@@ -1,0 +1,22 @@
+{
+  "name": "sure-savings",
+  "version": "1.0.0",
+  "description": "SURE SAVINGS — Smart Income Buffer: Institutional-grade liquidity intelligence platform for variable income earners.",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -p 3000",
+    "dev": "serve . -p 3000"
+  },
+  "keywords": [
+    "fintech",
+    "liquidity-intelligence",
+    "cash-buffer",
+    "gig-economy",
+    "sure-savings"
+  ],
+  "author": "SURE SAVINGS",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

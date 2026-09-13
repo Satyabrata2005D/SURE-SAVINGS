@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS 8.0 — 30-Day Financial Resilience Plan</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <!-- Brand & Icon -->
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Resilience OS v8.0</span>
+      </div>
+    </a>
+    <!-- Security & Status Badges -->
+    <div class="hidden sm:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">State Engine: <span id="headerStateLabel" class="font-bold text-emerald-600">STABLE</span></span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>256-bit Encrypted Execution</span>
+    </div>
+  </div>
+
+  <!-- Right: Controls -->
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span>Search</span>
+      <kbd class="kbd">⌘K</kbd>
+    </button>
+
+    <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+      <span>🌐 Public Explorer</span>
+    </a>
+
+    <!-- Dark Mode Toggle -->
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <!-- Notification Bell -->
+    <div class="notification-bell" onclick="toggleNotifications()">
+      <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <!-- User Avatar Container -->
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+        </div>
+        <div class="py-1 border-b" style="border-color: var(--border-default)">
+          <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span>Calibrate Baseline</span>
+          </div>
+        </div>
+        <div class="py-1">
+          <div class="user-menu-item" onclick="exportData()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Export Data</span>
+          </div>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- BEGIN: Main Layout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+  
+  <!-- BEGIN: NavigationSidebar -->
+  <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+    <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+      <div class="mb-4 px-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+      </div>
+      <nav class="space-y-1" id="mainNavigationTabs">
+        <a href="index.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Command Center</span>
+        </a>
+        <a href="resilience-plan.html" class="unified-nav-link active">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span class="flex-1">Resilience Plan</span>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-brand-500 text-white">v8.0</span>
+        </a>
+        <a href="simulator.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span>SURE SAVINGS</span>
+        </a>
+        <a href="income-intelligence.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <span>Income Intelligence</span>
+        </a>
+        <a href="planner.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Cash Flow Planner</span>
+        </a>
+        <a href="decision-pipeline.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          <span>Decision Pipeline</span>
+        </a>
+        <a href="calendar.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Income Calendar</span>
+        </a>
+        <a href="goals.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Goals &amp; Buffer Plan</span>
+        </a>
+        <a href="risk.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <span>Risk &amp; Early Warning</span>
+        </a>
+        <a href="health.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <span>Financial Health</span>
+        </a>
+        <a href="activity.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span>Activity &amp; Ledger</span>
+        </a>
+        <a href="coach.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span>AI Resilience Coach</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Institutional Assurance Card -->
+    <div class="premium-card p-3.5 border-l-4 border-l-emerald-500" style="border-radius: var(--radius-xl);">
+      <div class="flex items-start space-x-2.5">
+        <div class="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
+          ✓
+        </div>
+        <div>
+          <p class="text-xs font-bold" style="color: var(--text-primary)">Autonomous State Engine</p>
+          <p class="text-[11px] leading-snug mt-0.5" style="color: var(--text-muted)">State transitions and execution roadmaps are computed deterministically. AI operates strictly read-only.</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- END: NavigationSidebar -->
+
+  <!-- BEGIN: MainContent -->
+  <main class="flex-1 flex flex-col space-y-6 min-w-0" data-purpose="resilience-plan-content">
+    
+    <!-- Hero / Plan Status Banner -->
+    <section class="premium-card p-6 sm:p-8 rounded-3xl relative overflow-hidden bg-gradient-to-br from-white to-stone-50 dark:from-stone-900 dark:to-stone-950 border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+        <div class="space-y-2 max-w-xl">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-brand-500 text-white">30-DAY EXECUTION MATRIX</span>
+            <span id="planStateBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">STATE: STABLE</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">
+            30-Day Financial Resilience Plan
+          </h1>
+          <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+            Institutional guidance engine that translates volatility into deterministic safety milestones. Protects cash floor, eliminates buffer deficit, and builds sovereign runway without debt.
+          </p>
+        </div>
+
+        <!-- Resilience Score Trajectory Card -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700 shadow-md flex items-center gap-5 min-w-[280px]">
+          <div class="text-center">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">CURRENT</span>
+            <div id="planScoreCurrent" class="text-3xl font-extrabold font-mono text-stone-800 dark:text-stone-100 mt-0.5">74</div>
+            <span class="text-[10px] text-stone-500 font-mono">1.5 wks runway</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <span class="text-xs font-bold text-brand-500">→ +6 pts →</span>
+            <span class="text-[10px] text-stone-400">30-day target</span>
+          </div>
+          <div class="text-center">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500 block">TARGET</span>
+            <div id="planScoreTarget" class="text-3xl font-extrabold font-mono text-emerald-600 mt-0.5">80</div>
+            <span class="text-[10px] text-emerald-600 font-mono font-bold">4.0 wks runway</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-stone-200 dark:border-stone-800">
+        <div>
+          <span class="text-[10px] uppercase font-bold text-stone-400">Target Cushion</span>
+          <p id="metricTargetBuffer" class="text-base font-extrabold font-mono text-stone-900 dark:text-stone-100 mt-0.5">₹15,000</p>
+        </div>
+        <div>
+          <span class="text-[10px] uppercase font-bold text-stone-400">Current Cushion</span>
+          <p id="metricCurrentBuffer" class="text-base font-extrabold font-mono text-stone-900 dark:text-stone-100 mt-0.5">₹8,400</p>
+        </div>
+        <div>
+          <span class="text-[10px] uppercase font-bold text-stone-400">Buffer Gap to Close</span>
+          <p id="metricBufferGap" class="text-base font-extrabold font-mono text-brand-600 mt-0.5">₹6,600</p>
+        </div>
+        <div>
+          <span class="text-[10px] uppercase font-bold text-stone-400">Protected Cash Floor</span>
+          <p id="metricProtectedFloor" class="text-base font-extrabold font-mono text-emerald-600 mt-0.5">₹3,500 (Intact)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Current State vs Target State Comparison Matrix -->
+    <section class="premium-card p-6 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">State Transition Trajectory</h2>
+          <p class="text-xs text-stone-500">Autonomous progression from current operational baseline to resilient equilibrium.</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300">
+          Posture: <span id="currentPostureText">DEFENSIVE_BUILD</span>
+        </span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b text-[10px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500">
+              <th class="py-2.5 px-3">Resilience Dimension</th>
+              <th class="py-2.5 px-3">Current Posture</th>
+              <th class="py-2.5 px-3">30-Day Target</th>
+              <th class="py-2.5 px-3">Operational Safeguard</th>
+              <th class="py-2.5 px-3 text-right">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-100 dark:divide-stone-800 font-medium">
+            <tr>
+              <td class="py-3 px-3 font-bold text-stone-800 dark:text-stone-200">Checking Cash Floor</td>
+              <td class="py-3 px-3 font-mono" id="rowFloorCurrent">₹3,500</td>
+              <td class="py-3 px-3 font-mono font-bold text-stone-900 dark:text-stone-100" id="rowFloorTarget">₹3,500</td>
+              <td class="py-3 px-3 text-stone-500">Hard stop; allocations blocked if balance drops</td>
+              <td class="py-3 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700">100% Intact</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-bold text-stone-800 dark:text-stone-200">Survival Runway</td>
+              <td class="py-3 px-3 font-mono" id="rowRunwayCurrent">1.5 weeks</td>
+              <td class="py-3 px-3 font-mono font-bold text-emerald-600" id="rowRunwayTarget">4.0 weeks</td>
+              <td class="py-3 px-3 text-stone-500">Weekly burn insulation against zero-income shock</td>
+              <td class="py-3 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-700">Building</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-bold text-stone-800 dark:text-stone-200">Income Concentration</td>
+              <td class="py-3 px-3 font-mono" id="rowConcentrationCurrent">0.42 HHI (Moderate)</td>
+              <td class="py-3 px-3 font-mono font-bold text-stone-900 dark:text-stone-100">&lt; 0.35 HHI (Balanced)</td>
+              <td class="py-3 px-3 text-stone-500">Diversification buffer prevents single-platform cliff</td>
+              <td class="py-3 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">Monitoring</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-bold text-stone-800 dark:text-stone-200">Volatility Absorption</td>
+              <td class="py-3 px-3 font-mono" id="rowVolatilityCurrent">64% Downside Insulated</td>
+              <td class="py-3 px-3 font-mono font-bold text-emerald-600">85% Insulated</td>
+              <td class="py-3 px-3 text-stone-500">Smoothed 4-week baseline absorption corridor</td>
+              <td class="py-3 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700">Protected</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 2: The 4 Ranked Execution Priorities -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">4 Ranked Execution Priorities</h2>
+          <p class="text-xs text-stone-500">Strictly ordered by impact on solvency, downside protection, and runway expansion.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="prioritiesContainer">
+        <!-- Priority 1 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col justify-between hover:border-brand-500/40 transition-colors">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400">P1 • CAPITAL ALLOCATION</span>
+              <span class="text-xs font-mono font-bold text-emerald-600">+3.2 pts</span>
+            </div>
+            <h3 class="text-sm font-bold text-stone-900 dark:text-stone-100 mt-2">Execute ₹900 Safe-to-Save Contribution</h3>
+            <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">
+              Allocate verified surplus into sovereign buffer vault while keeping checking floor fully funded. Prevents lifestyle creep during peak earning cycles.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px]">
+            <span class="text-stone-400">Risk Trigger: Checking balance &lt; ₹3,500</span>
+            <span class="font-bold text-brand-600">Immediate Action</span>
+          </div>
+        </div>
+
+        <!-- Priority 2 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col justify-between hover:border-brand-500/40 transition-colors">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400">P2 • LIQUIDITY SHIELD</span>
+              <span class="text-xs font-mono font-bold text-emerald-600">+1.8 pts</span>
+            </div>
+            <h3 class="text-sm font-bold text-stone-900 dark:text-stone-100 mt-2">Maintain ₹3,500 Checking Floor Boundary</h3>
+            <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">
+              Enforce automated firewall preventing overdrafts, fee penalties, and cash shortages during unexpected mid-week obligations.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px]">
+            <span class="text-stone-400">Risk Trigger: Inflows lag weekly burn</span>
+            <span class="font-bold text-stone-600">Active Firewall</span>
+          </div>
+        </div>
+
+        <!-- Priority 3 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col justify-between hover:border-brand-500/40 transition-colors">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400">P3 • DIVERSIFICATION</span>
+              <span class="text-xs font-mono font-bold text-emerald-600">+1.0 pts</span>
+            </div>
+            <h3 class="text-sm font-bold text-stone-900 dark:text-stone-100 mt-2">Cap Single Client Share Below 55%</h3>
+            <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">
+              Cultivate secondary income streams (e.g. Zepto delivery shifts or design retainer) to shield weekly cash flow from single-client disruption.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px]">
+            <span class="text-stone-400">Risk Trigger: Dominant client &gt; 65%</span>
+            <span class="font-bold text-stone-600">Ongoing Hedge</span>
+          </div>
+        </div>
+
+        <!-- Priority 4 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col justify-between hover:border-brand-500/40 transition-colors">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-400">P4 • SPEND GOVERNANCE</span>
+              <span class="text-xs font-mono font-bold text-emerald-600">+0.8 pts</span>
+            </div>
+            <h3 class="text-sm font-bold text-stone-900 dark:text-stone-100 mt-2">Discretionary Throttle on Volatile Weeks</h3>
+            <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">
+              Automatically restrict non-essential outlays during low-earning weeks to prevent buffer degradation before rent cycle.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px]">
+            <span class="text-stone-400">Risk Trigger: Income drops &gt; 25%</span>
+            <span class="font-bold text-stone-600">Dynamic Policy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 4-Week Execution Roadmap -->
+    <section class="premium-card p-6 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">4-Week Execution Roadmap</h2>
+          <p class="text-xs text-stone-500">Weekly milestones, buffer capitalization trajectory, and floor checks.</p>
+        </div>
+        <span class="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-200">
+          Target Runway: 4.0 Weeks
+        </span>
+      </div>
+
+      <div class="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-stone-200 dark:before:bg-stone-800" id="roadmapContainer">
+        <!-- Week 1 -->
+        <div class="relative pl-4">
+          <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-brand-500 ring-4 ring-white dark:ring-stone-900"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-600">WEEK 1 • LIQUIDITY FOUNDATION</span>
+              <h3 class="text-xs font-bold text-stone-900 dark:text-stone-100 mt-0.5">Capitalize Initial Safe-to-Save Tranche</h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="text-stone-500">Buffer: <b class="text-stone-800 dark:text-stone-200">₹9,300</b></span>
+              <span class="text-emerald-600 font-bold">+0.4 wks runway</span>
+            </div>
+          </div>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Execute first ₹900 surplus transfer into reserve vault. Validate checking floor remains untouched at ₹3,500.</p>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="relative pl-4">
+          <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-stone-300 dark:bg-stone-700 ring-4 ring-white dark:ring-stone-900"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-stone-500">WEEK 2 • RECURRING DRAIN MITIGATION</span>
+              <h3 class="text-xs font-bold text-stone-900 dark:text-stone-100 mt-0.5">Audit Subscriptions &amp; Smooth Fixed Bills</h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="text-stone-500">Buffer: <b class="text-stone-800 dark:text-stone-200">₹10,500</b></span>
+              <span class="text-emerald-600 font-bold">+0.5 wks runway</span>
+            </div>
+          </div>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Isolate recurring debits (₹480/wk) and allocate additional ₹1,200 surplus tranche following mid-month client settlement.</p>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="relative pl-4">
+          <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-stone-300 dark:bg-stone-700 ring-4 ring-white dark:ring-stone-900"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-stone-500">WEEK 3 • SAFETY THRESHOLD CROSSING</span>
+              <h3 class="text-xs font-bold text-stone-900 dark:text-stone-100 mt-0.5">Achieve 3.0 Weeks Survival Runway</h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="text-stone-500">Buffer: <b class="text-stone-800 dark:text-stone-200">₹12,600</b></span>
+              <span class="text-emerald-600 font-bold">+0.8 wks runway</span>
+            </div>
+          </div>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Cross the 3-week survival threshold. Emergency buffer now absorbs up to 21 consecutive days of zero income.</p>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="relative pl-4">
+          <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-stone-900"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600">WEEK 4 • INSTITUTIONAL CAPITALIZATION</span>
+              <h3 class="text-xs font-bold text-stone-900 dark:text-stone-100 mt-0.5">Reach Target Reserve Equilibrium</h3>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="text-stone-500">Buffer: <b class="text-emerald-600">₹15,000</b></span>
+              <span class="text-emerald-600 font-bold">4.0 wks (100% Target)</span>
+            </div>
+          </div>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Attain sovereign ₹15,000 cushion. State machine transitions from STABLE to RESILIENT. Unlock growth capital allocations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Interactive Recovery Pathways (Counterfactual Engine) -->
+    <section class="premium-card p-6 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">Recovery &amp; Gap Closure Pathways</h2>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-400">COUNTERFACTUAL ENGINE</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-0.5">Simulate alternative recovery velocities to close the ₹6,600 buffer deficit without incurring high-interest debt.</p>
+        </div>
+        <!-- Pathway Selector Buttons -->
+        <div class="flex items-center p-1 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-xs">
+          <button id="btnConservative" onclick="selectRecoveryPathway('CONSERVATIVE')" class="px-3 py-1.5 rounded-lg font-bold transition-all text-stone-600 dark:text-stone-400 hover:text-stone-900">
+            Conservative
+          </button>
+          <button id="btnBalanced" onclick="selectRecoveryPathway('BALANCED')" class="px-3 py-1.5 rounded-lg font-bold transition-all bg-white dark:bg-stone-700 shadow-sm text-brand-600 dark:text-brand-400">
+            Balanced ★
+          </button>
+          <button id="btnAccelerated" onclick="selectRecoveryPathway('ACCELERATED')" class="px-3 py-1.5 rounded-lg font-bold transition-all text-stone-600 dark:text-stone-400 hover:text-stone-900">
+            Accelerated
+          </button>
+        </div>
+      </div>
+
+      <!-- Pathway Details Display Card -->
+      <div id="pathwayDisplayCard" class="p-6 rounded-2xl bg-stone-50 dark:bg-stone-800/60 border border-stone-200 dark:border-stone-700 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-700">
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="pathwayBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-brand-500 text-white">RECOMMENDED PATHWAY</span>
+              <h3 id="pathwayTitle" class="text-base font-bold text-stone-900 dark:text-stone-100">Balanced Recovery Pathway</h3>
+            </div>
+            <p id="pathwayDescription" class="text-xs text-stone-600 dark:text-stone-400 mt-1">
+              Maintains balanced surplus distribution with zero reduction in essential grocery or housing budgets.
+            </p>
+          </div>
+          <div class="flex items-center gap-6">
+            <div class="text-right">
+              <span class="text-[10px] uppercase font-bold text-stone-400">Time to Full Target</span>
+              <p id="pathwayDays" class="text-xl font-extrabold font-mono text-stone-900 dark:text-stone-100">42 Days</p>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] uppercase font-bold text-stone-400">Weekly Savings</span>
+              <p id="pathwayRate" class="text-xl font-extrabold font-mono text-emerald-600">₹1,100/wk</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-3.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800">
+            <span class="text-[10px] uppercase font-bold text-stone-400">Runway Velocity</span>
+            <p id="pathwayRunwayVelocity" class="text-xs font-bold font-mono text-stone-800 dark:text-stone-200 mt-1">+0.5 weeks / 14 days</p>
+            <p class="text-[11px] text-stone-500 mt-0.5">Smooth, predictable cushion expansion.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800">
+            <span class="text-[10px] uppercase font-bold text-stone-400">Lifestyle Trade-off</span>
+            <p id="pathwayTradeoff" class="text-xs font-bold font-mono text-amber-600 mt-1">Minimal (Discretionary Dining -10%)</p>
+            <p class="text-[11px] text-stone-500 mt-0.5">Protects checking floor and commute expenses.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800">
+            <span class="text-[10px] uppercase font-bold text-stone-400">Feasibility Confidence</span>
+            <p id="pathwayConfidence" class="text-xs font-bold font-mono text-emerald-600 mt-1">94% Feasibility</p>
+            <p class="text-[11px] text-stone-500 mt-0.5">Validated against 12 weeks of historical earnings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Multi-Goal Safe-to-Save Allocator -->
+    <section class="premium-card p-6 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">Multi-Goal Safe-to-Save Allocation</h2>
+          <p class="text-xs text-stone-500">Mathematical surplus distribution weighted by risk sensitivity and target horizons.</p>
+        </div>
+        <span class="text-xs font-mono font-bold text-brand-600">Surplus: <span id="allocSurplusLabel">₹1,300</span></span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="goalAllocationCards">
+        <!-- Goal 1 -->
+        <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-stone-800 dark:text-stone-200">1. Emergency Buffer Vault</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700">Weight: 60%</span>
+          </div>
+          <div class="mt-3 flex items-baseline justify-between">
+            <span class="text-lg font-extrabold font-mono text-brand-600" id="goalAlloc1">₹780</span>
+            <span class="text-[11px] font-mono text-stone-400">Target: ₹15,000</span>
+          </div>
+          <div class="w-full bg-stone-100 dark:bg-stone-800 rounded-full h-1.5 mt-2">
+            <div class="bg-brand-500 h-1.5 rounded-full" style="width: 56%"></div>
+          </div>
+          <span class="text-[10px] text-stone-400 mt-1 block">Priority: Solvency protection</span>
+        </div>
+
+        <!-- Goal 2 -->
+        <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-stone-800 dark:text-stone-200">2. Equipment &amp; Gear Upgrade</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">Weight: 25%</span>
+          </div>
+          <div class="mt-3 flex items-baseline justify-between">
+            <span class="text-lg font-extrabold font-mono text-stone-800 dark:text-stone-200" id="goalAlloc2">₹325</span>
+            <span class="text-[11px] font-mono text-stone-400">Target: ₹25,000</span>
+          </div>
+          <div class="w-full bg-stone-100 dark:bg-stone-800 rounded-full h-1.5 mt-2">
+            <div class="bg-blue-500 h-1.5 rounded-full" style="width: 28%"></div>
+          </div>
+          <span class="text-[10px] text-stone-400 mt-1 block">Priority: Productivity expansion</span>
+        </div>
+
+        <!-- Goal 3 -->
+        <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-stone-800 dark:text-stone-200">3. Tax &amp; Contingency Reserve</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-700">Weight: 15%</span>
+          </div>
+          <div class="mt-3 flex items-baseline justify-between">
+            <span class="text-lg font-extrabold font-mono text-stone-800 dark:text-stone-200" id="goalAlloc3">₹195</span>
+            <span class="text-[11px] font-mono text-stone-400">Target: ₹10,000</span>
+          </div>
+          <div class="w-full bg-stone-100 dark:bg-stone-800 rounded-full h-1.5 mt-2">
+            <div class="bg-purple-500 h-1.5 rounded-full" style="width: 45%"></div>
+          </div>
+          <span class="text-[10px] text-stone-400 mt-1 block">Priority: Compliance &amp; safety</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Actions / Export -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-stone-200 dark:border-stone-800">
+      <div class="text-xs text-stone-500">
+        Resilience Operating System v8.0 • Engine verified with zero fund movement authority.
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="window.print()" class="px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 text-xs font-bold hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+          Print Plan PDF
+        </button>
+        <a href="simulator.html" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+          <span>Launch Counterfactual Stress Test</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </main>
+  <!-- END: MainContent -->
+</div>
+
+<!-- SCRIPTS -->
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// SURE SAVINGS 8.0: Dedicated Resilience Plan Screen Controller
+// ══════════════════════════════════════════════════════════════
+
+let currentPathwayKey = "BALANCED";
+
+const PATHWAYS = {
+  CONSERVATIVE: {
+    title: "Conservative Recovery Pathway",
+    description: "Prioritizes zero lifestyle disruption. Slower buffer accumulation with maximum everyday liquidity cushion.",
+    badge: "MINIMUM FRICTION",
+    days: "68 Days",
+    rate: "₹650/wk",
+    velocity: "+0.3 weeks / 14 days",
+    tradeoff: "None (Zero spending adjustments)",
+    confidence: "98% Feasibility",
+    badgeClass: "bg-blue-500 text-white"
+  },
+  BALANCED: {
+    title: "Balanced Recovery Pathway",
+    description: "Maintains optimal surplus distribution. Protects checking floor with moderate spending optimization.",
+    badge: "RECOMMENDED PATHWAY",
+    days: "42 Days",
+    rate: "₹1,100/wk",
+    velocity: "+0.5 weeks / 14 days",
+    tradeoff: "Minimal (Discretionary Dining -10%)",
+    confidence: "94% Feasibility",
+    badgeClass: "bg-brand-500 text-white"
+  },
+  ACCELERATED: {
+    title: "Accelerated Recovery Pathway",
+    description: "Rapidly closes the buffer deficit. Channels 80% of discretionary surplus directly into emergency vault.",
+    badge: "MAXIMUM VELOCITY",
+    days: "24 Days",
+    rate: "₹1,850/wk",
+    velocity: "+1.1 weeks / 14 days",
+    tradeoff: "High (Discretionary paused until threshold)",
+    confidence: "86% Feasibility",
+    badgeClass: "bg-emerald-600 text-white"
+  }
+};
+
+function selectRecoveryPathway(key) {
+  currentPathwayKey = key;
+  const p = PATHWAYS[key];
+  if (!p) return;
+
+  // Toggle button styles
+  const btnC = document.getElementById("btnConservative");
+  const btnB = document.getElementById("btnBalanced");
+  const btnA = document.getElementById("btnAccelerated");
+
+  [btnC, btnB, btnA].forEach(btn => {
+    if (btn) {
+      btn.className = "px-3 py-1.5 rounded-lg font-bold transition-all text-stone-600 dark:text-stone-400 hover:text-stone-900";
+    }
+  });
+
+  const activeBtn = key === "CONSERVATIVE" ? btnC : (key === "BALANCED" ? btnB : btnA);
+  if (activeBtn) {
+    activeBtn.className = "px-3 py-1.5 rounded-lg font-bold transition-all bg-white dark:bg-stone-700 shadow-sm text-brand-600 dark:text-brand-400";
+  }
+
+  // Update card content
+  const title = document.getElementById("pathwayTitle");
+  const desc = document.getElementById("pathwayDescription");
+  const badge = document.getElementById("pathwayBadge");
+  const days = document.getElementById("pathwayDays");
+  const rate = document.getElementById("pathwayRate");
+  const velocity = document.getElementById("pathwayRunwayVelocity");
+  const tradeoff = document.getElementById("pathwayTradeoff");
+  const confidence = document.getElementById("pathwayConfidence");
+
+  if (title) title.textContent = p.title;
+  if (desc) desc.textContent = p.description;
+  if (badge) {
+    badge.textContent = p.badge;
+    badge.className = `px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${p.badgeClass}`;
+  }
+  if (days) days.textContent = p.days;
+  if (rate) rate.textContent = p.rate;
+  if (velocity) velocity.textContent = p.velocity;
+  if (tradeoff) tradeoff.textContent = p.tradeoff;
+  if (confidence) confidence.textContent = p.confidence;
+}
+
+// Hydrate from live backend or store
+document.addEventListener("DOMContentLoaded", () => {
+  const store = window.sureSavingsStore;
+  if (store) {
+    store.subscribe((state) => {
+      const p = store.getProfile();
+      if (!p) return;
+
+      const currBuf = Number(p.current_buffer || 0);
+      const targetBuf = Number(p.buffer_target || 15000);
+      const floor = Number(p.protected_floor || 3500);
+      const gap = Math.max(0, targetBuf - currBuf);
+      const score = p.resilience_score || 74;
+      const coverage = p.current_coverage_weeks || 1.5;
+
+      const scoreEl = document.getElementById("planScoreCurrent");
+      if (scoreEl) scoreEl.textContent = score;
+
+      const currBufEl = document.getElementById("metricCurrentBuffer");
+      if (currBufEl) currBufEl.textContent = `₹${currBuf.toLocaleString()}`;
+
+      const targetBufEl = document.getElementById("metricTargetBuffer");
+      if (targetBufEl) targetBufEl.textContent = `₹${targetBuf.toLocaleString()}`;
+
+      const gapEl = document.getElementById("metricBufferGap");
+      if (gapEl) gapEl.textContent = `₹${gap.toLocaleString()}`;
+
+      const floorEl = document.getElementById("metricProtectedFloor");
+      if (floorEl) floorEl.textContent = `₹${floor.toLocaleString()} (Intact)`;
+
+      const rowFloorCurrent = document.getElementById("rowFloorCurrent");
+      if (rowFloorCurrent) rowFloorCurrent.textContent = `₹${floor.toLocaleString()}`;
+
+      const rowRunwayCurrent = document.getElementById("rowRunwayCurrent");
+      if (rowRunwayCurrent) rowRunwayCurrent.textContent = `${coverage} weeks`;
+
+      const twin = state.digitalTwin || {};
+      const fState = twin.financial_state || "STABLE";
+      const headerState = document.getElementById("headerStateLabel");
+      if (headerState) headerState.textContent = fState;
+
+      const planState = document.getElementById("planStateBadge");
+      if (planState) planState.textContent = `STATE: ${fState}`;
+    });
+  }
+
+  // Load Resilience Plan data from API if available
+  const isDemo = new URLSearchParams(window.location.search).get("demo") === "1";
+  if (window.sureSavingsApi && window.sureSavingsApi.getResiliencePlan) {
+    window.sureSavingsApi.getResiliencePlan(isDemo).then(plan => {
+      if (plan && plan.top_priorities) {
+        // Hydrate priorities if returned
+        const prioritiesContainer = document.getElementById("prioritiesContainer");
+        if (prioritiesContainer && plan.top_priorities.length > 0) {
+          prioritiesContainer.innerHTML = plan.top_priorities.map((pr, idx) => `
+            <div class="p-5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col justify-between hover:border-brand-500/40 transition-colors">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold ${idx === 0 ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400' : idx === 1 ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400' : 'bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400'}">${pr.priority || `P${idx+1}`} • ${pr.category || 'ACTION'}</span>
+                  <span class="text-xs font-mono font-bold text-emerald-600">+${pr.impact_points || (3.2 - idx*0.8).toFixed(1)} pts</span>
+                </div>
+                <h3 class="text-sm font-bold text-stone-900 dark:text-stone-100 mt-2">${pr.title}</h3>
+                <p class="text-xs text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">
+                  ${pr.description || pr.rationale || "Protects liquidity corridor and maintains buffer growth trajectory."}
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px]">
+                <span class="text-stone-400">Risk Trigger: ${pr.risk_trigger || 'Deviation from baseline'}</span>
+                <span class="font-bold text-brand-600">${pr.urgency || 'Active'}</span>
+              </div>
+            </div>
+          `).join("");
+        }
+      }
+    }).catch(() => {});
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Financial Health Center</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Liquidity Intelligence</span>
+      </div>
+    </a>
+    <div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="font-medium">SOC-2 Type II Vault</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>256-bit TLS Encrypted</span>
+    </div>
+    <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">Deterministic Rule Engine v5.0</span>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span>Search</span>
+      <kbd class="kbd">⌘K</kbd>
+    </button>
+
+    <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+      <span>🌐 Public Explorer</span>
+    </a>
+
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <div class="notification-bell" onclick="toggleNotifications()">
+      <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full border font-medium text-xs" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary);">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+      </svg>
+      <span>Instant Sandbox Active</span>
+    </div>
+
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+        </div>
+        <div class="py-1 border-b" style="border-color: var(--border-default)">
+          <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span>Calibrate Baseline</span>
+          </div>
+        </div>
+        <div class="py-1">
+          <div class="user-menu-item" onclick="exportData()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Export Data</span>
+          </div>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- BEGIN: Main Layout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+  
+  <!-- BEGIN: NavigationSidebar -->
+  <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+    <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+      <div class="mb-4 px-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+      </div>
+      <nav class="space-y-1" id="mainNavigationTabs">
+        <a href="index.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Command Center</span>
+        </a>
+        <a href="resilience-plan.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span class="flex-1">Resilience Plan</span>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-brand-500 text-white">v8.0</span>
+        </a>
+        <a href="simulator.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span>SURE SAVINGS</span>
+        </a>
+        <a href="income-intelligence.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <span>Income Intelligence</span>
+        </a>
+        <a href="planner.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Cash Flow Planner</span>
+        </a>
+        <a href="decision-pipeline.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          <span>Decision Pipeline</span>
+        </a>
+        <a href="calendar.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Income Calendar</span>
+        </a>
+        <a href="goals.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Goals &amp; Buffer Plan</span>
+        </a>
+        <a href="risk.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <span>Risk &amp; Early Warning</span>
+        </a>
+        <a href="health.html" class="unified-nav-link active">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <span>Financial Health</span>
+        </a>
+        <a href="activity.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span>Transactions &amp; Activity</span>
+        </a>
+        <a href="coach.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span>AI Resilience Coach</span>
+        </a>
+        <a href="login.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+          <span>Sign In / Portal</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Health Tier Card in Sidebar -->
+    <div class="premium-card p-4 space-y-3" style="border-radius: var(--radius-2xl);">
+      <div class="flex items-center space-x-2 text-emerald-500">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        <span class="text-xs font-bold uppercase tracking-wider">Audit Tier: Solid</span>
+      </div>
+      <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+        0 overdraft events recorded over 180 days. 100% adherence to ₹3,500 checking floor.
+      </p>
+    </div>
+  </aside>
+  <!-- END: NavigationSidebar -->
+
+  <!-- BEGIN: MainContentArea -->
+  <main class="flex-1 flex flex-col space-y-6 min-w-0">
+    
+    <!-- Hero Header & Action Bar -->
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center space-x-2 mb-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Holistic Resilience Assessment • Audit v5.0</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">Financial Health Center</h1>
+        <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary)">
+          Continuous multi-dimensional evaluation of liquidity resilience, buffer runway, and burn efficiency.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2.5">
+        <button id="syncHealthBtn" onclick="syncHealthTelemetry()" class="px-3.5 py-2 rounded-xl border text-xs font-bold transition-all flex items-center space-x-2 hover:bg-stone-50" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-primary)">
+          <svg id="syncHealthIcon" class="w-4 h-4 text-emerald-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          <span>Sync Open Banking</span>
+        </button>
+        <button onclick="downloadHealthAuditPDF()" class="px-4 py-2 rounded-xl text-xs font-bold text-white transition-all shadow-md flex items-center space-x-2" style="background: var(--brand-primary); box-shadow: 0 4px 12px rgba(255, 91, 69, 0.25);">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <span>Download Audit PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Bento Grid: Resilience Score & 4 Dimensions -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Radial Score Gauge Card -->
+      <div class="lg:col-span-5 premium-card p-6 flex flex-col justify-between relative overflow-hidden" style="border-radius: var(--radius-2xl);">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">Resilience Score</h3>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold" style="background: var(--surface-sunken); color: var(--text-secondary); border: 1px solid var(--border-default)">
+            Deterministic v5.0
+          </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 my-2">
+          <!-- SVG Radial Score Meter with Conic Feel -->
+          <div class="relative w-40 h-40 flex items-center justify-center flex-shrink-0">
+            <svg class="w-full h-full -rotate-90" viewBox="0 0 160 160">
+              <circle cx="80" cy="80" r="66" fill="transparent" stroke="var(--border-default)" stroke-width="12" stroke-linecap="round"></circle>
+              <!-- Colored score arc -->
+              <circle id="scoreRadialCircle" cx="80" cy="80" fill="transparent" stroke="var(--brand-primary)" stroke-width="12" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="107.8" class="transition-all duration-1000"></circle>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span id="scoreDisplayVal" class="text-4xl font-extrabold font-mono tracking-tight" style="color: var(--text-primary)">74</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider mt-0.5" style="color: var(--text-muted)">out of 100</span>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-center sm:text-left">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
+              <span>✓ Solid • Volatility Resilient</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Dynamic buffers absorb unexpected dry spells while preserving your <strong style="color: var(--text-primary)">₹3,500 checking floor</strong> 100% untouched.
+            </p>
+            <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-500 font-mono">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+              <span>+6 pts vs last audit cycle</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 mt-4 border-t flex items-center justify-between text-xs" style="border-color: var(--border-default); color: var(--text-muted)">
+          <span>Stress Tested: 20% Inflow Drought</span>
+          <span class="font-bold text-emerald-500 font-mono">ABSORBABLE</span>
+        </div>
+      </div>
+
+      <!-- 4 Supporting Health Dimensions -->
+      <div class="lg:col-span-7 premium-card p-6 flex flex-col justify-between" style="border-radius: var(--radius-2xl);">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">Resilience Dimensions</h3>
+            <p class="text-xs" style="color: var(--text-muted)">Algorithmic multi-factor health composition</p>
+          </div>
+          <span class="text-xs font-mono font-bold" style="color: var(--text-subtle)">Weighted Matrix</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Dim 1: Income Stability -->
+          <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">Income Stability</span>
+              <span class="text-sm font-extrabold font-mono text-emerald-500" id="dimStabilityVal">82%</span>
+            </div>
+            <div class="w-full bg-stone-200/40 rounded-full h-2 overflow-hidden" style="background: var(--surface-paper);">
+              <div id="dimStabilityBar" class="h-2 rounded-full bg-emerald-500 transition-all duration-700" style="width: 82%"></div>
+            </div>
+            <p class="text-[11px]" style="color: var(--text-muted)">Consistent baseline over 12-wk rolling window across gig platforms.</p>
+          </div>
+
+          <!-- Dim 2: Buffer Coverage -->
+          <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">Buffer Coverage</span>
+              <span class="text-sm font-extrabold font-mono text-amber-500" id="dimBufferVal">68%</span>
+            </div>
+            <div class="w-full bg-stone-200/40 rounded-full h-2 overflow-hidden" style="background: var(--surface-paper);">
+              <div id="dimBufferBar" class="h-2 rounded-full bg-amber-500 transition-all duration-700" style="width: 68%"></div>
+            </div>
+            <p class="text-[11px]" style="color: var(--text-muted)">1.5 weeks autonomous coverage against optimal 4.0-week target.</p>
+          </div>
+
+          <!-- Dim 3: Expense Health -->
+          <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">Expense Efficiency</span>
+              <span class="text-sm font-extrabold font-mono text-blue-500" id="dimExpenseVal">75%</span>
+            </div>
+            <div class="w-full bg-stone-200/40 rounded-full h-2 overflow-hidden" style="background: var(--surface-paper);">
+              <div id="dimExpenseBar" class="h-2 rounded-full bg-blue-500 transition-all duration-700" style="width: 75%"></div>
+            </div>
+            <p class="text-[11px]" style="color: var(--text-muted)">Fixed essentials at ₹4,400/wk comfortably inside ₹7,100 baseline.</p>
+          </div>
+
+          <!-- Dim 4: Cash Flow Health -->
+          <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">Cash Flow Smoothness</span>
+              <span class="text-sm font-extrabold font-mono text-indigo-500" id="dimCashFlowVal">71%</span>
+            </div>
+            <div class="w-full bg-stone-200/40 rounded-full h-2 overflow-hidden" style="background: var(--surface-paper);">
+              <div id="dimCashFlowBar" class="h-2 rounded-full bg-indigo-500 transition-all duration-700" style="width: 71%"></div>
+            </div>
+            <p class="text-[11px]" style="color: var(--text-muted)">Steady surplus accumulation with zero late fees or missed debits.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Priority Action Directive Card -->
+    <div class="premium-card p-6 relative overflow-hidden" style="border-radius: var(--radius-2xl);">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+        <div class="space-y-2 max-w-2xl">
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider" style="background: var(--brand-primary-light); color: var(--brand-primary);">
+              High Priority Action
+            </span>
+            <span class="text-xs font-mono" style="color: var(--text-muted)">Trigger: Festival Volatility Window</span>
+          </div>
+          <h2 class="text-xl font-extrabold" style="color: var(--text-primary)">Strengthen Your Defensive Buffer</h2>
+          <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-secondary)" data-health="summary-desc">
+            Your earnings are currently robust (<strong class="text-emerald-500">+18% above stabilized baseline</strong>), but your buffer covers only ~1.5 weeks of essentials (₹6,800 of ₹15,000 target). Allocating <strong style="color: var(--text-primary)">₹900 this cycle</strong> creates an impenetrable firewall ahead of October festival volatility.
+          </p>
+          <div class="grid grid-cols-3 gap-3 pt-2">
+            <div class="p-2.5 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Safe to Allocate</div>
+              <div class="text-base font-extrabold font-mono text-brand-500" data-health="safe-alloc">₹0</div>
+            </div>
+            <div class="p-2.5 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Floor Intact</div>
+              <div class="text-base font-extrabold font-mono" style="color: var(--text-primary)" data-health="floor">₹500</div>
+            </div>
+            <div class="p-2.5 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">New Runway</div>
+              <div class="text-base font-extrabold font-mono text-emerald-500" data-health="runway">4.0 wks</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2.5 w-full lg:w-auto flex-shrink-0">
+          <a href="goals.html" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-md brand-glow transition-all text-center flex items-center justify-center space-x-2">
+            <span>Build My Buffer Now</span>
+            <span>→</span>
+          </a>
+          <a href="decision-pipeline.html" class="px-4 py-2 rounded-xl border hover:bg-stone-50 text-xs font-bold text-center transition-colors flex items-center justify-center space-x-1.5" style="border-color: var(--border-default); color: var(--text-secondary)">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+            <span>Inspect 7-Step Mathematical Proof</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-Stage Trajectory & SVG Corridor -->
+    <div class="premium-card p-6" style="border-radius: var(--radius-2xl);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+        <div>
+          <h3 class="text-base font-bold" style="color: var(--text-primary)">Financial Resilience Trajectory</h3>
+          <p class="text-xs" style="color: var(--text-muted)">Deterministic velocity mapping from 30 days past to 30 days forward</p>
+        </div>
+        <div class="flex items-center space-x-4 text-xs font-mono">
+          <div class="flex items-center space-x-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
+            <span style="color: var(--text-secondary)">Realized Score</span>
+          </div>
+          <div class="flex items-center space-x-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            <span style="color: var(--text-secondary)">Predictive Vector</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Stage Stepper -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">30 Days Ago</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded" style="background: var(--surface-paper); color: var(--text-muted)">HISTORICAL</span>
+          </div>
+          <div class="text-3xl font-extrabold font-mono" style="color: var(--text-primary)">68</div>
+          <p class="text-[11px]" style="color: var(--text-muted)">Vulnerable buffer, unhedged fuel price spikes, erratic gig payouts.</p>
+        </div>
+
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2 relative" style="background: var(--surface-sunken); border-color: var(--brand-primary)">
+          <div class="absolute -top-2.5 right-4 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase text-white bg-brand-500 shadow-sm">Current Status</div>
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-500">Today</span>
+            <span class="text-[10px] font-mono font-bold text-emerald-500">+6 PTS MoM</span>
+          </div>
+          <div class="text-3xl font-extrabold font-mono text-brand-500">74</div>
+          <p class="text-[11px]" style="color: var(--text-muted)">Surplus captured, disciplined floor lock adherence, zero late fees.</p>
+        </div>
+
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-2" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">30 Days Ahead</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded font-bold text-amber-500" style="background: rgba(245, 158, 11, 0.1);">PROJECTED</span>
+          </div>
+          <div class="text-3xl font-extrabold font-mono text-amber-500">76</div>
+          <p class="text-[11px]" style="color: var(--text-muted)">Assuming ₹900 weekly buffer sweeps sustained across coming cycles.</p>
+        </div>
+      </div>
+
+      <!-- SVG Trajectory Curve -->
+      <div class="w-full p-4 rounded-xl border overflow-hidden" style="background: var(--surface-sunken); border-color: var(--border-default)">
+        <div class="w-full h-32">
+          <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 900 130">
+            <defs>
+              <linearGradient id="realizedGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FF5B45" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#FF5B45" stop-opacity="0.0"/>
+              </linearGradient>
+              <linearGradient id="corridorGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <!-- Projected Corridor -->
+            <polygon points="450,60 900,32 900,85 450,60" fill="url(#corridorGrad)"></polygon>
+            <line x1="450" y1="60" x2="900" y2="32" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4"></line>
+            <line x1="450" y1="60" x2="900" y2="85" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2 2" stroke-opacity="0.5"></line>
+            
+            <!-- Realized Curve -->
+            <polygon points="0,95 225,85 450,60 450,130 0,130" fill="url(#realizedGrad)"></polygon>
+            <path d="M 0,95 Q 225,85 450,60" fill="none" stroke="#FF5B45" stroke-width="3"></path>
+
+            <!-- Data Dots -->
+            <circle cx="80" cy="91" r="5" fill="#fff" stroke="#FF5B45" stroke-width="3"></circle>
+            <text x="80" y="115" fill="var(--text-muted)" font-family="JetBrains Mono" font-size="11" text-anchor="middle">Aug 4 (68)</text>
+
+            <circle cx="450" cy="60" r="7" fill="#FF5B45" stroke="#fff" stroke-width="3"></circle>
+            <text x="450" y="44" fill="var(--text-primary)" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" text-anchor="middle">Today (74)</text>
+
+            <circle cx="820" cy="48" r="5" fill="#f59e0b" stroke="#fff" stroke-width="2.5"></circle>
+            <text x="820" y="24" fill="#f59e0b" font-family="JetBrains Mono" font-size="11" text-anchor="middle">Target (76)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagnostics Breakdown: Signals & Vulnerabilities -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Positive Signals -->
+      <div class="premium-card p-6 flex flex-col justify-between" style="border-radius: var(--radius-2xl);">
+        <div>
+          <div class="flex items-center justify-between pb-3 mb-4 border-b" style="border-color: var(--border-default)">
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">Verified Positive Signals</h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-emerald-600 bg-emerald-50">3 VERIFIED</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-xs font-bold" style="color: var(--text-primary)">Stabilized baseline ₹7,100 outpaces essential ₹4,400 burn by 61%</div>
+              <p class="text-[11px] mt-1" style="color: var(--text-muted)">Surplus cushion allows dynamic buffer allocation without encroaching on mandatory food, fuel, or phone bills.</p>
+            </div>
+
+            <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-xs font-bold" style="color: var(--text-primary)">100% adherence to ₹3,500 checking floor lock over 24 consecutive weeks</div>
+              <p class="text-[11px] mt-1" style="color: var(--text-muted)">Zero emergency overdraft requests or unarranged debit penalties recorded.</p>
+            </div>
+
+            <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-xs font-bold" style="color: var(--text-primary)">Multi-platform payout synchronization with zero float latency</div>
+              <p class="text-[11px] mt-1" style="color: var(--text-muted)">Disbursements from delivery and freelance gigs arrive predictably within settlement windows.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 mt-4 border-t flex items-center justify-between text-xs" style="border-color: var(--border-default)">
+          <span style="color: var(--text-muted)">Signal Processing</span>
+          <span class="text-emerald-500 font-mono font-bold">100% Deterministic</span>
+        </div>
+      </div>
+
+      <!-- Attention Areas -->
+      <div class="premium-card p-6 flex flex-col justify-between" style="border-radius: var(--radius-2xl);">
+        <div>
+          <div class="flex items-center justify-between pb-3 mb-4 border-b" style="border-color: var(--border-default)">
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text-primary)">Key Attention Areas</h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-amber-600 bg-amber-50">3 ATTENTION</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-xs font-bold" style="color: var(--text-primary)">Buffer runway (1.5 weeks) remains under the 4.0-week target</div>
+              <p class="text-[11px] mt-1" style="color: var(--text-muted)">A sudden 14-day app outage or illness would test the checking floor without continuing reserve sweeps.</p>
+            </div>
+
+            <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-xs font-bold" style="color: var(--text-primary)">High concentration in mobility logistics (78% of receipts)</div>
+              <p class="text-[11px] mt-1" style="color: var(--text-muted)">Vulnerable to platform algorithm shifts, monsoon slowdowns, or local fuel inflation.</p>
+            </div>
+
+            <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <div class="text-xs font-bold" style="color: var(--text-primary)">Upcoming ₹4,500 two-wheeler EMI creates temporary liquidity dip</div>
+              <p class="text-[11px] mt-1" style="color: var(--text-muted)">Scheduled auto-debit requires keeping minimum working capital cleared before the 10th.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 mt-4 border-t flex items-center justify-between text-xs" style="border-color: var(--border-default)">
+          <span style="color: var(--text-muted)">Early Warning</span>
+          <span class="text-brand-500 font-mono font-bold">Pre-Emptive Hedging Active</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Peer Benchmark & Audit Telemetry -->
+    <div class="premium-card p-6" style="border-radius: var(--radius-2xl);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+        <div>
+          <h3 class="text-base font-bold" style="color: var(--text-primary)">Cohort Peer Benchmark</h3>
+          <p class="text-xs" style="color: var(--text-muted)">Benchmarked against 1,420+ independent gig workers in Tier-1 logistics hubs</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold text-emerald-600 bg-emerald-50">
+          80th Percentile
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="text-[11px] font-bold uppercase" style="color: var(--text-subtle)">Burn Ratio</div>
+          <div class="text-2xl font-extrabold font-mono text-emerald-500 mt-1">62%</div>
+          <div class="text-[10px] mt-0.5" style="color: var(--text-muted)">▼ Optimal efficiency</div>
+        </div>
+
+        <div class="p-4 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="text-[11px] font-bold uppercase" style="color: var(--text-subtle)">Liquid Reserves</div>
+          <div class="text-2xl font-extrabold font-mono mt-1" style="color: var(--text-primary)" data-health="liquid-reserves">₹2,400</div>
+          <div class="text-[10px] mt-0.5" style="color: var(--text-muted)" data-health="reserves-target">of ₹2,400 target</div>
+        </div>
+
+        <div class="p-4 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="text-[11px] font-bold uppercase" style="color: var(--text-subtle)">Volatility Index</div>
+          <div class="text-2xl font-extrabold font-mono text-amber-500 mt-1" data-health="volatility-index">1.92</div>
+          <div class="text-[10px] mt-0.5" style="color: var(--text-muted)">Normalized CV</div>
+        </div>
+
+        <div class="p-4 rounded-xl border text-center" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="text-[11px] font-bold uppercase" style="color: var(--text-subtle)">Non-Custodial Audit</div>
+          <div class="text-2xl font-extrabold font-mono text-emerald-500 mt-1">Verified</div>
+          <div class="text-[10px] mt-0.5" style="color: var(--text-muted)">Zero custody guarantee</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- END: MainContentArea -->
+</div>
+<!-- END: Main Layout -->
+
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+
+<script>
+  function syncHealthTelemetry() {
+    const icon = document.getElementById('syncHealthIcon');
+    if (icon) icon.classList.add('animate-spin');
+    
+    setTimeout(() => {
+      if (icon) icon.classList.remove('animate-spin');
+      if (window.showToast) {
+        window.showToast("Telemetry synced with Open Banking & Gig Aggregators. Health score confirmed at 74/100.", "success");
+      }
+    }, 900);
+  }
+
+  function downloadHealthAuditPDF() {
+    if (window.showToast) {
+      window.showToast("Generating comprehensive Financial Resilience Health Audit PDF...", "info");
+      setTimeout(() => {
+        window.showToast("Audit PDF ready for download.", "success");
+      }, 1200);
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Income Calendar &amp; Liquidity Heatmap</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Liquidity Intelligence</span>
+      </div>
+    </a>
+    <div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="font-medium">SOC-2 Type II Vault</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>256-bit TLS Encrypted</span>
+    </div>
+    <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">Financial Operating System v8.0</span>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span>Search</span>
+      <kbd class="kbd">⌘K</kbd>
+    </button>
+
+    <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+      <span>🌐 Public Explorer</span>
+    </a>
+
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <div class="notification-bell" onclick="toggleNotifications()">
+      <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full border font-medium text-xs" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary);">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+      </svg>
+      <span>Live Dynamic Ledger</span>
+    </div>
+
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+        </div>
+        <div class="py-1 border-b" style="border-color: var(--border-default)">
+          <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span>Calibrate Baseline</span>
+          </div>
+        </div>
+        <div class="py-1">
+          <div class="user-menu-item" onclick="exportData()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Export Data</span>
+          </div>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- BEGIN: Main Layout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+  
+  <!-- BEGIN: NavigationSidebar -->
+  <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+    <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+      <div class="mb-4 px-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+      </div>
+      <nav class="space-y-1" id="mainNavigationTabs">
+        <a href="index.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Command Center</span>
+        </a>
+        <a href="simulator.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span>SURE SAVINGS</span>
+        </a>
+        <a href="income-intelligence.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <span>Income Intelligence</span>
+        </a>
+        <a href="planner.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Cash Flow Planner</span>
+        </a>
+        <a href="decision-pipeline.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          <span>Decision Pipeline</span>
+        </a>
+        <a href="calendar.html" class="unified-nav-link active">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Income Calendar</span>
+        </a>
+        <a href="goals.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Goals &amp; Buffer Plan</span>
+        </a>
+        <a href="risk.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <span>Risk &amp; Early Warning</span>
+        </a>
+        <a href="health.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <span>Financial Health</span>
+        </a>
+        <a href="activity.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span>Transactions &amp; Activity</span>
+        </a>
+        <a href="coach.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span>AI Resilience Coach</span>
+        </a>
+        <a href="login.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+          <span>Sign In / Portal</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Calendar Sync Status -->
+    <div class="premium-card p-4 space-y-3" style="border-radius: var(--radius-2xl);">
+      <div class="flex items-center space-x-2 text-emerald-500">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        <span class="text-xs font-bold uppercase tracking-wider">Universal Reactive Ledger</span>
+      </div>
+      <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+        Events directly drive cash-flow curves, timing gaps, buffer absorption, and early warning risk scores in real time.
+      </p>
+    </div>
+  </aside>
+  <!-- END: NavigationSidebar -->
+
+  <!-- BEGIN: MainContent -->
+  <main class="flex-1 space-y-6 overflow-x-hidden min-w-0">
+    
+    <!-- Title & Controls -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+          <p class="text-xs font-bold tracking-wider uppercase text-brand-500">
+            Cash Rhythm &amp; Liquidity Heatmap
+          </p>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">
+          Income Calendar
+        </h1>
+        <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary)">
+          Anticipate multi-platform payouts, track timing mismatches, and schedule mandatory commitments safely.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="calAddEventBtn" class="px-3 py-2 text-xs font-bold rounded-xl text-white shadow-md flex items-center space-x-1.5 transition-all bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          <span>Schedule Event</span>
+        </button>
+
+        <button id="connectIncomeBtn" class="px-3 py-2 text-xs font-bold rounded-xl border transition-all flex items-center space-x-1.5 hover:border-brand-500" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-primary);">
+          <span class="text-xs">⚡</span>
+          <span>Connect Income Source</span>
+        </button>
+
+        <button id="calSyncBtn" class="px-3 py-2 text-xs font-bold rounded-xl border transition-all flex items-center space-x-1.5 hover:border-brand-500" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-primary);">
+          <svg id="calSyncIcon" class="w-3.5 h-3.5 text-brand-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          <span>Sync &amp; Recalculate</span>
+        </button>
+
+        <button id="calVarianceBtn" class="px-3 py-2 text-xs font-bold rounded-xl border transition-all flex items-center space-x-1.5 hover:border-brand-500" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-primary);" title="Expected vs Actual Variance">
+          <span>📊 Variance</span>
+        </button>
+
+        <div class="inline-flex rounded-xl border p-0.5" style="border-color: var(--border-default); background: var(--surface-sunken)">
+          <button id="calExportCsvBtn" class="px-2 py-1 text-[11px] font-bold rounded-lg hover:text-brand-500 transition-colors" style="color: var(--text-secondary)" title="Export CSV">CSV</button>
+          <span class="text-stone-300 dark:text-stone-700 self-center">|</span>
+          <button id="calExportJsonBtn" class="px-2 py-1 text-[11px] font-bold rounded-lg hover:text-brand-500 transition-colors" style="color: var(--text-secondary)" title="Export JSON">JSON</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagnostic Stat Bar -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="premium-card p-4 flex items-center gap-3.5" style="border-radius: var(--radius-xl);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-emerald-600 shrink-0 font-bold" style="background: var(--surface-sunken)">
+          ↓
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Expected Income</span>
+          <div class="text-lg font-black font-mono text-emerald-600" data-calendar="expected-income">₹0</div>
+          <p class="text-[10px]" style="color: var(--text-subtle)">Monthly Paced Inflows</p>
+        </div>
+      </div>
+
+      <div class="premium-card p-4 flex items-center gap-3.5" style="border-radius: var(--radius-xl);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-rose-500 shrink-0 font-bold" style="background: var(--surface-sunken)">
+          ↑
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Mandated Outflows</span>
+          <div class="text-lg font-black font-mono text-rose-500" data-calendar="mandated-outflows">₹0</div>
+          <p class="text-[10px]" style="color: var(--text-subtle)">Essential Commitments</p>
+        </div>
+      </div>
+
+      <div class="premium-card p-4 flex items-center gap-3.5" style="border-radius: var(--radius-xl);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-amber-500 shrink-0 font-bold" style="background: var(--surface-sunken)">
+          ⚠️
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-amber-500">Critical Gap Risk</span>
+          <div class="text-lg font-black font-mono text-amber-500" data-calendar="critical-gap">Analyzing…</div>
+          <p class="text-[10px]" style="color: var(--text-subtle)" data-calendar="gap-status">Protected by floor</p>
+        </div>
+      </div>
+
+      <div class="premium-card p-4 flex items-center gap-3.5" style="border-radius: var(--radius-xl);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-brand-500 shrink-0 font-bold" style="background: var(--surface-sunken)">
+          🛡️
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Reserve Buffer</span>
+          <div class="text-lg font-black font-mono text-brand-500" data-calendar="reserve-buffer">₹0</div>
+          <p class="text-[10px] text-emerald-600 font-bold">Dynamic Liquidity Cushion</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar Grid Section -->
+    <section class="premium-card p-5 sm:p-6 space-y-4" style="border-radius: var(--radius-2xl);">
+      
+      <!-- Month Navigation & Controls Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-4" style="border-color: var(--border-default)">
+        <div class="flex items-center space-x-3">
+          <div class="flex items-center space-x-1.5">
+            <button id="calPrevMonth" class="p-1.5 rounded-lg border hover:border-brand-500 transition-colors" style="background: var(--surface-sunken); border-color: var(--border-default)" title="Previous Month">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <h2 id="calendarMonthTitle" class="text-lg font-black tracking-tight" style="color: var(--text-primary)">
+              September 2026
+            </h2>
+            <button id="calNextMonth" class="p-1.5 rounded-lg border hover:border-brand-500 transition-colors" style="background: var(--surface-sunken); border-color: var(--border-default)" title="Next Month">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+          <button id="calTodayBtn" class="px-2.5 py-1 rounded-md text-[11px] font-bold border hover:border-brand-500 transition-colors" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
+            Current
+          </button>
+          <span id="calendarMonthSubtitle" class="hidden md:inline text-xs" style="color: var(--text-subtle)">
+            30 Days Paced
+          </span>
+        </div>
+
+        <!-- Heatmap Legend -->
+        <div class="flex flex-wrap items-center gap-3 text-xs">
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span> Inflow</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> Outflow</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-amber-500"></span> Gap Day</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-blue-500"></span> Sweep</span>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1 pb-2 border-b" style="border-color: var(--border-default)">
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-1.5" id="calFilterGroup">
+          <button class="cal-filter-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all border border-brand-500 bg-brand-50 text-brand-600 dark:bg-brand-950/60 dark:text-brand-300" data-filter="all">All Events</button>
+          <button class="cal-filter-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all border border-stone-200 dark:border-stone-800 hover:border-brand-500 text-stone-600 dark:text-stone-300" data-filter="inflow">🟢 Inflows</button>
+          <button class="cal-filter-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all border border-stone-200 dark:border-stone-800 hover:border-brand-500 text-stone-600 dark:text-stone-300" data-filter="outflow">🔴 Outflows</button>
+          <button class="cal-filter-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all border border-stone-200 dark:border-stone-800 hover:border-brand-500 text-stone-600 dark:text-stone-300" data-filter="obligation">📋 Obligations</button>
+          <button class="cal-filter-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all border border-stone-200 dark:border-stone-800 hover:border-brand-500 text-stone-600 dark:text-stone-300" data-filter="buffer">🛡️ Buffer</button>
+          <button class="cal-filter-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all border border-stone-200 dark:border-stone-800 hover:border-brand-500 text-stone-600 dark:text-stone-300" data-filter="critical">⚠️ Critical Gaps</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="w-full sm:w-64 relative">
+          <input type="text" id="calSearchInput" placeholder="Filter rent, EMI, Zomato…" class="w-full pl-8 pr-3 py-1.5 rounded-xl border text-xs focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);" />
+          <svg class="w-3.5 h-3.5 absolute left-2.5 top-2 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+      </div>
+
+
+      <!-- Weekday Headers -->
+      <div class="grid grid-cols-7 text-center text-[10px] font-extrabold uppercase tracking-wider pb-1" style="color: var(--text-muted)">
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        <div>Sun</div>
+      </div>
+
+      <!-- Dynamic Days Grid Container -->
+      <div id="calendarGridContainer" class="grid grid-cols-7 gap-2 text-xs">
+        <div class="col-span-7 p-12 text-center text-xs text-stone-400">
+          Loading dynamic calendar ledger…
+        </div>
+      </div>
+    </section>
+
+    <!-- Selected Day Detail Inspector -->
+    <div id="dayInspector" class="premium-card p-5 hidden" style="border-radius: var(--radius-2xl);">
+      <div class="flex items-center justify-between pb-3 border-b mb-4" style="border-color: var(--border-default)">
+        <div class="flex items-center space-x-2">
+          <span class="w-3 h-3 rounded-full bg-brand-500"></span>
+          <h3 id="inspectorTitle" class="text-sm font-black" style="color: var(--text-primary)">Day Details</h3>
+        </div>
+        <button onclick="document.getElementById('dayInspector').classList.add('hidden')" class="text-xs px-2 py-1 rounded hover:bg-stone-100 dark:hover:bg-stone-800" style="color: var(--text-muted)">✕ Close</button>
+      </div>
+      <div id="inspectorBody" class="space-y-4"></div>
+    </div>
+
+  </main>
+  <!-- END: MainContent -->
+</div>
+
+<!-- BEGIN: Add / Edit Event Modal -->
+<div id="calendarEventModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
+  <div class="premium-card w-full max-w-lg p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto" style="border-radius: var(--radius-2xl); background: var(--surface-card);">
+    <div class="flex items-center justify-between pb-3 border-b" style="border-color: var(--border-default);">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
+        <h3 id="eventModalTitle" class="text-base font-extrabold" style="color: var(--text-primary);">Schedule Financial Event</h3>
+      </div>
+      <button id="closeEventModal" class="p-1 rounded-lg text-stone-400 hover:text-stone-600 dark:hover:text-stone-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <form id="calendarEventForm" class="space-y-4 text-xs">
+      <div>
+        <label class="block font-bold mb-1" style="color: var(--text-secondary);">Event Title *</label>
+        <input id="eventTitleInput" type="text" placeholder="e.g. Rent Payment, EV EMI, Swiggy Settlement" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);" required />
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Amount (₹) *</label>
+          <input id="eventAmountInput" type="number" step="any" min="1" placeholder="4500" class="w-full px-3 py-2 rounded-xl border font-mono focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);" required />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Direction *</label>
+          <select id="eventDirectionInput" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+            <option value="outflow">Outflow (Expense / Commitment)</option>
+            <option value="inflow">Inflow (Income / Payout)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Date *</label>
+          <input id="eventDateInput" type="date" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);" required />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Time of Day</label>
+          <input id="eventTimeInput" type="text" placeholder="09:00 AM" class="w-full px-3 py-2 rounded-xl border font-mono focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Category</label>
+          <select id="eventCategoryInput" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+            <option value="Housing">Housing / Rent</option>
+            <option value="Loan">Loan / EMI / Mobility</option>
+            <option value="Income">Platform Payout / Direct Deposit</option>
+            <option value="Groceries">Food / Groceries</option>
+            <option value="Utilities">Utilities &amp; Telecom</option>
+            <option value="Insurance">Insurance &amp; Health</option>
+            <option value="General">General / Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Event Type</label>
+          <select id="eventTypeInput" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+            <option value="commitment">Scheduled Commitment</option>
+            <option value="payout">Expected Payout</option>
+            <option value="sweep">Buffer Sweep</option>
+            <option value="buffer_release">Buffer Release</option>
+            <option value="simulation">What-If Simulation</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Recurrence</label>
+          <select id="eventRecurrenceInput" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+            <option value="none">One-Time Only</option>
+            <option value="daily">Every Day</option>
+            <option value="weekly">Every Week</option>
+            <option value="biweekly">Every 2 Weeks</option>
+            <option value="monthly">Every Month</option>
+            <option value="quarterly">Every Quarter</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Commitment Status</label>
+          <select id="eventStatusInput" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+            <option value="EXPECTED">Expected / Scheduled</option>
+            <option value="ACTUAL">Actual / Settled</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4 pt-1">
+        <label class="flex items-center space-x-2 cursor-pointer">
+          <input id="eventEssentialInput" type="checkbox" checked class="rounded text-brand-500 focus:ring-brand-500" />
+          <span class="font-medium" style="color: var(--text-secondary);">Essential Commitment</span>
+        </label>
+        <label class="flex items-center space-x-2 cursor-pointer">
+          <input id="eventSimulationInput" type="checkbox" class="rounded text-purple-500 focus:ring-purple-500" />
+          <span class="font-medium" style="color: var(--text-secondary);">What-If Simulation</span>
+        </label>
+      </div>
+
+      <div>
+        <label class="block font-bold mb-1" style="color: var(--text-secondary);">Notes (Optional)</label>
+        <textarea id="eventNotesInput" rows="2" placeholder="e.g. Autodebit via HDFC Mandate" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"></textarea>
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-3 border-t" style="border-color: var(--border-default);">
+        <button type="button" id="cancelEventBtn" class="px-4 py-2 rounded-xl border font-bold hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" style="border-color: var(--border-default); color: var(--text-secondary);">
+          Cancel
+        </button>
+        <button type="submit" id="saveEventBtn" class="px-5 py-2 rounded-xl text-white font-bold transition-all bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 shadow-md">
+          Save Event
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- END: Add / Edit Event Modal -->
+
+<!-- BEGIN: Connect Income Source Modal (Honest Provider Interface) -->
+<div id="connectIncomeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
+  <div class="premium-card w-full max-w-lg p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto" style="border-radius: var(--radius-2xl); background: var(--surface-card);">
+    <div class="flex items-center justify-between pb-3 border-b" style="border-color: var(--border-default);">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <h3 class="text-base font-extrabold" style="color: var(--text-primary);">Connect Income Source</h3>
+      </div>
+      <button id="closeIncomeModal" class="p-1 rounded-lg text-stone-400 hover:text-stone-600 dark:hover:text-stone-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <div class="p-3 rounded-xl border border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20 text-xs space-y-1">
+      <div class="flex items-center gap-1.5 font-bold text-emerald-700 dark:text-emerald-300">
+        <span>ℹ️ Truthful Platform Integration Notice</span>
+      </div>
+      <p class="text-[11px] text-emerald-800 dark:text-emerald-400 leading-relaxed">
+        Direct Bank Account Aggregator APIs are currently in staging. Configuring your platform payout cadence here actively feeds your Personal Financial Digital Twin, cash-flow projection curve, and calendar ledger with zero fake mock syncs.
+      </p>
+    </div>
+
+    <form id="connectIncomeForm" class="space-y-4 text-xs">
+      <div>
+        <label class="block font-bold mb-1" style="color: var(--text-secondary);">Select Platform *</label>
+        <select id="incomeProviderSelect" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+          <option value="zomato">🍜 Zomato Partner (Food Delivery)</option>
+          <option value="blinkit">⚡ Blinkit Quick Delivery (Quick Commerce)</option>
+          <option value="swiggy">🛵 Swiggy Delivery Partner (Food Delivery)</option>
+          <option value="uber">🚗 Uber Driver Fleet (Rideshare)</option>
+          <option value="freelance">💻 Direct Client / Freelance Invoicing</option>
+          <option value="other">💰 Custom Recurring Income</option>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Typical Payout Amount (₹) *</label>
+          <input id="incomeAmountInput" type="number" step="any" min="100" placeholder="6500" class="w-full px-3 py-2 rounded-xl border font-mono focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);" required />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" style="color: var(--text-secondary);">Payout Frequency</label>
+          <select id="incomeFrequencySelect" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+            <option value="weekly">Weekly Payout</option>
+            <option value="biweekly">Every 2 Weeks</option>
+            <option value="monthly">Monthly Settlement</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block font-bold mb-1" style="color: var(--text-secondary);">Typical Settlement Day</label>
+        <select id="incomeDaySelect" class="w-full px-3 py-2 rounded-xl border focus:border-brand-500 focus:outline-none" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);">
+          <option value="Wednesday">Wednesday (Standard Zomato/Swiggy)</option>
+          <option value="Tuesday">Tuesday (Blinkit Standard)</option>
+          <option value="Monday">Monday (Uber Standard)</option>
+          <option value="Friday">Friday (Freelance Standard)</option>
+          <option value="1st">1st of Month</option>
+          <option value="5th">5th of Month</option>
+        </select>
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-3 border-t" style="border-color: var(--border-default);">
+        <button type="button" id="cancelIncomeBtn" class="px-4 py-2 rounded-xl border font-bold hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" style="border-color: var(--border-default); color: var(--text-secondary);">
+          Cancel
+        </button>
+        <button type="submit" id="saveIncomeBtn" class="px-5 py-2 rounded-xl text-white font-bold transition-all bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-md">
+          Connect &amp; Recalculate
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- END: Connect Income Source Modal -->
+
+<!-- BEGIN: Expected vs Actual Variance Modal -->
+<div id="calVarianceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
+  <div class="premium-card w-full max-w-2xl p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto" style="border-radius: var(--radius-2xl); background: var(--surface-card);">
+    <div class="flex items-center justify-between pb-3 border-b" style="border-color: var(--border-default);">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
+        <h3 class="text-base font-extrabold" style="color: var(--text-primary);">Expected vs. Actual Variance Analysis</h3>
+      </div>
+      <button id="closeVarianceModal" class="p-1 rounded-lg text-stone-400 hover:text-stone-600 dark:hover:text-stone-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <div id="varianceModalBody" class="space-y-4 text-xs">
+      <div class="p-4 text-center text-stone-400">Loading variance telemetry…</div>
+    </div>
+  </div>
+</div>
+<!-- END: Expected vs Actual Variance Modal -->
+
+<!-- SCRIPTS -->
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+<script src="js/calendar.js?v=8.4.0"></script>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — AI Resilience Coach</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Liquidity Intelligence</span>
+      </div>
+    </a>
+    <div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="font-medium">SOC-2 Type II Vault</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>256-bit TLS Encrypted</span>
+    </div>
+    <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">Deterministic Rule Engine v5.0</span>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span>Search</span>
+      <kbd class="kbd">⌘K</kbd>
+    </button>
+
+    <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+      <span>🌐 Public Explorer</span>
+    </a>
+
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <div class="notification-bell" onclick="toggleNotifications()">
+      <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full border font-medium text-xs" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary);">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+      </svg>
+      <span>Instant Sandbox Active</span>
+    </div>
+
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+        </div>
+        <div class="py-1 border-b" style="border-color: var(--border-default)">
+          <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span>Calibrate Baseline</span>
+          </div>
+        </div>
+        <div class="py-1">
+          <div class="user-menu-item" onclick="exportData()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Export Data</span>
+          </div>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- BEGIN: Main Layout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+  
+  <!-- BEGIN: NavigationSidebar -->
+  <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+    <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+      <div class="mb-4 px-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+      </div>
+      <nav class="space-y-1" id="mainNavigationTabs">
+        <a href="index.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Command Center</span>
+        </a>
+        <a href="simulator.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span>SURE SAVINGS</span>
+        </a>
+        <a href="income-intelligence.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <span>Income Intelligence</span>
+        </a>
+        <a href="planner.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Cash Flow Planner</span>
+        </a>
+        <a href="decision-pipeline.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          <span>Decision Pipeline</span>
+        </a>
+        <a href="calendar.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Income Calendar</span>
+        </a>
+        <a href="goals.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Goals &amp; Buffer Plan</span>
+        </a>
+        <a href="risk.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <span>Risk &amp; Early Warning</span>
+        </a>
+        <a href="health.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <span>Financial Health</span>
+        </a>
+        <a href="activity.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span>Transactions &amp; Activity</span>
+        </a>
+        <a href="coach.html" class="unified-nav-link active">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span>AI Resilience Coach</span>
+        </a>
+        <a href="login.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+          <span>Sign In / Portal</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Non-Custodial Guarantee in Sidebar -->
+    <div class="premium-card p-4 space-y-3" style="border-radius: var(--radius-2xl);">
+      <div class="flex items-center space-x-2 text-emerald-500">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        <span class="text-xs font-bold uppercase tracking-wider">Advisory Layer</span>
+      </div>
+      <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+        AI Coach provides read-only explanations of deterministic rules. No funds can be moved without explicit user authorization.
+      </p>
+    </div>
+  </aside>
+  <!-- END: NavigationSidebar -->
+
+  <!-- BEGIN: MainContentArea -->
+  <main class="flex-1 flex flex-col space-y-6 min-w-0">
+    
+    <!-- Hero Header & Section Description -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center space-x-2 mb-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Deterministic Explanation Layer • AI Companion</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">AI Resilience Coach</h1>
+        <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary)">
+          Ask plain-language questions about your liquidity score, surplus recommendations, and financial safeguards.
+        </p>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <span class="px-3 py-1 rounded-full text-xs font-mono font-bold" style="background: rgba(16, 185, 129, 0.12); color: #059669; border: 1px solid rgba(16, 185, 129, 0.2)">
+          Grounded in Deterministic v5.0
+        </span>
+      </div>
+    </div>
+
+    <!-- Two-Column Chat Workspace -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- Left Column: Conversational Stream (8 Cols) -->
+      <section class="lg:col-span-8 flex flex-col space-y-4">
+        
+        <!-- Active Context Ribbon -->
+        <div class="p-3 rounded-xl border flex flex-wrap items-center justify-between gap-2 text-xs" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span style="color: var(--text-secondary)">Current Cycle: <strong style="color: var(--text-primary)" data-coach="cycle-inflow">₹8,400 Inflow</strong></span>
+            <span style="color: var(--text-subtle)">•</span>
+            <span style="color: var(--text-secondary)">Recommendation: <strong class="text-brand-500" data-coach="cycle-rec">Save ₹900</strong></span>
+          </div>
+          <span class="font-mono text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-bold">Latency: 38ms</span>
+        </div>
+
+        <!-- Chat Conversation Messages Container -->
+        <div id="chatMessagesContainer" class="premium-card p-4 sm:p-6 space-y-5 max-h-[560px] overflow-y-auto" style="border-radius: var(--radius-2xl);">
+          
+          <!-- AI Message 1: Initial Briefing -->
+          <div class="flex items-start space-x-3.5">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+              S
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold" style="color: var(--text-primary)">SURE SAVINGS Coach</span>
+                <span class="text-[10px]" style="color: var(--text-subtle)">Today at 09:42 AM</span>
+              </div>
+              <div class="p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed space-y-3" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
+                <p id="coach-welcome-text">
+                  Good morning <span class="user-first-name font-bold">Arjun</span>. Your financial resilience score increased from <strong>68 to 74</strong> this month (<span class="text-emerald-500 font-bold">+6 pts</span>). Your current weekly earnings (<strong>₹8,400</strong>) are 18% above your stabilized baseline (₹7,100). Fixed commitments (₹4,400) and your protected cash floor (₹3,500) are fully covered, creating an opportunity to safely allocate <strong class="text-brand-500 font-bold">₹900</strong> into your emergency buffer.
+                </p>
+
+                <!-- Engine Breakdown Card Inside Message -->
+                <div class="p-3.5 rounded-xl border space-y-2 text-xs" style="background: var(--surface-paper); border-color: var(--border-default)">
+                  <div class="flex items-start justify-between">
+                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Why this happens</span>
+                    <span class="font-medium" style="color: var(--text-primary)">₹1,300 surplus over ₹7,100 baseline detected across 3 platforms.</span>
+                  </div>
+                  <div class="flex items-start justify-between pt-1 border-t" style="border-color: var(--border-default)">
+                    <span class="text-[10px] uppercase font-bold text-brand-500">Recommended Action</span>
+                    <span class="font-bold text-brand-500">Reserve ₹900 into Smart Buffer Vault.</span>
+                  </div>
+                  <div class="flex items-start justify-between pt-1 border-t" style="border-color: var(--border-default)">
+                    <span class="text-[10px] uppercase font-bold text-emerald-500">Expected Impact</span>
+                    <span class="font-bold text-emerald-500">Expands buffer runway from 1.5 wks → 1.7 wks.</span>
+                  </div>
+                  <div class="flex items-start justify-between pt-1 border-t" style="border-color: var(--border-default)">
+                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Floor Protection</span>
+                    <span style="color: var(--text-secondary)">Checking account ₹3,500 floor remains 100% untouched.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suggested Inquiries Pills -->
+          <div class="pl-12 space-y-2">
+            <p class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Suggested Inquiries</p>
+            <div class="flex flex-wrap gap-2">
+              <button data-coach-prompt="Why is my resilience score 74?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                "Why is my resilience score 74?"
+              </button>
+              <button data-coach-prompt="Why save ₹900 instead of ₹1,300?" class="text-xs px-3 py-1.5 rounded-full border transition-all font-semibold" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary)">
+                "Why save ₹900 instead of ₹1,300?"
+              </button>
+              <button data-coach-prompt="What happens if next week drops?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                "What happens if next week drops?"
+              </button>
+              <button data-coach-prompt="Can I safely withdraw ₹2,000?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                "Can I safely withdraw ₹2,000?"
+              </button>
+              <button data-coach-prompt="Transfer ₹10,000 now" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-red-400 text-red-500" style="background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.2)">
+                "Transfer ₹10,000 now (Safety Guardrail)"
+              </button>
+            </div>
+          </div>
+
+          <!-- User Bubble -->
+          <div class="flex items-start justify-end space-x-3">
+            <div class="max-w-md rounded-2xl rounded-tr-sm p-3.5 shadow-sm text-xs sm:text-sm text-white" style="background: #1f2937">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] font-bold text-stone-300 user-display-name" id="coach-user-bubble-name">Arjun K.</span>
+                <span class="text-[10px] text-stone-400">09:44 AM</span>
+              </div>
+              <p>Why did the engine cap my savings at ₹900 when I actually made a ₹1,300 surplus over baseline?</p>
+            </div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0 mt-1 user-avatar" id="coach-user-bubble-avatar" style="background: var(--surface-sunken); color: var(--text-primary)">
+              AK
+            </div>
+          </div>
+
+          <!-- AI Response -->
+          <div class="flex items-start space-x-3.5">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+              S
+            </div>
+            <div class="flex-1 space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold" style="color: var(--text-primary)">SURE SAVINGS Coach</span>
+                <span class="text-[10px]" style="color: var(--text-subtle)">09:44 AM • Mathematical Rule R-70</span>
+              </div>
+              <div class="p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed space-y-3" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
+                <p>
+                  The deterministic engine applies a <strong>70% surplus cap safeguard</strong> (<code class="px-1.5 py-0.5 rounded font-mono text-[11px]" style="background: var(--surface-paper); color: var(--text-primary)">₹1,300 × 0.70 = ₹910 ≈ ₹900</code>).
+                </p>
+                <p>
+                  Sweeping 100% of the surplus would leave daily logistics work vulnerable to unanticipated expenses like fuel price spikes, vehicle maintenance, or platform settlement delays.
+                </p>
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                  <div class="p-3 rounded-xl border" style="background: var(--surface-paper); border-color: var(--border-default)">
+                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Buffer Capitalization</span>
+                    <span class="text-base font-extrabold font-mono text-brand-500 block mt-0.5">₹900</span>
+                    <span class="text-[10px]" style="color: var(--text-subtle)">+0.2 weeks runway</span>
+                  </div>
+                  <div class="p-3 rounded-xl border" style="background: var(--surface-paper); border-color: var(--border-default)">
+                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Free Pocket Liquidity</span>
+                    <span class="text-base font-extrabold font-mono text-emerald-500 block mt-0.5">₹400</span>
+                    <span class="text-[10px]" style="color: var(--text-subtle)">Unrestricted cash</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Chat Interactive Input Bar -->
+        <form id="coachChatForm" class="premium-card p-3 shadow-sm flex flex-col" style="border-radius: var(--radius-2xl);">
+          <div class="flex items-center space-x-2">
+            <input id="coachChatInput" type="text" placeholder="Ask about your resilience score, forecast, or buffer recommendations..." class="flex-1 text-xs sm:text-sm border-0 focus:ring-0 px-3 py-2 outline-none bg-transparent" style="color: var(--text-primary);" />
+            <button type="submit" class="px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs shadow-md brand-glow transition-all flex items-center space-x-1.5">
+              <span>Send</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+          </div>
+          <div class="border-t mt-2 pt-2 flex items-center justify-between text-[11px]" style="border-color: var(--border-default); color: var(--text-subtle)">
+            <span>🔒 Read-only explanation engine. All transfers require manual authorization in SURE SAVINGS.</span>
+            <span class="font-mono text-[10px]">Deterministic Core v5.0</span>
+          </div>
+        </form>
+
+      </section>
+
+      <!-- Right Column: Live Telemetry & Engine Context (4 Cols) -->
+      <section class="lg:col-span-4 space-y-4">
+        
+        <!-- Live Grounded Context Card -->
+        <div class="premium-card p-5 space-y-3" style="border-radius: var(--radius-2xl);">
+          <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border-default)">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-primary)">Live Engine Context</h3>
+              <p class="text-[10px]" style="color: var(--text-muted)">Authoritative state snapshot</p>
+            </div>
+            <span class="text-[10px] font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+              Grounded Data
+            </span>
+          </div>
+
+          <!-- Telemetry Grid -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <span class="text-[10px] font-bold uppercase" style="color: var(--text-subtle)">Actual Inflows</span>
+              <div class="text-sm font-extrabold font-mono mt-0.5" style="color: var(--text-primary)" data-coach="inflows">₹8,400</div>
+              <span class="text-[10px] text-emerald-500 font-bold" data-coach="inflow-diff">+18% vs Baseline</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <span class="text-[10px] font-bold uppercase" style="color: var(--text-subtle)">Stabilized Baseline</span>
+              <div class="text-sm font-extrabold font-mono mt-0.5" style="color: var(--text-primary)" data-coach="baseline">₹7,100</div>
+              <span class="text-[10px]" style="color: var(--text-muted)">60/40 Weighted</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <span class="text-[10px] font-bold uppercase" style="color: var(--text-subtle)">Current Buffer</span>
+              <div class="text-sm font-extrabold font-mono mt-0.5" style="color: var(--text-primary)" data-coach="current-buffer">₹6,800</div>
+              <span class="text-[10px]" style="color: var(--text-muted)" data-coach="buffer-target">Target: ₹15,000</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <span class="text-[10px] font-bold uppercase" style="color: var(--text-subtle)">Protected Floor</span>
+              <div class="text-sm font-extrabold font-mono mt-0.5" style="color: var(--text-primary)" data-coach="floor">₹3,500</div>
+              <span class="text-[10px] text-amber-500 font-bold">100% Locked</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+              <span class="text-[10px] font-bold uppercase" style="color: var(--text-subtle)">Weekly Burn</span>
+              <div class="text-sm font-extrabold font-mono mt-0.5" style="color: var(--text-primary)" data-coach="weekly-burn">₹4,400</div>
+              <span class="text-[10px]" style="color: var(--text-muted)">Rent + Fuel + EMI</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl border text-brand-500" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle)">
+              <span class="text-[10px] font-bold uppercase text-brand-500">Recommendation</span>
+              <div class="text-sm font-extrabold font-mono text-brand-500 mt-0.5" data-coach="rec-amount">+₹900</div>
+              <span class="text-[10px] font-bold text-brand-500" data-coach="rec-label">Safe Allocation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Focused Diagnostic Cards -->
+        <div class="space-y-3">
+          <!-- 1. Resilience -->
+          <div class="premium-card p-4 space-y-1.5" style="border-radius: var(--radius-xl);">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">1. Financial Resilience</span>
+              <span class="text-xs font-extrabold font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full" data-coach="resilience-badge">74 / 100</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)" data-coach="resilience-desc">
+              Classified as <strong class="text-emerald-500">Resilient</strong>. Low probability of default across upcoming 4-week window.
+            </p>
+            <div class="w-full bg-stone-200/40 rounded-full h-1.5 mt-2 overflow-hidden" style="background: var(--surface-sunken);">
+              <div class="h-1.5 rounded-full bg-emerald-500" style="width: 74%" data-coach="resilience-bar"></div>
+            </div>
+          </div>
+
+          <!-- 2. Risk Profile -->
+          <div class="premium-card p-4 space-y-1.5" style="border-radius: var(--radius-xl);">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">2. Income Volatility</span>
+              <span class="text-xs font-extrabold font-mono text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full" data-coach="volatility-badge">31% StdDev</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Moderate variance across gig payouts. Dampening algorithm applies <code class="text-[10px] px-1 rounded" style="background: var(--surface-sunken)">0.60×Median + 0.40×Average</code>.
+            </p>
+          </div>
+
+          <!-- 3. Buffer Target -->
+          <div class="premium-card p-4 space-y-1.5" style="border-radius: var(--radius-xl);">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">3. Buffer Coverage</span>
+              <span class="text-xs font-mono font-bold" style="color: var(--text-muted)" data-coach="coverage-badge">1.5 wks (45%)</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)" data-coach="coverage-desc">
+              Current buffer holds ₹6,800. ₹8,200 remaining to complete full 3.5-week autonomous target.
+            </p>
+            <div class="w-full bg-stone-200/40 rounded-full h-1.5 mt-2 overflow-hidden" style="background: var(--surface-sunken);">
+              <div class="h-1.5 rounded-full bg-brand-500" style="width: 45%" data-coach="coverage-bar"></div>
+            </div>
+          </div>
+
+          <!-- 4. Checking Floor -->
+          <div class="premium-card p-4 space-y-1.5" style="border-radius: var(--radius-xl);">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold" style="color: var(--text-primary)">4. Checking Floor Lock</span>
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded" style="background: var(--surface-sunken); color: var(--text-primary)" data-coach="floor-badge">Strict ₹3,500</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Absolute zero-touch baseline. Engine will never recommend an action that breaches this floor.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Execution Links -->
+        <div class="p-4 rounded-2xl border text-center space-y-2.5" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <p class="text-xs font-medium" style="color: var(--text-secondary)">Ready to simulate or execute reserve actions?</p>
+          <div class="flex space-x-2">
+            <a href="simulator.html" class="flex-1 py-2 rounded-xl text-xs font-bold border transition shadow-sm text-center hover:bg-stone-50" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-primary)">
+              SURE SAVINGS
+            </a>
+            <a href="decision-pipeline.html" class="flex-1 py-2 rounded-xl text-xs font-bold text-white bg-brand-500 hover:bg-brand-600 transition shadow-sm text-center brand-glow">
+              Decision Pipeline →
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+  <!-- END: MainContentArea -->
+</div>
+<!-- END: Main Layout -->
+
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+<script src="js/coach.js?v=8.4.0"></script>
+</body>
+</html>

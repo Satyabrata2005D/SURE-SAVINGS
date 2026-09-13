@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Private Financial Resilience Workspace</title>
+  <meta name="description" content="Build a financial buffer before life tests it. Intelligent automated savings, cash flow protection, and resilience scoring for variable income earners."/>
+  
+  <!-- Tailwind CSS v3 with plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Identity Services Client Library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+  <!-- PARTICLE BACKGROUND -->
+  <div class="particles-container" id="login-particles"></div>
+
+  <!-- Main Container -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden">
+    <!-- Ambient Background Glows -->
+    <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-brand-500/8 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-10 right-10 w-56 h-56 bg-violet-500/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/4 w-96 h-96 gradient-mesh opacity-40 rounded-full blur-2xl pointer-events-none"></div>
+
+    <!-- Main Outer Modal Card -->
+    <div class="w-full max-w-5xl premium-card overflow-hidden relative z-10 flex flex-col lg:flex-row animate-fade-in-scale" style="border-radius: var(--radius-3xl);">
+      
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- LEFT COLUMN: Brand Hero -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="w-full lg:w-1/2 p-8 sm:p-10 lg:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r relative" style="background: var(--surface-paper); border-color: var(--border-default);">
+        <div>
+          <!-- Back Link -->
+          <div class="mb-4">
+            <a href="landing.html" class="inline-flex items-center gap-1.5 text-xs font-bold hover:text-brand-500 transition-colors" style="color: var(--text-muted)">
+              <span>←</span>
+              <span>Back to Public Explorer</span>
+            </a>
+          </div>
+
+          <!-- Brand Wordmark -->
+          <div class="flex items-center gap-3 mb-6 animate-fade-in-up">
+            <div class="w-11 h-11 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center font-bold text-xl text-white shadow-md">
+              S
+            </div>
+            <div>
+              <div class="font-extrabold text-xl tracking-tight flex items-center gap-1.5" style="color: var(--text-primary)">
+                SURE SAVINGS
+              </div>
+              <p class="text-[10px] font-bold tracking-widest text-brand-500 uppercase">Smart Income Buffer</p>
+            </div>
+          </div>
+
+          <!-- Mission Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border mb-6 animate-fade-in-up delay-100" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle);">
+            <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+            <span class="text-xs font-bold text-brand-500 tracking-wide uppercase">Build a buffer before life tests it</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="text-2xl sm:text-3xl font-black tracking-tight leading-snug mb-4 animate-fade-in-up delay-200" style="color: var(--text-primary)">
+            Your private resilience workspace
+          </h1>
+
+          <p class="text-sm leading-relaxed mb-6 animate-fade-in-up delay-300" style="color: var(--text-secondary)">
+            Map your real income, compute your safe-to-save recommendation, 
+            build a volatility shield, and access advanced AI coaching—all in 
+            a private, zero-custody workspace.
+          </p>
+
+          <!-- Feature Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 animate-fade-in-up delay-400">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+              <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0 text-sm">📊</div>
+              <div>
+                <span class="text-xs font-bold block" style="color: var(--text-primary)">Resilience Index</span>
+                <span class="text-[11px]" style="color: var(--text-muted)">Multi-factor financial health scoring engine</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+              <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0 text-sm">🛡️</div>
+              <div>
+                <span class="text-xs font-bold block" style="color: var(--text-primary)">Smart Buffer</span>
+                <span class="text-[11px]" style="color: var(--text-muted)">Automated liquidity shield & floor protection</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+              <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0 text-sm">🤖</div>
+              <div>
+                <span class="text-xs font-bold block" style="color: var(--text-primary)">AI Coaching</span>
+                <span class="text-[11px]" style="color: var(--text-muted)">Contextual financial advice via RAG intelligence</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+              <div class="w-8 h-8 rounded-lg bg-rose-100 flex items-center justify-center flex-shrink-0 text-sm">📈</div>
+              <div>
+                <span class="text-xs font-bold block" style="color: var(--text-primary)">Shock Simulator</span>
+                <span class="text-[11px]" style="color: var(--text-muted)">Stress test your finances against real scenarios</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Footer -->
+        <div class="hidden lg:flex items-center gap-2 mt-4 text-[11px] animate-fade-in delay-600" style="color: var(--text-subtle)">
+          <svg class="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span>Zero passwords stored • Non-custodial • Private workspaces</span>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- RIGHT COLUMN: Auth Flow -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="w-full lg:w-1/2 p-8 sm:p-10 lg:p-12 flex flex-col justify-center relative" style="background: var(--surface-paper);">
+        
+        <!-- Dark Mode Toggle -->
+        <div class="absolute top-4 right-4">
+          <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <div class="toggle-thumb">
+              <span id="theme-icon">☀️</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- AUTH STEP 1: Email Input -->
+        <div id="step-email" class="animate-fade-in-up">
+          <div class="mb-6">
+            <span class="text-[10px] font-bold text-brand-500 uppercase tracking-wider block mb-1">Step 1 of 2</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight" style="color: var(--text-primary)">
+              Sign in to your workspace
+            </h2>
+            <p class="text-xs mt-1.5 leading-relaxed" style="color: var(--text-muted)">
+              We'll send a 6-digit code to verify your identity. No passwords required.
+            </p>
+          </div>
+
+          <!-- Google Auth Button -->
+          <button 
+            id="google-login-btn"
+            type="button" 
+            onclick="handleGoogleLogin()"
+            class="btn-secondary w-full py-3.5 text-sm group mb-4"
+          >
+            <svg class="w-4 h-4 flex-shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+
+          <!-- Divider -->
+          <div class="relative flex items-center justify-center my-5">
+            <div class="border-t w-full" style="border-color: var(--border-default)"></div>
+            <span class="px-3 text-[10px] font-semibold uppercase" style="background: var(--surface-paper); color: var(--text-subtle)">or continue with email</span>
+            <div class="border-t w-full" style="border-color: var(--border-default)"></div>
+          </div>
+
+          <!-- Email Form -->
+          <form id="email-form" onsubmit="handleEmailSubmit(event)" class="space-y-4">
+            <div>
+              <label for="email-input" class="block text-xs font-bold mb-1.5" style="color: var(--text-secondary)">Email Address</label>
+              <input 
+                type="email" 
+                id="email-input"
+                placeholder="you@example.com"
+                value="das2005satyabrata@gmail.com"
+                required 
+                autocomplete="email"
+                class="w-full px-4 py-3 rounded-xl border text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+              />
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-3.5 text-sm" id="send-otp-btn">
+              <span>Send Verification Code</span>
+              <span>→</span>
+            </button>
+          </form>
+
+          <!-- Error Display -->
+          <div id="email-error" class="hidden mt-3 p-3 rounded-xl border text-xs font-medium flex items-center gap-2" style="background: var(--accent-rose-light); border-color: rgba(244,63,94,0.2); color: var(--accent-rose);">
+            <span>⚠️</span>
+            <span id="email-error-text"></span>
+          </div>
+        </div>
+
+        <!-- AUTH STEP 2: OTP Verification -->
+        <div id="step-otp" class="hidden">
+          <div class="mb-6">
+            <button type="button" onclick="goBackToEmail()" class="inline-flex items-center gap-1.5 text-xs font-bold mb-3 hover:text-brand-500 transition-colors" style="color: var(--text-muted)">
+              <span>←</span> Back
+            </button>
+            <span class="text-[10px] font-bold text-brand-500 uppercase tracking-wider block mb-1">Step 2 of 3</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight" style="color: var(--text-primary)">
+              Enter verification code
+            </h2>
+            <p class="text-xs mt-1.5 leading-relaxed" style="color: var(--text-muted)">
+              A 6-digit verification code has been sent to <strong id="otp-email-display" class="text-brand-500">—</strong>. Please check your inbox (and spam folder) to retrieve your code.
+            </p>
+          </div>
+
+          <!-- Premium OTP Boxes -->
+          <form id="otp-form" onsubmit="handleOtpSubmit(event)" class="space-y-5">
+            <div class="flex justify-center gap-2.5" id="otp-container">
+              <input type="text" inputmode="numeric" maxlength="1" class="otp-input-premium" data-otp-idx="0" autocomplete="one-time-code" />
+              <input type="text" inputmode="numeric" maxlength="1" class="otp-input-premium" data-otp-idx="1" />
+              <input type="text" inputmode="numeric" maxlength="1" class="otp-input-premium" data-otp-idx="2" />
+              <div class="flex items-center px-1" style="color: var(--text-subtle)">
+                <span class="text-lg font-light">—</span>
+              </div>
+              <input type="text" inputmode="numeric" maxlength="1" class="otp-input-premium" data-otp-idx="3" />
+              <input type="text" inputmode="numeric" maxlength="1" class="otp-input-premium" data-otp-idx="4" />
+              <input type="text" inputmode="numeric" maxlength="1" class="otp-input-premium" data-otp-idx="5" />
+            </div>
+
+            <!-- Fallback notice only if outbound SMTP is totally blocked -->
+            <div id="dev-otp-notice" class="hidden p-3 rounded-xl border text-xs flex items-center justify-between" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.25); color: #059669;">
+              <div class="flex items-center gap-2">
+                <span>🔑</span>
+                <span>Verification Code: <strong id="dev-otp-code" class="font-mono font-bold text-sm tracking-wider"></strong></span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-3.5 text-sm" id="verify-otp-btn">
+              <span>Verify Code & Continue</span>
+              <span>🔐</span>
+            </button>
+          </form>
+
+          <!-- Resend Timer -->
+          <div class="text-center mt-4">
+            <span id="resend-timer" class="text-xs" style="color: var(--text-subtle)">Resend code in <strong class="font-mono">30s</strong></span>
+            <button type="button" id="resend-btn" class="hidden text-xs font-bold text-brand-500 hover:underline" onclick="resendOtp()">
+              Resend Code
+            </button>
+          </div>
+
+          <!-- OTP Error -->
+          <div id="otp-error" class="hidden mt-3 p-3 rounded-xl border text-xs font-medium flex items-center gap-2" style="background: var(--accent-rose-light); border-color: rgba(244,63,94,0.2); color: var(--accent-rose);">
+            <span>⚠️</span>
+            <span id="otp-error-text"></span>
+          </div>
+        </div>
+
+        <!-- AUTH STEP 3: Mandatory Customer Onboarding Details -->
+        <div id="step-onboarding" class="hidden">
+          <div class="mb-5">
+            <span class="text-[10px] font-bold text-brand-500 uppercase tracking-wider block mb-1">Step 3 of 3 • Profile Activation</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight" style="color: var(--text-primary)">
+              Customer Information
+            </h2>
+            <p class="text-xs mt-1 leading-relaxed" style="color: var(--text-muted)">
+              Please fill in your basic customer details to complete registration and unlock your workspace.
+            </p>
+          </div>
+
+          <form id="onboarding-form" onsubmit="handleOnboardingSubmit(event)" class="space-y-3.5 max-h-[460px] overflow-y-auto pr-1">
+            <!-- Full Legal Name -->
+            <div>
+              <label for="onboard-name" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">Full Legal Name <span class="text-brand-500">*</span></label>
+              <input 
+                type="text" 
+                id="onboard-name" 
+                placeholder="e.g. Satyabrata Das" 
+                required 
+                class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+              />
+            </div>
+
+            <!-- Date of Birth & Phone Number -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="onboard-dob" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">Date of Birth <span class="text-brand-500">*</span></label>
+                <input 
+                  type="date" 
+                  id="onboard-dob" 
+                  required 
+                  class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                  style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+                />
+              </div>
+              <div>
+                <label for="onboard-phone" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">Phone Number <span class="text-brand-500">*</span></label>
+                <input 
+                  type="tel" 
+                  id="onboard-phone" 
+                  placeholder="+91 98765 43210" 
+                  required 
+                  class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                  style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+                />
+              </div>
+            </div>
+
+            <!-- Country & State -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="onboard-country" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">Country <span class="text-brand-500">*</span></label>
+                <select 
+                  id="onboard-country" 
+                  required 
+                  class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                  style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+                >
+                  <option value="India" selected>India (🇮🇳)</option>
+                  <option value="United States">United States (🇺🇸)</option>
+                  <option value="United Kingdom">United Kingdom (🇬🇧)</option>
+                  <option value="Canada">Canada (🇨🇦)</option>
+                  <option value="Australia">Australia (🇦🇺)</option>
+                  <option value="United Arab Emirates">United Arab Emirates (🇦🇪)</option>
+                  <option value="Singapore">Singapore (🇸🇬)</option>
+                  <option value="Germany">Germany (🇩🇪)</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="onboard-state" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">State / Province <span class="text-brand-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="onboard-state" 
+                  placeholder="e.g. Odisha" 
+                  required 
+                  class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                  style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+                />
+              </div>
+            </div>
+
+            <!-- District & Area -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="onboard-district" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">District / City <span class="text-brand-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="onboard-district" 
+                  placeholder="e.g. Cuttack" 
+                  required 
+                  class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                  style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+                />
+              </div>
+              <div>
+                <label for="onboard-area" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">Area / Locality / PIN <span class="text-brand-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="onboard-area" 
+                  placeholder="e.g. CDA Sector 9, 753014" 
+                  required 
+                  class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                  style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+                />
+              </div>
+            </div>
+
+            <!-- Occupation Profile -->
+            <div>
+              <label for="onboard-occupation" class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">Primary Occupation / Profession</label>
+              <select 
+                id="onboard-occupation" 
+                class="w-full px-3.5 py-2.5 rounded-xl border text-sm font-medium outline-none transition-all focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary);"
+              >
+                <option value="Gig Platform Worker" selected>Gig Platform Worker (Ride, Delivery, Urban Company)</option>
+                <option value="Freelancer / Consultant">Freelancer / Independent Consultant</option>
+                <option value="Small Business Owner">Small Business Owner / Trader</option>
+                <option value="Salaried Professional">Salaried Employee / Professional</option>
+                <option value="Creator / Digital Entrepreneur">Creator / Digital Entrepreneur</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-3.5 text-sm mt-3 font-bold shadow-md" id="onboard-submit-btn">
+              <span>Complete Onboarding & Access Workspace</span>
+              <span>🚀</span>
+            </button>
+          </form>
+
+          <!-- Onboarding Error Display -->
+          <div id="onboard-error" class="hidden mt-3 p-3 rounded-xl border text-xs font-medium flex items-center gap-2" style="background: var(--accent-rose-light); border-color: rgba(244,63,94,0.2); color: var(--accent-rose);">
+            <span>⚠️</span>
+            <span id="onboard-error-text"></span>
+          </div>
+        </div>
+
+        <!-- AUTH STEP 3: Success -->
+        <div id="step-success" class="hidden text-center">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-100 flex items-center justify-center animate-bounce-in">
+            <svg class="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-extrabold tracking-tight mb-2 animate-fade-in-up delay-100" style="color: var(--text-primary)">
+            Welcome to SURE SAVINGS
+          </h2>
+          <p class="text-sm mb-1 animate-fade-in-up delay-200" style="color: var(--text-secondary)">
+            Signed in as <strong id="success-email" class="text-brand-500">—</strong>
+          </p>
+          <p class="text-xs animate-fade-in-up delay-300" style="color: var(--text-muted)">
+            Preparing your private financial workspace…
+          </p>
+          <div class="mt-6 animate-fade-in-up delay-400">
+            <div class="progress-bar w-48 mx-auto">
+              <div class="progress-bar-fill brand" style="width: 0%" id="redirect-progress"></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center">
+    <div class="text-[11px] font-medium" style="color: var(--text-subtle)">
+      SURE SAVINGS • Deterministic Financial Resilience Core v5.0
+    </div>
+  </footer>
+
+  <!-- Confetti Container -->
+  <div id="confetti-container" class="confetti-container hidden"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js?v=8.7.0"></script>
+  <script src="js/store.js?v=8.7.0"></script>
+
+  <script>
+    // ═══════════════════════════════════════════════════════
+    // DARK MODE
+    // ═══════════════════════════════════════════════════════
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('suresavings_theme', isDark ? 'light' : 'dark');
+      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+    (function() {
+      const saved = localStorage.getItem('suresavings_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = '🌙';
+      }
+    })();
+
+    // ═══════════════════════════════════════════════════════
+    // PARTICLES
+    // ═══════════════════════════════════════════════════════
+    function initParticles() {
+      const container = document.getElementById('login-particles');
+      if (!container) return;
+      const sizes = ['particle-sm', 'particle-md', 'particle-lg'];
+      for (let i = 0; i < 15; i++) {
+        const p = document.createElement('div');
+        p.className = `particle ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.bottom = `${Math.random() * 40}%`;
+        p.style.animationDuration = `${6 + Math.random() * 8}s`;
+        p.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(p);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // OTP INPUT SYSTEM — Premium Auto-Advance
+    // ═══════════════════════════════════════════════════════
+    function initOtpInputs() {
+      const inputs = document.querySelectorAll('.otp-input-premium');
+      inputs.forEach((input, idx) => {
+        input.addEventListener('input', (e) => {
+          const val = e.target.value.replace(/[^0-9]/g, '');
+          e.target.value = val;
+          if (val) {
+            e.target.classList.add('filled');
+            // Auto-advance to next
+            if (idx < inputs.length - 1) {
+              inputs[idx + 1].focus();
+            }
+          } else {
+            e.target.classList.remove('filled');
+          }
+        });
+        
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+            inputs[idx - 1].focus();
+            inputs[idx - 1].value = '';
+            inputs[idx - 1].classList.remove('filled');
+          }
+        });
+
+        input.addEventListener('focus', () => {
+          input.select();
+        });
+
+        // Paste handling
+        input.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const pasteData = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '');
+          if (pasteData.length >= 6) {
+            inputs.forEach((inp, i) => {
+              inp.value = pasteData[i] || '';
+              if (inp.value) inp.classList.add('filled');
+            });
+            inputs[Math.min(5, pasteData.length - 1)].focus();
+          }
+        });
+      });
+    }
+
+    function getOtpValue() {
+      return Array.from(document.querySelectorAll('.otp-input-premium'))
+        .map(i => i.value).join('');
+    }
+
+    function clearOtpInputs() {
+      document.querySelectorAll('.otp-input-premium').forEach(i => {
+        i.value = '';
+        i.classList.remove('filled', 'error');
+      });
+    }
+
+    function shakeOtpInputs() {
+      document.querySelectorAll('.otp-input-premium').forEach(i => {
+        i.classList.add('error');
+        setTimeout(() => i.classList.remove('error'), 500);
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // CONFETTI CELEBRATION
+    // ═══════════════════════════════════════════════════════
+    function triggerConfetti() {
+      const container = document.getElementById('confetti-container');
+      container.classList.remove('hidden');
+      const colors = ['#FF5B45', '#F59E0B', '#059669', '#3B82F6', '#8B5CF6', '#F43F5E'];
+      
+      for (let i = 0; i < 60; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = `${1.5 + Math.random() * 2}s`;
+        piece.style.animationDelay = `${Math.random() * 0.5}s`;
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        if (Math.random() > 0.5) {
+          piece.style.borderRadius = '50%';
+          piece.style.width = `${6 + Math.random() * 8}px`;
+          piece.style.height = piece.style.width;
+        } else {
+          piece.style.width = `${8 + Math.random() * 6}px`;
+          piece.style.height = `${4 + Math.random() * 4}px`;
+        }
+        container.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        container.classList.add('hidden');
+        container.innerHTML = '';
+      }, 3500);
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // AUTH FLOW
+    // ═══════════════════════════════════════════════════════
+    let userEmail = '';
+    let resendInterval = null;
+
+    async function handleEmailSubmit(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email-input');
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      hideError('email');
+      const sendBtn = document.getElementById('send-otp-btn');
+      sendBtn.disabled = true;
+      sendBtn.innerHTML = `
+        <svg class="animate-spin h-4 w-4 inline" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Sending Code to Email…</span>
+      `;
+
+      try {
+        const sendFn = (window.sureSavingsApi?.sendOtp || window.sureSavingsApi?.sendEmailOTP)?.bind(window.sureSavingsApi);
+        if (!sendFn) throw new Error("API client is not loaded. Please refresh the page.");
+        const res = await sendFn(email);
+        userEmail = email;
+        
+        // Transition to OTP step
+        document.getElementById('step-email').classList.add('hidden');
+        document.getElementById('step-otp').classList.remove('hidden');
+        document.getElementById('step-otp').classList.add('animate-fade-in-up');
+        document.getElementById('otp-email-display').textContent = email;
+
+        // Clear any old values so user inputs code from their email
+        clearOtpInputs();
+
+        // If local dev environment network completely blocks SMTP, show fallback code
+        const devNotice = document.getElementById('dev-otp-notice');
+        if (res && res.dev_otp && res.smtp_status === "delivered_to_dev_console") {
+          devNotice?.classList.remove('hidden');
+          const devCode = document.getElementById('dev-otp-code');
+          if (devCode) devCode.textContent = res.dev_otp;
+        } else {
+          devNotice?.classList.add('hidden');
+        }
+        
+        // Focus first OTP input
+        setTimeout(() => {
+          document.querySelector('.otp-input-premium')?.focus();
+        }, 300);
+
+        startResendTimer();
+      } catch (err) {
+        showError('email', err.message || 'Unable to send verification code. Please try again.');
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = '<span>Send Verification Code</span><span>→</span>';
+      }
+    }
+
+    async function handleOtpSubmit(e) {
+      e.preventDefault();
+      const otp = getOtpValue();
+      if (otp.length < 6) {
+        shakeOtpInputs();
+        showError('otp', 'Please enter the complete 6-digit code sent to your email.');
+        return;
+      }
+
+      hideError('otp');
+      const verifyBtn = document.getElementById('verify-otp-btn');
+      verifyBtn.disabled = true;
+      verifyBtn.innerHTML = `
+        <svg class="animate-spin h-4 w-4 inline" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Verifying…</span>
+      `;
+
+      try {
+        const verifyFn = (window.sureSavingsApi?.verifyOtp || window.sureSavingsApi?.verifyEmailOTP)?.bind(window.sureSavingsApi);
+        if (!verifyFn) throw new Error("API client is not loaded. Please refresh the page.");
+        const res = await verifyFn(userEmail, otp);
+        
+        try {
+          if (res && res.user && window.sureSavingsStore?.setUser) {
+            window.sureSavingsStore.setUser(res.user);
+          }
+        } catch (storeErr) {
+          console.warn("Store sync issue:", storeErr);
+        }
+
+        // Check if user has already completed onboarding details
+        if (res && res.user && res.user.is_onboarded) {
+          // Returning user who already filled details -> Go directly to dashboard
+          document.getElementById('step-otp').classList.add('hidden');
+          showSuccessAndRedirect(res.user.name || userEmail);
+        } else {
+          // New / Incomplete user -> Mandatory Step 3: Fill Customer Details
+          document.getElementById('step-otp').classList.add('hidden');
+          const onboardStep = document.getElementById('step-onboarding');
+          onboardStep.classList.remove('hidden');
+          onboardStep.classList.add('animate-fade-in-up');
+          
+          if (res?.user?.name && res.user.name !== 'Sandbox User') {
+            const nameEl = document.getElementById('onboard-name');
+            if (nameEl) nameEl.value = res.user.name;
+          }
+          if (res?.user?.phone_number) {
+            const phoneEl = document.getElementById('onboard-phone');
+            if (phoneEl) phoneEl.value = res.user.phone_number;
+          }
+          if (res?.user?.date_of_birth) {
+            const dobEl = document.getElementById('onboard-dob');
+            if (dobEl) dobEl.value = res.user.date_of_birth;
+          }
+        }
+      } catch (err) {
+        shakeOtpInputs();
+        showError('otp', err.message || 'Invalid verification code. Please check your email inbox and try again.');
+        verifyBtn.disabled = false;
+        verifyBtn.innerHTML = '<span>Verify Code & Continue</span><span>🔐</span>';
+      }
+    }
+
+    async function handleOnboardingSubmit(e) {
+      e.preventDefault();
+      hideError('onboard');
+
+      const name = document.getElementById('onboard-name').value.trim();
+      const dob = document.getElementById('onboard-dob').value.trim();
+      const phone = document.getElementById('onboard-phone').value.trim();
+      const country = document.getElementById('onboard-country').value.trim();
+      const state = document.getElementById('onboard-state').value.trim();
+      const district = document.getElementById('onboard-district').value.trim();
+      const area = document.getElementById('onboard-area').value.trim();
+      const occupation = document.getElementById('onboard-occupation').value.trim();
+
+      if (!name || !dob || !phone || !country || !state || !district || !area) {
+        showError('onboard', 'Please fill in all required customer details.');
+        return;
+      }
+
+      const submitBtn = document.getElementById('onboard-submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin h-4 w-4 inline" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Saving Customer Details…</span>
+      `;
+
+      try {
+        const res = await window.sureSavingsApi.completeOnboarding({
+          name,
+          date_of_birth: dob,
+          phone_number: phone,
+          country,
+          state,
+          district,
+          area,
+          occupation
+        });
+
+        try {
+          if (res && res.user && window.sureSavingsStore?.setUser) {
+            window.sureSavingsStore.setUser(res.user);
+          }
+        } catch (storeErr) {
+          console.warn("Store sync issue:", storeErr);
+        }
+
+        document.getElementById('step-onboarding').classList.add('hidden');
+        showSuccessAndRedirect(res?.user?.name || name);
+      } catch (err) {
+        showError('onboard', err.message || 'Unable to save customer details. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Complete Onboarding & Access Workspace</span><span>🚀</span>';
+      }
+    }
+
+    function showSuccessAndRedirect(displayName) {
+      document.getElementById('step-success').classList.remove('hidden');
+      document.getElementById('success-email').textContent = displayName;
+      triggerConfetti();
+      
+      setTimeout(() => {
+        const progressBar = document.getElementById('redirect-progress');
+        if (progressBar) progressBar.style.width = '100%';
+      }, 200);
+
+      setTimeout(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const returnTo = urlParams.get('return_to') || 'index.html';
+        window.location.href = returnTo;
+      }, 2000);
+    }
+
+    function goBackToEmail() {
+      document.getElementById('step-otp').classList.add('hidden');
+      document.getElementById('step-onboarding').classList.add('hidden');
+      document.getElementById('step-email').classList.remove('hidden');
+      clearOtpInputs();
+      hideError('otp');
+      hideError('onboard');
+      if (resendInterval) clearInterval(resendInterval);
+    }
+
+    function startResendTimer() {
+      let seconds = 30;
+      const timerEl = document.getElementById('resend-timer');
+      const resendBtn = document.getElementById('resend-btn');
+      timerEl.classList.remove('hidden');
+      resendBtn.classList.add('hidden');
+
+      resendInterval = setInterval(() => {
+        seconds--;
+        timerEl.innerHTML = `Resend code in <strong class="font-mono">${seconds}s</strong>`;
+        if (seconds <= 0) {
+          clearInterval(resendInterval);
+          timerEl.classList.add('hidden');
+          resendBtn.classList.remove('hidden');
+        }
+      }, 1000);
+    }
+
+    async function resendOtp() {
+      try {
+        hideError('otp');
+        const sendFn = (window.sureSavingsApi?.sendOtp || window.sureSavingsApi?.sendEmailOTP)?.bind(window.sureSavingsApi);
+        await sendFn(userEmail);
+        startResendTimer();
+      } catch (err) {
+        showError('otp', 'Unable to resend. Please try again.');
+      }
+    }
+
+    function showError(step, msg) {
+      const container = document.getElementById(`${step}-error`);
+      const text = document.getElementById(`${step}-error-text`);
+      if (container && text) {
+        text.textContent = msg;
+        container.classList.remove('hidden');
+        container.classList.add('animate-fade-in-up');
+      }
+    }
+
+    function hideError(step) {
+      const container = document.getElementById(`${step}-error`);
+      if (container) container.classList.add('hidden');
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // GOOGLE AUTH & NATIVE IDENTITY SERVICES
+    // ═══════════════════════════════════════════════════════
+
+    // Load only accounts that the user actually signed into on this browser
+    function getStoredGoogleAccounts() {
+      try {
+        const stored = localStorage.getItem('sure_savings_saved_google_accounts');
+        let list = stored ? JSON.parse(stored) : [];
+        // Strictly filter out any old demo/mock accounts from previous tests
+        list = list.filter(a => 
+          a.email && 
+          a.email.toLowerCase() !== 'satyabrata.lead@gmail.com' && 
+          a.email.toLowerCase() !== 'satyabrata.workspace@gmail.com' &&
+          !a.email.toLowerCase().includes('example.com') &&
+          !a.email.toLowerCase().includes('demo')
+        );
+        // Persist cleaned list back to localStorage
+        localStorage.setItem('sure_savings_saved_google_accounts', JSON.stringify(list));
+        return list;
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveGoogleAccount(acc) {
+      try {
+        const list = getStoredGoogleAccounts();
+        const existingIdx = list.findIndex(a => a.email.toLowerCase() === acc.email.toLowerCase());
+        if (existingIdx >= 0) {
+          list[existingIdx] = { ...list[existingIdx], ...acc };
+        } else {
+          list.unshift(acc);
+        }
+        localStorage.setItem('sure_savings_saved_google_accounts', JSON.stringify(list.slice(0, 5)));
+      } catch (e) {}
+    }
+
+    function removeStoredAccount(email, event) {
+      if (event) event.stopPropagation();
+      try {
+        let list = getStoredGoogleAccounts();
+        list = list.filter(a => a.email.toLowerCase() !== email.toLowerCase());
+        localStorage.setItem('sure_savings_saved_google_accounts', JSON.stringify(list));
+        renderGoogleAccountsList();
+      } catch (e) {}
+    }
+
+    function renderGoogleAccountsList() {
+      const container = document.getElementById('google-accounts-list');
+      const section = document.getElementById('google-saved-accounts-section');
+      if (!container) return;
+
+      const stored = getStoredGoogleAccounts();
+      if (!stored || stored.length === 0) {
+        if (section) section.classList.add('hidden');
+        container.innerHTML = '';
+        return;
+      }
+
+      if (section) section.classList.remove('hidden');
+      container.innerHTML = stored.map((acc, index) => {
+        const initials = (acc.name || "GU").split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+        return `
+          <div 
+            id="google-acc-row-${index}"
+            onclick="selectGoogleUserAccount('${acc.email}', '${acc.name.replace(/'/g, "\\'")}', null, ${index})" 
+            class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-all duration-150 group border border-slate-200 dark:border-slate-700/80 mb-2"
+          >
+            <div class="flex items-center gap-3 overflow-hidden">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-sm flex-shrink-0">
+                ${initials}
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-brand-500 transition-colors flex items-center gap-2">
+                  <span class="truncate">${acc.name}</span>
+                </div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono truncate mt-0.5">${acc.email}</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+              <button 
+                type="button" 
+                onclick="removeStoredAccount('${acc.email}', event)" 
+                class="text-slate-400 hover:text-rose-500 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-xs"
+                title="Remove from saved accounts"
+              >
+                ✕
+              </button>
+              <svg class="w-4 h-4 text-slate-300 group-hover:text-brand-500 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function initGoogleOneTap() {
+      try {
+        const config = await window.sureSavingsApi?.getAuthConfig?.().catch(() => null);
+        const clientId = config?.google_client_id || "947725575754-6dm6krn2rdgpjicukncluhocheuis2ab.apps.googleusercontent.com";
+        if (clientId && window.google?.accounts?.id) {
+          google.accounts.id.initialize({
+            client_id: clientId,
+            auto_select: false,
+            cancel_on_tap_outside: false,
+            callback: async (response) => {
+              if (response.credential) {
+                try {
+                  const res = await window.sureSavingsApi.verifyGoogleCredential(response.credential);
+                  if (res?.user?.email) {
+                    saveGoogleAccount({ email: res.user.email, name: res.user.name || "Google User" });
+                  }
+                  window.location.href = res?.user?.is_onboarded === false ? 'login.html?step=onboarding' : 'index.html';
+                } catch(err) {
+                  console.error("Google credential verification error:", err);
+                  alert("Google verification failed: " + (err.message || "Please try again."));
+                }
+              }
+            }
+          });
+
+          // Render official Google button into slot if container exists
+          const slot = document.getElementById('google-official-btn-slot');
+          if (slot) {
+            google.accounts.id.renderButton(slot, {
+              type: 'standard',
+              theme: 'outline',
+              size: 'large',
+              text: 'continue_with',
+              shape: 'pill',
+              width: 320,
+              logo_alignment: 'left'
+            });
+          }
+
+          // Prompt Google One Tap natively
+          google.accounts.id.prompt((notification) => {
+            if (notification.isNotDisplayed()) {
+              console.log("[GIS] One Tap not displayed reason:", notification.getNotDisplayedReason?.());
+            } else if (notification.isSkippedMoment()) {
+              console.log("[GIS] One Tap skipped reason:", notification.getSkippedReason?.());
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("One Tap initialization warning:", e);
+      }
+    }
+
+    async function handleGoogleLogin() {
+      try {
+        if (window.google?.accounts?.id) {
+          google.accounts.id.prompt((notification) => {
+            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+              openGoogleAccountChooserModal();
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("GIS prompt error:", e);
+      }
+      openGoogleAccountChooserModal();
+    }
+
+    function launchGoogleOAuthRedirect() {
+      const cid = "947725575754-6dm6krn2rdgpjicukncluhocheuis2ab.apps.googleusercontent.com";
+      const redirectUri = window.location.origin + "/api/v1/auth/google/callback";
+      const scope = "openid email profile";
+      const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(cid)}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}&prompt=select_account`;
+      window.location.href = url;
+    }
+
+    async function openGoogleAccountChooserModal() {
+      const modal = document.getElementById('google-account-chooser-modal');
+      if (modal) {
+        renderGoogleAccountsList();
+        try {
+          const config = await window.sureSavingsApi?.getAuthConfig?.();
+          if (config && config.google_client_id) {
+            const input = document.getElementById('google-client-id-input');
+            if (input && !input.value) input.value = config.google_client_id;
+          }
+        } catch (e) {}
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeGoogleAccountChooserModal() {
+      const modal = document.getElementById('google-account-chooser-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    async function handleUserCustomGoogleSubmit() {
+      const emailInput = document.getElementById('custom-google-email');
+      const nameInput = document.getElementById('custom-google-name');
+      const email = emailInput?.value?.trim();
+      const name = nameInput?.value?.trim() || "Google User";
+
+      if (!email || !email.includes('@')) {
+        alert('Please enter your valid Google email address.');
+        emailInput?.focus();
+        return;
+      }
+
+      await selectGoogleUserAccount(email, name, null, 'form');
+    }
+
+    async function handleSaveGoogleClientId() {
+      const input = document.getElementById('google-client-id-input');
+      const val = input?.value?.trim();
+      if (!val || !val.includes('.apps.googleusercontent.com')) {
+        alert('Please enter a valid Google OAuth Client ID ending in .apps.googleusercontent.com');
+        input?.focus();
+        return;
+      }
+
+      try {
+        await window.sureSavingsApi.setGoogleClientId(val);
+        alert('Google Client ID connected successfully! Chrome native Google One Tap is now active.');
+        closeGoogleAccountChooserModal();
+        if (window.google?.accounts?.id) {
+          google.accounts.id.initialize({
+            client_id: val,
+            callback: async (response) => {
+              if (response.credential) {
+                await window.sureSavingsApi.verifyGoogleCredential(response.credential);
+                window.location.href = 'index.html';
+              }
+            }
+          });
+          google.accounts.id.prompt();
+        }
+      } catch (err) {
+        alert('Failed to save Client ID: ' + (err.message || 'Please check and try again.'));
+      }
+    }
+
+    async function selectGoogleUserAccount(email, name, picture = null, rowIndex = null) {
+      const row = rowIndex !== null && rowIndex !== 'form' ? document.getElementById(`google-acc-row-${rowIndex}`) : null;
+      if (row) {
+        row.style.pointerEvents = 'none';
+        row.style.opacity = '0.6';
+      }
+
+      const modalHeader = document.querySelector('#google-account-chooser-modal h3');
+      const originalTitle = modalHeader ? modalHeader.textContent : 'Sign in with Google';
+      if (modalHeader) {
+        modalHeader.innerHTML = `<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Signing in with Google…</span>`;
+      }
+
+      try {
+        const res = await window.sureSavingsApi.selectGoogleAccount(email, name, picture);
+        saveGoogleAccount({ email, name: res?.user?.name || name });
+
+        closeGoogleAccountChooserModal();
+
+        if (res?.user?.is_onboarded === false) {
+          document.getElementById('step-email').classList.add('hidden');
+          document.getElementById('step-otp').classList.add('hidden');
+          document.getElementById('step-onboarding').classList.remove('hidden');
+          document.getElementById('onboard-name').value = res.user.name || name;
+          return;
+        }
+
+        document.getElementById('step-email').classList.add('hidden');
+        showSuccessAndRedirect(res?.user?.name || name);
+      } catch (err) {
+        if (modalHeader) modalHeader.textContent = originalTitle;
+        if (row) {
+          row.style.pointerEvents = '';
+          row.style.opacity = '1';
+        }
+        alert('Google sign-in failed: ' + (err.message || 'Please try again.'));
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // INITIALIZATION
+    // ═══════════════════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', async () => {
+      initParticles();
+      initOtpInputs();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('step') === 'onboarding') {
+        document.getElementById('step-email').classList.add('hidden');
+        document.getElementById('step-otp').classList.add('hidden');
+        document.getElementById('step-onboarding').classList.remove('hidden');
+        try {
+          const me = await window.sureSavingsApi?.getCurrentUser();
+          if (me && me.user) {
+            if (me.user.name && me.user.name !== 'Sandbox User') {
+              document.getElementById('onboard-name').value = me.user.name;
+            }
+            if (me.user.phone_number) {
+              document.getElementById('onboard-phone').value = me.user.phone_number;
+            }
+            if (me.user.date_of_birth) {
+              document.getElementById('onboard-dob').value = me.user.date_of_birth;
+            }
+          }
+        } catch(e) {}
+        return;
+      }
+
+      // Check for existing session
+      const token = sessionStorage.getItem('suresavings_session_token') || 
+                    localStorage.getItem('suresavings_session_token');
+      if (token) {
+        try {
+          const me = await window.sureSavingsApi?.getCurrentUser();
+          if (me && me.user) {
+            if (me.user.is_onboarded === false && !me.user.is_demo_user) {
+              document.getElementById('step-email').classList.add('hidden');
+              document.getElementById('step-otp').classList.add('hidden');
+              document.getElementById('step-onboarding').classList.remove('hidden');
+              return;
+            }
+            window.location.href = 'index.html';
+          }
+        } catch(e) {
+          sessionStorage.removeItem('suresavings_session_token');
+          localStorage.removeItem('suresavings_session_token');
+        }
+      }
+
+      // Initialize Google One Tap automatically on page load
+      initGoogleOneTap();
+
+      // Auto-open Google Chooser if directed from landing or external CTA
+      if (urlParams.get('action') === 'google') {
+        setTimeout(() => openGoogleAccountChooserModal(), 150);
+      }
+
+      // Check for error in query string (e.g. from OAuth redirect)
+      const queryError = urlParams.get('error');
+      if (queryError) {
+        const errorDiv = document.getElementById('email-error');
+        const errorText = document.getElementById('email-error-text');
+        if (errorDiv && errorText) {
+          errorText.textContent = decodeURIComponent(queryError);
+          errorDiv.classList.remove('hidden');
+        }
+      }
+
+      // Keyboard listener for Escape key to close modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeGoogleAccountChooserModal();
+        }
+      });
+    });
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- GOOGLE ACCOUNT SIGN-IN MODAL -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div 
+    id="google-account-chooser-modal" 
+    class="fixed inset-0 z-50 flex items-center justify-center hidden bg-slate-950/70 backdrop-blur-sm p-4 transition-all duration-200"
+    onclick="if(event.target === this) closeGoogleAccountChooserModal()"
+  >
+    <div class="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Top header with Google branding and Close button -->
+      <div class="p-5 pb-4 border-b border-slate-100 dark:border-slate-800/80">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2.5">
+            <!-- Official Google "G" SVG -->
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span class="text-xs font-bold tracking-wider text-slate-600 dark:text-slate-300 uppercase">Google Sign-In</span>
+          </div>
+          <button 
+            type="button" 
+            onclick="closeGoogleAccountChooserModal()" 
+            class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            title="Close"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Sign in with Google</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          Select or enter your Google account to log into your private workspace without OTP.
+        </p>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-5 max-h-[75vh] overflow-y-auto space-y-4">
+        
+        <!-- Google Native Account Picker / One Tap Trigger -->
+        <div class="p-4 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 text-center space-y-2.5">
+          <div class="text-xs font-bold text-blue-950 dark:text-blue-200 flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Google Browser Account Selector</span>
+          </div>
+          <p class="text-[11px] text-blue-800/80 dark:text-blue-300 leading-relaxed">
+            Choose directly from all Google accounts active in your browser without OTP:
+          </p>
+          <div id="google-official-btn-slot" class="flex justify-center"></div>
+          <button 
+            type="button" 
+            onclick="launchGoogleOAuthRedirect()" 
+            class="w-full py-3 px-4 bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-700 hover:bg-blue-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2 group"
+          >
+            <span>🌐 Open Google Account Chooser</span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <!-- Saved Accounts on this Device (Only real accounts ever logged into by user) -->
+        <div id="google-saved-accounts-section" class="hidden">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+            Accounts used on this browser
+          </div>
+          <div id="google-accounts-list"></div>
+        </div>
+
+        <!-- Direct Sign-In with User's Google Account -->
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/70 space-y-3">
+          <div class="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+            <span>👤</span>
+            <span>Your Google Account</span>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Your Google Email Address</label>
+            <input 
+              type="email" 
+              id="custom-google-email" 
+              placeholder="e.g. das2005satyabrata@gmail.com" 
+              value="das2005satyabrata@gmail.com"
+              class="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-white outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500" 
+            />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Your Full Name</label>
+            <input 
+              type="text" 
+              id="custom-google-name" 
+              placeholder="e.g. Satyabrata Das" 
+              value="Satyabrata Das"
+              class="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-white outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500" 
+            />
+          </div>
+          <button 
+            type="button" 
+            onclick="handleUserCustomGoogleSubmit()" 
+            class="w-full py-3 px-4 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
+          >
+            <span>Sign In with this Google Account</span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <!-- Connect Google OAuth Client ID for Chrome Native Auto-Detection -->
+        <div class="p-3.5 rounded-xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-800/40 text-xs">
+          <div class="font-bold text-blue-900 dark:text-blue-300 mb-1 flex items-center gap-1.5">
+            <span>⚡</span>
+            <span>Auto-Detect Browser Accounts (Google One Tap)</span>
+          </div>
+          <p class="text-[11px] text-blue-700 dark:text-blue-400 leading-relaxed mb-2.5">
+            To have Chrome automatically pop up with all Google accounts logged into your browser, connect your Google Cloud Client ID below:
+          </p>
+          <div class="space-y-2">
+            <input 
+              type="text" 
+              id="google-client-id-input" 
+              placeholder="Your Google Client ID (...apps.googleusercontent.com)" 
+              class="w-full px-3 py-2 text-[11px] rounded-lg border border-blue-300 dark:border-blue-700 dark:bg-slate-900 dark:text-white outline-none focus:border-blue-500 font-mono"
+            />
+            <button 
+              type="button" 
+              onclick="handleSaveGoogleClientId()" 
+              class="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-colors shadow-sm"
+            >
+              Save & Enable Chrome Auto-Detection
+            </button>
+            <details class="text-[11px] text-blue-800 dark:text-blue-300 pt-1 cursor-pointer">
+              <summary class="hover:underline font-medium">How to get a Google Client ID (2 mins)</summary>
+              <ol class="list-decimal pl-4 mt-1.5 space-y-1 text-[10.5px] text-slate-600 dark:text-slate-400">
+                <li>Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="text-blue-600 underline">Google Cloud Console</a>.</li>
+                <li>Click <strong>Create Credentials → OAuth client ID → Web application</strong>.</li>
+                <li>Add to <em>Authorized JavaScript origins</em>: <code class="bg-blue-100 dark:bg-blue-900/40 px-1 py-0.5 rounded">http://localhost:8000</code> and <code class="bg-blue-100 dark:bg-blue-900/40 px-1 py-0.5 rounded">http://127.0.0.1:8000</code>.</li>
+                <li>Copy the Client ID and paste it into the box above.</li>
+              </ol>
+            </details>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 leading-normal flex items-center gap-2">
+        <span class="text-xs">🔒</span>
+        <span>Zero OTP required. Signed directly into your private, isolated workspace.</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

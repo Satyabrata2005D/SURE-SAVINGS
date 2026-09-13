@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Smart Income Buffer | Financial Resilience Platform</title>
+  <meta name="description" content="Explore SURE SAVINGS: Adaptive liquidity intelligence and smart income buffer for variable-income earners. Institutional-grade volatility shield for gig workers."/>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3',
+              100: '#ffe8e4',
+              200: '#ffd0c8',
+              500: '#FF5B45',
+              600: '#F05138',
+              700: '#d93b22'
+            },
+            amberAccent: {
+              400: '#FBBF24',
+              500: '#F59E0B',
+              600: '#D97706'
+            },
+            canvas: '#F8F7F4',
+            paper: '#ffffff',
+            ink: {
+              DEFAULT: '#0F172A',
+              muted: '#64748B',
+              subtle: '#94A3B8'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Identity Services Library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="min-h-full text-ink flex flex-col justify-between antialiased" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+  <!-- PARTICLE BACKGROUND -->
+  <div class="particles-container" id="particles-bg"></div>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Badge -->
+      <div class="flex items-center gap-3">
+        <a href="landing.html" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-black text-lg shadow-md group-hover:scale-105 transition-transform">
+            S
+          </div>
+          <div>
+            <div class="font-extrabold text-base tracking-tight leading-none" style="color: var(--text-primary)">SURE SAVINGS</div>
+            <div class="text-[9px] font-bold text-brand-500 uppercase tracking-wider mt-0.5">Smart Income Buffer</div>
+          </div>
+        </a>
+
+        <!-- Public Explorer Badge -->
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+          <span>PUBLIC EXPLORER</span>
+        </span>
+      </div>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-bold" style="color: var(--text-muted)">
+        <a href="#how-it-works" class="hover:text-brand-500 transition-colors">How It Works</a>
+        <a href="#shock-simulator" class="hover:text-brand-500 transition-colors">Shock Simulator</a>
+        <a href="#explainable-safe" class="hover:text-brand-500 transition-colors">Why ₹900?</a>
+        <a href="#security" class="hover:text-brand-500 transition-colors">Security</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <!-- Dark Mode Toggle -->
+        <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <div class="toggle-thumb">
+            <span id="theme-icon">☀️</span>
+          </div>
+        </button>
+
+        <a href="login.html" class="btn-secondary text-xs py-2 px-3.5">
+          Sign In
+        </a>
+        <button onclick="openAuthGate('NAV_CTA')" class="btn-primary text-xs py-2 px-4">
+          <span>Build My Workspace</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow">
+    
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 1. CINEMATIC HERO SECTION -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section class="relative pt-16 pb-20 lg:pt-28 lg:pb-32 overflow-hidden">
+      <!-- Gradient Mesh Background -->
+      <div class="absolute inset-0 gradient-mesh pointer-events-none"></div>
+      <div class="absolute inset-0 stipple-pattern pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        
+        <!-- Category Pill with Glow -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8 animate-fade-in-down shadow-sm" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle);">
+          <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+          <span class="text-xs font-bold text-brand-600 tracking-wide uppercase">Institutional-Grade Volatility Shield</span>
+        </div>
+
+        <!-- Typewriter Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] max-w-5xl mx-auto mb-6 animate-fade-in-up" style="color: var(--text-primary)">
+          Your income changes.<br/>
+          <span class="text-brand-500" id="typewriter-text"></span><span class="typewriter-cursor" id="typewriter-cursor"></span>
+        </h1>
+
+        <!-- Supporting Copy -->
+        <p class="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-up delay-200" style="color: var(--text-secondary)">
+          SURE SAVINGS helps variable-income professionals understand what they can safely save, how long their buffer protects them, and what shocks lie ahead.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-14 animate-fade-in-up delay-300">
+          <a href="#shock-simulator" class="w-full sm:w-auto btn-secondary px-7 py-3.5 text-sm">
+            <span>Explore Interactive Demo ↓</span>
+          </a>
+          <button onclick="openAuthGate('HERO_CTA')" class="w-full sm:w-auto btn-primary px-7 py-3.5 text-sm">
+            <span>Build My Financial Workspace →</span>
+          </button>
+        </div>
+
+        <!-- Animated Counter Stats -->
+        <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12 animate-fade-in-up delay-500">
+          <div class="text-center">
+            <div class="text-2xl sm:text-3xl font-black font-mono" style="color: var(--text-primary)" data-counter="12847">0</div>
+            <div class="text-xs font-medium mt-1" style="color: var(--text-muted)">Users Protected</div>
+          </div>
+          <div class="w-px h-10 hidden sm:block" style="background: var(--border-default)"></div>
+          <div class="text-center">
+            <div class="text-2xl sm:text-3xl font-black font-mono text-brand-500" data-counter="2.4" data-prefix="₹" data-suffix="Cr">₹0</div>
+            <div class="text-xs font-medium mt-1" style="color: var(--text-muted)">Buffer Capital Calculated</div>
+          </div>
+          <div class="w-px h-10 hidden sm:block" style="background: var(--border-default)"></div>
+          <div class="text-center">
+            <div class="text-2xl sm:text-3xl font-black font-mono" style="color: var(--accent-emerald)" data-counter="99.7" data-suffix="%">0%</div>
+            <div class="text-xs font-medium mt-1" style="color: var(--text-muted)">Uptime Reliability</div>
+          </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-medium mt-10 animate-fade-in delay-600" style="color: var(--text-muted)">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            No Login Required to Explore
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Private Multi-Tenant Workspaces
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Zero Custody • Non-Custodial Intelligence
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 2. LIVE PRODUCT EXPLORER CARD -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 reveal">
+      <div class="premium-card overflow-hidden">
+        
+        <!-- Header Strip -->
+        <div class="px-6 py-4 border-b flex flex-wrap items-center justify-between gap-3" style="background: var(--surface-sunken); border-color: var(--border-default);">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-primary)">Live System Preview</span>
+            <span class="text-xs" style="color: var(--text-subtle)">•</span>
+            <span class="text-xs" style="color: var(--text-muted)">Canonical Persona: <strong style="color: var(--text-primary)">Arjun K. (Delivery & Freelance Lead)</strong></span>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full border text-[10px] font-bold font-mono" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-secondary)">
+            DETERMINISTIC v5.0
+          </span>
+        </div>
+
+        <!-- 3 Core Tiles -->
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x" style="border-color: var(--border-default)">
+          
+          <!-- Tile 1: Resilience Index -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted)">Resilience Index</span>
+              <span class="metric-badge metric-badge-positive">Solid Tier</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl sm:text-5xl font-black font-mono" style="color: var(--text-primary)" data-counter="74">0</span>
+              <span class="text-sm font-bold" style="color: var(--text-subtle)">/ 100</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Multi-factor scoring across income stability, buffer runway, fixed expense burden, and timing liquidity health.
+            </p>
+          </div>
+
+          <!-- Tile 2: Smart Buffer Capital -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted)">Smart Buffer Capital</span>
+              <span class="metric-badge metric-badge-info">1.5 wks runway</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl sm:text-5xl font-black font-mono" style="color: var(--text-primary)">₹6,800</span>
+              <span class="text-xs font-medium" style="color: var(--text-subtle)">/ ₹15,000 Target</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Strictly protects your <strong>₹3,500 checking floor</strong> so rent and EMI debits clear without overdraft penalties.
+            </p>
+          </div>
+
+          <!-- Tile 3: Safe-to-Save Action -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted)">Safe to Save</span>
+              <span class="metric-badge" style="background: var(--brand-primary-light); color: var(--brand-primary);">70% Policy Cap</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl sm:text-5xl font-black text-brand-500 font-mono">₹900</span>
+              <span class="text-xs font-medium" style="color: var(--text-subtle)">from ₹1,300 surplus</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Automated surplus banking leaves ₹400 in free pocket cash so you never feel deprived.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 3. HOW IT WORKS — Animated Steps Timeline -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="how-it-works" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="text-center mb-12 reveal">
+        <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">How It Works</span>
+        <h2 class="text-2xl sm:text-4xl font-black tracking-tight mt-2 mb-3" style="color: var(--text-primary)">
+          Three Steps to Financial Resilience
+        </h2>
+        <p class="text-sm max-w-xl mx-auto" style="color: var(--text-secondary)">
+          From income chaos to calculated stability — powered by deterministic math, not guesswork.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="premium-card p-6 sm:p-8 reveal delay-100 group hover:border-brand-500/30">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-md group-hover:scale-110 transition-transform">1</div>
+          <h3 class="text-base font-bold mb-2" style="color: var(--text-primary)">Connect Your Income</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">Log weekly gig payouts, freelance earnings, or variable salary. The engine detects patterns within 4 weeks of data.</p>
+        </div>
+
+        <div class="premium-card p-6 sm:p-8 reveal delay-200 group hover:border-amber-500/30">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-md group-hover:scale-110 transition-transform">2</div>
+          <h3 class="text-base font-bold mb-2" style="color: var(--text-primary)">Smart Buffer Calculates</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">Deterministic algorithms compute your safe-to-save amount, protecting your checking floor while building a volatility shield.</p>
+        </div>
+
+        <div class="premium-card p-6 sm:p-8 reveal delay-300 group hover:border-emerald-500/30">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-md group-hover:scale-110 transition-transform">3</div>
+          <h3 class="text-base font-bold mb-2" style="color: var(--text-primary)">Resilience on Autopilot</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">Your buffer absorbs income shocks automatically. Get early warnings, risk scores, and AI coaching — all in your private workspace.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 4. INTERACTIVE SHOCK SIMULATOR -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="shock-simulator" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24 reveal">
+      <div class="premium-card p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+        
+        <!-- Header -->
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Interactive Stress Test</span>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight mt-1 mb-2" style="color: var(--text-primary)">
+            Simulate a Platform Inflow Shock
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
+            Test how the Smart Buffer absorbs order slowdowns, monsoons, and platform downtime without ever touching your ₹3,500 cash floor.
+          </p>
+        </div>
+
+        <!-- Scenario Presets -->
+        <div class="flex flex-wrap gap-2.5 mb-8">
+          <button type="button" onclick="applyPreset(0, this)" class="preset-btn btn-secondary text-xs py-2.5 px-4">
+            Normal Inflow (0%)
+          </button>
+          <button type="button" onclick="applyPreset(10, this)" class="preset-btn btn-secondary text-xs py-2.5 px-4">
+            Mild Drift (-10%)
+          </button>
+          <button type="button" onclick="applyPreset(20, this)" class="preset-btn btn-secondary text-xs py-2.5 px-4">
+            Seasonal Drought (-20%)
+          </button>
+          <button type="button" onclick="applyPreset(40, this)" class="preset-btn btn-primary text-xs py-2.5 px-4">
+            Platform Downtime (-40%)
+          </button>
+          <button type="button" onclick="applyPreset(60, this)" class="preset-btn px-4 py-2.5 rounded-xl border border-rose-200 text-xs font-bold text-rose-600 hover:bg-rose-50 transition-all">
+            Extreme Shock (-60%)
+          </button>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-2xl p-6 sm:p-8 border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+          
+          <!-- Left: Simulation Metrics -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              
+              <div class="p-4 rounded-xl border shadow-xs" style="background: var(--surface-paper); border-color: var(--border-default);">
+                <span class="text-[11px] font-bold uppercase block mb-1" style="color: var(--text-muted)">Projected Inflow</span>
+                <span class="text-xl sm:text-2xl font-black font-mono" style="color: var(--text-primary)" id="sim-projected-income">₹5,040</span>
+                <span class="text-[10px] block mt-0.5" style="color: var(--text-subtle)">from ₹8,400 base</span>
+              </div>
+
+              <div class="p-4 rounded-xl border shadow-xs" style="background: var(--surface-paper); border-color: var(--border-default);">
+                <span class="text-[11px] font-bold uppercase block mb-1" style="color: var(--text-muted)">Weekly Burn</span>
+                <span class="text-xl sm:text-2xl font-black font-mono" style="color: var(--text-primary)">₹4,400</span>
+                <span class="text-[10px] block mt-0.5" style="color: var(--text-subtle)">Fixed obligations</span>
+              </div>
+
+              <div class="p-4 rounded-xl border shadow-xs col-span-2 sm:col-span-1" style="background: var(--surface-paper); border-color: var(--border-default);">
+                <span class="text-[11px] font-bold uppercase block mb-1" style="color: var(--text-muted)">Buffer Runway</span>
+                <span class="text-xl sm:text-2xl font-black text-brand-500 font-mono" id="sim-runway">1.5 wks</span>
+                <span class="text-[10px] block mt-0.5" style="color: var(--text-subtle)">Deficit absorption</span>
+              </div>
+
+            </div>
+
+            <!-- Defensive Banner -->
+            <div class="p-4 rounded-xl border text-xs flex items-start gap-3" style="background: var(--surface-paper); border-color: var(--accent-amber-light);">
+              <span class="text-lg">🛡️</span>
+              <div>
+                <strong class="font-bold block" style="color: #92400E" id="sim-floor-status">Defensive Circuit Breaker Activated</strong>
+                <p class="mt-0.5 leading-snug" style="color: var(--text-secondary)" id="sim-defensive-action">
+                  Enable Deficit Smoothing: Draw ₹1,040/wk from buffer, suspend discretionary spends.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Action Card -->
+          <div class="lg:col-span-5 rounded-2xl p-6 border shadow-sm flex flex-col justify-between space-y-4" style="background: var(--surface-paper); border-color: var(--border-default);">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b" style="border-color: var(--border-subtle)">
+                <span class="text-xs font-bold" style="color: var(--text-muted)">Resilience Shift</span>
+                <span class="text-xs font-bold font-mono" style="color: var(--text-primary)" id="sim-resilience-text">74 → 71 (-3 pts)</span>
+              </div>
+              <div class="pt-3">
+                <div class="flex justify-between text-xs mb-1" style="color: var(--text-secondary)">
+                  <span>Checking Floor Protection:</span>
+                  <span class="font-bold text-emerald-600">₹3,500 INTACT</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-bar-fill emerald" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="openAuthGate('SAVE_SCENARIO')" class="btn-primary w-full py-3 text-xs">
+              <span>Save This Scenario in My Workspace →</span>
+            </button>
+            <p class="text-[10px] text-center" style="color: var(--text-subtle)">
+              Requires 1-click Google authentication • Your data stays isolated
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 5. WHY ₹900? — Explainable Engine -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="explainable-safe" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24 reveal">
+      <div class="premium-card p-6 sm:p-10 lg:p-12">
+        
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Explainable Financial Engine</span>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight mt-1 mb-2" style="color: var(--text-primary)">
+            Why Save Exactly ₹900?
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
+            No black-box algorithms. Every rupee recommended by SURE SAVINGS is mathematically transparent.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="p-5 rounded-2xl border reveal delay-100" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <span class="text-[11px] font-bold uppercase block mb-1" style="color: var(--text-muted)">Step 1 • Inflow vs Baseline</span>
+            <div class="text-2xl font-black font-mono mb-1" style="color: var(--text-primary)">₹8,400</div>
+            <p class="text-xs" style="color: var(--text-secondary)">
+              Week 36 earnings exceeded the ₹7,100 stabilized baseline by <strong>₹1,300 surplus</strong>.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl border reveal delay-200" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <span class="text-[11px] font-bold uppercase block mb-1" style="color: var(--text-muted)">Step 2 • 70% Policy Safeguard</span>
+            <div class="text-2xl font-black font-mono mb-1" style="color: var(--text-primary)">₹910</div>
+            <p class="text-xs" style="color: var(--text-secondary)">
+              Policy limits savings to <strong>70% of surplus</strong> to prevent over-constraining daily life.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl border reveal delay-300" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <span class="text-[11px] font-bold uppercase block mb-1" style="color: var(--text-muted)">Step 3 • Clean Rounding</span>
+            <div class="text-2xl font-black text-brand-500 font-mono mb-1">₹900</div>
+            <p class="text-xs" style="color: var(--text-secondary)">
+              Rounded to clean <strong>₹50 increment</strong> for clear, friction-free reserve transfer.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl border reveal delay-400" style="background: var(--accent-emerald-light); border-color: rgba(5, 150, 105, 0.3);">
+            <span class="text-[11px] font-bold uppercase block mb-1 text-emerald-800">Step 4 • Free Pocket Cash</span>
+            <div class="text-2xl font-black text-emerald-900 font-mono mb-1">₹400</div>
+            <p class="text-xs text-emerald-800">
+              <strong>100% untouched</strong> in checking for guilt-free personal discretionary spending.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4" style="border-color: var(--border-default)">
+          <span class="text-xs" style="color: var(--text-muted)">Want your own personalized safe-to-save calculation?</span>
+          <button onclick="openAuthGate('SAFE_SAVE_CTA')" class="btn-primary py-2.5 px-5 text-xs" style="background: var(--text-primary);">
+            <span>Calculate My Recommendation →</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 6. CASH FLOW TIMING GAP -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="timing-gap" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24 reveal">
+      <div class="premium-card p-6 sm:p-10 lg:p-12">
+        
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Cash-Flow Timing Intelligence</span>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight mt-1 mb-2" style="color: var(--text-primary)">
+            The 9-Hour Liquidity Deficit
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
+            Gig workers are often solvent on paper but hit temporary intra-day cash deficits when bills clear before platform payouts settle.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          
+          <!-- Timeline -->
+          <div class="p-6 rounded-2xl border space-y-4" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="flex items-start gap-4">
+              <span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800 text-xs font-bold font-mono">09:00 AM</span>
+              <div>
+                <span class="text-xs font-bold block" style="color: var(--text-primary)">EV Two-Wheeler EMI Debited</span>
+                <span class="text-xs text-rose-600 font-bold font-mono">-₹4,500.00</span>
+                <p class="text-[11px] mt-0.5" style="color: var(--text-muted)">Checking drops dangerously close to zero.</p>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-dashed border-amber-300 ml-7 pl-6 py-2">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[10px] font-bold">
+                ⚡ 9-Hour Intra-Day Exposure Window
+              </span>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold font-mono">06:00 PM</span>
+              <div>
+                <span class="text-xs font-bold block" style="color: var(--text-primary)">Platform Payouts Settle</span>
+                <span class="text-xs text-emerald-600 font-bold font-mono">+₹6,900.00</span>
+                <p class="text-[11px] mt-0.5" style="color: var(--text-muted)">Healthy solvent end-of-day balance restored.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution -->
+          <div class="space-y-4">
+            <div class="p-5 rounded-2xl border" style="background: var(--brand-primary-light); border-color: rgba(255,91,69,0.2);">
+              <h4 class="text-sm font-bold mb-1" style="color: var(--text-primary)">How Smart Buffer Solves This:</h4>
+              <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+                Rather than forcing you to take predatory daily-credit loans or incur overdraft fees, SURE SAVINGS detects the timing mismatch and automatically cushions the 9-hour gap.
+              </p>
+            </div>
+
+            <button onclick="openAuthGate('CASH_FLOW_CTA')" class="btn-primary w-full py-3 text-xs">
+              <span>Map My Cash Flow Obligations →</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 7. SECURITY & TRUST PANEL — Dark Premium -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="security" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24 reveal">
+      <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        <!-- Ambient glow -->
+        <div class="absolute top-0 right-0 w-72 h-72 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-56 h-56 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-2xl mb-10 relative z-10">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Bank-Grade Foundation</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1 mb-2">
+            Private by Design. Zero Custody.
+          </h2>
+          <p class="text-sm text-stone-400 leading-relaxed">
+            We provide financial intelligence and resilience calculation. We never take custody of your money and we never store your passwords.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          
+          <div class="space-y-2 reveal delay-100">
+            <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-lg">🔒</div>
+            <h4 class="text-sm font-bold text-white">Google Verified Auth</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              Google handles identity verification. Your Google password is never entered into SURE SAVINGS.
+            </p>
+          </div>
+
+          <div class="space-y-2 reveal delay-200">
+            <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-lg">🛡️</div>
+            <h4 class="text-sm font-bold text-white">Zero-Trust Isolation</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              All transactions, buffers, and AI interactions are strictly scoped to your server-side session.
+            </p>
+          </div>
+
+          <div class="space-y-2 reveal delay-300">
+            <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-lg">⚡</div>
+            <h4 class="text-sm font-bold text-white">No Withdrawal Authority</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              Zero fund custody. We simulate reserve targets and advise on safety without moving your actual money.
+            </p>
+          </div>
+
+          <div class="space-y-2 reveal delay-400">
+            <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-lg">📝</div>
+            <h4 class="text-sm font-bold text-white">Immutable Audit Trace</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              Every formula and policy decision produces a cryptographic trace for complete mathematical transparency.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- 8. FINAL CONVERSION BANNER -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 text-center mb-24 reveal">
+      <div class="p-8 sm:p-12 rounded-3xl border shadow-md relative overflow-hidden" style="background: var(--brand-primary-light); border-color: rgba(255, 91, 69, 0.2);">
+        <div class="absolute -top-20 -right-20 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <h3 class="text-2xl sm:text-3xl font-black tracking-tight mb-3" style="color: var(--text-primary)">
+          Ready to protect your variable income?
+        </h3>
+        <p class="text-sm max-w-md mx-auto mb-6" style="color: var(--text-secondary)">
+          Set up your private resilience workspace in seconds. Explore with zero friction.
+        </p>
+        <button onclick="openAuthGate('BOTTOM_BANNER')" class="btn-primary px-8 py-3.5 text-sm">
+          Build My Financial Workspace →
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t py-8" style="background: var(--surface-paper); border-color: var(--border-default);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style="color: var(--text-subtle)">
+      <div class="flex items-center gap-2">
+        <span class="font-bold" style="color: var(--text-secondary)">SURE SAVINGS</span>
+        <span>•</span>
+        <span>Deterministic Financial Resilience Core v5.0</span>
+      </div>
+      <div class="flex items-center gap-4 font-medium">
+        <a href="#how-it-works" class="hover:text-brand-500 transition-colors">How It Works</a>
+        <a href="#security" class="hover:text-brand-500 transition-colors">Security</a>
+        <a href="login.html" class="hover:text-brand-500 transition-colors">Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUTH GATE MODAL -->
+  <div id="auth-gate-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: var(--surface-overlay);">
+    <div class="glass-modal rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-left animate-fade-in-scale">
+      
+      <div class="flex items-center justify-between pb-3 border-b mb-5" style="border-color: var(--border-default)">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-brand-500 block">Personalized Financial Protection</span>
+          <h3 class="text-lg font-extrabold" style="color: var(--text-primary)">Build Your Private Workspace</h3>
+        </div>
+        <button type="button" onclick="closeAuthGate()" class="text-sm p-1 hover:bg-stone-100 rounded-lg transition-colors" style="color: var(--text-subtle)">✕</button>
+      </div>
+
+      <p class="text-xs leading-relaxed mb-6" style="color: var(--text-secondary)">
+        You've explored the SURE SAVINGS public demonstration model. Sign in securely to connect your real income, buffer, and risk analytics.
+      </p>
+
+      <!-- Google Auth -->
+      <button 
+        id="gate-google-btn"
+        type="button" 
+        onclick="triggerGoogleAuthFromGate()"
+        class="btn-secondary w-full py-3.5 text-xs sm:text-sm group"
+      >
+        <svg class="w-4 h-4 flex-shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="relative flex items-center justify-center my-4">
+        <div class="border-t w-full" style="border-color: var(--border-default)"></div>
+        <span class="px-3 text-[10px] font-semibold uppercase" style="background: var(--surface-paper); color: var(--text-subtle)">or</span>
+        <div class="border-t w-full" style="border-color: var(--border-default)"></div>
+      </div>
+
+      <a href="login.html" class="btn-ghost w-full py-2.5 text-xs font-bold border rounded-xl justify-center" style="border-color: var(--border-default); color: var(--text-secondary)">
+        <span>Continue with Email OTP →</span>
+      </a>
+
+      <div class="mt-6 p-3 rounded-xl border text-[11px] leading-snug" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+        🔒 <strong style="color: var(--text-secondary)">Zero Passwords:</strong> We authenticate via Google Identity Services and session tokens. Your personal financial data stays 100% isolated.
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/api.js?v=8.7.0"></script>
+  <script src="js/store.js?v=8.7.0"></script>
+
+  <script>
+    let pendingAction = "EXPLORE";
+
+    // ═══════════════════════════════════════════════════════
+    // DARK MODE
+    // ═══════════════════════════════════════════════════════
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('suresavings_theme', isDark ? 'light' : 'dark');
+      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // Initialize theme
+    (function() {
+      const saved = localStorage.getItem('suresavings_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = '🌙';
+      }
+    })();
+
+    // ═══════════════════════════════════════════════════════
+    // TYPEWRITER EFFECT
+    // ═══════════════════════════════════════════════════════
+    const typewriterPhrases = [
+      "Your financial safety shouldn't.",
+      "Your savings plan should adapt.",
+      "Your resilience should grow.",
+    ];
+    let phraseIdx = 0, charIdx = 0, isDeleting = false;
+
+    function typeWriter() {
+      const el = document.getElementById('typewriter-text');
+      if (!el) return;
+      const current = typewriterPhrases[phraseIdx];
+      
+      if (!isDeleting) {
+        el.textContent = current.substring(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === current.length) {
+          setTimeout(() => { isDeleting = true; typeWriter(); }, 2000);
+          return;
+        }
+        setTimeout(typeWriter, 50 + Math.random() * 40);
+      } else {
+        el.textContent = current.substring(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % typewriterPhrases.length;
+          setTimeout(typeWriter, 400);
+          return;
+        }
+        setTimeout(typeWriter, 25);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // ANIMATED COUNTERS
+    // ═══════════════════════════════════════════════════════
+    function animateCounters() {
+      document.querySelectorAll('[data-counter]').forEach(el => {
+        const target = parseFloat(el.dataset.counter);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const duration = 2000;
+        const start = performance.now();
+        const isDecimal = target % 1 !== 0;
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4); // ease-out-quart
+          const current = target * eased;
+          
+          if (isDecimal) {
+            el.textContent = `${prefix}${current.toFixed(1)}${suffix}`;
+          } else {
+            el.textContent = `${prefix}${Math.floor(current).toLocaleString()}${suffix}`;
+          }
+          
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // SCROLL REVEAL
+    // ═══════════════════════════════════════════════════════
+    function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // PARTICLE BACKGROUND
+    // ═══════════════════════════════════════════════════════
+    function initParticles() {
+      const container = document.getElementById('particles-bg');
+      if (!container) return;
+      const colors = ['var(--brand-primary)', 'var(--accent-amber)', 'var(--accent-violet)', 'var(--accent-blue)'];
+      const sizes = ['particle-sm', 'particle-md', 'particle-lg'];
+      
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.className = `particle ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.bottom = `${Math.random() * 30}%`;
+        p.style.animationDuration = `${6 + Math.random() * 8}s`;
+        p.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(p);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // AUTH GATE MODAL
+    // ═══════════════════════════════════════════════════════
+    function openAuthGate(action = "EXPLORE") {
+      pendingAction = action;
+      try { sessionStorage.setItem("suresavings_pending_action", action); } catch (e) {}
+      document.getElementById("auth-gate-modal").classList.remove("hidden");
+    }
+
+    function closeAuthGate() {
+      document.getElementById("auth-gate-modal").classList.add("hidden");
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // INITIALIZATION
+    // ═══════════════════════════════════════════════════════
+    document.addEventListener("DOMContentLoaded", async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("deleted") === "1") {
+        const delToast = document.createElement("div");
+        delToast.className = "fixed top-6 right-6 z-50 bg-stone-900 text-white px-4 py-3 rounded-2xl shadow-2xl border border-rose-500/50 flex items-center space-x-2.5 text-xs animate-fade-in";
+        delToast.innerHTML = `<span class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold">✓</span><span class="font-medium">Your profile and data have been permanently deleted.</span>`;
+        document.body.appendChild(delToast);
+        setTimeout(() => {
+          delToast.style.opacity = "0";
+          delToast.style.transition = "opacity 0.4s ease";
+          setTimeout(() => delToast.remove(), 400);
+        }, 5000);
+      }
+
+      typeWriter();
+      animateCounters();
+      initScrollReveal();
+      initParticles();
+
+      try {
+        if (window.sureSavingsApi) {
+          const overview = await window.sureSavingsApi.getPublicDemoOverview();
+          console.log("[SURE SAVINGS] Public Explorer connected to engine v5.0", overview);
+        }
+        if (window.sureSavingsApi) {
+          const config = await window.sureSavingsApi.getAuthConfig();
+          if (config && config.google_client_id && window.google?.accounts?.id) {
+            google.accounts.id.initialize({
+              client_id: config.google_client_id,
+              callback: handleGoogleCredentialResponse,
+              auto_select: false,
+              cancel_on_tap_outside: true
+            });
+            google.accounts.id.prompt();
+          }
+        }
+      } catch (err) {
+        console.warn("[SURE SAVINGS] Public Explorer initialization info:", err);
+      }
+    });
+
+    async function handleGoogleCredentialResponse(response) {
+      if (!response.credential) return;
+      try {
+        await window.sureSavingsApi.verifyGoogleCredential(response.credential);
+        window.location.href = "index.html";
+      } catch (err) {
+        console.error("Google sign-in error:", err);
+        window.location.href = "login.html?error=" + encodeURIComponent(err.message);
+      }
+    }
+
+    async function triggerGoogleAuthFromGate() {
+      window.location.href = "login.html?action=google";
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // SHOCK SIMULATOR
+    // ═══════════════════════════════════════════════════════
+    async function applyPreset(dropPct, btnElement) {
+      document.querySelectorAll(".preset-btn").forEach(b => {
+        b.className = "preset-btn btn-secondary text-xs py-2.5 px-4";
+      });
+      btnElement.className = "preset-btn btn-primary text-xs py-2.5 px-4";
+      if (dropPct >= 60) {
+        btnElement.className = "preset-btn px-4 py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-sm transition-all";
+      }
+
+      try {
+        const res = await window.sureSavingsApi.simulatePublicShock({
+          shockPercentage: dropPct,
+          scenarioPreset: `drought_${dropPct}`
+        });
+
+        if (res && res.simulation) {
+          const sim = res.simulation;
+          document.getElementById("sim-projected-income").innerText = `₹${sim.projected_weekly_income.toLocaleString()}`;
+          document.getElementById("sim-runway").innerText = `${sim.runway_weeks} wks`;
+          document.getElementById("sim-floor-status").innerText = sim.floor_status;
+          document.getElementById("sim-defensive-action").innerText = sim.defensive_action;
+          document.getElementById("sim-resilience-text").innerText = `74 → ${sim.resilience_score} (${sim.resilience_delta} pts)`;
+        }
+      } catch (err) {
+        console.warn("Public simulation error:", err);
+      }
+    }
+  </script>
+</body>
+</html>
+
+  <!-- TOP PUBLIC NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Public Explorer Badge -->
+      <div class="flex items-center gap-3">
+        <a href="landing.html" class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-stone-900 text-white flex items-center justify-center font-black text-lg shadow-sm">
+            S
+          </div>
+          <div>
+            <div class="font-extrabold text-stone-900 text-base tracking-tight leading-none">SURE SAVINGS</div>
+            <div class="text-[9px] font-bold text-brand-500 uppercase tracking-wider mt-0.5">Smart Income Buffer</div>
+          </div>
+        </a>
+
+        <!-- Public Explorer Badge -->
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+          <span>PUBLIC EXPLORER • Read-Only</span>
+        </span>
+      </div>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-bold text-stone-600">
+        <a href="#how-it-works" class="hover:text-stone-900 transition-colors">How It Works</a>
+        <a href="#shock-simulator" class="hover:text-stone-900 transition-colors">Shock Simulator</a>
+        <a href="#explainable-safe" class="hover:text-stone-900 transition-colors">Why ₹900?</a>
+        <a href="#timing-gap" class="hover:text-stone-900 transition-colors">Cash Flow</a>
+        <a href="#security" class="hover:text-stone-900 transition-colors">Security</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <a href="login.html" class="px-3.5 py-2 rounded-xl border border-stone-300 hover:border-stone-400 text-stone-700 hover:bg-stone-50 text-xs font-bold transition-all">
+          Sign In
+        </a>
+        <button onclick="openAuthGate('NAV_CTA')" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-sm brand-glow transition-all flex items-center gap-1.5">
+          <span>Build My Workspace</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PUBLIC CONTENT -->
+  <main class="flex-grow">
+    
+    <!-- 1. HERO SECTION -->
+    <section class="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden">
+      <div class="absolute inset-0 stipple-pattern opacity-60 pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        
+        <!-- Category Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200/80 mb-6 shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+          <span class="text-xs font-bold text-brand-600 tracking-wide uppercase">Institutional-Grade Volatility Shield</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-stone-900 tracking-tight leading-tight max-w-4xl mx-auto mb-5">
+          Your income changes.<br/>
+          <span class="text-brand-500">Your financial safety shouldn't.</span>
+        </h1>
+
+        <!-- Supporting Copy -->
+        <p class="text-base sm:text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed mb-8">
+          SURE SAVINGS helps variable-income professionals understand what they can safely save, how long their buffer protects them, and what shocks lie ahead.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+          <a href="#shock-simulator" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-stone-900 hover:bg-stone-800 text-white text-sm font-bold shadow-md transition-all flex items-center justify-center gap-2">
+            <span>Explore Interactive Demo ↓</span>
+          </a>
+          <button onclick="openAuthGate('HERO_CTA')" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold shadow-md brand-glow transition-all flex items-center justify-center gap-2">
+            <span>Build My Financial Workspace →</span>
+          </button>
+        </div>
+
+        <!-- Trust Badges Row -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-stone-500 font-medium">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            No Login Required to Explore
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Private Multi-Tenant Workspaces
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Zero Custody • Non-Custodial Intelligence
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. LIVE PRODUCT EXPLORER CARD (CANONICAL MODEL PREVIEW) -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="bg-white rounded-3xl border border-stone-200/90 shadow-xl overflow-hidden">
+        
+        <!-- Header Strip -->
+        <div class="px-6 py-4 bg-stone-50 border-b border-stone-200 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-bold text-stone-800 uppercase tracking-wider">Live System Preview</span>
+            <span class="text-xs text-stone-400">•</span>
+            <span class="text-xs text-stone-500">Canonical Persona: <strong class="text-stone-800">Arjun K. (Delivery &amp; Freelance Lead)</strong></span>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-white border border-stone-200 text-[10px] font-bold font-mono text-stone-600">
+            DETERMINISTIC v4.0
+          </span>
+        </div>
+
+        <!-- 3 Core Highlight Tiles -->
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-stone-200">
+          
+          <!-- Tile 1: Resilience Index -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-stone-500 uppercase tracking-wider">Resilience Index</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700">Solid Tier</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl sm:text-5xl font-black text-stone-900 font-mono">74</span>
+              <span class="text-sm font-bold text-stone-400">/ 100</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Multi-factor scoring across income stability, buffer runway, fixed expense burden, and timing liquidity health.
+            </p>
+          </div>
+
+          <!-- Tile 2: Smart Buffer Capital -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-stone-500 uppercase tracking-wider">Smart Buffer Capital</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700">1.5 wks runway</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl sm:text-5xl font-black text-stone-900 font-mono">₹6,800</span>
+              <span class="text-xs text-stone-400 font-medium">/ ₹15,000 Target</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Strictly protects your <strong>₹3,500 checking floor</strong> so rent and EMI debits clear without overdraft penalties.
+            </p>
+          </div>
+
+          <!-- Tile 3: Safe-to-Save Action -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-stone-500 uppercase tracking-wider">Safe to Save</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-50 text-brand-600">70% Policy Cap</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl sm:text-5xl font-black text-brand-500 font-mono">₹900</span>
+              <span class="text-xs text-stone-400 font-medium">from ₹1,300 surplus</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Automated surplus banking leaves ₹400 in free pocket cash so you never feel deprived.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. INTERACTIVE PUBLIC SHOCK SIMULATOR (CENTERPIECE CONVERSION FEATURE) -->
+    <section id="shock-simulator" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="bg-white rounded-3xl border border-stone-200/90 shadow-xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+        
+        <!-- Header -->
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Interactive Stress Test</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-1 mb-2">
+            Simulate a Platform Inflow Shock
+          </h2>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            Test how the Smart Buffer absorbs order slowdowns, monsoons, and platform downtime without ever touching your ₹3,500 cash floor.
+          </p>
+        </div>
+
+        <!-- Scenario Preset Buttons -->
+        <div class="flex flex-wrap gap-2.5 mb-8">
+          <button type="button" onclick="applyPreset(0, this)" class="preset-btn px-4 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-all">
+            Normal Inflow (0%)
+          </button>
+          <button type="button" onclick="applyPreset(10, this)" class="preset-btn px-4 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-all">
+            Mild Drift (-10%)
+          </button>
+          <button type="button" onclick="applyPreset(20, this)" class="preset-btn px-4 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-all">
+            Seasonal Drought (-20%)
+          </button>
+          <button type="button" onclick="applyPreset(40, this)" class="preset-btn active px-4 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-bold shadow-sm transition-all">
+            Platform Downtime (-40%)
+          </button>
+          <button type="button" onclick="applyPreset(60, this)" class="preset-btn px-4 py-2.5 rounded-xl border border-rose-200 text-xs font-bold text-rose-700 hover:bg-rose-50 transition-all">
+            Extreme Shock (-60%)
+          </button>
+        </div>
+
+        <!-- Dynamic Results Display Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-stone-50 rounded-2xl p-6 sm:p-8 border border-stone-200/80">
+          
+          <!-- Left: Simulation Metrics -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              
+              <div class="p-4 bg-white rounded-xl border border-stone-200 shadow-xs">
+                <span class="text-[11px] font-bold text-stone-500 uppercase block mb-1">Projected Inflow</span>
+                <span class="text-xl sm:text-2xl font-black text-stone-900 font-mono" id="sim-projected-income">₹5,040</span>
+                <span class="text-[10px] text-stone-400 block mt-0.5">from ₹8,400 base</span>
+              </div>
+
+              <div class="p-4 bg-white rounded-xl border border-stone-200 shadow-xs">
+                <span class="text-[11px] font-bold text-stone-500 uppercase block mb-1">Weekly Burn</span>
+                <span class="text-xl sm:text-2xl font-black text-stone-900 font-mono">₹4,400</span>
+                <span class="text-[10px] text-stone-400 block mt-0.5">Fixed obligations</span>
+              </div>
+
+              <div class="p-4 bg-white rounded-xl border border-stone-200 shadow-xs col-span-2 sm:col-span-1">
+                <span class="text-[11px] font-bold text-stone-500 uppercase block mb-1">Buffer Runway</span>
+                <span class="text-xl sm:text-2xl font-black text-brand-500 font-mono" id="sim-runway">1.5 wks</span>
+                <span class="text-[10px] text-stone-400 block mt-0.5">Deficit absorption</span>
+              </div>
+
+            </div>
+
+            <!-- Defensive Recommendation Banner -->
+            <div class="p-4 rounded-xl bg-white border border-amber-200 text-xs text-stone-800 flex items-start gap-3">
+              <span class="text-lg">🛡️</span>
+              <div>
+                <strong class="font-bold text-amber-900 block" id="sim-floor-status">Defensive Circuit Breaker Activated</strong>
+                <p class="text-stone-600 mt-0.5 leading-snug" id="sim-defensive-action">
+                  Enable Deficit Smoothing: Draw ₹1,040/wk from buffer, suspend discretionary spends.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Action & Conversion Card -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-6 border border-stone-200 shadow-sm flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-stone-100">
+                <span class="text-xs font-bold text-stone-500">Resilience Shift</span>
+                <span class="text-xs font-bold font-mono text-stone-900" id="sim-resilience-text">74 → 71 (-3 pts)</span>
+              </div>
+              <div class="pt-3">
+                <div class="flex justify-between text-xs text-stone-600 mb-1">
+                  <span>Checking Floor Protection:</span>
+                  <span class="font-bold text-emerald-600">₹3,500 INTACT</span>
+                </div>
+                <div class="w-full bg-stone-100 rounded-full h-2 overflow-hidden">
+                  <div class="bg-emerald-500 h-full rounded-full w-full"></div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="openAuthGate('SAVE_SCENARIO')" class="w-full py-3 px-4 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-xs font-bold shadow-md brand-glow transition-all flex items-center justify-center gap-2">
+              <span>Save This Scenario in My Workspace →</span>
+            </button>
+            <p class="text-[10px] text-stone-400 text-center">
+              Requires 1-click Google authentication • Your data stays isolated
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. "WHY ₹900?" EXPLAINABLE SAFEGUARD EXPERIENCE -->
+    <section id="explainable-safe" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="bg-white rounded-3xl border border-stone-200/90 shadow-xl p-6 sm:p-10 lg:p-12">
+        
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Explainable Financial Engine</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-1 mb-2">
+            Why Save Exactly ₹900?
+          </h2>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            No black-box algorithms. Every rupee recommended by SURE SAVINGS is mathematically transparent and verified by the deterministic policy layer.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="p-5 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-[11px] font-bold text-stone-500 uppercase block mb-1">Step 1 • Inflow vs Baseline</span>
+            <div class="text-2xl font-black text-stone-900 font-mono mb-1">₹8,400</div>
+            <p class="text-xs text-stone-600">
+              Week 36 earnings exceeded the ₹7,100 stabilized baseline by <strong>₹1,300 surplus</strong>.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-[11px] font-bold text-stone-500 uppercase block mb-1">Step 2 • 70% Policy Safeguard</span>
+            <div class="text-2xl font-black text-stone-900 font-mono mb-1">₹910</div>
+            <p class="text-xs text-stone-600">
+              Policy limits savings to <strong>70% of surplus</strong> to prevent over-constraining daily life.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-[11px] font-bold text-stone-500 uppercase block mb-1">Step 3 • Clean Rounding</span>
+            <div class="text-2xl font-black text-brand-500 font-mono mb-1">₹900</div>
+            <p class="text-xs text-stone-600">
+              Rounded to clean <strong>₹50 increment</strong> for clear, friction-free reserve transfer.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-200">
+            <span class="text-[11px] font-bold text-emerald-800 uppercase block mb-1">Step 4 • Free Pocket Cash</span>
+            <div class="text-2xl font-black text-emerald-900 font-mono mb-1">₹400</div>
+            <p class="text-xs text-emerald-800">
+              <strong>100% untouched</strong> in checking for guilt-free personal discretionary spending.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span class="text-xs text-stone-500">Want your own personalized safe-to-save calculation?</span>
+          <button onclick="openAuthGate('SAFE_SAVE_CTA')" class="px-5 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+            <span>Calculate My Recommendation →</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. INTRADAY TIMING GAP CASE STUDY -->
+    <section id="timing-gap" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="bg-white rounded-3xl border border-stone-200/90 shadow-xl p-6 sm:p-10 lg:p-12">
+        
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Cash-Flow Timing Intelligence</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-1 mb-2">
+            The 9-Hour Liquidity Deficit
+          </h2>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            Gig workers are often solvent on paper but hit temporary intra-day cash deficits when bills clear before platform payouts settle.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          
+          <!-- Timeline Card -->
+          <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-4">
+            
+            <div class="flex items-start gap-4">
+              <span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800 text-xs font-bold font-mono">09:00 AM</span>
+              <div>
+                <span class="text-xs font-bold text-stone-900 block">EV Two-Wheeler EMI Debited</span>
+                <span class="text-xs text-rose-600 font-bold font-mono">-₹4,500.00</span>
+                <p class="text-[11px] text-stone-500 mt-0.5">Checking drops dangerously close to zero.</p>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-dashed border-amber-300 ml-7 pl-6 py-2">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[10px] font-bold">
+                ⚡ 9-Hour Intra-Day Exposure Window
+              </span>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold font-mono">06:00 PM</span>
+              <div>
+                <span class="text-xs font-bold text-stone-900 block">Platform Payouts Settle</span>
+                <span class="text-xs text-emerald-600 font-bold font-mono">+₹6,900.00</span>
+                <p class="text-[11px] text-stone-500 mt-0.5">Healthy solvent end-of-day balance restored.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Solution Explanation -->
+          <div class="space-y-4">
+            <div class="p-5 rounded-2xl bg-brand-50/60 border border-brand-200">
+              <h4 class="text-sm font-bold text-stone-900 mb-1">How Smart Buffer Solves This:</h4>
+              <p class="text-xs text-stone-600 leading-relaxed">
+                Rather than forcing you to take predatory daily-credit loans or incur overdraft fees, SURE SAVINGS detects the timing mismatch and automatically cushions the 9-hour gap.
+              </p>
+            </div>
+
+            <button onclick="openAuthGate('CASH_FLOW_CTA')" class="w-full py-3 px-4 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-xs font-bold shadow-md brand-glow transition-all flex items-center justify-center gap-2">
+              <span>Map My Cash Flow Obligations →</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. SECURITY & TRUST PANEL -->
+    <section id="security" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="bg-stone-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        
+        <div class="max-w-2xl mb-10">
+          <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">Bank-Grade Foundation</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1 mb-2">
+            Private by Design. Zero Custody.
+          </h2>
+          <p class="text-sm text-stone-400 leading-relaxed">
+            We provide financial intelligence and resilience calculation. We never take custody of your money and we never store your passwords.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div class="space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-stone-800 flex items-center justify-center text-brand-500 font-bold">
+              🔒
+            </div>
+            <h4 class="text-sm font-bold text-white">Google Verified Auth</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              Google handles identity verification. Your Google password is never entered into SURE SAVINGS.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-stone-800 flex items-center justify-center text-emerald-400 font-bold">
+              🛡️
+            </div>
+            <h4 class="text-sm font-bold text-white">Zero-Trust Isolation</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              All transactions, buffers, and AI interactions are strictly scoped to your server-side session.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-stone-800 flex items-center justify-center text-amber-400 font-bold">
+              ⚡
+            </div>
+            <h4 class="text-sm font-bold text-white">No Withdrawal Authority</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              Zero fund custody. We simulate reserve targets and advise on safety without moving your actual money.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-stone-800 flex items-center justify-center text-blue-400 font-bold">
+              📝
+            </div>
+            <h4 class="text-sm font-bold text-white">Immutable Audit Trace</h4>
+            <p class="text-xs text-stone-400 leading-relaxed">
+              Every formula and policy decision produces a cryptographic trace for complete mathematical transparency.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. FINAL CONVERSION BANNER -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 text-center mb-24">
+      <div class="p-8 sm:p-12 rounded-3xl bg-brand-50 border border-brand-200 shadow-md">
+        <h3 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mb-3">
+          Ready to protect your variable income?
+        </h3>
+        <p class="text-sm text-stone-600 max-w-md mx-auto mb-6">
+          Set up your private resilience workspace in seconds. Explore with zero friction.
+        </p>
+        <button onclick="openAuthGate('BOTTOM_BANNER')" class="px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white rounded-2xl text-sm font-bold shadow-md brand-glow transition-all">
+          Build My Financial Workspace →
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-stone-200 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-stone-700">SURE SAVINGS</span>
+        <span>•</span>
+        <span>Deterministic Financial Resilience Core v4.0</span>
+      </div>
+      <div class="flex items-center gap-4 font-medium">
+        <a href="#how-it-works" class="hover:text-stone-600">How It Works</a>
+        <a href="#security" class="hover:text-stone-600">Security Architecture</a>
+        <a href="login.html" class="hover:text-stone-600">Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SMART AUTHENTICATION GATE MODAL -->
+  <div id="auth-gate-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-200 relative text-left">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-stone-100 mb-5">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-brand-500 block">Personalized Financial Protection</span>
+          <h3 class="text-lg font-extrabold text-stone-900">Build Your Private Workspace</h3>
+        </div>
+        <button type="button" onclick="closeAuthGate()" class="text-stone-400 hover:text-stone-600 text-sm p-1">✕</button>
+      </div>
+
+      <p class="text-xs text-stone-600 leading-relaxed mb-6">
+        You've explored the SURE SAVINGS public demonstration model. Sign in securely to connect your real income, buffer, and risk analytics.
+      </p>
+
+      <!-- 1-Click Continue with Google -->
+      <button 
+        id="gate-google-btn"
+        type="button" 
+        onclick="triggerGoogleAuthFromGate()"
+        class="w-full py-3.5 px-4 bg-white border border-stone-300 hover:border-stone-400 hover:bg-stone-50 rounded-xl text-xs sm:text-sm font-bold text-stone-800 flex items-center justify-center gap-3 shadow-sm transition-all group"
+      >
+        <svg class="w-4 h-4 flex-shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="relative flex items-center justify-center my-4">
+        <div class="border-t border-stone-200 w-full"></div>
+        <span class="bg-white px-3 text-[10px] font-semibold text-stone-400 uppercase">or</span>
+        <div class="border-t border-stone-200 w-full"></div>
+      </div>
+
+      <!-- Secondary: Continue with Email / Explore Login Portal -->
+      <a 
+        href="login.html" 
+        class="w-full py-2.5 px-4 rounded-xl border border-stone-200 hover:bg-stone-50 text-xs font-bold text-stone-700 flex items-center justify-center gap-2 transition-all"
+      >
+        <span>Continue with Email OTP →</span>
+      </a>
+
+      <!-- Security guarantee note -->
+      <div class="mt-6 p-3 rounded-xl bg-stone-50 border border-stone-200 text-[11px] text-stone-500 leading-snug">
+        🔒 <strong>Zero Passwords:</strong> We authenticate via Google Identity Services and session tokens. Your personal financial data stays 100% isolated.
+      </div>
+    </div>
+  </div>
+
+  <!-- Central API & State Scripts -->
+  <script src="js/api.js?v=8.7.0"></script>
+  <script src="js/store.js?v=8.7.0"></script>
+
+  <!-- Interactive Public Explorer Logic -->
+  <script>
+    let pendingAction = "EXPLORE";
+
+    function openAuthGate(action = "EXPLORE") {
+      pendingAction = action;
+      try {
+        sessionStorage.setItem("suresavings_pending_action", action);
+      } catch (e) {}
+      document.getElementById("auth-gate-modal").classList.remove("hidden");
+    }
+
+    function closeAuthGate() {
+      document.getElementById("auth-gate-modal").classList.add("hidden");
+    }
+
+    // Initialize GIS and Public Telemetry on load
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        // Load live public canonical overview
+        if (window.sureSavingsApi) {
+          const overview = await window.sureSavingsApi.getPublicDemoOverview();
+          console.log("[SURE SAVINGS] Public Explorer connected to authoritative engine v4.0", overview);
+        }
+
+        // Initialize Google Identity Services if available
+        if (window.sureSavingsApi) {
+          const config = await window.sureSavingsApi.getAuthConfig();
+          if (config && config.google_client_id && window.google?.accounts?.id) {
+            google.accounts.id.initialize({
+              client_id: config.google_client_id,
+              callback: handleGoogleCredentialResponse,
+              auto_select: false,
+              cancel_on_tap_outside: true
+            });
+            google.accounts.id.prompt();
+          }
+        }
+      } catch (err) {
+        console.warn("[SURE SAVINGS] Public Explorer initialization info:", err);
+      }
+    });
+
+    async function handleGoogleCredentialResponse(response) {
+      if (!response.credential) return;
+      try {
+        await window.sureSavingsApi.verifyGoogleCredential(response.credential);
+        window.location.href = "index.html";
+      } catch (err) {
+        console.error("Google sign-in error:", err);
+        window.location.href = "login.html?error=" + encodeURIComponent(err.message);
+      }
+    }
+
+    async function triggerGoogleAuthFromGate() {
+      window.location.href = "login.html?action=google";
+    }
+
+    // Interactive Shock Simulator Live Execution
+    async function applyPreset(dropPct, btnElement) {
+      document.querySelectorAll(".preset-btn").forEach(b => {
+        b.className = "preset-btn px-4 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-all";
+      });
+      btnElement.className = "preset-btn active px-4 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-bold shadow-sm transition-all";
+
+      try {
+        const res = await window.sureSavingsApi.simulatePublicShock({
+          shockPercentage: dropPct,
+          scenarioPreset: `drought_${dropPct}`
+        });
+
+        if (res && res.simulation) {
+          const sim = res.simulation;
+          document.getElementById("sim-projected-income").innerText = `₹${sim.projected_weekly_income.toLocaleString()}`;
+          document.getElementById("sim-runway").innerText = `${sim.runway_weeks} wks`;
+          document.getElementById("sim-floor-status").innerText = sim.floor_status;
+          document.getElementById("sim-defensive-action").innerText = sim.defensive_action;
+          document.getElementById("sim-resilience-text").innerText = `74 → ${sim.resilience_score} (${sim.resilience_delta} pts)`;
+        }
+      } catch (err) {
+        console.warn("Public simulation error:", err);
+      }
+    }
+  </script>
+</body>
+</html>

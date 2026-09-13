@@ -1,0 +1,28 @@
+# Environment & Secret variables
+.env
+.env.local
+.env.*.local
+
+# Python caches & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Databases
+*.db
+*.sqlite3
+sure_savings.db
+
+# User uploads
+uploads/avatars/*
+!uploads/avatars/.gitkeep
+
+# OS & Editor files
+.DS_Store
+.vscode/
+.idea/
+*.log

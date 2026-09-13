@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Risk &amp; Early Warning Center</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Liquidity Intelligence</span>
+      </div>
+    </a>
+    <div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="font-medium">SOC-2 Type II Vault</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>256-bit TLS Encrypted</span>
+    </div>
+    <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">Deterministic Rule Engine v5.0</span>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span>Search</span>
+      <kbd class="kbd">⌘K</kbd>
+    </button>
+
+    <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+      <span>🌐 Public Explorer</span>
+    </a>
+
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <div class="notification-bell" onclick="toggleNotifications()">
+      <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full border font-medium text-xs" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary);">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+      </svg>
+      <span>Instant Sandbox Active</span>
+    </div>
+
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+        </div>
+        <div class="py-1 border-b" style="border-color: var(--border-default)">
+          <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span>Calibrate Baseline</span>
+          </div>
+        </div>
+        <div class="py-1">
+          <div class="user-menu-item" onclick="exportData()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Export Data</span>
+          </div>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- BEGIN: Main Layout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+  
+  <!-- BEGIN: NavigationSidebar -->
+  <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+    <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+      <div class="mb-4 px-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+      </div>
+      <nav class="space-y-1" id="mainNavigationTabs">
+        <a href="index.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Command Center</span>
+        </a>
+        <a href="resilience-plan.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span class="flex-1">Resilience Plan</span>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-brand-500 text-white">v8.0</span>
+        </a>
+        <a href="simulator.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span>SURE SAVINGS</span>
+        </a>
+        <a href="income-intelligence.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <span>Income Intelligence</span>
+        </a>
+        <a href="planner.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Cash Flow Planner</span>
+        </a>
+        <a href="decision-pipeline.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          <span>Decision Pipeline</span>
+        </a>
+        <a href="calendar.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Income Calendar</span>
+        </a>
+        <a href="goals.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Goals &amp; Buffer Plan</span>
+        </a>
+        <a href="risk.html" class="unified-nav-link active">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <span>Risk &amp; Early Warning</span>
+        </a>
+        <a href="health.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <span>Financial Health</span>
+        </a>
+        <a href="activity.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span>Transactions &amp; Activity</span>
+        </a>
+        <a href="coach.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span>AI Resilience Coach</span>
+        </a>
+        <a href="login.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+          <span>Sign In / Portal</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Non-Custodial Trust Badge in Sidebar -->
+    <div class="premium-card p-4 space-y-3" style="border-radius: var(--radius-2xl);">
+      <div class="flex items-center space-x-2 text-emerald-500">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"></path></svg>
+        <span class="text-xs font-bold uppercase tracking-wider">Predictive Guard</span>
+      </div>
+      <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+        Autonomous early warning engine monitors timing deltas and platform sweep volatility to protect your <strong style="color: var(--text-primary)">₹3,500 checking floor</strong>.
+      </p>
+    </div>
+  </aside>
+  <!-- END: NavigationSidebar -->
+
+  <!-- BEGIN: MainContentArea -->
+  <main class="flex-1 flex flex-col space-y-6 min-w-0">
+    
+    <!-- Hero Header & Real-Time Status -->
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center space-x-2 mb-1.5">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2);">
+            Early Warning Telemetry Active
+          </span>
+          <span class="text-xs" style="color: var(--text-subtle)">• Real-time non-custodial risk surveillance</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">Risk &amp; Early Warning Center</h1>
+        <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary)">
+          Detect liquidity stress and intraday timing gaps before they breach your checking floor.
+        </p>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <button onclick="runEarlyWarningScan()" class="px-3.5 py-2 rounded-xl text-xs font-bold text-white transition-all shadow-md flex items-center space-x-1.5" style="background: var(--brand-primary); box-shadow: 0 4px 12px rgba(255, 91, 69, 0.25);">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          <span>Run Fresh Telemetry Scan</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4 High-Impact Telemetry Metrics -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- 1. Primary Risk Status -->
+      <div class="premium-card p-5" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Risk Status</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" data-risk="status-badge" style="background: rgba(16, 185, 129, 0.12); color: #059669;">LOW OVERALL</span>
+        </div>
+        <div class="text-2xl font-extrabold font-mono text-emerald-600" data-risk="status-title">Absorbable Risk</div>
+        <div class="text-xs mt-1" style="color: var(--text-muted)" data-risk="status-detail">Surplus Buffer Active</div>
+        <div class="w-full bg-stone-200/40 rounded-full h-1.5 mt-3 overflow-hidden" style="background: var(--surface-sunken);">
+          <div class="h-1.5 rounded-full bg-emerald-500" data-risk="status-bar" style="width: 30%"></div>
+        </div>
+      </div>
+
+      <!-- 2. Volatility Stress -->
+      <div class="premium-card p-5" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Volatility Stress</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" data-risk="volatility-badge" style="background: rgba(245, 158, 11, 0.12); color: #d97706;">HIGH VARIANCE</span>
+        </div>
+        <div class="text-2xl font-extrabold font-mono" style="color: var(--text-primary)" data-risk="volatility-val">1.92 CV</div>
+        <div class="text-xs mt-1" style="color: var(--text-muted)">Gig Fluctuations Measured</div>
+        <div class="w-full bg-stone-200/40 rounded-full h-1.5 mt-3 overflow-hidden" style="background: var(--surface-sunken);">
+          <div class="h-1.5 rounded-full bg-amber-500" data-risk="volatility-bar" style="width: 62%"></div>
+        </div>
+      </div>
+
+      <!-- 3. Minimum Floor Margin -->
+      <div class="premium-card p-5" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Floor Cushion</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" data-risk="cushion-badge" style="background: rgba(16, 185, 129, 0.12); color: #059669;">PROTECTED</span>
+        </div>
+        <div class="text-2xl font-extrabold font-mono" style="color: var(--text-primary)" data-risk="cushion-val">+₹1,900</div>
+        <div class="text-xs mt-1" style="color: var(--text-muted)" data-risk="cushion-detail">Above ₹500 Floor (₹2,400 balance)</div>
+        <div class="w-full bg-stone-200/40 rounded-full h-1.5 mt-3 overflow-hidden" style="background: var(--surface-sunken);">
+          <div class="h-1.5 rounded-full bg-emerald-500" data-risk="cushion-bar" style="width: 100%"></div>
+        </div>
+      </div>
+
+      <!-- 4. Platform Concentration -->
+      <div class="premium-card p-5" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Platform Concentration</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" style="background: rgba(99, 102, 241, 0.12); color: #6366f1;">ACTIVE</span>
+        </div>
+        <div class="text-2xl font-extrabold font-mono" style="color: var(--text-primary)" data-risk="concentration-val">Primary Earner</div>
+        <div class="text-xs mt-1" style="color: var(--text-muted)">Consultant &amp; Freelance Stream</div>
+        <div class="w-full bg-stone-200/40 rounded-full h-1.5 mt-3 overflow-hidden" style="background: var(--surface-sunken);">
+          <div class="h-1.5 rounded-full bg-indigo-500" style="width: 74%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Early Warning Trigger Spotlight -->
+    <div class="premium-card p-6 border-l-4 relative overflow-hidden" style="border-radius: var(--radius-2xl); border-left-color: #ef4444;">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b" style="border-color: var(--border-default)">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: rgba(239, 68, 68, 0.12); color: #ef4444;">
+            <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
+              <span>🚨 Critical Early Warning</span>
+              <span>•</span>
+              <span>Sep 10 Timing Mismatch</span>
+            </div>
+            <h3 class="text-lg font-bold" style="color: var(--text-primary)">Intraday Cash Timing Mismatch Imminent</h3>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>9-Hour Settlement Delta</span>
+        </div>
+      </div>
+
+      <div class="py-4 text-xs sm:text-sm leading-relaxed" style="color: var(--text-secondary)">
+        While your aggregate weekly earnings are projected at <strong style="color: var(--text-primary)">₹6,900</strong>, scheduled morning debits (<strong style="color: var(--text-primary)">₹8,300</strong> for Rent &amp; Utilities) will precede evening platform sweeps by 9 hours on Sep 10. If the payout encounters banking batch queue delays, checking liquidity will briefly compress to within ₹220 of your <strong class="text-red-500 font-mono">₹3,500 absolute floor</strong>.
+      </div>
+
+      <!-- Recommended 4-Step Defensive Response -->
+      <div class="mt-2 space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Recommended 4-Step Defensive Protocol</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="p-3.5 rounded-xl border flex flex-col justify-between" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-brand-500 font-mono">01</span>
+              <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded" style="background: var(--surface-paper); color: var(--text-muted)">Discretionary</span>
+            </div>
+            <div class="text-xs font-bold" style="color: var(--text-primary)">Preserve Cash</div>
+            <p class="text-[11px] mt-1" style="color: var(--text-muted)">Hold your ₹400 free pocket; avoid discretionary weekend outlays.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border flex flex-col justify-between" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-brand-500 font-mono">02</span>
+              <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded" style="background: var(--surface-paper); color: var(--text-muted)">Buffer Lock</span>
+            </div>
+            <div class="text-xs font-bold" style="color: var(--text-primary)">Freeze Withdrawals</div>
+            <p class="text-[11px] mt-1" style="color: var(--text-muted)">Freeze non-essential buffer withdrawals until platform sweep clears.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border flex flex-col justify-between" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-brand-500 font-mono">03</span>
+              <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded" style="background: rgba(245, 158, 11, 0.15); color: #d97706;">Temporary</span>
+            </div>
+            <div class="text-xs font-bold" style="color: var(--text-primary)">Pre-Authorize Bridge</div>
+            <p class="text-[11px] mt-1" style="color: var(--text-muted)">Authorize temporary ₹1,400 reserve bridge to eliminate negative gap.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border flex flex-col justify-between" style="background: var(--surface-sunken); border-color: var(--border-default)">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-brand-500 font-mono">04</span>
+              <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded" style="background: rgba(16, 185, 129, 0.15); color: #059669;">Automated</span>
+            </div>
+            <div class="text-xs font-bold" style="color: var(--text-primary)">Re-sweep on Settlement</div>
+            <p class="text-[11px] mt-1" style="color: var(--text-muted)">Automatically restore reserve balance once evening gig deposit clears.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-5 pt-4 border-t flex flex-wrap items-center justify-between gap-3" style="border-color: var(--border-default)">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button onclick="authorizeDefensiveSmoothing()" class="px-4 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-md brand-glow transition-all flex items-center space-x-1.5">
+            <span>🛡️ Pre-Authorize ₹1,400 Buffer Bridge</span>
+          </button>
+          <a href="planner.html" class="px-4 py-2.5 rounded-xl border hover:bg-stone-50 text-xs font-bold transition-all flex items-center space-x-1.5" style="border-color: var(--border-default); color: var(--text-primary)">
+            <span>View Intraday Timeline</span>
+            <span>→</span>
+          </a>
+        </div>
+        <div class="text-[11px] flex items-center space-x-1.5 text-emerald-500 font-mono font-medium">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>Non-Custodial: Zero Fund Movement Guarantee</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-Week Dynamic Forward Stress Trajectory -->
+    <div class="premium-card p-6" style="border-radius: var(--radius-2xl);">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h3 class="text-base font-bold" style="color: var(--text-primary)">4-Week Forward Stress Projection</h3>
+          <p class="text-xs" style="color: var(--text-muted)">Multi-week stress testing under variable gig earnings scenarios</p>
+        </div>
+        <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
+          Confidence: 94.2%
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Week 1 -->
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-3" style="background: var(--surface-sunken); border-color: rgba(239, 68, 68, 0.3);">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-secondary)">Week 1 (Sep 1–7)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" style="background: rgba(239, 68, 68, 0.12); color: #ef4444;">HIGH STRESS</span>
+          </div>
+          <div class="space-y-1 text-xs">
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Outflows</span>
+              <span class="font-mono font-bold" style="color: var(--text-primary)">₹8,300</span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Inflows</span>
+              <span class="font-mono font-bold text-red-500">₹6,900</span>
+            </div>
+            <div class="flex justify-between pt-1 border-t" style="border-color: var(--border-default)">
+              <span style="color: var(--text-muted)">Net Timing Gap</span>
+              <span class="font-mono font-bold text-red-500">-₹1,400</span>
+            </div>
+          </div>
+          <div class="w-full bg-stone-200/40 rounded-full h-1.5 overflow-hidden" style="background: var(--surface-paper);">
+            <div class="h-1.5 rounded-full bg-red-500" style="width: 25%"></div>
+          </div>
+          <p class="text-[11px] leading-relaxed" style="color: var(--text-muted)">Morning rent debits exceed incoming gig earnings. Buffer bridge engaged.</p>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-3" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-secondary)">Week 2 (Sep 8–14)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" style="background: rgba(245, 158, 11, 0.12); color: #d97706;">RECOVERING</span>
+          </div>
+          <div class="space-y-1 text-xs">
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Outflows</span>
+              <span class="font-mono font-bold" style="color: var(--text-primary)">₹4,200</span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Inflows</span>
+              <span class="font-mono font-bold text-emerald-500">₹7,800</span>
+            </div>
+            <div class="flex justify-between pt-1 border-t" style="border-color: var(--border-default)">
+              <span style="color: var(--text-muted)">Buffer Growth</span>
+              <span class="font-mono font-bold text-emerald-500">+₹800</span>
+            </div>
+          </div>
+          <div class="w-full bg-stone-200/40 rounded-full h-1.5 overflow-hidden" style="background: var(--surface-paper);">
+            <div class="h-1.5 rounded-full bg-amber-500" style="width: 55%"></div>
+          </div>
+          <p class="text-[11px] leading-relaxed" style="color: var(--text-muted)">Weekend festival surge replenishes bridge and begins buffer rebuilding.</p>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-3" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-secondary)">Week 3 (Sep 15–21)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" style="background: rgba(59, 130, 246, 0.12); color: #3b82f6;">BALANCED</span>
+          </div>
+          <div class="space-y-1 text-xs">
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Outflows</span>
+              <span class="font-mono font-bold" style="color: var(--text-primary)">₹5,100</span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Inflows</span>
+              <span class="font-mono font-bold" style="color: var(--text-primary)">₹6,400</span>
+            </div>
+            <div class="flex justify-between pt-1 border-t" style="border-color: var(--border-default)">
+              <span style="color: var(--text-muted)">Net Surplus</span>
+              <span class="font-mono font-bold text-emerald-500">+₹1,300</span>
+            </div>
+          </div>
+          <div class="w-full bg-stone-200/40 rounded-full h-1.5 overflow-hidden" style="background: var(--surface-paper);">
+            <div class="h-1.5 rounded-full bg-blue-500" style="width: 70%"></div>
+          </div>
+          <p class="text-[11px] leading-relaxed" style="color: var(--text-muted)">Mid-month utility settlement window safely absorbed without dipping into floor.</p>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="p-4 rounded-xl border flex flex-col justify-between space-y-3" style="background: var(--surface-sunken); border-color: rgba(16, 185, 129, 0.3);">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-secondary)">Week 4 (Sep 22–30)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono" style="background: rgba(16, 185, 129, 0.12); color: #059669;">STABLE</span>
+          </div>
+          <div class="space-y-1 text-xs">
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Outflows</span>
+              <span class="font-mono font-bold" style="color: var(--text-primary)">₹5,900</span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--text-muted)">Inflows</span>
+              <span class="font-mono font-bold text-emerald-500">₹9,100</span>
+            </div>
+            <div class="flex justify-between pt-1 border-t" style="border-color: var(--border-default)">
+              <span style="color: var(--text-muted)">Surplus Safeguard</span>
+              <span class="font-mono font-bold text-emerald-500">+₹3,200</span>
+            </div>
+          </div>
+          <div class="w-full bg-stone-200/40 rounded-full h-1.5 overflow-hidden" style="background: var(--surface-paper);">
+            <div class="h-1.5 rounded-full bg-emerald-500" style="width: 92%"></div>
+          </div>
+          <p class="text-[11px] leading-relaxed" style="color: var(--text-muted)">Month-end surge enables 100% buffer goal completion with zero checking risk.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Stress Testing Simulator Sandbox -->
+    <div class="premium-card p-6" style="border-radius: var(--radius-2xl);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+        <div>
+          <h3 class="text-base font-bold" style="color: var(--text-primary)">Interactive Volatility Stress Simulator</h3>
+          <p class="text-xs" style="color: var(--text-muted)">Simulate adverse platform conditions to evaluate deterministic safety margins</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-[11px] font-bold font-mono" style="background: var(--brand-primary-light); color: var(--brand-primary);">
+          Sandbox Mode Active
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <!-- Control 1: Settlement Delay -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs">
+            <span class="font-bold" style="color: var(--text-primary)">Platform Batch Delay</span>
+            <span class="font-mono font-bold text-brand-500" id="delayVal">9 Hours</span>
+          </div>
+          <input type="range" min="0" max="24" step="1" value="9" id="delaySlider" oninput="updateRiskStressSim()" class="w-full accent-brand-500 cursor-pointer">
+          <div class="flex justify-between text-[10px]" style="color: var(--text-subtle)">
+            <span>0h (Instant)</span>
+            <span>12h (Half-Day)</span>
+            <span>24h (Next-Day)</span>
+          </div>
+        </div>
+
+        <!-- Control 2: Payout Volume Shock -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs">
+            <span class="font-bold" style="color: var(--text-primary)">Weekly Inflow Shortfall</span>
+            <span class="font-mono font-bold text-brand-500" id="shortfallVal">-15%</span>
+          </div>
+          <input type="range" min="0" max="50" step="5" value="15" id="shortfallSlider" oninput="updateRiskStressSim()" class="w-full accent-brand-500 cursor-pointer">
+          <div class="flex justify-between text-[10px]" style="color: var(--text-subtle)">
+            <span>0% (Expected)</span>
+            <span>-25% (Rain/Downtime)</span>
+            <span>-50% (Severe)</span>
+          </div>
+        </div>
+
+        <!-- Simulated Outcome Card -->
+        <div class="p-4 rounded-xl border flex flex-col justify-between" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-secondary)">Simulated Buffer Floor</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold" id="simSafetyBadge" style="background: rgba(16, 185, 129, 0.15); color: #059669;">SAFE</span>
+          </div>
+          <div class="my-2">
+            <div class="text-xl font-extrabold font-mono" id="simProjectedFloor" style="color: var(--text-primary)">₹3,680</div>
+            <div class="text-[11px]" style="color: var(--text-muted)">Required checking floor: ₹3,500</div>
+          </div>
+          <div class="text-[11px] font-medium" id="simStatusMsg" style="color: #059669;">
+            ✓ Safe: Buffer absorption preserves floor intact.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deterministic Engine Ribbon -->
+    <div class="p-4 rounded-xl border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs" style="background: var(--surface-sunken); border-color: var(--border-default)">
+      <div class="flex items-center space-x-2.5">
+        <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        <span style="color: var(--text-secondary)">
+          <strong style="color: var(--text-primary)">Non-Custodial Deterministic Core:</strong> All simulations and recommendations run client-side and in verified non-custodial containers. SURE SAVINGS never executes automated debits without explicit authorization.
+        </span>
+      </div>
+      <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded border flex-shrink-0" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-muted)">
+        Engine Version 5.0
+      </span>
+    </div>
+
+  </main>
+  <!-- END: MainContentArea -->
+</div>
+<!-- END: Main Layout -->
+
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+
+<script>
+  function runEarlyWarningScan() {
+    if (window.showToast) {
+      window.showToast("Telemetry Scan Complete: No new intraday anomalies detected. Buffer bridge remains active.", "success");
+    }
+  }
+
+  function authorizeDefensiveSmoothing() {
+    if (window.showToast) {
+      window.showToast("Defensive Buffer Bridge Pre-Authorized! ₹1,400 reserve bridge armed for Sep 10 settlement delta.", "success");
+    }
+  }
+
+  function updateRiskStressSim() {
+    const delay = parseInt(document.getElementById('delaySlider').value);
+    const shortfall = parseInt(document.getElementById('shortfallSlider').value);
+    
+    document.getElementById('delayVal').textContent = delay + " Hours";
+    document.getElementById('shortfallVal').textContent = "-" + shortfall + "%";
+
+    // Base calculation: Floor ₹3,500, base projection ₹3,720
+    const baselineSurplus = 220;
+    const impact = (delay * 35) + (shortfall * 24);
+    const projected = Math.max(3100, 3720 - impact);
+    
+    const floorEl = document.getElementById('simProjectedFloor');
+    const badgeEl = document.getElementById('simSafetyBadge');
+    const msgEl = document.getElementById('simStatusMsg');
+
+    floorEl.textContent = "₹" + projected.toLocaleString();
+
+    if (projected >= 3500) {
+      badgeEl.textContent = "SAFE";
+      badgeEl.style.background = "rgba(16, 185, 129, 0.15)";
+      badgeEl.style.color = "#059669";
+      msgEl.textContent = "✓ Safe: Buffer absorption preserves ₹3,500 floor intact.";
+      msgEl.style.color = "#059669";
+    } else if (projected >= 3300) {
+      badgeEl.textContent = "WARNING";
+      badgeEl.style.background = "rgba(245, 158, 11, 0.15)";
+      badgeEl.style.color = "#d97706";
+      msgEl.textContent = "⚠️ Caution: Checking floor compromised by ₹" + (3500 - projected) + ". Automated buffer bridge advised.";
+      msgEl.style.color = "#d97706";
+    } else {
+      badgeEl.textContent = "CRITICAL";
+      badgeEl.style.background = "rgba(239, 68, 68, 0.15)";
+      badgeEl.style.color = "#ef4444";
+      msgEl.textContent = "🚨 High Risk: Major liquidity deficit of ₹" + (3500 - projected) + ". Emergency reserve release required.";
+      msgEl.style.color = "#ef4444";
+    }
+  }
+</script>
+</body>
+</html>

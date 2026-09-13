@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Income Intelligence & Volatility Matrix</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <!-- Brand & Icon -->
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Liquidity Intelligence</span>
+      </div>
+    </a>
+    <!-- Security Badges -->
+    <div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="font-medium">SOC-2 Type II Vault</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>256-bit TLS Encrypted</span>
+    </div>
+    <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">Deterministic Rule Engine v5.0</span>
+    </div>
+  </div>
+
+  <!-- Right: Controls -->
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span>Search</span>
+      <kbd class="kbd">⌘K</kbd>
+    </button>
+
+    <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+      <span>🌐 Public Explorer</span>
+    </a>
+
+    <!-- Dark Mode Toggle -->
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <!-- Notification Bell -->
+    <div class="notification-bell" onclick="toggleNotifications()">
+      <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <!-- Sandbox Indicator -->
+    <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full border font-medium text-xs" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary);">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+      </svg>
+      <span>Instant Sandbox Active</span>
+    </div>
+
+    <!-- User Avatar Container -->
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+        </div>
+        <div class="py-1 border-b" style="border-color: var(--border-default)">
+          <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span>Calibrate Baseline</span>
+          </div>
+        </div>
+        <div class="py-1">
+          <div class="user-menu-item" onclick="exportData()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>Export Data</span>
+          </div>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- BEGIN: Main Layout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+  
+  <!-- BEGIN: NavigationSidebar -->
+  <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+    <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+      <div class="mb-4 px-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+      </div>
+      <nav class="space-y-1" id="mainNavigationTabs">
+        <a href="index.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Command Center</span>
+        </a>
+        <a href="resilience-plan.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span class="flex-1">Resilience Plan</span>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-brand-500 text-white">v8.0</span>
+        </a>
+        <a href="simulator.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span>SURE SAVINGS</span>
+        </a>
+        <a href="income-intelligence.html" class="unified-nav-link active">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <span>Income Intelligence</span>
+        </a>
+        <a href="planner.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Cash Flow Planner</span>
+        </a>
+        <a href="decision-pipeline.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          <span>Decision Pipeline</span>
+        </a>
+        <a href="calendar.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Income Calendar</span>
+        </a>
+        <a href="goals.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Goals &amp; Buffer Plan</span>
+        </a>
+        <a href="risk.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <span>Risk &amp; Early Warning</span>
+        </a>
+        <a href="health.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <span>Financial Health</span>
+        </a>
+        <a href="activity.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span>Activity &amp; Ledger</span>
+        </a>
+        <a href="coach.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span>AI Resilience Coach</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Algorithm Philosophy -->
+    <div class="premium-card p-3.5 border-l-4 border-l-brand-500" style="border-radius: var(--radius-xl);">
+      <div class="flex items-start space-x-2.5">
+        <div class="w-6 h-6 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
+          ∑
+        </div>
+        <div>
+          <p class="text-xs font-bold" style="color: var(--text-primary)">Non-Parametric Weighting</p>
+          <p class="text-[11px] leading-snug mt-0.5" style="color: var(--text-muted)">60% Median + 40% Mean filters out one-off windfalls while tracking real income progression.</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- END: NavigationSidebar -->
+
+  <!-- BEGIN: MainContent -->
+  <main class="flex-1 space-y-6 overflow-x-hidden">
+    
+    <!-- Title & Controls -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <p class="text-xs font-bold tracking-wider uppercase text-emerald-600">
+            Cycle Week 36 / 52 • Dynamic Volatility Analytics
+          </p>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1" style="color: var(--text-primary)">
+          Income Intelligence
+        </h1>
+        <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary)">
+          Understand your income dispersion, calculate stabilized cash baselines, and detect safe-to-save surplus.
+        </p>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="openLogIncomeModal()" class="px-3.5 py-1.5 text-xs font-bold rounded-xl border transition-all flex items-center space-x-1.5 hover:border-brand-500 bg-brand-500/10 text-brand-600 border-brand-500/30">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          <span>+ Log Week Income</span>
+        </button>
+        <button onclick="exportData()" class="px-3.5 py-1.5 text-xs font-bold rounded-xl border transition-all flex items-center space-x-1.5 hover:border-brand-500" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-secondary);">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>Export Ledger</span>
+        </button>
+        <a href="simulator.html" class="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-md brand-glow transition-all flex items-center space-x-1.5">
+          <span>Simulate Next Cycle</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Top KPI Grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="income-kpi-grid">
+      <div class="premium-card p-4" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between text-xs mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Current Income</span>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full text-emerald-700 bg-emerald-100 dark:bg-emerald-950" data-income="drift-badge">Live Actual</span>
+        </div>
+        <div class="text-2xl font-black mt-1 font-mono" style="color: var(--text-primary)" data-income="current">₹10,000</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px]">
+          <span class="text-emerald-600 font-bold" data-income="status-label">Active Earnings</span>
+          <span style="color: var(--text-muted)">Current Period</span>
+        </div>
+      </div>
+
+      <div class="premium-card p-4" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between text-xs mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Stabilized Income</span>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background: var(--surface-sunken); color: var(--text-secondary)">Benchmark</span>
+        </div>
+        <div class="text-2xl font-black mt-1 font-mono" style="color: var(--text-primary)" data-income="stabilized">₹1,100</div>
+        <div class="mt-2.5 text-[10px] font-mono truncate" style="color: var(--text-muted)">0.60×Median + 0.40×Average</div>
+      </div>
+
+      <div class="premium-card p-4" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between text-xs mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Forecast Next Cycle</span>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full text-sky-700 bg-sky-100 dark:bg-sky-950">Active Projection</span>
+        </div>
+        <div class="text-2xl font-black mt-1 font-mono" style="color: var(--text-primary)" data-income="forecast">₹100</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px]" style="color: var(--text-secondary)">
+          <span>Band:</span>
+          <span class="font-bold font-mono" data-income="forecast-band">Adaptive Floor</span>
+        </div>
+      </div>
+
+      <div class="premium-card p-4" style="border-radius: var(--radius-xl);">
+        <div class="flex items-center justify-between text-xs mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Volatility Index</span>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full text-amber-700 bg-amber-100 dark:bg-amber-950">Moderate</span>
+        </div>
+        <div class="text-2xl font-black mt-1 font-mono text-amber-500" data-income="volatility">0.31 CV</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px]" style="color: var(--text-muted)">
+          <span>Safe ceiling: &lt; 0.40</span>
+          <span class="font-bold text-emerald-600">Well-anchored</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Chart Section -->
+    <section class="premium-card p-5 sm:p-6" style="border-radius: var(--radius-2xl);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b" style="border-color: var(--border-default)">
+        <div>
+          <h2 class="text-base font-extrabold" style="color: var(--text-primary)">Income Trend &amp; 12-Week Volatility Matrix</h2>
+          <p class="text-xs" style="color: var(--text-secondary)">Historical weekly payouts against deterministic stabilized baseline</p>
+        </div>
+        <div class="flex items-center space-x-3 text-[11px]" style="color: var(--text-muted)">
+          <div class="flex items-center space-x-1.5">
+            <span class="w-3 h-3 rounded bg-amber-400"></span>
+            <span>Actual Payout</span>
+          </div>
+          <div class="flex items-center space-x-1.5">
+            <span class="w-3.5 h-0.5 border-t-2 border-dashed border-slate-500"></span>
+            <span>Stabilized (₹7,100)</span>
+          </div>
+          <div class="flex items-center space-x-1.5">
+            <span class="w-3 h-3 rounded bg-brand-500"></span>
+            <span>Current Week</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Chart -->
+      <div class="relative pt-6 pb-2">
+        <div class="w-full h-64 relative">
+          <svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewBox="0 0 960 220">
+            <defs>
+              <linearGradient id="coralBar" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#FF5B45"></stop>
+                <stop offset="100%" stop-color="#E84A35"></stop>
+              </linearGradient>
+              <linearGradient id="amberBar" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#FBBF24"></stop>
+                <stop offset="100%" stop-color="#F59E0B"></stop>
+              </linearGradient>
+            </defs>
+
+            <!-- Horizontal Grid -->
+            <line stroke="var(--border-subtle)" stroke-width="1" x1="40" x2="940" y1="15" y2="15"></line>
+            <text fill="var(--text-subtle)" font-family="monospace" font-size="10" text-anchor="end" x="32" y="19">10k</text>
+            <line stroke="var(--border-subtle)" stroke-width="1" x1="40" x2="940" y1="55" y2="55"></line>
+            <text fill="var(--text-subtle)" font-family="monospace" font-size="10" text-anchor="end" x="32" y="59">8k</text>
+            <line stroke="var(--border-subtle)" stroke-width="1" x1="40" x2="940" y1="95" y2="95"></line>
+            <text fill="var(--text-subtle)" font-family="monospace" font-size="10" text-anchor="end" x="32" y="99">6k</text>
+            <line stroke="var(--border-subtle)" stroke-width="1" x1="40" x2="940" y1="135" y2="135"></line>
+            <text fill="var(--text-subtle)" font-family="monospace" font-size="10" text-anchor="end" x="32" y="139">4k</text>
+
+            <!-- Stabilized Line -->
+            <line stroke="#FF5B45" stroke-dasharray="6,4" stroke-width="2" x1="40" x2="940" y1="73" y2="73"></line>
+
+            <!-- Bars -->
+            <rect fill="url(#amberBar)" height="116" opacity="0.85" rx="5" width="34" x="75" y="79"></rect>
+            <rect fill="url(#amberBar)" height="128" opacity="0.85" rx="5" width="34" x="149" y="67"></rect>
+            <rect fill="#FBBF24" height="82" opacity="0.65" rx="5" width="34" x="223" y="113"></rect>
+            <rect fill="url(#amberBar)" height="114" opacity="0.85" rx="5" width="34" x="297" y="81"></rect>
+            <rect fill="url(#amberBar)" height="126" opacity="0.85" rx="5" width="34" x="371" y="69"></rect>
+            <rect fill="url(#amberBar)" height="172" rx="5" width="34" x="445" y="23"></rect>
+            <rect fill="url(#amberBar)" height="118" opacity="0.85" rx="5" width="34" x="519" y="77"></rect>
+            <rect fill="url(#amberBar)" height="124" opacity="0.85" rx="5" width="34" x="593" y="71"></rect>
+            <rect fill="url(#amberBar)" height="108" opacity="0.85" rx="5" width="34" x="667" y="87"></rect>
+            <rect fill="url(#amberBar)" height="120" opacity="0.85" rx="5" width="34" x="741" y="75"></rect>
+
+            <!-- Active W36 Bar -->
+            <rect fill="url(#coralBar)" height="148" rx="5" stroke="#FF5B45" stroke-width="2" width="34" x="815" y="47"></rect>
+            <circle cx="832" cy="47" fill="#FF5B45" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+            <text fill="#FF5B45" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle" x="832" y="38">₹8,400</text>
+
+            <!-- Ground Axis -->
+            <line stroke="var(--border-default)" stroke-width="1.5" x1="40" x2="940" y1="195" y2="195"></line>
+          </svg>
+        </div>
+
+        <div class="grid grid-cols-11 text-center text-[10px] font-bold pt-2 px-8" style="color: var(--text-muted)">
+          <span>W26</span>
+          <span>W27</span>
+          <span>W28 (Rain)</span>
+          <span>W29</span>
+          <span>W30</span>
+          <span>W31 (Fest)</span>
+          <span>W32</span>
+          <span>W33</span>
+          <span>W34</span>
+          <span>W35</span>
+          <span class="text-brand-500 font-extrabold">W36 (Now)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lower Analytics Grid -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- Statistical Breakdown (7 cols) -->
+      <div class="lg:col-span-7 premium-card p-5 sm:p-6 space-y-5" style="border-radius: var(--radius-2xl);">
+        <div class="flex items-center justify-between pb-3 border-b" style="border-color: var(--border-default)">
+          <div>
+            <h3 class="text-sm font-extrabold" style="color: var(--text-primary)">Statistical Variance &amp; Dispersion</h3>
+            <p class="text-xs" style="color: var(--text-secondary)">Non-parametric distribution breakdown across 12 trailing weeks</p>
+          </div>
+          <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full text-emerald-700 bg-emerald-100 dark:bg-emerald-950">
+            Resilient
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted)">Median Weekly</div>
+            <div class="text-lg font-black font-mono mt-0.5" style="color: var(--text-primary)" data-income="median">₹7,050</div>
+            <div class="text-[10px]" style="color: var(--text-subtle)">Core baseline center</div>
+          </div>
+          <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted)">Average Weekly</div>
+            <div class="text-lg font-black font-mono mt-0.5" style="color: var(--text-primary)" data-income="average">₹7,180</div>
+            <div class="text-[10px] text-emerald-600 font-medium">+1.8% vs median</div>
+          </div>
+          <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted)">Lowest Trough</div>
+            <div class="text-lg font-black font-mono text-rose-500 mt-0.5" data-income="lowest">₹5,100</div>
+            <div class="text-[10px]" style="color: var(--text-subtle)">Week 28 (Monsoon)</div>
+          </div>
+          <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted)">Highest Peak</div>
+            <div class="text-lg font-black font-mono text-emerald-600 mt-0.5" data-income="highest">₹9,600</div>
+            <div class="text-[10px]" style="color: var(--text-subtle)">Week 31 (Festival)</div>
+          </div>
+          <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted)">Safe Spread</div>
+            <div class="text-lg font-black font-mono mt-0.5" style="color: var(--text-primary)" data-income="spread">₹1,600</div>
+            <div class="text-[10px]" style="color: var(--text-subtle)">Trough vs ₹3.5k Floor</div>
+          </div>
+          <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted)">Protected Floor</div>
+            <div class="text-lg font-black font-mono text-brand-500 mt-0.5" data-income="floor">₹500</div>
+            <div class="text-[10px] text-emerald-600 font-medium">100% Insulated</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl border space-y-1.5" style="background: var(--surface-sunken); border-color: var(--border-default);">
+          <div class="flex items-center space-x-2 text-xs font-bold" style="color: var(--text-primary)">
+            <span class="text-brand-500">⚙️</span>
+            <span>Mathematical Guarantee Formula</span>
+          </div>
+          <div class="text-xs font-mono font-bold p-2.5 rounded-lg border" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-primary);">
+            Stabilized = (0.60 × Rolling 12-Wk Median) + (0.40 × Rolling 12-Wk Mean)
+          </div>
+          <p class="text-xs leading-relaxed mt-1" style="color: var(--text-secondary)">
+            This deterministic formulation protects variable income earners from budget whiplash by dampening one-off windfalls while steadily expanding with sustained income gains.
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Card (5 cols) -->
+      <div class="lg:col-span-5 premium-card p-5 sm:p-6 flex flex-col justify-between space-y-5" style="border-radius: var(--radius-2xl);">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md text-brand-500" style="background: var(--brand-primary-light);">
+              Opportunity Detected
+            </span>
+            <span class="text-xs font-medium text-emerald-600">Safe to Save</span>
+          </div>
+          
+          <h3 class="text-lg font-extrabold leading-snug" style="color: var(--text-primary)" data-income="surplus-heading">
+            Surplus Safeguard Assessment
+          </h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary)" data-income="surplus-body">
+            You generated <strong style="color: var(--text-primary)" data-income="surplus-text">surplus above baseline</strong> this cycle. Fixed essential obligations and your protected checking floor are completely secured.
+          </p>
+
+          <div class="p-3.5 rounded-xl border space-y-1.5" style="background: var(--surface-sunken); border-color: var(--border-default);">
+            <div class="text-xs font-bold flex items-center space-x-1.5 text-emerald-600">
+              <span>🛡️</span>
+              <span>70% Safeguard Recommendation</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
+              Allocating ₹900 into your reserve vault keeps <strong style="color: var(--text-primary)">₹400 free pocket cash</strong> and stretches runway survival duration from 1.5 → 1.7 weeks.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-4 border-t" style="border-color: var(--border-default)">
+          <button onclick="openApproveTransferModal()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-md brand-glow transition-all flex items-center justify-center space-x-2">
+            <span>Review ₹900 Safe-to-Save Recommendation →</span>
+          </button>
+          <a href="simulator.html" class="w-full py-2.5 text-center block text-xs font-bold rounded-xl border transition-all hover:bg-stone-50" style="background: var(--surface-paper); border-color: var(--border-default); color: var(--text-secondary);">
+            Open Interactive Simulator
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- END: MainContent -->
+</div>
+
+<!-- SCRIPTS -->
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+</body>
+</html>

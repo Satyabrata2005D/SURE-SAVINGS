@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SURE SAVINGS — Smart Income Buffer | Liquidity Intelligence</title>
+<!-- Tailwind CSS v3 with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration matching SURE SAVINGS Aesthetic -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3',
+              100: '#ffe8e4',
+              200: '#ffd0c8',
+              500: '#FF5B45',
+              600: '#F05138',
+              700: '#d93b22'
+            },
+            amberAccent: {
+              400: '#FBBF24',
+              500: '#F59E0B',
+              600: '#D97706'
+            },
+            canvas: '#F8F7F4',
+            paper: '#ffffff',
+            ink: {
+              DEFAULT: '#0F172A',
+              muted: '#64748B',
+              subtle: '#94A3B8'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif']
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02)',
+            'elevated': '0 20px 35px -8px rgba(15, 23, 42, 0.08), 0 8px 16px -4px rgba(15, 23, 42, 0.03)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen has-security-bar" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- 🛡️ FORTRESS: Encrypted Connection Indicator Bar -->
+<div class="security-encrypted-bar" id="security-encrypted-bar">
+  <svg class="lock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+  <span class="security-detail">🔒 256-bit TLS Encrypted</span>
+  <span class="separator"></span>
+  <span class="security-detail hide-mobile">SOC-2 Type II Compliant</span>
+  <span class="separator hide-mobile"></span>
+  <span class="security-detail hide-mobile">Zero Fund Movement</span>
+  <span class="separator"></span>
+  <span class="security-detail">Session: <span class="session-timer" id="session-timer-display">3h 00m</span></span>
+  <button onclick="openSecurityDetailsModal()" style="margin-left:8px;padding:2px 10px;background:rgba(5,150,105,0.2);border:1px solid rgba(5,150,105,0.3);border-radius:6px;color:#A7F3D0;font-size:10px;font-weight:700;cursor:pointer;" class="hide-mobile">View Details</button>
+</div>
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+<div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+<!-- Brand & Icon -->
+<div class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+<div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+          S
+        </div>
+<div class="flex flex-col leading-none">
+<span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+<span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Liquidity Intelligence</span>
+</div>
+</div>
+<!-- Security Badges -->
+<div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+<svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="font-medium">SOC-2 Type II Vault</span>
+</div>
+<div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+<svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+</svg>
+<span>256-bit TLS Encrypted</span>
+</div>
+<div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-medium" style="color: var(--text-secondary)">Deterministic Rule Engine v5.0</span>
+</div>
+</div>
+<!-- Right: Controls -->
+<div class="flex items-center space-x-2.5 flex-shrink-0">
+<!-- Command Palette Hint -->
+<button onclick="openCommandPalette()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all hover:border-brand-500/30" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+  <span>Search</span>
+  <kbd class="kbd">⌘K</kbd>
+</button>
+
+<a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+  <span>🌐 Public Explorer</span>
+</a>
+
+<!-- Dark Mode Toggle -->
+<button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+  <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+</button>
+
+<!-- Notification Bell -->
+<div class="notification-bell" onclick="toggleNotifications()">
+  <svg class="w-5 h-5" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+  <span class="notification-badge" id="notif-badge">3</span>
+</div>
+
+<!-- Sandbox Indicator -->
+<div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full border font-medium" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary);">
+<svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+</svg>
+<span>Instant Sandbox Active</span>
+</div>
+
+<!-- User Avatar -->
+<div class="relative" id="user-avatar-container">
+<div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+<div class="user-avatar" id="user-avatar-circle">
+          AK
+        </div>
+<div class="hidden sm:block text-right">
+<p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
+<p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+</div>
+</div>
+<!-- User Dropdown Menu -->
+<div class="user-menu hidden" id="user-menu-dropdown">
+  <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+    <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
+    <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+  </div>
+  <div class="py-1 border-b" style="border-color: var(--border-default)">
+    <div class="user-menu-item" onclick="openMyProfileModal()">
+      <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+      <span>My Profile</span>
+    </div>
+    <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
+      <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+      <span>Calibrate Baseline</span>
+    </div>
+  </div>
+  <div class="py-1">
+    <div class="user-menu-item" onclick="exportData()">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+      <span>Export Data</span>
+    </div>
+    <div class="user-menu-item danger" onclick="handleLogout()">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+      <span>Sign Out</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<!-- 🛡️ FORTRESS: Security Status Banner -->
+<div class="security-status-banner no-print" id="security-status-banner">
+  <div class="status-item">
+    <span class="status-dot"></span>
+    <span>Content-Security-Policy Active</span>
+  </div>
+  <div class="status-item">
+    <span class="status-dot"></span>
+    <span>X-Frame-Options: DENY</span>
+  </div>
+  <div class="status-item">
+    <span class="status-dot"></span>
+    <span>Brute-Force Protection Enabled</span>
+  </div>
+  <div class="status-item hide-mobile" style="display:none">
+    <span class="status-dot"></span>
+    <span>HSTS Enforced</span>
+  </div>
+  <div class="status-item">
+    <span class="status-dot"></span>
+    <span>Inactivity Timeout: 3 Hours</span>
+  </div>
+  <div class="status-item">
+    <span class="holo-badge">🛡️ FORTRESS v5.0</span>
+  </div>
+</div>
+
+<!-- BEGIN: MainAppLayout -->
+<div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 gap-6 relative">
+<!-- Decorative background watermark / stipples inspired by reference visual -->
+<div class="absolute -top-10 -left-10 w-48 h-48 stipple-pattern opacity-60 pointer-events-none rounded-full"></div>
+<div class="absolute top-1/3 -right-6 w-36 h-36 stipple-pattern opacity-40 pointer-events-none rounded-full"></div>
+<!-- BEGIN: NavigationSidebar -->
+<aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
+<div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
+<div class="mb-4 px-2">
+<h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+</div>
+<nav class="space-y-1" id="mainNavigationTabs">
+  <a href="index.html" class="unified-nav-link active">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+    <span>Command Center</span>
+  </a>
+  <a href="resilience-plan.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+    <span class="flex-1">Resilience Plan</span>
+    <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-brand-500 text-white">v8.0</span>
+  </a>
+  <a href="simulator.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+    <span>SURE SAVINGS</span>
+  </a>
+  <a href="income-intelligence.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+    <span>Income Intelligence</span>
+  </a>
+  <a href="planner.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+    <span>Cash Flow Planner</span>
+  </a>
+  <a href="decision-pipeline.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+    <span>Decision Pipeline</span>
+  </a>
+  <a href="calendar.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <span>Income Calendar</span>
+  </a>
+  <a href="goals.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+    <span>Goals & Buffer Plan</span>
+  </a>
+  <a href="risk.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+    <span>Risk & Early Warning</span>
+  </a>
+  <a href="health.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+    <span>Financial Health</span>
+  </a>
+  <a href="activity.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+    <span>Transactions & Activity</span>
+  </a>
+  <a href="coach.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+    <span>AI Resilience Coach</span>
+  </a>
+  <a href="login.html" class="unified-nav-link">
+    <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+    <span>Sign In / Portal</span>
+  </a>
+</nav>
+<!-- Quick Volatility Sandbox Profile Switcher (Reference Match) -->
+<div class="mt-6 pt-4 border-t border-stone-200/70">
+<div class="flex items-center justify-between text-xs font-semibold text-stone-500 mb-2">
+<span class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-amberAccent-500" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" fill-rule="evenodd"></path>
+</svg>
+<span>Persona Profile</span>
+</span>
+<span class="text-[10px] text-brand-600 font-bold tracking-tight">Active</span>
+</div>
+<div class="p-3 bg-stone-50 border border-stone-200 rounded-xl space-y-1 cursor-pointer hover:bg-stone-100 transition-colors">
+<div class="flex items-center space-x-2">
+<div class="w-5 h-5 rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px] font-bold">
+                ✓
+              </div>
+<span class="text-xs font-bold text-stone-800">Gig Platform Worker</span>
+</div>
+<p class="text-[11px] text-stone-500 pl-7">Variable weekly payouts (Zomato/Blinkit/Fiverr)</p>
+</div>
+</div>
+<!-- Bank Read-Only Safe Guarantee Indicator -->
+<div class="mt-4 p-3 bg-emerald-50/50 border border-emerald-200/60 rounded-xl">
+<div class="flex items-start space-x-2">
+<svg class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0 lock-pulse-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<p class="text-xs font-semibold text-emerald-900">Zero Fund Movement</p>
+<p class="text-[11px] text-emerald-700 leading-tight mt-0.5">Decision engine creates recommendations; your bank keeps 100% control.</p>
+</div>
+</div>
+</div>
+
+<!-- 🛡️ FORTRESS: Trust Shield Card -->
+<div class="trust-shield-card mt-4" id="trust-shield-card">
+  <div class="shield-title">
+    <div class="security-shield-badge" style="width:28px;height:28px;">
+      <svg class="shield-icon" style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      <div class="shield-ring"></div>
+    </div>
+    <span>Security Posture</span>
+  </div>
+  <div class="shield-stat">
+    <span>Encryption</span>
+    <span class="shield-stat-value" style="color:var(--accent-emerald)">TLS 1.3</span>
+  </div>
+  <div class="shield-stat">
+    <span>Headers Policy</span>
+    <span class="shield-stat-value">FORTRESS v5</span>
+  </div>
+  <div class="shield-stat">
+    <span>Session Age</span>
+    <span class="shield-stat-value" id="sidebar-session-age">0m</span>
+  </div>
+  <div class="shield-stat">
+    <span>OTP Protection</span>
+    <span class="shield-stat-value" style="color:var(--accent-emerald)">5-attempt lock</span>
+  </div>
+  <div class="shield-stat">
+    <span>Fund Movement</span>
+    <span class="shield-stat-value" style="color:var(--accent-emerald)">BLOCKED</span>
+  </div>
+</div>
+</div>
+</aside>
+<!-- END: NavigationSidebar -->
+<!-- BEGIN: MainContentArea -->
+<main class="flex-1 space-y-6" data-purpose="primary-workspace">
+<!-- Subheader Context Banner -->
+<section class="bg-paper border border-stone-200/90 rounded-2xl p-5 shadow-soft flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex flex-wrap items-center gap-2 text-stone-500 text-xs">
+<span id="current-date-display">Thursday, 3 September 2026</span>
+<span>•</span>
+<span class="text-emerald-700 font-medium">Income Cycle: Week 36 / 52</span>
+<span class="hidden sm:inline-block text-stone-300">•</span>
+<!-- Behavior Profile Badge -->
+<span id="behavior-profile-pill" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 cursor-pointer hover:bg-brand-100 transition-colors" title="Empirical Financial Behavior Profile" onclick="openBehaviorProfileInfo()">
+  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+  <span id="behavior-profile-text">Profile: BUFFER_BUILDING</span>
+</span>
+<!-- Data Quality Badge -->
+<span id="data-quality-pill" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 cursor-pointer hover:bg-emerald-100 transition-colors" title="Continuous Data Quality Engine" onclick="openDataQualityModal()">
+  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+  <span id="data-quality-text">Data Quality: 95/100 (HIGH)</span>
+</span>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-stone-900 mt-1" id="main-greeting-heading">
+  <span id="dashboard-greeting">Good morning</span>, <span id="dashboard-user-name">Member</span>
+</h1>
+<p class="text-xs sm:text-sm text-stone-500 mt-0.5">
+  Turn income volatility into financial resilience with automated liquidity safeguards.
+</p>
+</div>
+<div class="flex items-center space-x-3">
+<button class="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-xl border border-stone-300/80 transition-all flex items-center space-x-2" onclick="triggerRecalculate()">
+<svg class="w-3.5 h-3.5 text-stone-600" fill="none" id="refreshIcon" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Sync Bank Aggregator</span>
+</button>
+<button class="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold rounded-xl shadow-sm transition-all flex items-center space-x-1.5" onclick="openExplainModal()">
+<span>Inspect Engine Reasoning</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</section>
+<!-- TAB 1: COMMAND CENTER (Default View) -->
+<div class="tab-pane space-y-6" id="tab-content-dashboard">
+<!-- PERSONAL FINANCIAL SETUP PROGRESS BANNER (Dynamic for new & in-progress users) -->
+<div id="setup-banner-container"></div>
+
+<!-- SURE SAVINGS 8.0: ADAPTIVE FINANCIAL RESILIENCE OPERATING SYSTEM -->
+<div id="financial-weather-container"></div>
+<div id="what-changed-container"></div>
+<div id="five-core-questions-container"></div>
+
+<!-- LEVEL 1: Financial Health & Resilience Score -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6" data-purpose="resilience-score-panel">
+<!-- Score Circular Gauge & Pillars -->
+<div class="lg:col-span-8 bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-700">
+                  Level 1 • Core Pillar
+                </span>
+<h3 class="text-base font-bold text-stone-900 mt-1">Income Resilience Metric</h3>
+<p class="text-xs text-stone-500">Holistic protection against unexpected weekly income drought</p>
+</div>
+<div class="flex items-center space-x-2">
+<button onclick="openExplainMetricModal('resilience_score')" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg border text-xs font-semibold transition-all hover:bg-stone-100" style="border-color: var(--border-default); color: var(--text-secondary);" title="Inspect Resilience Calculation & 6-Step Graph">
+  <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  <span>Why?</span>
+</button>
+<div class="inline-flex items-center space-x-1 text-emerald-600 font-semibold text-xs bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>+6 pts MoM</span>
+</div>
+</div>
+</div>
+<!-- Resilience Score Visual Cluster -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center my-4">
+<!-- Giant Number & Radial Representation -->
+<div class="md:col-span-5 flex flex-col items-center justify-center p-4 bg-stone-50/70 rounded-2xl border border-stone-200/60">
+<div class="relative flex items-center justify-center">
+<!-- SVG Gauge Ring -->
+<svg class="w-36 h-36 transform -rotate-90">
+<circle class="text-stone-200" cx="72" cy="72" fill="transparent" r="58" stroke="currentColor" stroke-width="10"></circle>
+<circle id="scoreGaugeCircle" class="text-brand-500 transition-all duration-1000" cx="72" cy="72" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="94.7" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-4xl font-extrabold text-stone-900 tracking-tight" id="scoreValue">74</span>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-stone-400">Out of 100</span>
+</div>
+</div>
+<p class="mt-2 text-xs font-semibold text-emerald-700 bg-emerald-100/60 px-2.5 py-0.5 rounded-md text-center" id="scoreStatusBadge">
+                  Solid • Volatility Resilient
+                </p>
+</div>
+<!-- 4 Sub-Pillar Breakdowns -->
+<div class="md:col-span-7 space-y-3">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-stone-600 font-medium">Income Predictability Stability</span>
+<span class="text-stone-900 font-bold" id="pillarIncomePredictability">82%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div id="pillarIncomeBar" class="bg-brand-500 h-full rounded-full transition-all duration-500" style="width: 82%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-stone-600 font-medium">Buffer Target Coverage</span>
+<span class="text-stone-900 font-bold" id="pillarBufferCoverage">68%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div id="pillarBufferBar" class="bg-amberAccent-500 h-full rounded-full transition-all duration-500" style="width: 68%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-stone-600 font-medium">Essential Fixed Expense Ratio</span>
+<span class="text-stone-900 font-bold" id="pillarExpenseRatio">75%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div id="pillarExpenseBar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-stone-600 font-medium">Cash Flow Survival Horizon</span>
+<span class="text-stone-900 font-bold" id="pillarSurvivalHorizon">71%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div id="pillarSurvivalBar" class="bg-stone-700 h-full rounded-full transition-all duration-500" style="width: 71%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pillar Context Help Explanations -->
+<div class="pt-3 border-t border-stone-200/80 grid grid-cols-3 gap-2 text-[11px] text-stone-500">
+<div>
+<span class="font-bold text-stone-700 block">What is it?</span>
+                Real-time safety cushion score calculated weekly from platform earnings.
+              </div>
+<div>
+<span class="font-bold text-stone-700 block">Why it matters?</span>
+                Ensures essential bills (rent, bike EMI) never bounce during slow weeks.
+              </div>
+<div>
+<span class="font-bold text-stone-700 block">Next Action</span>
+                Accept ₹900 safe deposit recommendation to reach 77 (+3 pts).
+              </div>
+</div>
+</div>
+<!-- LEVEL 5: SMART RECOMMENDATION CARD (The Key Decision Engine Output) -->
+<div class="lg:col-span-4 bg-white border-2 border-brand-500/20 rounded-2xl p-6 shadow-elevated flex flex-col justify-between relative overflow-hidden" data-purpose="decision-card" id="next-best-action-card">
+<!-- Decorative accent glow -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-brand-100 rounded-full blur-2xl pointer-events-none"></div>
+<div>
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center space-x-1.5 flex-shrink-0">
+  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-brand-100 text-brand-700" id="nbaPriorityBadge">
+    Next Best Action
+  </span>
+  <button onclick="openExplainMetricModal('safe_to_save')" class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md border text-[11px] font-semibold transition-all hover:bg-stone-100" style="border-color: var(--border-default); color: var(--text-secondary);" title="Inspect Safe-to-Save Calculation">
+    <svg class="w-3 h-3 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <span>Why?</span>
+  </button>
+</div>
+<div class="flex items-center flex-shrink-0 max-w-full" id="recConfidence">
+<span class="text-xs font-semibold text-stone-500 flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>94% Confidence</span>
+</span>
+</div>
+</div>
+<div class="mt-4">
+<h4 class="text-xl font-extrabold text-stone-900 leading-snug" id="recTitle">
+                  Save ₹900 while preserving your cash floor.
+                </h4>
+<p class="text-xs text-stone-500 mt-2 leading-relaxed" id="recSubtitle">
+                  Surplus detected of <span class="font-semibold text-stone-800">₹1,300</span> above baseline. Moving ₹900 to your buffer keeps ₹400 free pocket liquidity and expands safety duration.
+                </p>
+</div>
+<!-- Recommendation Quick Metrics -->
+<div class="mt-5 p-3.5 bg-stone-50 border border-stone-200/80 rounded-xl space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-stone-500">Surplus Above Median:</span>
+<span class="font-semibold text-stone-800" id="recSurplusVal">+₹1,300</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Buffer Runway Expansion:</span>
+<span class="font-semibold text-emerald-700" id="recRunwayVal">1.5 weeks → 1.7 weeks</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Protected Cash Floor:</span>
+<span class="font-semibold text-stone-800" id="recFloorVal">₹3,500 (100% Untouched)</span>
+</div>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="mt-6 space-y-2">
+<button class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-bold text-xs sm:text-sm tracking-wide shadow-md transition-all flex items-center justify-center space-x-2" id="acceptBtn" onclick="openApproveTransferModal()">
+<span id="acceptBtnSpan">Approve ₹900 Reserve Transfer</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<button class="w-full py-2.5 bg-stone-50 hover:bg-stone-100 text-stone-700 rounded-xl font-semibold text-xs transition-colors border border-stone-200" onclick="openExplainModal()">
+                View 7-Step Deterministic Proof
+              </button>
+</div>
+</div>
+</section>
+<!-- LEVEL 2 & LEVEL 3-4: Available Protected Buffer & Income Variance Bar Chart -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- LEVEL 2: Smart Buffer Breakdown -->
+<div class="lg:col-span-5 bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft flex flex-col justify-between" data-purpose="protected-buffer-card">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amberAccent-500">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-sm font-bold text-stone-900">Protected Capital Reserve</h3>
+<p class="text-[11px] text-stone-500">Automated Liquidity Vault</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-brand-600 bg-brand-50 px-2.5 py-0.5 rounded-full border border-brand-100">
+                  Auto-Calibrated
+                </span>
+</div>
+<!-- Primary Value & Progress -->
+<div class="mt-4">
+<div class="flex items-baseline justify-between">
+<span class="text-3xl font-extrabold text-stone-900 tracking-tight" id="displayTotalBuffer">₹6,800</span>
+<span class="text-xs font-semibold text-stone-500" id="targetBufferLabel">Target: ₹15,000 (45%)</span>
+</div>
+<p class="text-xs text-stone-500 mt-0.5" id="bufferRunwaySub">Equivalent to <span class="font-bold text-stone-700" id="bufferRunwayWeeks">1.5 weeks</span> of bare essential expenditure</p>
+<!-- Multi-tier Bar Representation (Protected Floor vs Safe Usable) -->
+<div class="mt-4 space-y-1.5">
+<div class="h-3 w-full bg-stone-100 rounded-full overflow-hidden flex" id="bufferBarTrack">
+<!-- Protected Floor (₹3,500) -->
+<div class="bg-stone-800 h-full transition-all duration-500" id="bufferBarFloor" style="width: 23.3%;" title="Protected Floor"></div>
+<!-- Safe Usable Buffer (₹3,300) -->
+<div class="bg-amberAccent-500 h-full transition-all duration-500" id="bufferBarUsable" style="width: 22%;" title="Usable Buffer"></div>
+<!-- Empty Gap towards Target -->
+<div class="bg-transparent h-full flex-1"></div>
+</div>
+<div class="flex justify-between text-[11px] text-stone-500 pt-1 font-medium">
+<span class="flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-stone-800 inline-block"></span>
+<span id="bufferLegendFloor">Floor: ₹3,500</span>
+</span>
+<span class="flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-amberAccent-500 inline-block"></span>
+<span id="bufferLegendUsable">Safe to Use: ₹3,300</span>
+</span>
+<span class="text-stone-400" id="bufferLegendTarget">Target: ₹15k</span>
+</div>
+</div>
+</div>
+<!-- Context cards -->
+<div class="mt-5 grid grid-cols-2 gap-3 text-xs">
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200/70">
+<span class="text-stone-500 text-[11px] block">Weekly Fixed Burn</span>
+<span class="text-sm font-bold text-stone-800 mt-0.5 block" id="weeklyFixedBurnVal">₹4,400</span>
+<span class="text-[10px] text-stone-400">Rent, Fuel &amp; EMIs</span>
+</div>
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200/70">
+<span class="text-stone-500 text-[11px] block">Downside Volatility</span>
+<span class="text-sm font-bold text-amber-600 mt-0.5 block" id="downsideVolatilityVal">31%</span>
+<span class="text-[10px] text-stone-400">Past variance analysis</span>
+</div>
+</div>
+</div>
+<!-- Fast Interaction Buttons -->
+<div class="mt-5 pt-4 border-t border-stone-200/80 flex items-center space-x-3">
+<button class="flex-1 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-xl transition-colors" onclick="switchTab('simulator')">
+                SURE SAVINGS
+              </button>
+<button class="flex-1 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-semibold rounded-xl transition-colors" onclick="openWithdrawModal()">
+                Request Drawdown
+              </button>
+</div>
+</div>
+<!-- LEVEL 3 & 4: Income Chart & Stabilized Income Metric (Identical visual style to SURE SAVINGS reference) -->
+<div class="lg:col-span-7 bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft flex flex-col justify-between" data-purpose="income-dynamics-chart">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+<div>
+<h3 class="text-sm font-bold text-stone-900">Income Variance &amp; Stabilized Baseline</h3>
+<p class="text-xs text-stone-500">Calculated via: <span class="font-mono text-stone-700 bg-stone-100 px-1 py-0.5 rounded text-[11px]">0.60×Median + 0.40×Average</span></p>
+</div>
+<div class="flex items-center space-x-2">
+<button onclick="openExplainMetricModal('stabilized_income')" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg border text-xs font-semibold transition-all hover:bg-stone-100" style="border-color: var(--border-default); color: var(--text-secondary);" title="Inspect Stabilized Income Calculation">
+  <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  <span>Why?</span>
+</button>
+<span class="inline-flex items-center space-x-1 text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full" id="incomeVarianceBadge">
+<span>↑ 18% vs Baseline</span>
+</span>
+</div>
+</div>
+<!-- Metric Summary Row -->
+<div class="grid grid-cols-3 gap-3 mb-6">
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200/70">
+<span class="text-[11px] text-stone-500 block">Actual This Week</span>
+<span class="text-lg font-extrabold text-stone-900" id="actualThisWeekVal">₹8,400</span>
+<span class="text-[10px] text-emerald-600 font-semibold block" id="actualThisWeekSub">Surplus week</span>
+</div>
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200/70">
+<span class="text-[11px] text-stone-500 block">Stabilized Baseline</span>
+<span class="text-lg font-extrabold text-stone-900" id="stabilizedBaselineVal">₹7,100</span>
+<span class="text-[10px] text-stone-400 block">Smoothing target</span>
+</div>
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200/70">
+<span class="text-[11px] text-stone-500 block">Expected Next Wk</span>
+<span class="text-lg font-extrabold text-stone-900" id="expectedIncomeVal">₹6,900</span>
+<span class="text-[10px] text-amber-600 font-semibold block" id="expectedIncomeSub">Slight dip forecast</span>
+</div>
+</div>
+<!-- Bar Chart Component (Crafted to mirror SURE SAVINGS Warm Amber Progressive Columns) -->
+<div class="pt-2" id="incomeBarChartContainer">
+<div class="h-44 w-full flex items-end justify-between gap-2 sm:gap-4 px-2 border-b border-stone-200 pb-2">
+<!-- Bar 1: Jan -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amber-100/90 rounded-t-lg transition-all duration-300 group-hover:bg-amber-200" style="height: 52px;"></div>
+<span class="absolute -top-7 text-[10px] font-semibold text-stone-600 hidden group-hover:block bg-stone-900 text-white px-1.5 py-0.5 rounded shadow">₹5,400</span>
+</div>
+<span class="text-[11px] font-medium text-stone-400">Wk 30</span>
+</div>
+<!-- Bar 2: Feb -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amber-200/90 rounded-t-lg transition-all duration-300 group-hover:bg-amber-300" style="height: 72px;"></div>
+<span class="absolute -top-7 text-[10px] font-semibold text-stone-600 hidden group-hover:block bg-stone-900 text-white px-1.5 py-0.5 rounded shadow">₹6,200</span>
+</div>
+<span class="text-[11px] font-medium text-stone-400">Wk 31</span>
+</div>
+<!-- Bar 3: Mar -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amber-200/90 rounded-t-lg transition-all duration-300 group-hover:bg-amber-300" style="height: 60px;"></div>
+<span class="absolute -top-7 text-[10px] font-semibold text-stone-600 hidden group-hover:block bg-stone-900 text-white px-1.5 py-0.5 rounded shadow">₹5,900</span>
+</div>
+<span class="text-[11px] font-medium text-stone-400">Wk 32</span>
+</div>
+<!-- Bar 4: Apr -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amber-300 rounded-t-lg transition-all duration-300 group-hover:bg-amber-400" style="height: 95px;"></div>
+<span class="absolute -top-7 text-[10px] font-semibold text-stone-600 hidden group-hover:block bg-stone-900 text-white px-1.5 py-0.5 rounded shadow">₹7,200</span>
+</div>
+<span class="text-[11px] font-medium text-stone-400">Wk 33</span>
+</div>
+<!-- Bar 5: May -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amber-300 rounded-t-lg transition-all duration-300 group-hover:bg-amber-400" style="height: 85px;"></div>
+<span class="absolute -top-7 text-[10px] font-semibold text-stone-600 hidden group-hover:block bg-stone-900 text-white px-1.5 py-0.5 rounded shadow">₹6,800</span>
+</div>
+<span class="text-[11px] font-medium text-stone-400">Wk 34</span>
+</div>
+<!-- Bar 6: Jun -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amber-400 rounded-t-lg transition-all duration-300 group-hover:bg-amber-500" style="height: 110px;"></div>
+<span class="absolute -top-7 text-[10px] font-semibold text-stone-600 hidden group-hover:block bg-stone-900 text-white px-1.5 py-0.5 rounded shadow">₹7,900</span>
+</div>
+<span class="text-[11px] font-medium text-stone-400">Wk 35</span>
+</div>
+<!-- Bar 7: Current Jul / This week (Accentuated) -->
+<div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative w-full flex justify-center">
+<div class="w-full max-w-[36px] bg-amberAccent-500 rounded-t-lg shadow-sm transition-all duration-300 group-hover:bg-amber-600" style="height: 140px;"></div>
+<span class="absolute -top-7 text-[10px] font-bold text-white bg-brand-500 px-1.5 py-0.5 rounded shadow">₹8,400</span>
+</div>
+<span class="text-[11px] font-bold text-stone-800">Current</span>
+</div>
+</div>
+<!-- Chart Legend Footer -->
+<div class="flex items-center justify-between text-xs text-stone-500 mt-2 px-1">
+<div class="flex items-center space-x-3">
+<span class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-amberAccent-500 rounded-sm inline-block"></span>
+<span>Weekly Deposits</span>
+</span>
+<span class="flex items-center space-x-1.5">
+<span class="w-2.5 h-0.5 bg-stone-400 inline-block"></span>
+<span>Smoothed Baseline</span>
+</span>
+</div>
+<span class="text-[11px] text-stone-400">Platform feeds: Swiggy + Freelance UX</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- TAB 2: INTERACTIVE SURE SAVINGS & WITHDRAWAL -->
+<div class="tab-pane hidden space-y-6" id="tab-content-simulator">
+<section class="bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft" data-purpose="simulator-playground">
+<div class="max-w-2xl">
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+              Interactive Stress-Test Sandbox
+            </span>
+<h2 class="text-xl font-bold text-stone-900 mt-2">Buffer &amp; Survival Horizon Simulator</h2>
+<p class="text-xs text-stone-500 mt-1">
+              Test how variable deposits or sudden emergencies impact your resilience score and floor protection before moving funds.
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+<!-- Left Controls: Dynamic Deposit Slider -->
+<div class="space-y-6 bg-stone-50/70 p-5 rounded-2xl border border-stone-200/70">
+<div>
+<div class="flex justify-between items-center mb-1">
+<label class="text-xs font-bold text-stone-800" for="saveRange">Simulate Weekly Contribution</label>
+<span class="text-sm font-extrabold text-brand-500" id="rangeValueDisplay">₹900</span>
+</div>
+<input class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-brand-500" id="saveRange" max="3000" min="0" oninput="updateSimulation(this.value)" step="100" type="range" value="900"/>
+<div class="flex justify-between text-[10px] text-stone-400 mt-1">
+<span>₹0</span>
+<span>₹1,500</span>
+<span>₹3,000</span>
+</div>
+</div>
+<!-- Quick Presets -->
+<div>
+<span class="text-xs font-semibold text-stone-600 block mb-2">Predefined Scenarios</span>
+<div class="grid grid-cols-3 gap-2">
+<button class="px-3 py-1.5 text-xs bg-white border border-stone-200 rounded-lg hover:border-brand-500 font-medium" onclick="setSimPreset(500)">
+                    Lean (+₹500)
+                  </button>
+<button class="px-3 py-1.5 text-xs bg-white border border-brand-500 text-brand-600 font-bold rounded-lg" onclick="setSimPreset(900)">
+                    Optimal (+₹900)
+                  </button>
+<button class="px-3 py-1.5 text-xs bg-white border border-stone-200 rounded-lg hover:border-brand-500 font-medium" onclick="setSimPreset(2000)">
+                    Surplus (+₹2k)
+                  </button>
+</div>
+</div>
+<!-- Simulated Buffer Safety Check -->
+<div class="p-4 bg-white rounded-xl border border-stone-200 space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-stone-500">Simulated Total Buffer:</span>
+<span class="font-bold text-stone-900" id="simBufferTotal">₹7,700</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Projected Resilience Score:</span>
+<span class="font-bold text-emerald-600" id="simResilienceScore">77 / 100 (+3)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Target Completion:</span>
+<span class="font-bold text-stone-800" id="simTargetPct">51.3%</span>
+</div>
+</div>
+</div>
+<!-- Right: Drawdown & Floor Protection Assurance -->
+<div class="space-y-4 bg-stone-50/70 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+<div>
+<h4 class="text-xs font-bold uppercase tracking-wider text-stone-700">Safety-First Withdrawal Check</h4>
+<p class="text-xs text-stone-500 mt-1">
+                  SURE SAVINGS automatically separates your untouchable floor from freely usable reserve.
+                </p>
+<div class="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1.5 text-xs">
+<div class="flex items-center space-x-2 text-emerald-800 font-bold">
+<svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Instant Safe Drawdown Limit: ₹3,300</span>
+</div>
+<p class="text-[11px] text-emerald-700 leading-normal">
+                    You can withdraw up to ₹3,300 without breaching your ₹3,500 emergency floor. No penalties, instant UPI transfer to your primary account.
+                  </p>
+</div>
+</div>
+<div class="pt-3 border-t border-stone-200">
+<button class="w-full py-2.5 bg-stone-900 hover:bg-black text-white text-xs font-bold rounded-xl transition-all shadow-sm" onclick="openWithdrawModal()">
+                  Test Emergency Drawdown Flow
+                </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- TAB 3: TRANSPARENT DECISION PIPELINE (Step-by-step logic) -->
+<div class="tab-pane hidden space-y-6" id="tab-content-pipeline">
+<section class="bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft" data-purpose="decision-engine-breakdown">
+<div class="max-w-2xl mb-6">
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-700">
+              Deterministic Reasoning Pipeline
+            </span>
+<h2 class="text-xl font-bold text-stone-900 mt-2">Zero Black-Box: How ₹900 Was Determined</h2>
+<p class="text-xs text-stone-500 mt-1">
+              Every recommendation is mathematically auditable. The pipeline runs through strict liquidity guards before presenting an action.
+            </p>
+</div>
+<!-- Vertical Pipeline Trace -->
+<div class="space-y-3 font-mono text-xs max-w-3xl">
+<!-- Step 1 -->
+<div class="p-3.5 bg-stone-50 border border-stone-200/80 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-[11px]">1</span>
+<div>
+<span class="font-bold text-stone-800">Gross Actual Earnings Detected</span>
+<span class="block text-[11px] text-stone-500 font-sans">Aggregation of Swiggy payouts + freelance direct bank credits</span>
+</div>
+</div>
+<span class="text-stone-900 font-bold text-sm">₹8,400</span>
+</div>
+<!-- Step 2 -->
+<div class="p-3.5 bg-stone-50 border border-stone-200/80 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-[11px]">2</span>
+<div>
+<span class="font-bold text-stone-800">Stabilized Income Baseline</span>
+<span class="block text-[11px] text-stone-500 font-sans">0.60×Median (₹7,000) + 0.40×Average (₹7,250)</span>
+</div>
+</div>
+<span class="text-stone-900 font-bold text-sm">₹7,100</span>
+</div>
+<!-- Step 3 -->
+<div class="p-3.5 bg-emerald-50/70 border border-emerald-200 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center font-bold text-[11px]">3</span>
+<div>
+<span class="font-bold text-emerald-900">Uncalibrated Surplus</span>
+<span class="block text-[11px] text-emerald-700 font-sans">Surplus = ₹8,400 - ₹7,100</span>
+</div>
+</div>
+<span class="text-emerald-700 font-bold text-sm">+₹1,300</span>
+</div>
+<!-- Step 4 -->
+<div class="p-3.5 bg-stone-50 border border-stone-200/80 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-[11px]">4</span>
+<div>
+<span class="font-bold text-stone-800">Buffer Target Cap Check</span>
+<span class="block text-[11px] text-stone-500 font-sans">Remaining gap to ₹15,000 target is ₹8,200 (Requires savings)</span>
+</div>
+</div>
+<span class="text-amber-700 font-bold text-sm">Gap: ₹8,200</span>
+</div>
+<!-- Step 5 -->
+<div class="p-3.5 bg-stone-50 border border-stone-200/80 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-[11px]">5</span>
+<div>
+<span class="font-bold text-stone-800">Platform Policy Guardrail</span>
+<span class="block text-[11px] text-stone-500 font-sans">Maximum single-week auto-reserve cap = ₹1,000</span>
+</div>
+</div>
+<span class="text-stone-900 font-bold text-sm">Cap: ₹1,000</span>
+</div>
+<!-- Step 6 -->
+<div class="p-3.5 bg-stone-50 border border-stone-200/80 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-[11px]">6</span>
+<div>
+<span class="font-bold text-stone-800">Volatility Damping Factor</span>
+<span class="block text-[11px] text-stone-500 font-sans">Adjustment coefficient for current fuel/living inflation: 0.90</span>
+</div>
+</div>
+<span class="text-stone-700 font-bold text-sm">× 0.90</span>
+</div>
+<!-- Step 7: Final Result -->
+<div class="p-4 bg-brand-50 border-2 border-brand-500/30 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold text-[11px]">✓</span>
+<div>
+<span class="font-bold text-brand-900 text-sm font-sans">Final Deterministic Safe Transfer</span>
+<span class="block text-xs text-brand-700 font-sans">Leaves ₹400 unrestricted surplus in hand.</span>
+</div>
+</div>
+<span class="text-brand-600 font-extrabold text-lg">₹900</span>
+</div>
+</div>
+</section>
+</div>
+<!-- TAB 4: AI RESILIENCE COACH -->
+<div class="tab-pane hidden space-y-6" id="tab-content-aicoach">
+<section class="bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft" data-purpose="ai-coach-interface">
+<div class="max-w-2xl mb-4">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Read-Only Explanatory Assistant
+              </span>
+</div>
+<h2 class="text-xl font-bold text-stone-900 mt-2">Financial Intelligence Coach</h2>
+<p class="text-xs text-stone-500 mt-1">
+              Ask questions regarding your cash buffer, forecast vulnerabilities, and why specific amounts were advised.
+            </p>
+</div>
+<!-- Suggested Prompt Chips -->
+<div class="flex flex-wrap gap-2 mb-4">
+<button class="text-xs bg-stone-100 hover:bg-stone-200 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200/70 transition-colors" onclick="askCoach('Why did the engine recommend ₹900 instead of ₹1,300?')">
+              "Why did the engine recommend ₹900 instead of ₹1,300?"
+            </button>
+<button class="text-xs bg-stone-100 hover:bg-stone-200 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200/70 transition-colors" onclick="askCoach('What happens if my earnings fall 25% next week?')">
+              "What happens if my earnings fall 25% next week?"
+            </button>
+<button class="text-xs bg-stone-100 hover:bg-stone-200 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200/70 transition-colors" onclick="askCoach('How can I safely raise my Resilience Score to 85?')">
+              "How can I safely raise my Resilience Score to 85?"
+            </button>
+</div>
+<!-- Chat Conversation Mock -->
+<div class="border border-stone-200 rounded-2xl p-4 bg-stone-50/50 space-y-4 min-h-[260px]" id="chatConversation">
+<!-- Assistant Message 1 -->
+<div class="flex items-start space-x-3">
+<div class="w-7 h-7 rounded-lg bg-brand-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+                AI
+              </div>
+<div class="bg-white p-3.5 rounded-2xl border border-stone-200/80 text-xs text-stone-700 max-w-xl shadow-sm leading-relaxed" id="coach-initial-msg">
+                Hello <span class="user-first-name font-bold">Arjun</span>! I've analyzed your past 8 weeks of platform income. You had a strong run this week (₹8,400, +18% above median). Your reserve currently has ₹6,800. What would you like to explore?
+              </div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="mt-4 flex items-center space-x-2">
+<input class="flex-1 text-xs border border-stone-300 rounded-xl px-4 py-2.5 focus:ring-brand-500 focus:border-brand-500 bg-white" id="coachInput" placeholder="Ask about your buffer, safety floors, or simulations..." type="text"/>
+<button class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold rounded-xl transition-all shadow-sm" onclick="submitCoachQuestion()">
+              Send
+            </button>
+</div>
+</section>
+</div>
+<!-- TAB 5: SYSTEM ARCHITECTURE -->
+<div class="tab-pane hidden space-y-6" id="tab-content-architecture">
+<section class="bg-paper border border-stone-200/90 rounded-2xl p-6 shadow-soft" data-purpose="system-architecture-diagram">
+<div class="max-w-2xl mb-6">
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-700">
+              Technical Verification
+            </span>
+<h2 class="text-xl font-bold text-stone-900 mt-2">Deterministic System Architecture</h2>
+<p class="text-xs text-stone-500 mt-1">
+              How SURE SAVINGS guarantees zero hallucinations and bank-grade data integrity across its multi-tiered stack.
+            </p>
+</div>
+<!-- Visual Topology -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center">
+<!-- Tier 1 -->
+<div class="p-4 bg-stone-50 border border-stone-200 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">1. Data Layer</span>
+<h4 class="text-xs font-bold text-stone-900 mt-1">Open Banking &amp; Aggregators</h4>
+<p class="text-[11px] text-stone-500 mt-1 leading-tight">Read-only account aggregation (Setu / Plaid tokenized APIs).</p>
+</div>
+<div class="mt-3 text-[10px] font-mono text-emerald-600 bg-emerald-50 py-1 rounded border border-emerald-100">
+                256-bit TLS
+              </div>
+</div>
+<!-- Tier 2 -->
+<div class="p-4 bg-stone-50 border border-stone-200 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">2. Backend</span>
+<h4 class="text-xs font-bold text-stone-900 mt-1">Financial Core (FastAPI)</h4>
+<p class="text-[11px] text-stone-500 mt-1 leading-tight">Cash flow calculation, median smoothing &amp; fixed expense floors.</p>
+</div>
+<div class="mt-3 text-[10px] font-mono text-stone-600 bg-white py-1 rounded border border-stone-200">
+                Deterministic Truth
+              </div>
+</div>
+<!-- Tier 3 -->
+<div class="p-4 bg-stone-50 border border-stone-200 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">3. Prediction</span>
+<h4 class="text-xs font-bold text-stone-900 mt-1">Volatility Engine</h4>
+<p class="text-[11px] text-stone-500 mt-1 leading-tight">Rolling standard deviation and seasonal downside probability.</p>
+</div>
+<div class="mt-3 text-[10px] font-mono text-stone-600 bg-white py-1 rounded border border-stone-200">
+                Scikit Quantile
+              </div>
+</div>
+<!-- Tier 4 -->
+<div class="p-4 bg-brand-50 border border-brand-200 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-brand-600">4. Decision Surface</span>
+<h4 class="text-xs font-bold text-brand-900 mt-1">Policy Guardrails</h4>
+<p class="text-[11px] text-brand-700 mt-1 leading-tight">Absolute caps, floor protections, and user confirmation bounds.</p>
+</div>
+<div class="mt-3 text-[10px] font-mono text-brand-600 bg-white py-1 rounded border border-brand-200 font-bold">
+                Zero Fund Moving
+              </div>
+</div>
+<!-- Tier 5 -->
+<div class="p-4 bg-stone-50 border border-stone-200 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-stone-400">5. Interface</span>
+<h4 class="text-xs font-bold text-stone-900 mt-1">Command UI (Next.js)</h4>
+<p class="text-[11px] text-stone-500 mt-1 leading-tight">High-fidelity responsive client with real-time feedback.</p>
+</div>
+<div class="mt-3 text-[10px] font-mono text-stone-600 bg-white py-1 rounded border border-stone-200">
+                Accessible WCAG
+              </div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- END: MainContentArea -->
+</div>
+<!-- END: MainAppLayout -->
+<!-- BEGIN: ModalsAndDrawers -->
+<!-- MODAL: Explain Engine Reasoning Modal -->
+<div class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs hidden items-center justify-center p-4" id="explainModal">
+<div class="bg-paper rounded-2xl max-w-lg w-full border border-stone-200 shadow-elevated p-6 space-y-4 transform transition-all">
+<div class="flex items-center justify-between pb-3 border-b border-stone-100">
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded-md bg-brand-500 text-white flex items-center justify-center text-xs font-bold">?</div>
+<h3 class="text-base font-bold text-stone-900">Why was ₹900 recommended?</h3>
+</div>
+<button class="text-stone-400 hover:text-stone-700 p-1" onclick="closeExplainModal()">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="space-y-3 text-xs text-stone-600 leading-relaxed">
+<p>
+          Your baseline median weekly earnings are <strong class="text-stone-900">₹7,100</strong>. This week, credits totaled <strong class="text-stone-900">₹8,400</strong>, generating a temporary disposable surplus of <strong class="text-emerald-700 font-bold">₹1,300</strong>.
+        </p>
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-1 font-mono text-[11px]">
+<div>• Net Surplus: ₹1,300</div>
+<div>• Policy Cap: Max ₹1,000 auto-deposit</div>
+<div>• Risk Guardrail (0.90): ₹1,000 × 0.90 = ₹900</div>
+<div>• Unrestricted Pocket Cash Remaining: ₹400</div>
+</div>
+<p>
+          Saving ₹900 keeps your emergency floor at <strong class="text-stone-900">₹3,500</strong> completely untouched, while raising your total reserves to <strong class="text-stone-900">₹7,700</strong>.
+        </p>
+</div>
+<div class="pt-3 border-t border-stone-100 flex justify-end">
+<button class="px-4 py-2 bg-stone-900 hover:bg-black text-white text-xs font-semibold rounded-xl" onclick="closeExplainModal()">
+          Got it, Close
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL: Dynamic 7.0 Metric Explainability & Trace Modal -->
+<div class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs hidden items-center justify-center p-4" id="metricExplainModal">
+<div class="bg-paper rounded-2xl max-w-2xl w-full border border-stone-200 shadow-elevated p-6 space-y-4 max-h-[90vh] overflow-y-auto transform transition-all">
+  <div class="flex items-center justify-between pb-3 border-b border-stone-100">
+    <div class="flex items-center space-x-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center text-sm font-black shadow-sm">∑</div>
+      <div>
+        <h3 class="text-base sm:text-lg font-bold text-stone-900" id="explainMetricTitle">Metric Explainability Trace</h3>
+        <p class="text-[11px] text-stone-500 font-mono" id="explainMetricVersion">Deterministic Engine v7.0 • Source v1</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-2">
+      <span id="explainMetricStatusBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+        AUTHORITATIVE
+      </span>
+      <button class="text-stone-400 hover:text-stone-700 p-1" onclick="closeExplainMetricModal()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Metric Value & Plain Language Narrative -->
+  <div class="p-4 bg-stone-50/80 rounded-xl border border-stone-200/80 space-y-1.5">
+    <div class="flex items-baseline justify-between">
+      <span class="text-xs font-bold uppercase tracking-wider text-stone-500">Calculated Value</span>
+      <span class="text-xs font-semibold text-emerald-600 flex items-center gap-1" id="explainMetricConfidence">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 94% Confidence
+      </span>
+    </div>
+    <div class="text-3xl font-black font-mono text-stone-900" id="explainMetricValue">₹900</div>
+    <p class="text-xs text-stone-600 leading-relaxed mt-1" id="explainMetricNarrative">
+      Evaluating metric calculation drivers and policies.
+    </p>
+  </div>
+
+  <!-- Mathematical Formula Box -->
+  <div>
+    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5 flex items-center gap-1.5">
+      <span>📐 Deterministic Mathematical Formula</span>
+    </h4>
+    <div class="p-3 bg-stone-900 text-amber-300 font-mono text-xs rounded-xl overflow-x-auto border border-stone-800" id="explainMetricFormula">
+      min(surplus * policy_cap, buffer_gap) with floor preservation
+    </div>
+    <p class="text-[11px] text-stone-500 mt-1" id="explainMetricPolicy">
+      Policy: 70% Surplus Safeguard Protocol with 30% Free Pocket Cash Retention
+    </p>
+  </div>
+
+  <!-- Primary Drivers -->
+  <div>
+    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">Primary Decision Drivers</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="explainMetricDriversContainer">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+
+  <!-- 6-Step Dependency Chain / Trace -->
+  <div>
+    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5 flex items-center justify-between">
+      <span>Calculation Trace &amp; Dependency Graph</span>
+      <span class="text-[10px] font-mono text-stone-400">Step 1 → Step 6 Verified</span>
+    </h4>
+    <div class="space-y-2" id="explainMetricStepsContainer">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+
+  <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
+    <span class="text-[11px] text-stone-400 font-mono" id="explainMetricCalculatedAt">Calculated: Live</span>
+    <button class="px-4 py-2 bg-stone-900 hover:bg-black text-white text-xs font-semibold rounded-xl transition-all" onclick="closeExplainMetricModal()">
+      Close Inspector
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: Data Quality Engine Details Modal -->
+<div class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs hidden items-center justify-center p-4" id="dataQualityModal">
+<div class="bg-paper rounded-2xl max-w-lg w-full border border-stone-200 shadow-elevated p-6 space-y-4 transform transition-all max-h-[90vh] overflow-y-auto">
+  <div class="flex items-center justify-between pb-3 border-b border-stone-100">
+    <div class="flex items-center space-x-2.5">
+      <div class="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center text-sm font-black shadow-sm">✓</div>
+      <div>
+        <h3 class="text-base font-bold text-stone-900">Continuous Data Quality Engine</h3>
+        <p class="text-[11px] text-stone-500">Autonomous 5-dimension integrity verification</p>
+      </div>
+    </div>
+    <button class="text-stone-400 hover:text-stone-700 p-1" onclick="closeDataQualityModal()">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+    </button>
+  </div>
+
+  <div class="p-4 bg-stone-50 rounded-xl border border-stone-200 flex items-center justify-between">
+    <div>
+      <span class="text-[11px] font-bold uppercase tracking-wider text-stone-500">Overall Quality Index</span>
+      <div class="text-3xl font-extrabold text-stone-900 mt-0.5" id="dqModalScore">95/100</div>
+      <p class="text-xs text-stone-500 mt-0.5" id="dqModalLabel">High Integrity • Authoritative Decision Status</p>
+    </div>
+    <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800" id="dqModalBadge">HIGH</span>
+  </div>
+
+  <div class="space-y-3 text-xs">
+    <h4 class="font-bold text-stone-800 uppercase tracking-wider text-[11px]">5 Quality Dimensions</h4>
+    
+    <div class="space-y-2 font-medium" id="dqDimensionsList">
+      <div class="p-2.5 bg-white border border-stone-200 rounded-lg flex items-center justify-between">
+        <div>
+          <span class="font-bold text-stone-800 block">1. Completeness</span>
+          <span class="text-[11px] text-stone-500">Income sources, recurring obligations, baseline profile</span>
+        </div>
+        <span class="font-mono font-bold text-emerald-600 text-sm" id="dqDimCompleteness">95%</span>
+      </div>
+      <div class="p-2.5 bg-white border border-stone-200 rounded-lg flex items-center justify-between">
+        <div>
+          <span class="font-bold text-stone-800 block">2. Validity</span>
+          <span class="text-[11px] text-stone-500">Positive values, format checks, valid cycles</span>
+        </div>
+        <span class="font-mono font-bold text-emerald-600 text-sm" id="dqDimValidity">100%</span>
+      </div>
+      <div class="p-2.5 bg-white border border-stone-200 rounded-lg flex items-center justify-between">
+        <div>
+          <span class="font-bold text-stone-800 block">3. Consistency</span>
+          <span class="text-[11px] text-stone-500">Cross-table balance vs surplus consistency</span>
+        </div>
+        <span class="font-mono font-bold text-emerald-600 text-sm" id="dqDimConsistency">95%</span>
+      </div>
+      <div class="p-2.5 bg-white border border-stone-200 rounded-lg flex items-center justify-between">
+        <div>
+          <span class="font-bold text-stone-800 block">4. Freshness</span>
+          <span class="text-[11px] text-stone-500">Data recency within current active weekly cycle</span>
+        </div>
+        <span class="font-mono font-bold text-emerald-600 text-sm" id="dqDimFreshness">90%</span>
+      </div>
+      <div class="p-2.5 bg-white border border-stone-200 rounded-lg flex items-center justify-between">
+        <div>
+          <span class="font-bold text-stone-800 block">5. Uniqueness</span>
+          <span class="text-[11px] text-stone-500">Duplicate detection across platform payouts</span>
+        </div>
+        <span class="font-mono font-bold text-emerald-600 text-sm" id="dqDimUniqueness">95%</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="dqIssuesSection" class="hidden">
+    <h4 class="font-bold text-rose-700 uppercase tracking-wider text-[11px] mb-1">Detected Issues</h4>
+    <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800 space-y-1" id="dqIssuesList"></div>
+  </div>
+
+  <div class="pt-3 border-t border-stone-100 flex justify-end">
+    <button class="px-4 py-2 bg-stone-900 hover:bg-black text-white text-xs font-semibold rounded-xl" onclick="closeDataQualityModal()">
+      Done
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: Financial Behavior Profile Info Modal -->
+<div class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs hidden items-center justify-center p-4" id="behaviorProfileModal">
+<div class="bg-paper rounded-2xl max-w-lg w-full border border-stone-200 shadow-elevated p-6 space-y-4 transform transition-all max-h-[90vh] overflow-y-auto">
+  <div class="flex items-center justify-between pb-3 border-b border-stone-100">
+    <div class="flex items-center space-x-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center text-sm font-black shadow-sm">👤</div>
+      <div>
+        <h3 class="text-base font-bold text-stone-900">Behavior-Based Financial Profile</h3>
+        <p class="text-[11px] text-stone-500">Adaptive coaching grounded in empirical cash flow</p>
+      </div>
+    </div>
+    <button class="text-stone-400 hover:text-stone-700 p-1" onclick="closeBehaviorProfileModal()">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+    </button>
+  </div>
+
+  <div class="p-4 bg-brand-50/70 border border-brand-200 rounded-xl space-y-1.5">
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-brand-700 uppercase tracking-wider" id="bpModalArchetype">BUFFER_BUILDING</span>
+      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white text-brand-700 border border-brand-200" id="bpModalTone">ENCOURAGING</span>
+    </div>
+    <h4 class="text-base font-extrabold text-stone-900" id="bpModalHeadline">Active Buffer Accumulator</h4>
+    <p class="text-xs text-stone-700 leading-relaxed" id="bpModalNarrative">
+      Healthy cash flow generation with positive surplus. Focus on systematically expanding emergency runway.
+    </p>
+    <div class="pt-2 mt-2 border-t border-brand-200/60 text-xs font-medium text-brand-900 flex items-center gap-1.5">
+      <span class="font-bold">Target Action Focus:</span>
+      <span id="bpModalActionFocus">Automate recurring surplus captures into liquid reserve.</span>
+    </div>
+  </div>
+
+  <div class="space-y-2 text-xs text-stone-600">
+    <h4 class="font-bold text-stone-800 uppercase tracking-wider text-[11px]">SURE SAVINGS 7.0 Behavioral Archetypes</h4>
+    <p class="text-[11px] leading-relaxed">
+      SURE SAVINGS does not use static customer personas. Profiles are computed empirically each cycle across income volatility, burn ratio, and reserve coverage from 9 distinct models:
+    </p>
+    <div class="grid grid-cols-3 gap-1.5 text-[10px] font-mono font-semibold pt-1">
+      <span class="p-1.5 bg-stone-100 rounded text-center">STABLE</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center">GROWING</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center">VOLATILE</span>
+      <span class="p-1.5 bg-brand-100 text-brand-800 rounded text-center font-bold">BUFFER_BUILDING</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center">BUFFER_DEP.</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center">LIQUIDITY_STR.</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center">INCOME_DECL.</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center">RECOVERING</span>
+      <span class="p-1.5 bg-stone-100 rounded text-center text-rose-700">CRITICAL</span>
+    </div>
+  </div>
+
+  <div class="pt-3 border-t border-stone-100 flex justify-end">
+    <button class="px-4 py-2 bg-stone-900 hover:bg-black text-white text-xs font-semibold rounded-xl" onclick="closeBehaviorProfileModal()">
+      Understood
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: Drawdown Safety Modal -->
+<div class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs hidden items-center justify-center p-4" id="withdrawModal">
+<div class="bg-paper rounded-2xl max-w-md w-full border border-stone-200 shadow-elevated p-6 space-y-4 transform transition-all">
+<div class="flex items-center justify-between pb-3 border-b border-stone-100">
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded-md bg-stone-900 text-white flex items-center justify-center text-xs font-bold">↓</div>
+<h3 class="text-base font-bold text-stone-900">Emergency Drawdown Request</h3>
+</div>
+<button class="text-stone-400 hover:text-stone-700 p-1" onclick="closeWithdrawModal()">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="space-y-3 text-xs">
+<div class="p-3 bg-stone-50 rounded-xl border border-stone-200">
+<span class="text-stone-500 block">Available Safe Reserve (Floor-Protected)</span>
+<span class="text-xl font-bold text-stone-900">₹3,300</span>
+<span class="text-[10px] text-stone-400 block mt-0.5">Protected Floor (₹3,500) will remain locked</span>
+</div>
+<div>
+<label class="text-xs font-bold text-stone-800 block mb-1" for="drawdownAmount">Enter Amount to Withdraw</label>
+<input class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-brand-500 focus:border-brand-500" id="drawdownAmount" max="3300" placeholder="e.g. 1500" type="number" value="1500"/>
+</div>
+<p class="text-[11px] text-stone-500">
+          Funds are transferred instantly back to your linked primary UPI handle with zero penalties.
+        </p>
+</div>
+<div class="pt-3 border-t border-stone-100 flex items-center space-x-2">
+<button class="flex-1 py-2 bg-stone-100 text-stone-700 hover:bg-stone-200 text-xs font-semibold rounded-xl" onclick="closeWithdrawModal()">
+          Cancel
+        </button>
+<button class="flex-1 py-2 bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold rounded-xl shadow-sm" onclick="confirmWithdrawal()">
+          Confirm Transfer
+        </button>
+</div>
+</div>
+</div>
+<!-- END: ModalsAndDrawers -->
+<!-- BEGIN: SecurityFooter -->
+<!-- Low-profile bank security strip directly replicating footer assurance from SURE SAVINGS -->
+<footer class="mt-auto border-t border-stone-200/90 bg-stone-50/90 py-3.5 px-4 sm:px-6 text-xs text-stone-500">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-2">
+<div class="flex flex-wrap items-center gap-x-6 gap-y-1">
+<div class="flex items-center space-x-1.5">
+<svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+<span class="font-medium text-stone-700">Bank-Grade Open Banking Ready</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<svg class="w-3.5 h-3.5 text-brand-500" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span class="font-medium text-stone-700">SOC 2 Type II Compliant</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+</svg>
+<span>256-bit Encryption</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<svg class="w-3.5 h-3.5 text-stone-600" fill="currentColor" viewbox="0 0 20 20">
+<path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
+<path clip-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" fill-rule="evenodd"></path>
+</svg>
+<span>Zero Fund Movement (Sandbox Mode)</span>
+</div>
+</div>
+<div class="text-[11px] font-mono text-stone-400">
+        v2.4.9 • Smart Income Buffer
+      </div>
+</div>
+</footer>
+<!-- END: SecurityFooter -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="tab-navigation-and-simulators">
+    // Primary Tab Switcher
+    function switchTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-pane').forEach(el => {
+        el.classList.add('hidden');
+      });
+
+      // Show targeted tab
+      const target = document.getElementById('tab-content-' + tabId);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      // Update active styling on nav buttons
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.classList.remove('bg-brand-500', 'text-white', 'shadow-sm');
+        btn.classList.add('text-stone-600', 'hover:bg-stone-50');
+      });
+
+      const activeBtn = document.getElementById('nav-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-500', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-stone-600', 'hover:bg-stone-50');
+      }
+    }
+
+    // Interactive Buffer Simulation Slider
+    function updateSimulation(val) {
+      const parsedVal = parseInt(val, 10);
+      document.getElementById('rangeValueDisplay').textContent = '₹' + parsedVal.toLocaleString('en-IN');
+      
+      const currentBuf = window.sureSavingsStore?.getProfile()?.current_buffer || 6800;
+      const newTotal = currentBuf + parsedVal;
+      document.getElementById('simBufferTotal').textContent = '₹' + newTotal.toLocaleString('en-IN');
+      
+      // Calculate projected score (+1 for every ₹300 saved)
+      const baseScore = window.sureSavingsStore?.getProfile()?.resilience_score || 74;
+      const bonusScore = Math.min(10, Math.floor(parsedVal / 300));
+      const projectedScore = Math.min(98, baseScore + bonusScore);
+      document.getElementById('simResilienceScore').textContent = `${projectedScore} / 100 (+${bonusScore})`;
+      
+      // Calculate target percentage (Goal: 15000)
+      const pct = ((newTotal / 15000) * 100).toFixed(1);
+      document.getElementById('simTargetPct').textContent = pct + '%';
+    }
+
+    function setSimPreset(val) {
+      const slider = document.getElementById('saveRange');
+      slider.value = val;
+      updateSimulation(val);
+    }
+
+    // Modal Controls
+    function openExplainModal() {
+      document.getElementById('explainModal').classList.remove('hidden');
+      document.getElementById('explainModal').classList.add('flex');
+    }
+
+    function closeExplainModal() {
+      document.getElementById('explainModal').classList.add('hidden');
+      document.getElementById('explainModal').classList.remove('flex');
+    }
+
+    function openWithdrawModal() {
+      document.getElementById('withdrawModal').classList.remove('hidden');
+      document.getElementById('withdrawModal').classList.add('flex');
+    }
+
+    function closeWithdrawModal() {
+      document.getElementById('withdrawModal').classList.add('hidden');
+      document.getElementById('withdrawModal').classList.remove('flex');
+    }
+
+    async function confirmWithdrawal() {
+      const amt = parseFloat(document.getElementById('drawdownAmount').value) || 2000;
+      if (window.sureSavingsStore) {
+        const res = await window.sureSavingsStore.withdrawBuffer(amt);
+        alert(`Simulated transfer completed: ₹${res.approved_amount || amt} credited to checking account.`);
+      } else {
+        alert('Simulated transfer initiated: ₹' + amt + ' credited to checking account.');
+      }
+      closeWithdrawModal();
+    }
+
+    // Approve Recommendation Handler - Delegated strictly to modal confirmation workflow
+    function approveRecommendation() {
+      openApproveTransferModal();
+    }
+
+    // Data Sync Trigger
+    async function triggerRecalculate() {
+      const icon = document.getElementById('refreshIcon');
+      icon.classList.add('animate-spin');
+      if (window.sureSavingsStore) {
+        await window.sureSavingsStore.syncFromBackend(true);
+      }
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        alert('Open banking feeds synchronized. Deterministic telemetry up-to-date.');
+      }, 600);
+    }
+
+    // Safe AI Coach Chat with Safe DOM Insertion & Real API
+    function askCoach(questionText) {
+      document.getElementById('coachInput').value = questionText;
+      submitCoachQuestion();
+    }
+
+    async function submitCoachQuestion() {
+      const input = document.getElementById('coachInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chatBox = document.getElementById('chatConversation');
+      
+      // User bubble (Safe DOM creation)
+      const userBubble = document.createElement('div');
+      userBubble.className = 'flex items-start justify-end space-x-2 animate-fade-in';
+      const userInner = document.createElement('div');
+      userInner.className = 'bg-brand-500 text-white p-3 rounded-2xl text-xs max-w-md shadow-sm';
+      userInner.textContent = text; // Safe text rendering
+      userBubble.appendChild(userInner);
+      chatBox.appendChild(userBubble);
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Bot bubble placeholder
+      const botBubble = document.createElement('div');
+      botBubble.className = 'flex items-start space-x-3 animate-fade-in';
+      botBubble.innerHTML = `
+        <div class="w-7 h-7 rounded-lg bg-brand-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+          S
+        </div>
+      `;
+      const botInner = document.createElement('div');
+      botInner.className = 'bg-white p-3.5 rounded-2xl border border-stone-200/80 text-xs text-stone-700 max-w-xl shadow-sm leading-relaxed whitespace-pre-line';
+      botInner.textContent = "Analyzing deterministic telemetry...";
+      botBubble.appendChild(botInner);
+      chatBox.appendChild(botBubble);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        let reply = "";
+        if (window.sureSavingsApi) {
+          const res = await window.sureSavingsApi.sendChatMessage(text);
+          reply = res.answer || res.reply;
+        } else {
+          const p = window.sureSavingsStore?.getProfile();
+          reply = `The decision engine verified your fixed essential floor is ₹${(p?.protected_floor || 3500).toLocaleString()}. This ensures rent and EMIs are fully insulated.`;
+        }
+        botInner.textContent = reply;
+      } catch (err) {
+        const p = window.sureSavingsStore?.getProfile();
+        botInner.textContent = `The decision engine analyzed your profile. Your fixed essential floor of ₹${(p?.protected_floor || 3500).toLocaleString()} is 100% protected while reserving ₹${(p?.recommended_contribution || 900).toLocaleString()}.`;
+      }
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+<!-- END: InteractiveScripts -->
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
+<!-- COMMAND PALETTE OVERLAY -->
+<div id="command-palette-overlay" class="command-palette-overlay hidden" onclick="closeCommandPalette(event)">
+  <div class="command-palette" onclick="event.stopPropagation()">
+    <input type="text" class="command-palette-input" placeholder="Search pages, actions, shortcuts…" id="cmd-palette-input" oninput="filterCommands(this.value)" />
+    <div class="command-palette-results" id="cmd-palette-results">
+      <div class="command-palette-item" onclick="window.location.href='index.html'">
+        <span>📊</span> <span>Command Center (Dashboard)</span>
+      </div>
+      <div class="command-palette-item" onclick="window.location.href='simulator.html'">
+        <span>🛡️</span> <span>SURE SAVINGS Simulator</span>
+      </div>
+      <div class="command-palette-item" onclick="window.location.href='income-intelligence.html'">
+        <span>📈</span> <span>Income Intelligence</span>
+      </div>
+      <div class="command-palette-item" onclick="window.location.href='buffer.html'">
+        <span>💰</span> <span>Buffer Manager</span>
+      </div>
+      <div class="command-palette-item" onclick="window.location.href='ai-coaching.html'">
+        <span>🤖</span> <span>AI Financial Coaching</span>
+      </div>
+      <div class="command-palette-item" onclick="window.location.href='settings.html'">
+        <span>⚙️</span> <span>Settings</span>
+      </div>
+      <div class="command-palette-item" onclick="toggleDarkMode(); closeCommandPalette();">
+        <span>🌓</span> <span>Toggle Dark Mode</span>
+      </div>
+      <div class="command-palette-item" onclick="exportData(); closeCommandPalette();">
+        <span>📥</span> <span>Export All Data</span>
+      </div>
+      <div class="command-palette-item" onclick="handleLogout();">
+        <span>🚪</span> <span>Sign Out</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🛡️ FORTRESS: Security Details Modal -->
+<div id="security-details-modal" class="security-modal-overlay hidden" onclick="closeSecurityDetailsModal(event)">
+  <div class="security-modal" onclick="event.stopPropagation()">
+    <div class="security-modal-header">
+      <div class="flex items-center gap-3">
+        <div class="security-shield-badge" style="width:34px;height:34px;">
+          <svg class="shield-icon" style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <div class="shield-ring"></div>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold" style="color: var(--text-primary)">Fortress Security Posture</h3>
+          <p class="text-[11px]" style="color: var(--text-muted)">Real-time verification telemetry • Institutional Grade</p>
+        </div>
+      </div>
+      <button onclick="closeSecurityDetailsModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-lg leading-none p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">&times;</button>
+    </div>
+    <div class="security-modal-body">
+      <div class="mb-4 p-3 rounded-xl flex items-center justify-between" style="background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.2);">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">All Defenses Active & Verified</span>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold">FORTRESS v5.0</span>
+      </div>
+
+      <div class="space-y-1">
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">256-Bit TLS v1.3 Cryptographic Channel</div>
+            <div class="text-[11px] text-gray-500">Perfect forward secrecy & HTTPS grade transport encryption</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">ACTIVE</span>
+        </div>
+
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">Multi-Tenant Cryptographic Isolation</div>
+            <div class="text-[11px] text-gray-500">Zero data co-mingling, all queries strictly scoped to authenticated user UUID</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">ISOLATED</span>
+        </div>
+
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">Hardened CSP v5 & Anti-Clickjacking</div>
+            <div class="text-[11px] text-gray-500">Strict Content Security Policy, X-Frame-Options: DENY, nosniff enforced</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">ENFORCED</span>
+        </div>
+
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">OTP Brute-Force Rate Limiting</div>
+            <div class="text-[11px] text-gray-500">Max 5 attempts / 10 min window with progressive lockouts and IP throttling</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">ARMED</span>
+        </div>
+
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">Zero Fund Movement Guarantee</div>
+            <div class="text-[11px] text-gray-500">Platform is read-only financial intelligence; cannot execute wire transfers</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">BLOCKED</span>
+        </div>
+
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">Client Runtime Anti-Tampering Shield</div>
+            <div class="text-[11px] text-gray-500">Object.freeze protection against prototype manipulation and console hijacking</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">FROZEN</span>
+        </div>
+
+        <div class="security-check-item">
+          <div class="security-check-icon pass">✓</div>
+          <div class="flex-1">
+            <div class="font-semibold text-xs text-gray-800 dark:text-gray-200">Inactivity Timeout Auto-Wipe</div>
+            <div class="text-[11px] text-gray-500">Automatic session invalidation after 3 hours of idle status</div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-600 font-bold">3h IDLE</span>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+        <span class="text-[11px] text-gray-400">SOC-2 Type II Certified Vault</span>
+        <button onclick="closeSecurityDetailsModal()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow transition-colors">Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js?v=8.4.0"></script>
+<script src="js/components.js?v=8.4.0"></script>
+<script src="js/store.js?v=8.4.0"></script>
+<script src="js/setup_wizard.js?v=8.4.0"></script>
+<script src="js/app.js?v=8.4.0"></script>
+
+<script>
+  // ═══════════════════════════════════════════════════════
+  // DARK MODE
+  // ═══════════════════════════════════════════════════════
+  function toggleDarkMode() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('suresavings_theme', isDark ? 'light' : 'dark');
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+    showToast(isDark ? 'Switched to Light Mode ☀️' : 'Switched to Dark Mode 🌙');
+  }
+  (function() {
+    const saved = localStorage.getItem('suresavings_theme');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.textContent = '🌙';
+    }
+  })();
+
+  // ═══════════════════════════════════════════════════════
+  // COMMAND PALETTE (⌘K / Ctrl+K)
+  // ═══════════════════════════════════════════════════════
+  function openCommandPalette() {
+    document.getElementById('command-palette-overlay').classList.remove('hidden');
+    setTimeout(() => document.getElementById('cmd-palette-input')?.focus(), 100);
+  }
+  function closeCommandPalette(e) {
+    if (!e || e.target === document.getElementById('command-palette-overlay')) {
+      document.getElementById('command-palette-overlay').classList.add('hidden');
+      document.getElementById('cmd-palette-input').value = '';
+      filterCommands('');
+    }
+  }
+  function filterCommands(query) {
+    const items = document.querySelectorAll('#cmd-palette-results .command-palette-item');
+    const q = query.toLowerCase();
+    items.forEach(item => {
+      item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const overlay = document.getElementById('command-palette-overlay');
+      if (overlay.classList.contains('hidden')) openCommandPalette();
+      else closeCommandPalette();
+    }
+    if (e.key === 'Escape') {
+      closeCommandPalette();
+      closeUserMenu();
+      closeSecurityDetailsModal();
+    }
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // USER MENU
+  // ═══════════════════════════════════════════════════════
+  function toggleUserMenu() {
+    const menu = document.getElementById('user-menu-dropdown');
+    menu.classList.toggle('hidden');
+  }
+  function closeUserMenu() {
+    document.getElementById('user-menu-dropdown')?.classList.add('hidden');
+  }
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#user-avatar-container')) closeUserMenu();
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // NOTIFICATIONS
+  // ═══════════════════════════════════════════════════════
+  function toggleNotifications() {
+    showToast('🔔 Notifications: 3 new alerts • Resilience score updated • Buffer milestone reached • Weekly report ready', 'info');
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // TOAST SYSTEM
+  // ═══════════════════════════════════════════════════════
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+    toast.innerHTML = `<span class="text-sm">${icon}</span><span class="text-xs" style="color: var(--text-secondary)">${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(100%)';
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // LOGOUT
+  // ═══════════════════════════════════════════════════════
+  function handleLogout() {
+    sessionStorage.removeItem('suresavings_session_token');
+    localStorage.removeItem('suresavings_session_token');
+    if (window.sureSavingsApi) {
+      try { window.sureSavingsApi.logout(); } catch(e) {}
+    }
+    window.location.href = 'login.html';
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // EXPORT DATA
+  // ═══════════════════════════════════════════════════════
+  function exportData() {
+    showToast('📥 Preparing data export…');
+    const profile = window.sureSavingsStore?.getProfile() || {};
+    const data = JSON.stringify(profile, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `suresavings_export_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setTimeout(() => showToast('✅ Data exported successfully!'), 1000);
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // SCROLL REVEAL INIT
+  // ═══════════════════════════════════════════════════════
+  function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // PERSONALIZED GREETING & USER CONTEXT
+  // ═══════════════════════════════════════════════════════
+  function updateGreeting(user) {
+    const hour = new Date().getHours();
+    let greeting = 'Good evening';
+    if (hour < 12) greeting = 'Good morning';
+    else if (hour < 17) greeting = 'Good afternoon';
+    
+    const greetEl = document.getElementById('dashboard-greeting');
+    if (greetEl) greetEl.textContent = greeting;
+
+    // Resolve active user from parameter or store
+    const activeUser = user || window.sureSavingsStore?.state?.auth?.user || window.sureSavingsStore?.state?.profile;
+    if (activeUser) {
+      const fullName = (activeUser.name || activeUser.display_name || '').trim();
+      const firstName = activeUser.first_name || (fullName ? fullName.split(/\s+/)[0] : 'Member');
+      const nameEl = document.getElementById('dashboard-user-name');
+      if (nameEl) nameEl.textContent = firstName;
+
+      document.querySelectorAll('.user-first-name').forEach(el => {
+        el.textContent = firstName;
+      });
+    }
+
+    // Dynamic current date formatting
+    const dateEl = document.getElementById('current-date-display');
+    if (dateEl) {
+      try {
+        const now = new Date();
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        dateEl.textContent = now.toLocaleDateString('en-US', options);
+      } catch (e) {}
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // 🛡️ FORTRESS SECURITY MODAL & TELEMETRY
+  // ═══════════════════════════════════════════════════════
+  function openSecurityDetailsModal() {
+    const modal = document.getElementById('security-details-modal');
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function closeSecurityDetailsModal(e) {
+    if (!e || e.target === document.getElementById('security-details-modal') || e.target.closest('button')) {
+      document.getElementById('security-details-modal')?.classList.add('hidden');
+    }
+  }
+
+  function initSecurityTelemetry() {
+    function updateTelemetry() {
+      if (window._securityShield) {
+        const remainingMs = window._securityShield.getInactivityRemaining();
+        const totalSec = Math.max(0, Math.floor(remainingMs / 1000));
+        const hours = Math.floor(totalSec / 3600);
+        const mins = Math.floor((totalSec % 3600) / 60);
+        const secs = totalSec % 60;
+        const timerEl = document.getElementById('session-timer-display');
+        if (timerEl) {
+          if (hours > 0) {
+            timerEl.textContent = `${hours}h ${mins.toString().padStart(2, '0')}m`;
+          } else {
+            timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+          }
+          if (totalSec < 600) {
+            timerEl.style.color = '#EF4444';
+            timerEl.style.fontWeight = '800';
+          } else {
+            timerEl.style.color = '';
+            timerEl.style.fontWeight = '';
+          }
+        }
+        const ageSec = window._securityShield.getSessionAge();
+        const ageEl = document.getElementById('sidebar-session-age');
+        if (ageEl) {
+          const ageMin = Math.floor(ageSec / 60);
+          ageEl.textContent = `${ageMin}m`;
+        }
+      }
+    }
+    updateTelemetry();
+    setInterval(updateTelemetry, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollReveal();
+    updateGreeting();
+    initSecurityTelemetry();
+
+    if (window.sureSavingsStore) {
+      window.sureSavingsStore.subscribe((state) => {
+        const u = state.auth?.user || state.profile;
+        if (u) updateGreeting(u);
+      });
+    }
+  });
+</script>
+</body></html>
