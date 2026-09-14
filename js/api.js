@@ -342,10 +342,48 @@ const api = {
     });
   },
 
-  sendChatMessage(query) {
+  sendChatMessage(query, pageContext = null) {
+    const ctx = pageContext || (typeof window !== "undefined" ? window.sureSavingsPageContext : null);
+    let timezone = "Asia/Kolkata";
+    let locale = "en-IN";
+    try {
+      if (typeof Intl !== "undefined" && Intl.DateTimeFormat) {
+        timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || timezone;
+      }
+      if (typeof window !== "undefined" && window.sureSavingsLocale && window.sureSavingsLocale.locale) {
+        locale = window.sureSavingsLocale.locale;
+      } else if (typeof window !== "undefined" && window.i18n && window.i18n.currentLocale) {
+        locale = window.i18n.currentLocale;
+      } else if (typeof localStorage !== "undefined" && localStorage.getItem("sureSavingsLocale")) {
+        locale = localStorage.getItem("sureSavingsLocale");
+      } else if (typeof navigator !== "undefined" && navigator.language) {
+        locale = navigator.language;
+      }
+    } catch (e) {}
+
     return this.fetchJSON("/api/v1/ai/chat", {
       method: "POST",
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({
+        query,
+        page_context: ctx || undefined,
+        timezone,
+        locale
+      }),
+    });
+  },
+
+  getLocalizationConfig() {
+    return this.fetchJSON("/api/v1/localization/config");
+  },
+
+  getUserPreferences() {
+    return this.fetchJSON("/api/v1/users/preferences");
+  },
+
+  updateUserPreferences(preferences) {
+    return this.fetchJSON("/api/v1/users/preferences", {
+      method: "PATCH",
+      body: JSON.stringify(preferences),
     });
   },
 
@@ -688,6 +726,61 @@ const api = {
   getWhatChanged(isDemo = false) {
     const ep = isDemo ? "/api/v1/public/demo/what-changed" : "/api/v1/workspace/what-changed";
     return this.fetchJSON(ep);
+  },
+
+  // ===================================================================
+  // Bank Account & Setu Account Aggregator Integration
+  // ===================================================================
+
+  getBankAccounts() {
+    return this.fetchJSON("/api/v1/bank-accounts");
+  },
+
+  connectBankAccount(payload = {}) {
+    return this.fetchJSON("/api/v1/bank-accounts/connect", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  },
+
+  getBankConnectionStatus() {
+    return this.fetchJSON("/api/v1/bank-accounts/status");
+  },
+
+  getBankAccount(accountId) {
+    return this.fetchJSON(`/api/v1/bank-accounts/${encodeURIComponent(accountId)}`);
+  },
+
+  syncBankAccount(connectionId) {
+    return this.fetchJSON(`/api/v1/bank-accounts/${encodeURIComponent(connectionId)}/sync`, {
+      method: "POST",
+    });
+  },
+
+  getBankTransactions(accountId, params = {}) {
+    const qs = new URLSearchParams();
+    if (params.direction) qs.set("direction", params.direction);
+    if (params.category) qs.set("category", params.category);
+    if (params.limit) qs.set("limit", params.limit);
+    if (params.offset) qs.set("offset", params.offset);
+    const qStr = qs.toString() ? `?${qs.toString()}` : "";
+    return this.fetchJSON(`/api/v1/bank-accounts/${encodeURIComponent(accountId)}/transactions${qStr}`);
+  },
+
+  getBankConsent(connectionId) {
+    return this.fetchJSON(`/api/v1/bank-accounts/${encodeURIComponent(connectionId)}/consent`);
+  },
+
+  revokeBankConsent(connectionId) {
+    return this.fetchJSON(`/api/v1/bank-accounts/${encodeURIComponent(connectionId)}/consent/revoke`, {
+      method: "POST",
+    });
+  },
+
+  disconnectBank(connectionId) {
+    return this.fetchJSON(`/api/v1/bank-accounts/${encodeURIComponent(connectionId)}`, {
+      method: "DELETE",
+    });
   },
 
   // ===================================================================

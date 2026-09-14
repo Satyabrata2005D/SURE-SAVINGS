@@ -1,0 +1,19 @@
+{
+  "title": "Bank Accounts & Balances",
+  "subtitle": "Direct read-only Account Aggregator connection via Setu AA",
+  "connect_btn": "Connect Bank Account",
+  "sync_btn": "Sync Now",
+  "syncing": "Syncing...",
+  "connected_accounts": "Connected Accounts",
+  "no_accounts": "No bank accounts linked yet. Connect your bank to initiate automated liquidity safeguards.",
+  "verified_balance": "Verified Balance",
+  "last_synced": "Last Synced",
+  "auto_sync_active": "Auto-Sync Active",
+  "disconnect": "Disconnect",
+  "revoke_consent": "Revoke Consent",
+  "checking_account": "Checking Account",
+  "savings_account": "Savings Account",
+  "institution": "Financial Institution",
+  "framework_notice": "RBI Account Aggregator Framework",
+  "encrypted_notice": "Non-Custodial / End-to-End Encrypted"
+}

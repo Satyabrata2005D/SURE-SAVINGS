@@ -1,0 +1,23 @@
+{
+  "title": "आयः कैलेंडर और डायनेमिक लेजर",
+  "subtitle": "गिग न्यूनम्ाई चक्र, भुगतान और अनिवार्य दायित्वों का पूर्वानुमान",
+  "today": "आज",
+  "tomorrow": "कल",
+  "yesterday": "बीता कल",
+  "add_event": "नया इवेंट जोड़ें",
+  "expected_payout": "अपेक्षित भुगतान",
+  "mandatory_outflow": "अनिवार्य व्ययः",
+  "buffer_allocation": "सञ्चयः आवंटन",
+  "month_view": "माह दृश्य",
+  "week_view": "सप्ताहः दृश्य",
+  "no_events": "इस तिथि के लिए कोई निर्धारित वित्तीय कार्यक्रम नहीं है।",
+  "gap_detected": "समय अंतराल का पता चला: {amount} की न्यूनम्ी",
+  "buffer_absorbed": "{amount} का स्वचालित वॉल्ट सञ्चयः अवशोषण चेकिंग खाते के उल्लंघन को रोकता है।",
+  "checking_balance": "चेकिंग शेष",
+  "opening_balance": "प्रारंभिक शेष",
+  "total_inflow": "कुल आवक",
+  "total_outflow": "कुल जावक",
+  "lowest_intraday": "न्यूनतम इंट्राडे शेष",
+  "closing_balance": "अंतिम शेष",
+  "protected_floor": "सुरक्षितम् न्यूनतम सीमा"
+}

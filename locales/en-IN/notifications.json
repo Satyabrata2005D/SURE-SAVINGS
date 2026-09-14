@@ -1,0 +1,14 @@
+{
+  "saved_success": "Saved successfully.",
+  "bank_connected": "Bank account connected successfully via Account Aggregator.",
+  "sync_completed": "Synchronization completed successfully.",
+  "goal_created": "Savings goal created successfully.",
+  "preference_updated": "Language and display preferences updated.",
+  "export_started": "Exporting data...",
+  "export_complete": "Export complete.",
+  "upload_failed": "Upload failed. Please try again.",
+  "profile_saved": "Profile saved successfully.",
+  "delete_failed": "Deletion failed. Please try again.",
+  "import_success": "Profile and data restored successfully.",
+  "import_failed": "Import failed. Invalid file format."
+}

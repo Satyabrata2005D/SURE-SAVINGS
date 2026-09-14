@@ -20,7 +20,8 @@ from backend.models import (
     User, FinancialProfile, WeeklyIncomeHistory,
     LedgerTransaction, ScheduledObligation, BufferLedgerEvent,
     AuditTrace, Recommendation, FinancialSnapshot, UserSession, EmailOTP,
-    IncomeSource, ExpenseItem, LiquidityPosition, Goal, FinancialEvent, CalendarEvent
+    IncomeSource, ExpenseItem, LiquidityPosition, Goal, FinancialEvent, CalendarEvent,
+    BankConnection, BankAccount, BankConsent, BankDataSession, BankTransaction, BankSyncRun
 )
 from backend.policy import DEFAULT_POLICY
 from backend.synthetic_data import (
@@ -58,6 +59,7 @@ def init_database():
             "behavior_profile": "TEXT DEFAULT 'STABLE'",
             "data_quality_score": "FLOAT DEFAULT 0.0",
             "data_quality_status": "TEXT DEFAULT 'INCOMPLETE'",
+            "preferred_locale": "TEXT DEFAULT 'en-IN'",
         }
         for col, col_type in user_col_defs.items():
             if col not in existing_user_cols:

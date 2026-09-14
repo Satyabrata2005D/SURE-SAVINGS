@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SURE SAVINGS — Bank Accounts &amp; Setu Account Aggregator</title>
+  
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff5f3', 100: '#ffe8e4', 200: '#ffd0c8',
+              500: '#FF5B45', 600: '#F05138', 700: '#d93b22'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="h-full font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--surface-canvas); color: var(--text-primary);">
+
+<!-- BEGIN: TopUtilityHeader -->
+<header class="w-full sticky top-0 z-40 glass-nav px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs">
+  <div class="flex items-center space-x-3 sm:space-x-4 overflow-x-auto py-0.5">
+    <a href="index.html" class="flex items-center space-x-2.5 pr-3 border-r" style="border-color: var(--border-default)">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm shadow-md">
+        S
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-extrabold text-sm tracking-tight" style="color: var(--text-primary)">SURE SAVINGS</span>
+        <span class="text-[9px] uppercase tracking-wider text-brand-500 font-bold">Bank Data Layer</span>
+      </div>
+    </a>
+    <div class="flex items-center space-x-2 px-2.5 py-1 rounded-full border" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="font-medium">RBI Account Aggregator Framework</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+        <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+      </svg>
+      <span>Non-Custodial / End-to-End Encrypted</span>
+    </div>
+    <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium" style="color: var(--text-secondary)">Setu AA Gateway Active</span>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-2.5 flex-shrink-0">
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"><span id="theme-icon">☀️</span></div>
+    </button>
+
+    <div class="relative" id="user-avatar-container">
+      <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
+        <div class="user-avatar" id="user-avatar-circle">U</div>
+        <div class="hidden sm:block text-right">
+          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">User</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Workspace</p>
+        </div>
+      </div>
+      <div class="user-menu hidden" id="user-menu-dropdown">
+        <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
+          <p class="text-xs font-bold" style="color: var(--text-primary)" id="menu-user-name">User</p>
+          <p class="text-[10px]" style="color: var(--text-muted)" id="menu-user-email">user@example.com</p>
+        </div>
+        <div class="py-1">
+          <a href="index.html" class="user-menu-item">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"></path></svg>
+            <span data-i18n="navigation.command_center">Command Center</span>
+          </a>
+          <div class="user-menu-item danger" onclick="handleLogout()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+            <span data-i18n="navigation.sign_out">Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: TopUtilityHeader -->
+
+<div class="flex-1 flex overflow-hidden">
+  <!-- BEGIN: Left Navigation Sidebar -->
+  <aside class="w-64 flex-shrink-0 border-r hidden md:flex flex-col justify-between p-4 overflow-y-auto" style="border-color: var(--border-default); background-color: var(--surface-card)">
+    <nav class="space-y-1">
+      <a href="index.html" class="unified-nav-link">
+        <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+        <span data-i18n="navigation.command_center">Command Center</span>
+      </a>
+      <a href="bank-accounts.html" class="unified-nav-link active">
+        <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+        <span class="flex-1 font-bold">Bank Accounts</span>
+        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-700 border border-emerald-300">Setu AA</span>
+      </a>
+      <a href="resilience-plan.html" class="unified-nav-link">
+        <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        <span class="flex-1" data-i18n="navigation.resilience_plan">Resilience Plan</span>
+      </a>
+      <a href="income-intelligence.html" class="unified-nav-link">
+        <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        <span data-i18n="navigation.income_intelligence">Income Intelligence</span>
+      </a>
+      <a href="calendar.html" class="unified-nav-link">
+        <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span data-i18n="navigation.income_calendar">Income Calendar</span>
+      </a>
+      <a href="activity.html" class="unified-nav-link">
+        <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+        <span data-i18n="navigation.transactions_activity">Transactions & Activity</span>
+      </a>
+      <a href="coach.html" class="unified-nav-link">
+        <svg class="w-4 h-4" style="color: var(--text-subtle)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        <span data-i18n="navigation.sure_ai_coach">SURE AI Guide</span>
+      </a>
+    </nav>
+
+    <!-- Provider trust box -->
+    <div class="mt-8 p-3 rounded-xl border text-xs" style="background: var(--surface-sunken); border-color: var(--border-default);">
+      <div class="flex items-center space-x-2 mb-1.5">
+        <span class="text-base">🏦</span>
+        <span class="font-bold" style="color: var(--text-primary)">Account Aggregator</span>
+      </div>
+      <p class="text-[11px] leading-relaxed" style="color: var(--text-muted)">
+        Powered by Setu AA Gateway. Consent-based, RBI regulated. We never see or store your netbanking password.
+      </p>
+    </div>
+  </aside>
+  <!-- END: Left Navigation Sidebar -->
+
+  <!-- BEGIN: Main Content Area -->
+  <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <!-- Breadcrumb & Status Bar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center space-x-2 text-xs font-semibold" style="color: var(--text-muted)">
+          <a href="index.html" class="hover:underline">Workspace</a>
+          <span>/</span>
+          <span style="color: var(--text-primary)">Bank Integration</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1" style="color: var(--text-primary)">
+          Bank Accounts
+        </h1>
+        <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary)">
+          Connect and synchronize bank accounts using Account Aggregator to fuel deterministic financial intelligence.
+        </p>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="openConnectBankModal()" class="px-4 py-2 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-brand-500 to-brand-700 hover:opacity-95 shadow-md flex items-center space-x-2 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          <span data-i18n="common.connect_bank">Connect Bank Account</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Sync Alert Notification Banner -->
+    <div id="sync-progress-banner" class="hidden p-4 rounded-xl border text-xs flex items-center justify-between transition-all" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--text-primary);">
+      <div class="flex items-center space-x-3">
+        <svg class="w-5 h-5 text-brand-500 animate-spin" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <div>
+          <p class="font-bold" id="sync-status-title">Requesting latest financial data...</p>
+          <p class="text-[11px]" style="color: var(--text-muted)" id="sync-status-subtitle">Connecting with Account Aggregator network</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Telemetry Cards Row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Total Connected Liquidity -->
+      <div class="p-4 rounded-2xl border" style="background-color: var(--surface-card); border-color: var(--border-default)">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted)">Total Connected Liquidity</span>
+          <span class="text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200">Authoritative</span>
+        </div>
+        <div class="text-2xl font-extrabold tracking-tight" style="color: var(--text-primary)" id="stat-total-balance">₹0.00</div>
+        <p class="text-[11px] mt-1" style="color: var(--text-muted)" id="stat-balance-as-of">Awaiting connection</p>
+      </div>
+
+      <!-- Connected Accounts Count -->
+      <div class="p-4 rounded-2xl border" style="background-color: var(--surface-card); border-color: var(--border-default)">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted)">Connected Accounts</span>
+          <span class="text-xs">🏦</span>
+        </div>
+        <div class="text-2xl font-extrabold tracking-tight" style="color: var(--text-primary)" id="stat-accounts-count">0</div>
+        <p class="text-[11px] mt-1" style="color: var(--text-muted)" id="stat-accounts-status">No banks linked</p>
+      </div>
+
+      <!-- Last Synchronized -->
+      <div class="p-4 rounded-2xl border" style="background-color: var(--surface-card); border-color: var(--border-default)">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted)">Data Freshness</span>
+          <span class="text-xs">⏱️</span>
+        </div>
+        <div class="text-sm font-bold tracking-tight truncate mt-1" style="color: var(--text-primary)" id="stat-last-sync">Never</div>
+        <p class="text-[11px] mt-1" style="color: var(--text-muted)" id="stat-freshness-note">Telemetry via Setu AA</p>
+      </div>
+
+      <!-- Safe-to-Save Invariant -->
+      <div class="p-4 rounded-2xl border" style="background-color: var(--surface-card); border-color: var(--border-default)">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Safe-to-Save</span>
+          <span class="text-[10px] font-bold text-white px-2 py-0.5 rounded-full bg-brand-500">Floor Protected</span>
+        </div>
+        <div class="text-2xl font-extrabold tracking-tight text-brand-500" id="stat-safe-to-save">₹0.00</div>
+        <p class="text-[11px] mt-1" style="color: var(--text-muted)">Preserves ₹3,500 cash floor</p>
+      </div>
+    </div>
+
+    <!-- Bank Accounts Section -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold tracking-tight" style="color: var(--text-primary)">
+          Connected Accounts
+        </h2>
+        <span class="text-xs" style="color: var(--text-muted)" id="accounts-badge">0 Linked</span>
+      </div>
+
+      <!-- Accounts Container -->
+      <div id="bank-accounts-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Dynamic Account Cards will render here -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="bank-empty-state" class="p-8 sm:p-12 rounded-2xl border border-dashed text-center space-y-4" style="background: var(--surface-sunken); border-color: var(--border-default)">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-brand-50 flex items-center justify-center text-3xl shadow-sm">
+          🏦
+        </div>
+        <div class="max-w-md mx-auto space-y-1">
+          <h3 class="font-bold text-base" style="color: var(--text-primary)">No bank accounts connected yet</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-muted)">
+            Connect your bank account securely using the RBI-regulated Account Aggregator framework. SURE SAVINGS will automatically detect income patterns, calculate essential burn, and update your smart liquidity buffer.
+          </p>
+        </div>
+        <div>
+          <button onclick="openConnectBankModal()" class="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-brand-500 to-brand-700 shadow hover:opacity-95 transition-all">
+            + Connect Bank Account
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Financial Intelligence Recalculation Preview -->
+    <div class="p-6 rounded-2xl border" style="background-color: var(--surface-card); border-color: var(--border-default)">
+      <div class="flex items-center justify-between border-b pb-4 mb-4" style="border-color: var(--border-default)">
+        <div>
+          <h3 class="font-bold text-sm sm:text-base flex items-center gap-2" style="color: var(--text-primary)">
+            <span>⚡ Financial Intelligence Updated from Bank Data</span>
+          </h3>
+          <p class="text-xs mt-0.5" style="color: var(--text-muted)">
+            Normalized bank data feeds directly into the deterministic financial engine without compromising core safety rules.
+          </p>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          Deterministic Engine
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+        <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Weekly Income</span>
+          <p class="text-base font-extrabold mt-1" style="color: var(--text-primary)" id="intel-weekly-income">₹0.00</p>
+          <p class="text-[10px] mt-0.5 text-emerald-600">Derived from verified inflows</p>
+        </div>
+        <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Essential Burn</span>
+          <p class="text-base font-extrabold mt-1" style="color: var(--text-primary)" id="intel-weekly-burn">₹0.00</p>
+          <p class="text-[10px] mt-0.5 text-rose-500">Rent, EMI, Fuel, Groceries</p>
+        </div>
+        <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Buffer Status</span>
+          <p class="text-base font-extrabold mt-1 text-emerald-600" id="intel-buffer-status">BUILDING</p>
+          <p class="text-[10px] mt-0.5" style="color: var(--text-muted)">Runway protection</p>
+        </div>
+        <div class="p-3 rounded-xl border" style="background: var(--surface-sunken); border-color: var(--border-default)">
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Resilience Score</span>
+          <p class="text-base font-extrabold mt-1" style="color: var(--text-primary)" id="intel-resilience-score">70 / 100</p>
+          <p class="text-[10px] mt-0.5 text-brand-500">Telemetry Calibrated</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- END: Main Content Area -->
+</div>
+
+<!-- ===================================================================== -->
+<!-- MODAL: Connect Bank Account (Disclosures & Consent Trigger) -->
+<!-- ===================================================================== -->
+<div id="connect-bank-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+  <div class="w-full max-w-lg rounded-2xl border shadow-2xl p-6 space-y-5" style="background-color: var(--surface-card); border-color: var(--border-default)">
+    <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-default)">
+      <div class="flex items-center space-x-2.5">
+        <div class="w-8 h-8 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center text-lg font-bold">
+          🏦
+        </div>
+        <div>
+          <h3 class="font-extrabold text-base" style="color: var(--text-primary)">Connect Bank Account</h3>
+          <p class="text-xs" style="color: var(--text-muted)">RBI Account Aggregator Secure Linking</p>
+        </div>
+      </div>
+      <button onclick="closeConnectBankModal()" class="text-stone-400 hover:text-stone-600 p-1">✕</button>
+    </div>
+
+    <!-- Disclosure Callout -->
+    <div class="p-4 rounded-xl border space-y-2 text-xs" style="background: var(--surface-sunken); border-color: var(--border-default)">
+      <p class="font-bold flex items-center gap-1.5" style="color: var(--text-primary)">
+        <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+        <span>What information will be requested?</span>
+      </p>
+      <ul class="list-disc list-inside space-y-1 pl-1" style="color: var(--text-secondary)">
+        <li>Account profile &amp; masked account numbers</li>
+        <li>Deposit balances (latest reported available balance)</li>
+        <li>Historical transaction narrations &amp; amounts (for income &amp; burn detection)</li>
+      </ul>
+      <div class="pt-2 border-t mt-2 flex items-center gap-1.5 text-[11px] text-emerald-700 font-semibold" style="border-color: var(--border-default)">
+        <span>🔒 Zero password exposure:</span> We will NEVER ask for your netbanking password, debit card PIN, or OTP.
+      </div>
+    </div>
+
+    <!-- Form Fields -->
+    <div class="space-y-3">
+      <div>
+        <label class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">
+          Mobile Number or Account Aggregator Handle (VUA)
+        </label>
+        <input type="text" id="connect-phone-input" placeholder="e.g. 9876543210 or user@setu" class="w-full text-xs rounded-xl border px-3 py-2.5 focus:ring-2 focus:ring-brand-500 focus:outline-none" style="background: var(--surface-canvas); border-color: var(--border-default); color: var(--text-primary)">
+        <p class="text-[10px] mt-1" style="color: var(--text-muted)">Enter the mobile number linked to your bank account.</p>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold mb-1" style="color: var(--text-secondary)">
+          Transaction History Window
+        </label>
+        <select id="connect-range-select" class="w-full text-xs rounded-xl border px-3 py-2.5 focus:ring-2 focus:ring-brand-500 focus:outline-none" style="background: var(--surface-canvas); border-color: var(--border-default); color: var(--text-primary)">
+          <option value="90">Past 90 Days (Recommended for Gig Payout Baseline)</option>
+          <option value="180">Past 6 Months</option>
+          <option value="365">Past 1 Year</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end space-x-3 pt-3 border-t" style="border-color: var(--border-default)">
+      <button onclick="closeConnectBankModal()" class="px-4 py-2 rounded-xl text-xs font-bold border hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+        Cancel
+      </button>
+      <button onclick="handleInitiateBankConnect()" id="btn-submit-connect" class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-brand-500 to-brand-700 hover:opacity-95 shadow-md flex items-center space-x-1.5 transition-all">
+        <span>Continue to Secure Bank Connection</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- MODAL: Setu Account Aggregator Sandbox Simulator (RBI AA Protocol)    -->
+<!-- ===================================================================== -->
+<div id="aa-simulator-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md hidden">
+  <div class="w-full max-w-lg rounded-2xl border shadow-2xl p-6 space-y-5" style="background-color: var(--surface-card); border-color: var(--border-default)">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-default)">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-black text-xl border border-emerald-500/20">
+          ⚡
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h3 class="font-extrabold text-base" style="color: var(--text-primary)">Setu Account Aggregator</h3>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+              Sandbox Simulator
+            </span>
+          </div>
+          <p class="text-xs" style="color: var(--text-muted)">RBI Licensed Financial Information User (FIU) Consent</p>
+        </div>
+      </div>
+      <button onclick="closeSimulatorModal()" class="text-stone-400 hover:text-stone-600 p-1">✕</button>
+    </div>
+
+    <!-- Simulator Notice -->
+    <div class="p-3.5 rounded-xl border space-y-1.5 text-xs" style="background: var(--surface-sunken); border-color: var(--border-default)">
+      <div class="flex items-center justify-between text-[11px] font-semibold" style="color: var(--text-secondary)">
+        <span>Customer Identifier:</span>
+        <span class="font-mono text-emerald-600" id="sim-vua-display">9876543210@setu</span>
+      </div>
+      <div class="flex items-center justify-between text-[11px] font-semibold" style="color: var(--text-secondary)">
+        <span>Consent Purpose:</span>
+        <span style="color: var(--text-primary)">Wealth &amp; Cash Flow Resilience Planning</span>
+      </div>
+      <div class="flex items-center justify-between text-[11px] font-semibold" style="color: var(--text-secondary)">
+        <span>Data Fetch Type:</span>
+        <span style="color: var(--text-primary)">Periodic (Daily Sync • 12 Months)</span>
+      </div>
+    </div>
+
+    <!-- Discovered Accounts to Link -->
+    <div class="space-y-2">
+      <p class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted)">Select Accounts to Link</p>
+      
+      <div class="p-3 rounded-xl border flex items-center justify-between hover:border-emerald-500/50 transition-colors" style="background: var(--surface-card); border-color: var(--border-default)">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">
+            HDFC
+          </div>
+          <div>
+            <p class="font-bold text-xs" style="color: var(--text-primary)">HDFC Bank — Salary &amp; Gig Inflows</p>
+            <p class="text-[11px]" style="color: var(--text-muted)">Savings •••• 4892</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <p class="font-extrabold text-xs text-emerald-600">₹18,450.00</p>
+          <span class="text-[10px] font-semibold text-emerald-700">✓ Ready to Link</span>
+        </div>
+      </div>
+
+      <div class="p-3 rounded-xl border flex items-center justify-between hover:border-emerald-500/50 transition-colors" style="background: var(--surface-card); border-color: var(--border-default)">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-50 text-sky-700 flex items-center justify-center font-bold text-xs">
+            SBI
+          </div>
+          <div>
+            <p class="font-bold text-xs" style="color: var(--text-primary)">State Bank of India — Reserve Savings</p>
+            <p class="text-[11px]" style="color: var(--text-muted)">Savings •••• 1045</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <p class="font-extrabold text-xs text-emerald-600">₹6,200.00</p>
+          <span class="text-[10px] font-semibold text-emerald-700">✓ Ready to Link</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Footnote -->
+    <div class="flex items-center gap-2 text-[11px] p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-medium">
+      <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+      <span>RBI AA Protocol: 256-bit encrypted data transfer. No netbanking password or OTP requested.</span>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-between pt-3 border-t" style="border-color: var(--border-default)">
+      <button onclick="closeSimulatorModal()" class="px-4 py-2 rounded-xl text-xs font-bold border hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+        Cancel
+      </button>
+      <button onclick="handleApproveSimulatorConsent()" id="btn-approve-simulator" class="px-5 py-2.5 rounded-xl text-xs font-extrabold text-white bg-gradient-to-r from-emerald-600 to-teal-700 hover:opacity-95 shadow-md flex items-center space-x-2 transition-all">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        <span>Approve Consent &amp; Link Accounts</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- MODAL: View Bank Transactions -->
+<!-- ===================================================================== -->
+<div id="transactions-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+  <div class="w-full max-w-2xl rounded-2xl border shadow-2xl p-6 space-y-4 max-h-[85vh] flex flex-col" style="background-color: var(--surface-card); border-color: var(--border-default)">
+    <div class="flex items-center justify-between border-b pb-3 flex-shrink-0" style="border-color: var(--border-default)">
+      <div>
+        <h3 class="font-extrabold text-base" style="color: var(--text-primary)" id="modal-account-title">Bank Transactions</h3>
+        <p class="text-xs" style="color: var(--text-muted)" id="modal-account-subtitle">Normalized ledger events</p>
+      </div>
+      <button onclick="closeTransactionsModal()" class="text-stone-400 hover:text-stone-600 p-1">✕</button>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="flex items-center space-x-2 text-xs flex-shrink-0">
+      <button onclick="filterModalTransactions('all')" id="tab-all" class="px-3 py-1 rounded-lg border font-bold bg-brand-50 text-brand-600 border-brand-200">All</button>
+      <button onclick="filterModalTransactions('credit')" id="tab-credit" class="px-3 py-1 rounded-lg border font-medium hover:bg-stone-50" style="border-color: var(--border-default)">Inflow (Income)</button>
+      <button onclick="filterModalTransactions('debit')" id="tab-debit" class="px-3 py-1 rounded-lg border font-medium hover:bg-stone-50" style="border-color: var(--border-default)">Outflow (Expenses)</button>
+    </div>
+
+    <!-- Transactions List Container -->
+    <div class="flex-1 overflow-y-auto space-y-2 pr-1" id="modal-transactions-list">
+      <!-- Dynamic list -->
+    </div>
+
+    <div class="flex items-center justify-end pt-3 border-t flex-shrink-0" style="border-color: var(--border-default)">
+      <button onclick="closeTransactionsModal()" class="px-4 py-2 rounded-xl text-xs font-bold border hover:bg-stone-100" style="border-color: var(--border-default); color: var(--text-secondary)">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- MODAL: Consent Management -->
+<!-- ===================================================================== -->
+<div id="consent-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+  <div class="w-full max-w-md rounded-2xl border shadow-2xl p-6 space-y-4" style="background-color: var(--surface-card); border-color: var(--border-default)">
+    <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-default)">
+      <h3 class="font-extrabold text-base" style="color: var(--text-primary)">Manage Account Aggregator Consent</h3>
+      <button onclick="closeConsentModal()" class="text-stone-400 hover:text-stone-600 p-1">✕</button>
+    </div>
+
+    <div class="space-y-3 text-xs" style="color: var(--text-secondary)">
+      <div class="p-3 rounded-xl border space-y-1.5" style="background: var(--surface-sunken); border-color: var(--border-default)">
+        <div class="flex justify-between">
+          <span class="font-semibold" style="color: var(--text-muted)">Consent Status:</span>
+          <span class="font-bold text-emerald-600" id="consent-status-badge">ACTIVE</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-semibold" style="color: var(--text-muted)">Provider:</span>
+          <span class="font-medium" id="consent-provider">Setu Account Aggregator</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-semibold" style="color: var(--text-muted)">Consent ID:</span>
+          <span class="font-mono text-[10px]" id="consent-id-val">N/A</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-semibold" style="color: var(--text-muted)">Purpose:</span>
+          <span class="text-right">Wealth &amp; resilience planning</span>
+        </div>
+      </div>
+
+      <p class="text-[11px] leading-relaxed" style="color: var(--text-muted)">
+        You have complete authority over your consent under the RBI Account Aggregator framework. Revoking stops all future automated data syncs immediately.
+      </p>
+    </div>
+
+    <div class="flex items-center justify-between pt-3 border-t" style="border-color: var(--border-default)">
+      <button onclick="handleRevokeConsent()" id="btn-revoke-consent" class="px-4 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-colors">
+        Revoke Consent
+      </button>
+      <button onclick="closeConsentModal()" class="px-4 py-2 rounded-xl text-xs font-bold border" style="border-color: var(--border-default); color: var(--text-secondary)">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+  window.sureSavingsPageContext = {
+    page: "bank-accounts.html",
+    title: "Bank Accounts & Open Banking",
+    section: "bank-accounts"
+  };
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+// =====================================================================
+// Bank Accounts View Controller
+// =====================================================================
+
+let currentBankData = { connections: [], accounts: [], liquidity: {} };
+let selectedAccountId = null;
+let activeConnectionId = null;
+let cachedTransactions = [];
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadBankData();
+});
+
+async function loadBankData() {
+  try {
+    const res = await api.getBankAccounts();
+    currentBankData = res;
+    renderTelemetry(res.liquidity, res.connections);
+    renderAccounts(res.accounts, res.connections);
+  } catch (err) {
+    console.error("Failed to load bank data:", err);
+  }
+}
+
+function renderTelemetry(liquidity, connections) {
+  const totalBal = liquidity.total_balance || 0;
+  const accountsCount = liquidity.accounts_count || 0;
+  const asOf = liquidity.latest_balance_as_of ? new Date(liquidity.latest_balance_as_of).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Awaiting data";
+  const lastSync = liquidity.last_synced_at ? new Date(liquidity.last_synced_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : "Never";
+
+  document.getElementById("stat-total-balance").textContent = `₹${totalBal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+  document.getElementById("stat-balance-as-of").textContent = `Latest reported as of ${asOf}`;
+  document.getElementById("stat-accounts-count").textContent = accountsCount;
+  document.getElementById("stat-accounts-status").textContent = accountsCount > 0 ? `${accountsCount} active connection(s)` : "No banks linked";
+  document.getElementById("stat-last-sync").textContent = lastSync;
+  document.getElementById("accounts-badge").textContent = `${accountsCount} Linked`;
+
+  // Update Financial Intelligence card from store if available
+  if (window.store && window.store.profile) {
+    const p = window.store.profile;
+    document.getElementById("stat-safe-to-save").textContent = `₹${(p.recommended_contribution || 0).toLocaleString('en-IN')}`;
+    document.getElementById("intel-weekly-income").textContent = `₹${(p.current_income || 0).toLocaleString('en-IN')}`;
+    document.getElementById("intel-weekly-burn").textContent = `₹${(p.weekly_burn || 0).toLocaleString('en-IN')}`;
+    document.getElementById("intel-resilience-score").textContent = `${p.resilience_score || 70} / 100`;
+  }
+}
+
+function renderAccounts(accounts, connections) {
+  const grid = document.getElementById("bank-accounts-grid");
+  const empty = document.getElementById("bank-empty-state");
+
+  if (!accounts || accounts.length === 0) {
+    grid.innerHTML = "";
+    empty.classList.remove("hidden");
+    return;
+  }
+
+  empty.classList.add("hidden");
+  grid.innerHTML = "";
+
+  accounts.forEach(acc => {
+    activeConnectionId = acc.bank_connection_id;
+    const asOfStr = acc.balance_as_of ? new Date(acc.balance_as_of).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Today";
+    
+    const card = document.createElement("div");
+    card.className = "p-5 rounded-2xl border flex flex-col justify-between space-y-4 transition-all hover:shadow-md";
+    card.style.backgroundColor = "var(--surface-card)";
+    card.style.borderColor = "var(--border-default)";
+
+    card.innerHTML = `
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-sm bg-gradient-to-br from-brand-600 to-brand-700 shadow">
+              ${acc.institution_name.charAt(0)}
+            </div>
+            <div>
+              <h4 class="font-extrabold text-sm" style="color: var(--text-primary)">${acc.institution_name}</h4>
+              <p class="text-xs font-mono" style="color: var(--text-muted)">${acc.masked_account_number} • ${acc.account_type}</p>
+            </div>
+          </div>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Connected
+          </span>
+        </div>
+
+        <div class="mt-4 p-3 rounded-xl" style="background: var(--surface-sunken)">
+          <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Latest Reported Balance</span>
+          <div class="text-xl font-black mt-0.5" style="color: var(--text-primary)">
+            ₹${acc.current_reported_balance.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+          </div>
+          <p class="text-[10px] mt-0.5" style="color: var(--text-muted)">Balance as of ${asOfStr}</p>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t flex flex-wrap items-center justify-between gap-2" style="border-color: var(--border-default)">
+        <div class="flex items-center space-x-2">
+          <button onclick="handleSyncNow('${acc.bank_connection_id}')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-brand-500 hover:bg-brand-600 transition-colors flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            <span data-i18n="common.sync_now">Sync Now</span>
+          </button>
+          <button onclick="openTransactionsModal('${acc.id}', '${acc.institution_name}', '${acc.masked_account_number}')" class="px-3 py-1.5 rounded-lg text-xs font-semibold border hover:bg-stone-50 transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
+            Transactions
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button onclick="openConsentModal('${acc.bank_connection_id}')" class="text-xs hover:underline" style="color: var(--text-muted)">
+            Consent
+          </button>
+          <span style="color: var(--border-default)">•</span>
+          <button onclick="handleDisconnect('${acc.bank_connection_id}')" class="text-xs text-rose-500 hover:underline">
+            Disconnect
+          </button>
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+// ── Connect Modal ──
+function openConnectBankModal() {
+  document.getElementById("connect-bank-modal").classList.remove("hidden");
+}
+function closeConnectBankModal() {
+  document.getElementById("connect-bank-modal").classList.add("hidden");
+}
+
+let pendingConnectionId = null;
+
+function openSimulatorModal(connectionId, phoneOrVua) {
+  pendingConnectionId = connectionId;
+  const display = phoneOrVua || "9876543210";
+  const el = document.getElementById("sim-vua-display");
+  if (el) {
+    el.textContent = display.includes("@") ? display : `${display}@setu`;
+  }
+  document.getElementById("aa-simulator-modal").classList.remove("hidden");
+}
+
+function closeSimulatorModal() {
+  document.getElementById("aa-simulator-modal").classList.add("hidden");
+  pendingConnectionId = null;
+}
+
+async function handleApproveSimulatorConsent() {
+  const connId = pendingConnectionId;
+  const btn = document.getElementById("btn-approve-simulator");
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<span>Approving Consent...</span>`;
+  }
+
+  try {
+    await new Promise(r => setTimeout(r, 400));
+    closeSimulatorModal();
+    if (connId) {
+      await handleSyncNow(connId);
+    }
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = `
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        <span>Approve Consent &amp; Link Accounts</span>
+      `;
+    }
+  }
+}
+
+async function handleInitiateBankConnect() {
+  const phone = document.getElementById("connect-phone-input").value.trim();
+  const btn = document.getElementById("btn-submit-connect");
+  btn.disabled = true;
+  btn.innerHTML = `<span>Initiating secure session...</span>`;
+
+  try {
+    const res = await api.connectBankAccount({
+      phone_or_vua: phone || undefined
+    });
+
+    closeConnectBankModal();
+
+    if (res.is_mock) {
+      // Local Account Aggregator Sandbox Simulator
+      // Opens the in-app RBI AA consent approval modal without launching any external crashing URLs
+      openSimulatorModal(res.connection_id, phone);
+    } else if (res.consent_url && res.consent_url.startsWith("http")) {
+      // Live Setu Account Aggregator Gateway
+      const banner = document.getElementById("sync-progress-banner");
+      banner.classList.remove("hidden");
+      document.getElementById("sync-status-title").textContent = "Redirecting to Setu Account Aggregator...";
+      document.getElementById("sync-status-subtitle").textContent = "Complete consent on Setu portal, then click Sync Now.";
+
+      window.open(res.consent_url, "_blank");
+    } else {
+      openSimulatorModal(res.connection_id, phone);
+    }
+
+  } catch (err) {
+    alert("Connection Error: " + (err.message || "Failed to start bank connection"));
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<span>Continue to Secure Bank Connection</span>`;
+  }
+}
+
+// ── Sync Progression ──
+async function handleSyncNow(connectionId) {
+  const banner = document.getElementById("sync-progress-banner");
+  banner.classList.remove("hidden");
+
+  const titleEl = document.getElementById("sync-status-title");
+  const subEl = document.getElementById("sync-status-subtitle");
+
+  titleEl.textContent = "Requesting latest financial data...";
+  subEl.textContent = "Waiting for bank data from Account Aggregator...";
+
+  try {
+    await new Promise(r => setTimeout(r, 600));
+    titleEl.textContent = "Processing transactions & filtering self-transfers...";
+    subEl.textContent = "Classifying income candidates and essential burn...";
+
+    await new Promise(r => setTimeout(r, 600));
+    titleEl.textContent = "Updating your financial intelligence & cash floor...";
+    subEl.textContent = "Triggering deterministic engine recalculation...";
+
+    const syncRes = await api.syncBankAccount(connectionId);
+    
+    titleEl.textContent = "✓ Synced successfully!";
+    subEl.textContent = `${syncRes.sync_result?.records_imported || 0} new records imported. Deterministic engine updated.`;
+
+    setTimeout(() => {
+      banner.classList.add("hidden");
+    }, 3000);
+
+    // Reload UI state
+    await loadBankData();
+  } catch (err) {
+    titleEl.textContent = "Sync Notice";
+    subEl.textContent = err.message || "Could not complete bank sync.";
+    setTimeout(() => { banner.classList.add("hidden"); }, 4000);
+  }
+}
+
+// ── Transactions Modal ──
+async function openTransactionsModal(accountId, instName, maskedAcc) {
+  selectedAccountId = accountId;
+  document.getElementById("modal-account-title").textContent = `${instName} Transactions`;
+  document.getElementById("modal-account-subtitle").textContent = `${maskedAcc} • Normalized & Deduplicated`;
+  document.getElementById("transactions-modal").classList.remove("hidden");
+
+  const listEl = document.getElementById("modal-transactions-list");
+  listEl.innerHTML = `<div class="p-6 text-center text-xs" style="color: var(--text-muted)">Loading transactions...</div>`;
+
+  try {
+    const res = await api.getBankTransactions(accountId);
+    cachedTransactions = res.transactions || [];
+    renderModalTransactions(cachedTransactions);
+  } catch (err) {
+    listEl.innerHTML = `<div class="p-6 text-center text-xs text-rose-500">Failed to load transactions.</div>`;
+  }
+}
+
+function closeTransactionsModal() {
+  document.getElementById("transactions-modal").classList.add("hidden");
+}
+
+function renderModalTransactions(txns) {
+  const listEl = document.getElementById("modal-transactions-list");
+  if (!txns || txns.length === 0) {
+    listEl.innerHTML = `<div class="p-6 text-center text-xs" style="color: var(--text-muted)">No transactions found for this account.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = "";
+  txns.forEach(t => {
+    const isCredit = (t.direction === "credit");
+    const row = document.createElement("div");
+    row.className = "p-3 rounded-xl border flex items-center justify-between text-xs";
+    row.style.background = "var(--surface-sunken)";
+    row.style.borderColor = "var(--border-default)";
+
+    const badgeClass = t.is_self_transfer 
+      ? "bg-stone-100 text-stone-700 border-stone-300"
+      : isCredit 
+        ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
+        : "bg-rose-50 text-rose-700 border-rose-200";
+
+    const badgeLabel = t.is_self_transfer ? "Self-Transfer" : (isCredit ? "+ Inflow" : "- Outflow");
+
+    row.innerHTML = `
+      <div class="space-y-0.5 max-w-[65%]">
+        <div class="flex items-center space-x-2">
+          <span class="font-bold truncate" style="color: var(--text-primary)">${t.description}</span>
+        </div>
+        <div class="flex items-center space-x-2 text-[10px]" style="color: var(--text-muted)">
+          <span>${t.transaction_date}</span>
+          <span>•</span>
+          <span>${t.category}</span>
+          ${t.reference ? `<span>• Ref: ${t.reference}</span>` : ''}
+        </div>
+      </div>
+      <div class="text-right space-y-0.5">
+        <div class="font-black ${isCredit ? 'text-emerald-600' : 'text-stone-800 dark:text-stone-200'}">
+          ${isCredit ? '+' : '-'}₹${t.amount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+        </div>
+        <span class="inline-block px-1.5 py-0.2 rounded text-[9px] font-bold border ${badgeClass}">
+          ${badgeLabel}
+        </span>
+      </div>
+    `;
+    listEl.appendChild(row);
+  });
+}
+
+function filterModalTransactions(type) {
+  document.getElementById("tab-all").className = "px-3 py-1 rounded-lg border font-medium hover:bg-stone-50";
+  document.getElementById("tab-credit").className = "px-3 py-1 rounded-lg border font-medium hover:bg-stone-50";
+  document.getElementById("tab-debit").className = "px-3 py-1 rounded-lg border font-medium hover:bg-stone-50";
+
+  if (type === 'all') {
+    document.getElementById("tab-all").className = "px-3 py-1 rounded-lg border font-bold bg-brand-50 text-brand-600 border-brand-200";
+    renderModalTransactions(cachedTransactions);
+  } else if (type === 'credit') {
+    document.getElementById("tab-credit").className = "px-3 py-1 rounded-lg border font-bold bg-brand-50 text-brand-600 border-brand-200";
+    renderModalTransactions(cachedTransactions.filter(t => t.direction === 'credit'));
+  } else if (type === 'debit') {
+    document.getElementById("tab-debit").className = "px-3 py-1 rounded-lg border font-bold bg-brand-50 text-brand-600 border-brand-200";
+    renderModalTransactions(cachedTransactions.filter(t => t.direction === 'debit'));
+  }
+}
+
+// ── Consent Management ──
+async function openConsentModal(connectionId) {
+  activeConnectionId = connectionId;
+  document.getElementById("consent-modal").classList.remove("hidden");
+
+  try {
+    const res = await api.getBankConsent(connectionId);
+    const c = res.consent;
+    document.getElementById("consent-status-badge").textContent = c.status;
+    document.getElementById("consent-id-val").textContent = c.consent_id || "N/A";
+  } catch (err) {
+    document.getElementById("consent-status-badge").textContent = "UNKNOWN";
+  }
+}
+function closeConsentModal() {
+  document.getElementById("consent-modal").classList.add("hidden");
+}
+
+async function handleRevokeConsent() {
+  if (!confirm("Are you sure you want to revoke this consent? Future bank syncs will be stopped.")) return;
+  try {
+    await api.revokeBankConsent(activeConnectionId);
+    alert("Consent successfully revoked.");
+    closeConsentModal();
+    await loadBankData();
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+}
+
+async function handleDisconnect(connectionId) {
+  if (!confirm("Disconnect bank connection? Historical transactions will remain preserved for your financial audit.")) return;
+  try {
+    await api.disconnectBank(connectionId);
+    alert("Bank disconnected.");
+    await loadBankData();
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+}
+</script>
+</body>
+</html>

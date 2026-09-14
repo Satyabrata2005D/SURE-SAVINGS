@@ -1,0 +1,23 @@
+{
+  "title": "આવક કેલેન્ડર અને લેજર",
+  "subtitle": "ગિગ આવક ચક્ર અને ચૂકવણીની આગાહી",
+  "today": "આજે",
+  "tomorrow": "આવતીકાલે",
+  "yesterday": "ગઈકાલે",
+  "add_event": "ઇવેન્ટ ઉમેરો",
+  "expected_payout": "અપેક્ષિત આવક",
+  "mandatory_outflow": "ફરજિયાત ખર્ચ",
+  "buffer_allocation": "બફર ફાળવણી",
+  "month_view": "મહિનો દૃશ્ય",
+  "week_view": "અઠવાડિયું દૃશ્ય",
+  "no_events": "આ તારીખ માટે કોઈ ઇવેન્ટ નથી.",
+  "gap_detected": "સમય અંતરાલ મળ્યો: {amount} ની અછત",
+  "buffer_absorbed": "સ્વચાલિત વૉલ્ટ બફર {amount} શોષી લે છે.",
+  "checking_balance": "ખાતા સિલક",
+  "opening_balance": "શરૂઆતની સિલક",
+  "total_inflow": "કુલ આવક",
+  "total_outflow": "કુલ ખર્ચ",
+  "lowest_intraday": "સૌથી ઓછી ઇન્ટ્રાડે સિલક",
+  "closing_balance": "અંતિમ સિલક",
+  "protected_floor": "સંરક્ષિત ફ્લોર"
+}

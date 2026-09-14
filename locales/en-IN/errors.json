@@ -1,0 +1,8 @@
+{
+  "generic": "Something went wrong. Please try again.",
+  "network": "Network connection error. Check your connection.",
+  "session_expired": "Your session has expired. Please sign in again.",
+  "bank_sync_failed": "Unable to synchronize bank data via Account Aggregator. Please try again later.",
+  "unauthorized": "You must be signed in to access this feature.",
+  "validation_failed": "Please check the entered values and try again."
+}

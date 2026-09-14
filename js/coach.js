@@ -157,43 +157,62 @@ async function sendCoachMessage(userText) {
   chatContainer.appendChild(userBubble);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  // Typing indicator
+  // Typing indicator with Gemini branding
   const typingBubble = document.createElement("div");
   typingBubble.id = "coachTypingIndicator";
   typingBubble.className = "flex items-start space-x-3.5 mb-4";
   typingBubble.innerHTML = `
-    <div class="relative w-9 h-9 rounded-xl bg-gray-900 text-white flex items-center justify-center font-bold text-sm shadow-sm flex-shrink-0">
+    <div class="relative w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-sm flex-shrink-0">
       S
       <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-teal-400 border-2 border-white"></span>
     </div>
-    <div class="bg-gray-50 border border-gray-100 text-gray-600 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm text-xs flex items-center space-x-2">
-      <span class="w-2 h-2 rounded-full bg-brand-coral animate-pulse"></span>
-      <span class="w-2 h-2 rounded-full bg-brand-coral animate-pulse" style="animation-delay: 0.2s"></span>
-      <span class="w-2 h-2 rounded-full bg-brand-coral animate-pulse" style="animation-delay: 0.4s"></span>
-      <span class="text-gray-400 pl-1 font-mono">Running deterministic verification...</span>
+    <div class="bg-gray-50 dark:bg-stone-800 border border-gray-100 dark:border-stone-700 text-gray-600 dark:text-stone-300 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm text-xs flex items-center space-x-2">
+      <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+      <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse" style="animation-delay: 0.2s"></span>
+      <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse" style="animation-delay: 0.4s"></span>
+      <span class="text-gray-500 dark:text-stone-400 pl-1 font-mono text-[11px]">Consulting Gemini AI with grounded telemetry...</span>
     </div>
   `;
   chatContainer.appendChild(typingBubble);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  // Try fetching from backend or fallback to local
+  // Try fetching from backend Gemini API
   let title = "";
   let answer = "";
   let badge = "";
+  let nextStep = "";
+  let navigation = null;
+  let isLiveGemini = false;
 
-  if (window.sureSavingsApi) {
+  if (window.sureSavingsApi || window.api) {
+    const apiService = window.sureSavingsApi || window.api;
     try {
-      const data = await window.sureSavingsApi.sendChatMessage(userText);
+      const pageCtx = window.sureSavingsPageContext || { page: "coach.html", title: "SURE AI Guide" };
+      const data = await apiService.sendChatMessage(userText, pageCtx);
       if (data && data.answer) {
-        title = data.title;
+        title = data.title || "SURE AI Guidance";
         answer = data.answer;
-        badge = data.badge;
+        badge = data.badge || (data.safety_status === "REFUSED" ? "Safety Invariant" : "Gemini 3.6 Flash Verified");
+        nextStep = data.next_step || "";
+        navigation = data.navigation || null;
+        isLiveGemini = true;
+      } else if (data && data.error) {
+        title = "SURE AI Notification";
+        answer = data.error.message || "An issue occurred while processing your request. Please try again.";
+        badge = "Service Notice";
       }
     } catch (e) {
-      console.warn("[SURE SAVINGS Coach] API unavailable, using grounded dynamic fallback:", e.message);
+      console.warn("[SURE AI] API call encountered an error:", e);
+      if (e.status === 401 || (e.message && e.message.includes("401"))) {
+        title = "Authentication Required";
+        answer = "Your session has expired. Please sign in again to access personalized SURE AI guidance.";
+        badge = "Auth Required";
+        navigation = { label: "Sign In", route: "login.html" };
+      }
     }
   }
 
+  // Fallback if no answer received from API
   if (!answer) {
     const responses = getLiveCoachResponses();
     const lower = userText.toLowerCase();
@@ -208,43 +227,129 @@ async function sendCoachMessage(userText) {
     const item = responses[key] || responses.default;
     title = item.title;
     answer = item.reply;
-    badge = item.scoreDelta;
+    badge = item.scoreDelta || "Deterministic Fallback";
+    nextStep = "Review your financial dashboard on Command Center.";
+    navigation = { label: "Open Command Center", route: "index.html" };
   }
 
   setTimeout(() => {
     const indicator = document.getElementById("coachTypingIndicator");
     if (indicator) indicator.remove();
 
+    // Enhanced markdown formatting for Gemini output
+    function formatMarkdown(text) {
+      if (!text) return "";
+      let formatted = text
+        .replace(/^### (.*$)/gim, '<h4 class="font-bold text-xs sm:text-sm mt-3 mb-1.5 text-brand-600 dark:text-brand-400">$1</h4>')
+        .replace(/^## (.*$)/gim, '<h3 class="font-bold text-sm sm:text-base mt-3 mb-1.5 text-brand-600 dark:text-brand-400">$1</h3>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded font-mono text-[11px] bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100">$1</code>')
+        .replace(/^\s*[-*•]\s+(.*$)/gim, '• $1')
+        .replace(/\n\n/g, '<br/><br/>')
+        .replace(/\n/g, '<br/>');
+      return formatted;
+    }
+
     const botBubble = document.createElement("div");
     botBubble.className = "flex items-start space-x-3.5 mb-4 animate-fade-in";
+    
+    let navButtonHtml = "";
+    if (navigation && navigation.route && navigation.label) {
+      navButtonHtml = `
+        <a href="${navigation.route}" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-brand-500 hover:bg-brand-600 transition-colors shadow-sm ml-auto">
+          <span>${navigation.label}</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      `;
+    }
+
+    let nextStepHtml = "";
+    if (nextStep) {
+      nextStepHtml = `
+        <div class="mt-3 p-3 rounded-xl border flex flex-wrap items-center justify-between gap-2" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25)">
+          <div class="flex items-center gap-2 max-w-[70%]">
+            <span class="text-base">👉</span>
+            <span class="text-xs font-semibold text-emerald-800 dark:text-emerald-300"><strong>Next Step:</strong> ${nextStep}</span>
+          </div>
+          ${navButtonHtml}
+        </div>
+      `;
+    }
+
+    const headerBadgeText = isLiveGemini 
+      ? 'Just now • Gemini 3.6 Flash • Grounded Telemetry'
+      : 'Just now • Deterministic Invariant Checked';
+
     botBubble.innerHTML = `
-      <div class="relative w-9 h-9 rounded-xl bg-gray-900 text-white flex items-center justify-center font-bold text-sm shadow-sm flex-shrink-0">
+      <div class="relative w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
         S
-        <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-teal-400 border-2 border-white"></span>
+        <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full ${isLiveGemini ? 'bg-teal-400' : 'bg-emerald-400'} border-2 border-white"></span>
       </div>
       <div class="flex-1 space-y-2">
         <div class="flex items-center space-x-2">
-          <span class="text-xs font-bold text-gray-900">SURE SAVINGS Coach</span>
-          <span class="text-[10px] text-gray-400">Just now • Rule Engine v2.4</span>
+          <span class="text-xs font-bold" style="color: var(--text-primary)">SURE AI</span>
+          <span class="text-[10px]" style="color: var(--text-subtle)">${headerBadgeText}</span>
         </div>
-        <div class="text-xs sm:text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-2xl p-4 space-y-3">
-          <div class="flex items-center justify-between border-b border-gray-200/60 pb-2">
-            <span class="bot-title text-xs font-bold text-gray-900"></span>
-            <span class="bot-badge text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-bold"></span>
+        <div class="text-xs sm:text-sm rounded-2xl p-4 space-y-2 border shadow-sm" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
+          <div class="flex items-center justify-between border-b pb-2" style="border-color: var(--border-default)">
+            <span class="bot-title text-xs font-bold" style="color: var(--text-primary)"></span>
+            <span class="bot-badge text-[10px] px-2 py-0.5 rounded-full font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200"></span>
           </div>
-          <div class="bot-answer text-xs sm:text-sm text-gray-700 leading-relaxed whitespace-pre-line"></div>
+          <div class="bot-answer leading-relaxed"></div>
+          ${nextStepHtml}
         </div>
       </div>
     `;
     botBubble.querySelector(".bot-title").textContent = title;
     botBubble.querySelector(".bot-badge").textContent = badge;
-    botBubble.querySelector(".bot-answer").textContent = answer;
+    botBubble.querySelector(".bot-answer").innerHTML = formatMarkdown(answer);
     chatContainer.appendChild(botBubble);
     chatContainer.scrollTop = chatContainer.scrollHeight;
-  }, 650);
+  }, 300);
+}
+
+function updateCoachWelcomeCard() {
+  const user = window.sureSavingsStore?.state?.auth?.user || window.sureSavingsStore?.state?.profile || {};
+  const p = window.sureSavingsStore?.state?.profile || {};
+  const isDemo = Boolean(user.is_demo_user);
+  
+  const name = user.first_name || (user.name ? user.name.split(' ')[0] : 'Member');
+  const welcomeEl = document.getElementById("coach-welcome-text");
+  if (welcomeEl) {
+    if (p.current_income && (p.current_income > 0 || isDemo)) {
+      const score = p.resilience_score || 70;
+      const income = Number(p.current_income || 0).toLocaleString();
+      const baseline = Number(p.stabilized_income || p.current_income).toLocaleString();
+      const burn = Number(p.weekly_burn || 0).toLocaleString();
+      const floor = Number(p.protected_floor || 0).toLocaleString();
+      const rec = Number(p.recommended_contribution || 0).toLocaleString();
+      
+      welcomeEl.innerHTML = `
+        Hello <strong>${name}</strong>. Your financial resilience score is currently <strong>${score} / 100</strong>. Your current weekly earnings (<strong>₹${income}</strong>) compare to a stabilized baseline of ₹${baseline}. Fixed commitments (₹${burn}) and your protected cash floor (₹${floor}) are tracked by the deterministic engine, with a current Safe-to-Save recommendation of <strong class="text-brand-500">₹${rec}</strong>.
+      `;
+    } else {
+      welcomeEl.innerHTML = `
+        Welcome <strong>${name}</strong> to <strong>SURE AI</strong>, your personal financial resilience guide. Complete your 30-second Financial Setup to unlock verified telemetry, Safe-to-Save recommendations, and your Resilience Index.
+      `;
+    }
+  }
+  
+  // Update cycle header pill
+  const inflowEl = document.querySelector('[data-coach="cycle-inflow"]');
+  if (inflowEl) {
+    const currentInflow = Number(p.current_income || 0).toLocaleString();
+    inflowEl.textContent = p.current_income ? `₹${currentInflow} Inflow` : "Setup Required";
+  }
+  const recEl = document.querySelector('[data-coach="cycle-rec"]');
+  if (recEl) {
+    const currentRec = Number(p.recommended_contribution || 0).toLocaleString();
+    recEl.textContent = p.recommended_contribution !== undefined ? `Save ₹${currentRec}` : "Save ₹0";
+  }
 }
 
 window.sendCoachMessage = sendCoachMessage;
+window.updateCoachWelcomeCard = updateCoachWelcomeCard;
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("coachChatForm");
@@ -268,4 +373,12 @@ document.addEventListener("DOMContentLoaded", () => {
       sendCoachMessage(prompt);
     });
   });
+
+  // Dynamically update welcome card on load and state change
+  updateCoachWelcomeCard();
+  if (window.sureSavingsStore?.subscribe) {
+    window.sureSavingsStore.subscribe(() => {
+      updateCoachWelcomeCard();
+    });
+  }
 });

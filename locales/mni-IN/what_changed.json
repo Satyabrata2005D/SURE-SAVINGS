@@ -1,0 +1,6 @@
+{
+  "title": "এই সপ্তাহে কী পরিবর্তন হয়েছে?",
+  "resilience_shift": "স্থিতিস্থাপকতা: {before} → {after} ({delta} পয়েন্ট)",
+  "summary_default": "সাপ্তাহিক পরিচালন পরিবর্তনের সারসংক্ষেপ।",
+  "essential_spending": "প্রয়োজনীয় খরচ"
+}

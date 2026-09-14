@@ -1,0 +1,12 @@
+{
+  "title": "Financial Goals & Buffers",
+  "subtitle": "Protected financial targets powered by automated savings rules",
+  "add_goal": "Create New Goal",
+  "target_amount": "Target Amount",
+  "current_progress": "Current Progress",
+  "target_date": "Target Completion Date",
+  "emergency_fund": "Emergency Cushion",
+  "medical_reserve": "Medical Reserve",
+  "vehicle_maintenance": "Vehicle Maintenance",
+  "no_goals": "No active goals created yet. Set up a target to begin automated reserve accumulation."
+}

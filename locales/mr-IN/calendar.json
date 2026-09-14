@@ -1,0 +1,23 @@
+{
+  "title": "उत्पन्न कॅलेंडर आणि डायनॅमिक लेजर",
+  "subtitle": "गिग पेमेंट चक्रे, नियोजित देयके आणि अनिवार्य दायित्वे",
+  "today": "आज",
+  "tomorrow": "उद्या",
+  "yesterday": "काल",
+  "add_event": "नियोजित इव्हेंट जोडा",
+  "expected_payout": "अपेक्षित कमाई",
+  "mandatory_outflow": "अनिवार्य खर्च",
+  "buffer_allocation": "बफर वाटप",
+  "month_view": "महिना दृश्य",
+  "week_view": "आठवडा दृश्य",
+  "no_events": "या तारखेसाठी कोणताही आर्थिक कार्यक्रम नियोजित नाही.",
+  "gap_detected": "वेळ अंतर आढळले: {amount} ची तूट",
+  "buffer_absorbed": "{amount} चे स्वयंचलित व्हॉल्ट बफर शोषण चालू खात्याचे उल्लंघन प्रतिबंधित करते.",
+  "checking_balance": "चालू शिल्लक",
+  "opening_balance": "आरंभीची शिल्लक",
+  "total_inflow": "एकूण आवक",
+  "total_outflow": "एकूण जावक",
+  "lowest_intraday": "दिवसातील किमान शिल्लक",
+  "closing_balance": "अखेरची शिल्लक",
+  "protected_floor": "संरक्षित मर्यादा"
+}

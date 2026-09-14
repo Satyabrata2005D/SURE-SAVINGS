@@ -60,6 +60,15 @@ function showToast(titleOrMsg, message, type = "success") {
     title = type === "error" ? "Error" : type === "warning" ? "Notice" : "Success";
   }
 
+  if (window.i18n && typeof window.i18n.t === "function") {
+    const translatedTitle = window.i18n.t(title);
+    if (translatedTitle && translatedTitle !== title) title = translatedTitle;
+    if (body) {
+      const translatedBody = window.i18n.t(body);
+      if (translatedBody && translatedBody !== body) body = translatedBody;
+    }
+  }
+
   const icons = {
     success: `<svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
     info: `<svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
@@ -2395,11 +2404,30 @@ function renderHeaderUserIdentity(user) {
   }
 }
 
+function ensureSureAiLauncher() {
+  const path = (window.location.pathname || "").toLowerCase();
+  if (path.endsWith("coach.html") || path.endsWith("login.html") || path.endsWith("register.html")) {
+    return;
+  }
+  if (document.getElementById("sure-ai-launcher-btn")) return;
+  const launcher = document.createElement("a");
+  launcher.id = "sure-ai-launcher-btn";
+  launcher.href = "coach.html";
+  launcher.className = "sure-ai-launcher";
+  launcher.setAttribute("title", "Ask SURE AI for guidance and explanations");
+  launcher.innerHTML = `
+    <span class="sparkle-icon">✨</span>
+    <span>Ask SURE AI</span>
+  `;
+  document.body.appendChild(launcher);
+}
+
 // Global DOM ready bootstrap
 document.addEventListener("DOMContentLoaded", () => {
   initAuthAndHeader();
   ensureMyProfileInDropdowns();
   highlightActiveNav();
+  ensureSureAiLauncher();
 
   // Attach global button actions
   document.querySelectorAll("button, a").forEach(el => {

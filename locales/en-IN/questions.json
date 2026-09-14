@@ -1,0 +1,19 @@
+{
+  "section_title": "THE 5 CORE FINANCIAL QUESTIONS",
+  "section_sub": "Continuous institutional state evaluation updated in real-time.",
+  "state_label": "State: {state}",
+  "q1_tag": "1. Safety Now",
+  "q1_title": "How safe am I right now?",
+  "q2_tag": "2. Change Detection",
+  "q2_title": "What changed recently?",
+  "q3_tag": "3. Next Best Action",
+  "q3_title": "What should I do next?",
+  "q4_tag": "4. Forward Stress",
+  "q4_title": "What could go wrong?",
+  "q5_tag": "5. Trajectory",
+  "q5_title": "Where is my financial twin heading?",
+  "status_protected": "Protected",
+  "status_stable_attention": "Stable with Attention",
+  "status_high_pressure": "High Pressure",
+  "active_shift_log": "Active Shift Log"
+}

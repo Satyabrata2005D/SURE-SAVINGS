@@ -1,0 +1,23 @@
+{
+  "title": "آمدنی کیلنڈر اور لیجر",
+  "subtitle": "گِگ آمدنی کے چکر اور لازمی ادائیگیوں کی پیش گوئی",
+  "today": "آج",
+  "tomorrow": "کل (آئندہ)",
+  "yesterday": "کل (گزشتہ)",
+  "add_event": "نیا ایونٹ شامل کریں",
+  "expected_payout": "متوقع آمدنی",
+  "mandatory_outflow": "لازمی اخراجات",
+  "buffer_allocation": "بفر مختص کرنا",
+  "month_view": "ماہانہ منظر",
+  "week_view": "ہفتہ وار منظر",
+  "no_events": "اس تاریخ کے لیے کوئی مالیاتی شیڈول نہیں ہے۔",
+  "gap_detected": "وقت کا فرق پایا گیا: {amount} کی کمی",
+  "buffer_absorbed": "خودکار والٹ بفر {amount} کو جذب کر کے اکاؤنٹ کی خلاف ورزی کو روکتا ہے۔",
+  "checking_balance": "اکاؤنٹ بیلنس",
+  "opening_balance": "ابتدائی بیلنس",
+  "total_inflow": "کل آمد",
+  "total_outflow": "کل اخراجات",
+  "lowest_intraday": "سب سے کم انٹرا ڈے بیلنس",
+  "closing_balance": "اختتامی بیلنس",
+  "protected_floor": "محفوظ فلور"
+}

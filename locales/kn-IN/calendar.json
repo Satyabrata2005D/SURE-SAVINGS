@@ -1,0 +1,23 @@
+{
+  "title": "ಆದಾಯ ಕ್ಯಾಲೆಂಡರ್ & ಲೆಡ್ಜರ್",
+  "subtitle": "ಗಿಗ್ ಆದಾಯ ಚಕ್ರಗಳು ಮತ್ತು ಪಾವತಿಗಳ ಮುನ್ಸೂಚನೆ",
+  "today": "ಇಂದು",
+  "tomorrow": "ನಾಳೆ",
+  "yesterday": "ನಿನ್ನೆ",
+  "add_event": "ಹೊಸ ಈವೆಂಟ್ ಸೇರಿಸಿ",
+  "expected_payout": "ನಿರೀಕ್ಷಿತ ಆದಾಯ",
+  "mandatory_outflow": "ಕಡ್ಡಾಯ ವೆಚ್ಚ",
+  "buffer_allocation": "ಬಫರ್ ಹಂಚಿಕೆ",
+  "month_view": "ತಿಂಗಳ ನೋಟ",
+  "week_view": "ವಾರದ ನೋಟ",
+  "no_events": "ಈ ದಿನಾಂಕಕ್ಕೆ ಯಾವುದೇ ಈವೆಂಟ್‌ಗಳಿಲ್ಲ.",
+  "gap_detected": "ಸಮಯದ ಅಂತರ ಪತ್ತೆಯಾಗಿದೆ: {amount} ಕೊರತೆ",
+  "buffer_absorbed": "ಸ್ವಯಂಚಾಲಿತ ವಾಲ್ಟ್ ಬಫರ್ {amount} ಹೀರಿಕೊಳ್ಳುವಿಕೆಯು ಖಾತೆಯ ಉಲ್ಲಂಘನೆಯನ್ನು ತಡೆಯುತ್ತದೆ.",
+  "checking_balance": "ಖಾತೆ ಬಾಕಿ",
+  "opening_balance": "ಆರಂಭಿಕ ಬಾಕಿ",
+  "total_inflow": "ಒಟ್ಟು ಒಳಹರಿವು",
+  "total_outflow": "ಒಟ್ಟು ಹೊರಹರಿವು",
+  "lowest_intraday": "ಅತ್ಯಂತ ಕಡಿಮೆ ಇಂಟ್ರಾಡೇ ಬ್ಯಾಲೆನ್ಸ್",
+  "closing_balance": "ಅಂತಿಮ ಬಾಕಿ",
+  "protected_floor": "ರಕ್ಷಿತ ಫ್ಲೋರ್"
+}

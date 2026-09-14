@@ -26,7 +26,11 @@ from dotenv import load_dotenv
 logger = logging.getLogger("sure_savings")
 
 from backend.database import get_db, SessionLocal
-from backend.models import User, FinancialProfile, EmailOTP
+from backend.models import (
+    User, FinancialProfile, EmailOTP,
+    BankConnection, BankAccount, BankConsent, BankDataSession, BankTransaction, BankSyncRun,
+    get_utc_now
+)
 from backend.repository import FinancialRepository, seed_canonical_user, init_database
 from backend.policy import DEFAULT_POLICY
 from backend.services import (
@@ -64,8 +68,25 @@ from backend.schemas import (
     BufferTargetRequest, ObligationCreateRequest, GoalCreateRequest,
     CSVTransactionImportRequest, WhatIfSimulationRequest,
     CalendarEventCreateRequest, CalendarEventUpdateRequest,
-    IncomeProviderConnectRequest
+    IncomeProviderConnectRequest,
+    ConnectBankRequest, BankConnectionResponse, BankAccountResponse,
+    BankTransactionResponse, BankSyncResponse, BankConsentStatusResponse, SetuWebhookPayload,
+    LocalizationConfigResponse, UserPreferencesRequest, UserPreferencesResponse
 )
+from backend.localization import (
+    SUPPORTED_LOCALES,
+    DEFAULT_LOCALE,
+    validate_locale,
+    get_supported_locales_list,
+)
+from backend.localization.i18n_service import LOCALES_DIR, I18nService
+from backend.services.setu_aa_service import setu_aa_service
+from backend.services.gemini_coach_service import gemini_coach_service
+from backend.services.bank_account_service import BankAccountService
+from backend.services.bank_transaction_service import BankTransactionService
+from backend.services.bank_reconciliation_service import BankReconciliationService
+from backend.services.bank_recalculation_service import BankRecalculationService
+from backend.services.bank_sync_service import setu_sync_service
 from backend.financial_engine import FinancialEngine
 from backend.digital_twin import FinancialDigitalTwin
 from backend.services.data_quality_service import DataQualityService
@@ -1849,6 +1870,72 @@ def update_personal_context(
     return {"status": "success", "profile": recalc["profile"], "readiness": recalc["readiness"]}
 
 
+# ── Localization & User Language Preferences ──
+
+@app.get("/api/v1/localization/config", response_model=LocalizationConfigResponse)
+def get_localization_config():
+    """Returns supported 23 locales, default locale, and translation version."""
+    return LocalizationConfigResponse(
+        default_locale=DEFAULT_LOCALE,
+        supported_locales=get_supported_locales_list(),
+        translation_version="5.0",
+        feature_flags={
+            "rtl_support": True,
+            "strict_purity": True,
+            "persisted_preference": True
+        }
+    )
+
+
+@app.get("/api/v1/localization/catalogs/{locale}")
+def get_localization_catalog(locale: str):
+    """Returns bundled flattened translation catalog for the specified locale."""
+    from backend.localization.i18n_service import get_catalog
+    return get_catalog(locale)
+
+
+@app.get("/api/v1/users/preferences", response_model=UserPreferencesResponse)
+def get_user_preferences(
+    current_user: User = Depends(get_current_user)
+):
+    """Retrieves authenticated user's saved preferred locale and regional preferences."""
+    pref = getattr(current_user, "preferred_locale", None) or getattr(current_user, "locale", None) or DEFAULT_LOCALE
+    return UserPreferencesResponse(
+        preferred_locale=validate_locale(pref),
+        timezone=getattr(current_user, "timezone", "Asia/Kolkata"),
+        currency=getattr(current_user, "currency", "INR"),
+        status="success"
+    )
+
+
+@app.patch("/api/v1/users/preferences", response_model=UserPreferencesResponse)
+def update_user_preferences(
+    req: UserPreferencesRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Updates authenticated user's preferred locale and regional settings with validation."""
+    if req.preferred_locale is not None:
+        valid_loc = validate_locale(req.preferred_locale)
+        current_user.locale = valid_loc
+        if hasattr(current_user, "preferred_locale"):
+            current_user.preferred_locale = valid_loc
+    if req.timezone is not None:
+        current_user.timezone = req.timezone
+    if req.currency is not None:
+        current_user.currency = "INR"
+    db.commit()
+    db.refresh(current_user)
+    
+    pref = getattr(current_user, "preferred_locale", None) or getattr(current_user, "locale", None) or DEFAULT_LOCALE
+    return UserPreferencesResponse(
+        preferred_locale=validate_locale(pref),
+        timezone=getattr(current_user, "timezone", "Asia/Kolkata"),
+        currency=getattr(current_user, "currency", "INR"),
+        status="success"
+    )
+
+
 @app.get("/api/v1/workspace/income-sources")
 def get_income_sources(
     current_user: User = Depends(get_current_user),
@@ -2853,25 +2940,19 @@ def ai_chat(
     db: Session = Depends(get_db)
 ):
     """
-    AI Financial Resilience Coach.
-    Builds context strictly and exclusively from the authenticated user's telemetry.
-    Never exposes another user's financial details.
+    SURE AI: Production-grade Gemini-powered conversational assistant.
+    Combines curated platform knowledge with authenticated user telemetry.
+    Strict read-only advisory boundary; zero mutation authority.
     """
-    p = _ensure_user_profile(db, current_user)
-    ctx = {
-        "user_name": current_user.name,
-        "current_income": p.current_income,
-        "stabilized_income": p.stabilized_income,
-        "surplus": p.surplus,
-        "recommended_contribution": p.recommended_contribution,
-        "current_buffer": p.current_buffer,
-        "protected_floor": p.protected_floor,
-        "safe_to_use_above_floor": p.safe_to_use_above_floor,
-        "current_coverage_weeks": p.current_coverage_weeks,
-        "resilience_score": p.resilience_score,
-        "weekly_burn": p.weekly_burn
-    }
-    return AICoachEngine.answer_query(req.query, ctx)
+    _ensure_user_profile(db, current_user)
+    return gemini_coach_service.answer_query(
+        db=db,
+        current_user=current_user,
+        query=req.query,
+        page_context=req.page_context,
+        timezone=req.timezone,
+        locale=req.locale
+    )
 
 
 @app.get("/api/v1/engine/audit")
@@ -2913,6 +2994,312 @@ def reset_state(
             "current_coverage_weeks": p.current_coverage_weeks
         }
     }
+
+
+# =====================================================================
+# BANK DATA INTEGRATION SUBSYSTEM (SETU ACCOUNT AGGREGATOR)
+# =====================================================================
+
+@app.get("/api/v1/bank-accounts")
+def list_bank_accounts(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    List all connected bank accounts for the authenticated user along with
+    aggregate connected liquidity position and freshness telemetry.
+    """
+    liquidity_info = BankAccountService.calculate_total_bank_liquidity(db, current_user.id)
+    connections = BankAccountService.list_user_connections(db, current_user.id)
+    
+    return {
+        "status": "success",
+        "liquidity": liquidity_info,
+        "connections": [c.to_dict() for c in connections],
+        "accounts": liquidity_info["accounts"]
+    }
+
+
+@app.post("/api/v1/bank-accounts/connect")
+def connect_bank_account(
+    req: ConnectBankRequest = Body(default_factory=ConnectBankRequest),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Initiate Setu Account Aggregator consent flow.
+    Returns consent_url for user redirection/webview and tracking connection_id.
+    """
+    phone = req.phone_or_vua or current_user.phone_number or "9876543210"
+    
+    # 1. Get or create BankConnection for this user
+    conn = BankAccountService.get_or_create_connection(
+        db=db,
+        user_id=current_user.id,
+        phone_or_vua=phone,
+        provider="SETU"
+    )
+    
+    # 2. Request consent creation from Setu AA
+    res = setu_aa_service.create_consent_request(
+        customer_vua=phone,
+        data_range_from=req.data_range_from,
+        data_range_to=req.data_range_to,
+        phone_number=current_user.phone_number
+    )
+    
+    if not res.get("success"):
+        conn.status = "ERROR"
+        conn.error_message_safe = "Failed to establish bank connection session."
+        db.commit()
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail={"error": {"code": "SETU_CONSENT_FAILED", "message": "Failed to create bank consent request."}}
+        )
+    
+    # 3. Record BankConsent entity
+    consent_id = res["consent_id"]
+    consent_url = res["consent_url"]
+    
+    bank_consent = BankConsent(
+        user_id=current_user.id,
+        bank_connection_id=conn.id,
+        provider=res.get("provider", "SETU"),
+        consent_id=consent_id,
+        status=res.get("status", "PENDING"),
+        consent_url=consent_url,
+        data_range_from=res.get("data_range_from"),
+        data_range_to=res.get("data_range_to"),
+        consent_created_at=get_utc_now(),
+        consent_updated_at=get_utc_now()
+    )
+    db.add(bank_consent)
+    conn.status = "AWAITING_CONSENT"
+    conn.updated_at = get_utc_now()
+    db.commit()
+    
+    return {
+        "status": "success",
+        "connection_id": conn.id,
+        "consent_id": consent_id,
+        "consent_url": consent_url,
+        "is_mock": res.get("is_mock", False),
+        "auth_warning": res.get("auth_warning"),
+        "provider": conn.provider,
+        "connection_status": conn.status,
+        "message": "Consent request created. Please complete account selection on the bank portal."
+    }
+
+
+@app.get("/api/v1/bank-accounts/status")
+def get_bank_connection_status(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Safe user-facing status endpoint for the authenticated user.
+    Never exposes provider secrets, auth tokens, or private credentials.
+    """
+    connections = BankAccountService.list_user_connections(db, current_user.id)
+    active_conn = connections[0] if connections else None
+    liquidity = BankAccountService.calculate_total_bank_liquidity(db, current_user.id)
+    
+    return {
+        "status": "success",
+        "has_connection": active_conn is not None,
+        "connection": active_conn.to_dict() if active_conn else None,
+        "liquidity": liquidity,
+        "provider_configured": setu_aa_service.is_configured
+    }
+
+
+@app.get("/api/v1/bank-accounts/{account_id}")
+def get_bank_account_details(
+    account_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Retrieve single bank account details for the authenticated user.
+    """
+    acc = BankAccountService.get_user_bank_account(db, current_user.id, account_id)
+    if not acc:
+        raise HTTPException(status_code=404, detail="Bank account not found")
+    return {"status": "success", "account": acc.to_dict()}
+
+
+@app.post("/api/v1/bank-accounts/{connection_id}/sync")
+def sync_bank_account(
+    connection_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Trigger on-demand synchronization ('Sync Now') for the specified bank connection.
+    Recalculates the financial engine and digital twin upon successful fetch.
+    """
+    conn = BankAccountService.get_connection(db, current_user.id, connection_id)
+    if not conn:
+        raise HTTPException(status_code=404, detail="Bank connection not found")
+        
+    result = setu_sync_service.execute_sync(db, current_user.id, connection_id)
+    if not result.get("success"):
+        raise HTTPException(
+            status_code=400,
+            detail={"error": {"code": "SYNC_FAILED", "message": result.get("error", "Sync failed")}}
+        )
+    return {"status": "success", "sync_result": result}
+
+
+@app.get("/api/v1/bank-accounts/{account_id}/transactions")
+def get_bank_transactions(
+    account_id: str,
+    direction: Optional[str] = Query(None, description="Filter by direction: credit or debit"),
+    category: Optional[str] = Query(None, description="Filter by category"),
+    limit: int = Query(50, ge=1, le=200),
+    offset: int = Query(0, ge=0),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Retrieve normalized transactions for a bank account belonging strictly to current user.
+    """
+    acc = BankAccountService.get_user_bank_account(db, current_user.id, account_id)
+    if not acc:
+        raise HTTPException(status_code=404, detail="Bank account not found")
+        
+    query = db.query(BankTransaction).filter(
+        BankTransaction.bank_account_id == acc.id,
+        BankTransaction.user_id == current_user.id
+    )
+    if direction:
+        query = query.filter(BankTransaction.direction == direction.lower())
+    if category:
+        query = query.filter(BankTransaction.category.ilike(f"%{category}%"))
+        
+    total = query.count()
+    txns = query.order_by(BankTransaction.transaction_date.desc()).offset(offset).limit(limit).all()
+    
+    return {
+        "status": "success",
+        "account": acc.to_dict(),
+        "total": total,
+        "offset": offset,
+        "limit": limit,
+        "transactions": [t.to_dict() for t in txns]
+    }
+
+
+@app.get("/api/v1/bank-accounts/{connection_id}/consent")
+def get_bank_consent_status(
+    connection_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    View consent state and validity details.
+    """
+    conn = BankAccountService.get_connection(db, current_user.id, connection_id)
+    if not conn:
+        raise HTTPException(status_code=404, detail="Bank connection not found")
+        
+    consent = db.query(BankConsent).filter(
+        BankConsent.bank_connection_id == conn.id
+    ).order_by(BankConsent.consent_created_at.desc()).first()
+    
+    if not consent:
+        raise HTTPException(status_code=404, detail="No consent record found")
+        
+    return {"status": "success", "consent": consent.to_dict()}
+
+
+@app.post("/api/v1/bank-accounts/{connection_id}/consent/revoke")
+def revoke_bank_consent(
+    connection_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Revoke consent with Setu AA and update local state.
+    """
+    conn = BankAccountService.get_connection(db, current_user.id, connection_id)
+    if not conn:
+        raise HTTPException(status_code=404, detail="Bank connection not found")
+        
+    consent = db.query(BankConsent).filter(
+        BankConsent.bank_connection_id == conn.id,
+        BankConsent.status.in_(["ACTIVE", "PENDING"])
+    ).first()
+    
+    if consent:
+        setu_aa_service.revoke_consent(consent.consent_id)
+        consent.status = "REVOKED"
+        consent.revoked_at = get_utc_now()
+        
+    conn.status = "CONSENT_REVOKED"
+    db.commit()
+    
+    return {"status": "success", "message": "Bank consent successfully revoked."}
+
+
+@app.delete("/api/v1/bank-accounts/{connection_id}")
+def disconnect_bank_account(
+    connection_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Disconnect a bank account. Revokes consent and marks accounts as inactive
+    while preserving historical transactions for audit and reporting.
+    """
+    result = BankAccountService.revoke_and_disconnect(db, current_user.id, connection_id)
+    if not result.get("success"):
+        raise HTTPException(status_code=404, detail=result.get("error", "Failed to disconnect"))
+    return result
+
+
+@app.post("/api/v1/bank-webhooks/setu")
+def handle_setu_webhook(
+    payload: SetuWebhookPayload,
+    db: Session = Depends(get_db)
+):
+    """
+    Process inbound Setu webhooks for consent status updates and data readiness notifications.
+    Idempotent and secure; never trusts user_id from payload, correlates strictly via consentId.
+    """
+    logger.info(f"Received Setu webhook event: type={payload.type}")
+    
+    # Extract identifiers
+    consent_id = payload.consentId or (payload.data.get("consentId") if payload.data else None)
+    event_type = payload.type
+    
+    if not consent_id:
+        return {"status": "ignored", "reason": "No consentId in webhook payload"}
+        
+    conn = BankAccountService.get_connection_by_consent_id(db, consent_id)
+    if not conn:
+        return {"status": "ignored", "reason": "Unknown consentId"}
+        
+    consent = db.query(BankConsent).filter(BankConsent.consent_id == consent_id).first()
+    
+    if event_type == "CONSENT_STATUS_UPDATE":
+        new_status = payload.status or (payload.data.get("status") if payload.data else "ACTIVE")
+        if consent:
+            consent.status = new_status
+            consent.consent_updated_at = get_utc_now()
+        if new_status == "ACTIVE":
+            conn.status = "CONSENT_ACTIVE"
+        elif new_status in ["REJECTED", "REVOKED", "EXPIRED"]:
+            conn.status = f"CONSENT_{new_status}"
+        db.commit()
+        return {"status": "success", "event": "CONSENT_STATUS_UPDATED", "new_status": new_status}
+        
+    elif event_type in ["FI_NOTIFICATION", "DATA_READY"]:
+        # Trigger background data sync
+        sync_result = setu_sync_service.execute_sync(db, conn.user_id, conn.id)
+        return {"status": "success", "event": "SYNC_TRIGGERED", "sync_result": sync_result}
+        
+    return {"status": "acknowledged"}
 
 
 # Mount static frontend files at root (after all API routes)

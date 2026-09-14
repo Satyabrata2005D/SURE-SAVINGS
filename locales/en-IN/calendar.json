@@ -1,0 +1,23 @@
+{
+  "title": "Income Calendar & Dynamic Ledger",
+  "subtitle": "Gig payout cycles, scheduled payments, and mandatory obligations",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "yesterday": "Yesterday",
+  "add_event": "Add Scheduled Event",
+  "expected_payout": "Expected Payout",
+  "mandatory_outflow": "Mandatory Outflow",
+  "buffer_allocation": "Buffer Allocation",
+  "month_view": "Month View",
+  "week_view": "Week View",
+  "no_events": "No scheduled financial events for this period.",
+  "gap_detected": "TIMING GAP DETECTED: Shortfall of {amount}",
+  "buffer_absorbed": "Automated vault buffer absorption of {amount} prevents checking account breach.",
+  "checking_balance": "Checking Balance",
+  "opening_balance": "Opening Balance",
+  "total_inflow": "Total Inflows",
+  "total_outflow": "Total Outflows",
+  "lowest_intraday": "Lowest Intraday Balance",
+  "closing_balance": "Closing Balance",
+  "protected_floor": "Protected Floor"
+}

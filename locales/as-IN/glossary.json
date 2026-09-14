@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "সুৰক্ষিত সঞ্চয় পৰিমাণ",
+  "smart_buffer": "স্মাৰ্ট বাফাৰ",
+  "protected_floor": "সুৰক্ষিত নগদ নিম্নতম সীমা",
+  "stabilized_income": "স্থিতিশীল উপাৰ্জন",
+  "expected_income": "প্ৰত্যাশিত আয়",
+  "financial_surplus": "বিত্তীয় ৰাহি",
+  "liquidity": "তাৰল্য",
+  "buffer_coverage": "বাফাৰ সুৰক্ষা কাল",
+  "income_volatility": "উপাৰ্জনৰ অস্থিৰতা",
+  "financial_risk": "বিত্তীয় সংকটৰ সম্ভাৱনা",
+  "financial_resilience": "বিত্তীয় স্থিতিস্থাপকতা",
+  "cash_flow": "নগদ প্ৰবাহ",
+  "income_shortfall": "আয়ৰ ঘাটি",
+  "capital_preservation": "মূলধন সুৰক্ষা",
+  "data_readiness": "তথ্যৰ প্ৰস্তুতি",
+  "data_quality": "তথ্যৰ মান",
+  "goal": "লক্ষ্য",
+  "obligation": "বাধ্যতামূলক দেনা",
+  "forecast": "পূৰ্বানুমান"
+}

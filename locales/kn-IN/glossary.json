@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "ಸುರಕ್ಷಿತ ಉಳಿತಾಯ ಮೊತ್ತ",
+  "smart_buffer": "ಸ್ಮಾರ್ಟ್ ಬಫರ್",
+  "protected_floor": "ರಕ್ಷಿತ ನಗದು ಕನಿಷ್ಠ ಮಿತಿ",
+  "stabilized_income": "ಸ್ಥಿರ ಆದಾಯ",
+  "expected_income": "ನಿರೀಕ್ಷಿತ ಆದಾಯ",
+  "financial_surplus": "ಹಣಕಾಸಿನ ಉಳಿಕೆ",
+  "liquidity": "ದ್ರವ್ಯತೆ",
+  "buffer_coverage": "ಬಫರ್ ರಕ್ಷಣೆ ಕಾಲ",
+  "income_volatility": "ಆದಾಯದ ಅನಿಶ್ಚಿತತೆ",
+  "financial_risk": "ಹಣಕಾಸು ಅಪಾಯ",
+  "financial_resilience": "ಹಣಕಾಸು ಸ್ಥಿತಿಸ್ಥಾಪಕತ್ವ",
+  "cash_flow": "ನಗದು ಹರಿವು",
+  "income_shortfall": "ಆದಾಯ ಕೊರತೆ",
+  "capital_preservation": "ಬಂಡವಾಳ ಸಂರಕ್ಷಣೆ",
+  "data_readiness": "ಡೇಟಾ ಸನ್ನದ್ಧತೆ",
+  "data_quality": "ಡೇಟಾ ಗುಣಮಟ್ಟ",
+  "goal": "ಗುರಿ",
+  "obligation": "ಕಡ್ಡಾಯ ಹೊಣೆಗಾರಿಕೆ",
+  "forecast": "ಮುನ್ಸೂಚನೆ"
+}

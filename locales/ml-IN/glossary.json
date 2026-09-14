@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "സുരക്ഷിതമായി സമ്പാദിക്കാവുന്ന തുക",
+  "smart_buffer": "സ്മാർട്ട് ബഫർ",
+  "protected_floor": "സംരക്ഷിത പണ അടിത്തറ",
+  "stabilized_income": "സ്ഥിര വരുമാനം",
+  "expected_income": "പ്രതീക്ഷിക്കുന്ന വരുമാനം",
+  "financial_surplus": "സാമ്പത്തിക മിച്ചം",
+  "liquidity": "ദ്രവ്യത",
+  "buffer_coverage": "ബഫർ പരിരക്ഷ",
+  "income_volatility": "വരുമാന ചാഞ്ചാട്ടം",
+  "financial_risk": "സാമ്പത്തിക നഷ്ടസാധ്യത",
+  "financial_resilience": "സാമ്പത്തിക പ്രതിരോധശേഷി",
+  "cash_flow": "പണപ്രവാഹം",
+  "income_shortfall": "വരുമാന കമ്മി",
+  "capital_preservation": "മൂലധന സംരക്ഷണം",
+  "data_readiness": "ഡാറ്റാ സന്നദ്ധത",
+  "data_quality": "ഡാറ്റാ ഗുണനിലവാരം",
+  "goal": "ലക്ഷ്യം",
+  "obligation": "ബാധ്യത",
+  "forecast": "പ്രവചനം"
+}

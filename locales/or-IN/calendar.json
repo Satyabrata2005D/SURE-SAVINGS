@@ -1,0 +1,23 @@
+{
+  "title": "ଆୟ କ୍ୟାଲେଣ୍ଡର ଏବଂ ଗତିଶୀଳ ଲେଜର",
+  "subtitle": "ଗିଗ୍ ପେଆଉଟ୍ ଚକ୍ର, ନିର୍ଦ୍ଧାରିତ ଦେୟ ଏବଂ ବାଧ୍ୟତାମୂଳକ ଦାୟିତ୍ୱ",
+  "today": "ଆଜି",
+  "tomorrow": "ଆସନ୍ତାକାଲି",
+  "yesterday": "ଗତକାଲି",
+  "add_event": "ଇଭେଣ୍ଟ ଯୋଡ଼ନ୍ତୁ",
+  "expected_payout": "ପ୍ରତ୍ୟାଶିତ ଆୟ",
+  "mandatory_outflow": "ବାଧ୍ୟତାମୂଳକ ଖର୍ଚ୍ଚ",
+  "buffer_allocation": "ବଫର୍ ଆବଣ୍ଟନ",
+  "month_view": "ମାସିକ ଦୃଶ୍ୟ",
+  "week_view": "ସାପ୍ତାହିକ ଦୃଶ୍ୟ",
+  "no_events": "ଏହି ଅବଧି ପାଇଁ କୌଣସି ଇଭେଣ୍ଟ ନାହିଁ।",
+  "gap_detected": "ସମୟର ଅଭାବ ଚିହ୍ନଟ: {amount} ର ଅଭାବ",
+  "buffer_absorbed": "ସ୍ୱୟଂଚାଳିତ ଭଲ୍ଟ ବଫର୍ {amount} ଶୋଷଣ କରି ଖାତା ଉଲ୍ଲଂଘନକୁ ରୋକିଥାଏ।",
+  "checking_balance": "ଖାତା ବାଲାନ୍ସ",
+  "opening_balance": "ପ୍ରାରମ୍ଭିକ ବାଲାନ୍ସ",
+  "total_inflow": "ମୋଟ ଆଗମନ",
+  "total_outflow": "ମୋଟ ନିର୍ଗମନ",
+  "lowest_intraday": "ସର୍ବନିମ୍ନ ଇଣ୍ଟ୍ରାଡେ ବାଲାନ୍ସ",
+  "closing_balance": "ଅନ୍ତିମ ବାଲାନ୍ସ",
+  "protected_floor": "ସଂରକ୍ଷିତ ଫ୍ଲୋର୍"
+}

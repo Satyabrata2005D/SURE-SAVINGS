@@ -1,0 +1,19 @@
+{
+  "title": "બેંક ખાતાઓ અને બેલેન્સ",
+  "subtitle": "Setu AA દ્વારા એકાઉન્ટ એગ્રીગેટર સીધું રીડ-ઓન્લી કનેક્શન",
+  "connect_btn": "બેંક ખાતું જોડો",
+  "sync_btn": "સિંક કરો",
+  "syncing": "સિંક થઈ રહ્યું છે...",
+  "connected_accounts": "જોડાયેલા ખાતાઓ",
+  "no_accounts": "હજુ સુધી કોઈ ખાતું જોડાયેલ નથી. આપમેળે રક્ષણ માટે ખાતું જોડો.",
+  "verified_balance": "ચકાસાયેલ બેલેન્સ",
+  "last_synced": "છેલ્લું સિંક",
+  "auto_sync_active": "ઓટો-સિંક સક્રિય",
+  "disconnect": "ડિસ્કનેક્ટ કરો",
+  "revoke_consent": "સંમતિ રદ કરો",
+  "checking_account": "ચાલુ ખાતું",
+  "savings_account": "બચત ખાતું",
+  "institution": "નાણાકીય સંસ્થા",
+  "framework_notice": "RBI એકાઉન્ટ એગ્રીગેટર ફ્રેમવર્ક",
+  "encrypted_notice": "નોન-કસ્ટોડિયલ / એન્ડ-ટુ-એન્ડ એન્ક્રિપ્ટેડ"
+}

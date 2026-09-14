@@ -1,0 +1,23 @@
+{
+  "title": "ఆదాయ క్యాలెండర్ & లెడ్జర్",
+  "subtitle": "గిగ్ సంపాదన మరియు చెల్లింపుల ముందస్తు అంచనా",
+  "today": "ఈరోజు",
+  "tomorrow": "రేపు",
+  "yesterday": "నిన్న",
+  "add_event": "కొత్త ఈవెంట్‌ను జోడించండి",
+  "expected_payout": "ఆశించిన ఆదాయం",
+  "mandatory_outflow": "తప్పనిసరి ఖర్చు",
+  "buffer_allocation": "బఫర్ కేటాయింపు",
+  "month_view": "నెల వీక్షణ",
+  "week_view": "వారం వీక్షణ",
+  "no_events": "ఈ తేదీన ఎటువంటి ఆర్థిక ఈవెంట్‌లు లేవు.",
+  "gap_detected": "సమయ వ్యత్యాసం గుర్తించబడింది: {amount} కొరత",
+  "buffer_absorbed": "ఆటోమేటెడ్ వాల్ట్ బఫర్ {amount} ను గ్రహించడం వలన ఖాతా పరిమితి ఉల్లంఘన నిరోధించబడుతుంది.",
+  "checking_balance": "ఖాతా నిల్వ",
+  "opening_balance": "ప్రారంభ నిల్వ",
+  "total_inflow": "మొత్తం ఇన్‌ఫ్లోలు",
+  "total_outflow": "మొత్తం అవుట్‌ఫ్లోలు",
+  "lowest_intraday": "అత్యల్ప ఇంట్రాడే నిల్వ",
+  "closing_balance": "ముగింపు నిల్వ",
+  "protected_floor": "రక్షిత ఫ్లోర్"
+}

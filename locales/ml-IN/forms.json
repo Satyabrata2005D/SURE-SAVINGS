@@ -1,0 +1,8 @@
+{
+  "email_label": "ഇമെയിൽ വിലാസം",
+  "email_placeholder": "name@example.com",
+  "amount_label": "തുക (₹)",
+  "date_label": "തീയതി",
+  "notes_label": "കുറിപ്പുകൾ (ഓപ്ഷണൽ)",
+  "submit": "സമർപ്പിക്കുക"
+}

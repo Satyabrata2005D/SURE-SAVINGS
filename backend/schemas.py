@@ -57,6 +57,9 @@ class DeleteProfileRequest(BaseModel):
 
 class AIChatRequest(BaseModel):
     query: str = Field(..., min_length=1, max_length=500, description="User query for the AI coach")
+    page_context: Optional[Dict[str, Any]] = Field(None, description="Optional client-side page context: page, section, selectedItem")
+    timezone: Optional[str] = Field(None, description="Client IANA timezone e.g. 'Asia/Kolkata', 'America/New_York'")
+    locale: Optional[str] = Field(None, description="Client locale e.g. 'en-IN', 'en-US'")
 
 class SimulationRequest(BaseModel):
     amount: float = Field(..., ge=0.0, description="Amount to simulate")
@@ -249,3 +252,112 @@ class IncomeProviderConnectRequest(BaseModel):
     notes: Optional[str] = Field(None, description="Optional notes")
 
 
+# =====================================================================
+# BANK DATA INTEGRATION SUBSYSTEM SCHEMAS (SETU ACCOUNT AGGREGATOR)
+# =====================================================================
+
+class ConnectBankRequest(BaseModel):
+    phone_or_vua: Optional[str] = Field(None, description="Customer phone number (e.g. 9876543210) or VUA (e.g. user@setu)")
+    data_range_from: Optional[str] = Field(None, description="ISO start date for transaction history fetch")
+    data_range_to: Optional[str] = Field(None, description="ISO end date for transaction history fetch")
+
+class BankConnectionResponse(BaseModel):
+    id: str
+    provider: str
+    status: str
+    customer_reference: Optional[str] = None
+    phone_or_vua: Optional[str] = None
+    error_code: Optional[str] = None
+    error_message_safe: Optional[str] = None
+    last_sync_at: Optional[str] = None
+    last_successful_sync_at: Optional[str] = None
+    created_at: Optional[str] = None
+    accounts_count: int = 0
+
+class BankAccountResponse(BaseModel):
+    id: str
+    bank_connection_id: str
+    fip_id: str
+    institution_name: str
+    masked_account_number: str
+    account_type: str
+    currency: str
+    current_reported_balance: float
+    available_reported_balance: Optional[float] = None
+    balance_as_of: Optional[str] = None
+    status: str
+    created_at: Optional[str] = None
+
+class BankTransactionResponse(BaseModel):
+    id: str
+    bank_account_id: str
+    external_transaction_id_or_stable_hash: str
+    transaction_date: str
+    transaction_timestamp: Optional[str] = None
+    amount: float
+    direction: str
+    description: str
+    merchant: Optional[str] = None
+    category: str
+    subcategory: Optional[str] = None
+    currency: str
+    reference: Optional[str] = None
+    balance_after: Optional[float] = None
+    classification_status: str
+    is_income_candidate: bool
+    is_expense_candidate: bool
+    is_recurring_candidate: bool
+    is_self_transfer: bool
+    confidence_score: float
+    imported_at: Optional[str] = None
+
+class BankSyncResponse(BaseModel):
+    success: bool
+    connection_id: Optional[str] = None
+    status: Optional[str] = None
+    accounts_count: Optional[int] = None
+    records_received: Optional[int] = None
+    records_imported: Optional[int] = None
+    records_skipped_duplicate: Optional[int] = None
+    total_reported_balance: Optional[float] = None
+    last_synced_at: Optional[str] = None
+    financial_engine: Optional[Dict[str, Any]] = None
+    error: Optional[str] = None
+
+class BankConsentStatusResponse(BaseModel):
+    id: str
+    consent_id: str
+    status: str
+    consent_url: Optional[str] = None
+    data_range_from: Optional[str] = None
+    data_range_to: Optional[str] = None
+    expires_at: Optional[str] = None
+    revoked_at: Optional[str] = None
+
+class SetuWebhookPayload(BaseModel):
+    type: Optional[str] = Field(None, description="Notification type: CONSENT_STATUS_UPDATE or FI_NOTIFICATION")
+    timestamp: Optional[str] = None
+    data: Optional[Dict[str, Any]] = None
+    consentId: Optional[str] = None
+    sessionId: Optional[str] = None
+    status: Optional[str] = None
+
+
+class LocalizationConfigResponse(BaseModel):
+    default_locale: str
+    supported_locales: List[Dict[str, Any]]
+    translation_version: str
+    feature_flags: Dict[str, Any]
+
+
+class UserPreferencesRequest(BaseModel):
+    preferred_locale: Optional[str] = None
+    timezone: Optional[str] = None
+    currency: Optional[str] = None
+
+
+class UserPreferencesResponse(BaseModel):
+    preferred_locale: str
+    timezone: str
+    currency: str
+    status: str = "success"

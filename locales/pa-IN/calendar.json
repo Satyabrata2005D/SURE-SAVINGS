@@ -1,0 +1,23 @@
+{
+  "title": "ਆਮਦਨ ਕੈਲੰਡਰ ਅਤੇ ਗਤੀਸ਼ੀਲ ਲੇਜ਼ਰ",
+  "subtitle": "ਗਿਗ ਭੁਗਤਾਨ ਚੱਕਰ, ਨਿਯਤ ਭੁਗਤਾਨ ਅਤੇ ਲਾਜ਼ਮੀ ਦੇਣਦਾਰੀਆਂ",
+  "today": "ਅੱਜ",
+  "tomorrow": "ਕੱਲ੍ਹ",
+  "yesterday": "ਬੀਤਿਆ ਕੱਲ੍ਹ",
+  "add_event": "ਇਵੈਂਟ ਸ਼ਾਮਲ ਕਰੋ",
+  "expected_payout": "ਅਨੁਮਾਨਿਤ ਭੁਗਤਾਨ",
+  "mandatory_outflow": "ਲਾਜ਼ਮੀ ਖਰਚਾ",
+  "buffer_allocation": "ਬਫਰ ਵੰਡ",
+  "month_view": "ਮਹੀਨਾਵਾਰ ਝਲਕ",
+  "week_view": "ਹਫ਼ਤਾਵਾਰੀ ਝਲਕ",
+  "no_events": "ਇਸ ਮਿਆਦ ਲਈ ਕੋਈ ਇਵੈਂਟ ਨਿਯਤ ਨਹੀਂ ਹੈ।",
+  "gap_detected": "ਸਮੇਂ ਦਾ ਅੰਤਰ ਮਿਲਿਆ: {amount} ਦੀ ਕਮੀ",
+  "buffer_absorbed": "ਸਵੈਚਾਲਿਤ ਵਾਲਟ ਬਫਰ {amount} ਸੋਖ ਕੇ ਖਾਤੇ ਦੀ ਸੀਮਾ ਉਲੰਘਣਾ ਨੂੰ ਰੋਕਦਾ ਹੈ।",
+  "checking_balance": "ਖਾਤਾ ਬਕਾਇਆ",
+  "opening_balance": "ਸ਼ੁਰੂਆਤੀ ਬਕਾਇਆ",
+  "total_inflow": "ਕੁੱਲ ਆਮਦਨ",
+  "total_outflow": "ਕੁੱਲ ਖਰਚੇ",
+  "lowest_intraday": "ਸਭ ਤੋਂ ਘੱਟ ਇੰਟਰਾਡੇ ਬਕਾਇਆ",
+  "closing_balance": "ਅੰਤਿਮ ਬਕਾਇਆ",
+  "protected_floor": "ਸੁਰੱਖਿਅਤ ਫਲੋਰ"
+}

@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "सुरक्षित बचत रक्कम",
+  "smart_buffer": "स्मार्ट बफर",
+  "protected_floor": "संरक्षित रोख किमान मर्यादा",
+  "stabilized_income": "स्थिर उत्पन्न",
+  "expected_income": "अपेक्षित उत्पन्न",
+  "financial_surplus": "आर्थिक अधिशेष",
+  "liquidity": "तरलता",
+  "buffer_coverage": "बफर कव्हरेज",
+  "income_volatility": "उत्पन्नातील चढ-उतार",
+  "financial_risk": "आर्थिक जोखीम",
+  "financial_resilience": "आर्थिक लवचिकता",
+  "cash_flow": "रोख प्रवाह",
+  "income_shortfall": "उत्पन्नातील तूट",
+  "capital_preservation": "भांडवल संरक्षण",
+  "data_readiness": "डेटा सज्जता",
+  "data_quality": "डेटा गुणवत्ता",
+  "goal": "ध्येय",
+  "obligation": "अनिवार्य दायित्व",
+  "forecast": "अंदाज"
+}

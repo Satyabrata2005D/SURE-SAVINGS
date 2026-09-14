@@ -7,6 +7,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
+from typing import Dict, Any, Optional, List
 import uuid
 
 from backend.database import Base
@@ -36,6 +37,7 @@ class User(Base):
     currency = Column(String(8), default="INR")
     timezone = Column(String(64), default="Asia/Kolkata")
     locale = Column(String(16), default="en-IN")
+    preferred_locale = Column(String(16), default="en-IN")
     status = Column(String(32), default="ACTIVE")
     is_demo_user = Column(Boolean, default=False)
     phone_number = Column(String(32), nullable=True)
@@ -76,6 +78,8 @@ class User(Base):
     audit_traces = relationship("AuditTrace", back_populates="user", cascade="all, delete-orphan")
     financial_events = relationship("FinancialEvent", back_populates="user", cascade="all, delete-orphan")
     calendar_events = relationship("CalendarEvent", back_populates="user", cascade="all, delete-orphan")
+    bank_connections = relationship("BankConnection", back_populates="user", cascade="all, delete-orphan")
+    bank_accounts = relationship("BankAccount", back_populates="user", cascade="all, delete-orphan")
 
 class UserSession(Base):
     __tablename__ = "user_sessions"
@@ -426,4 +430,296 @@ class CalendarEvent(Base):
             "notes": self.notes,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
+        }
+
+
+# =====================================================================
+# BANK DATA INTEGRATION SUBSYSTEM (SETU ACCOUNT AGGREGATOR)
+# =====================================================================
+
+class BankConnection(Base):
+    """
+    Represents an Account Aggregator connection established by an authenticated user.
+    Maintains status lifecycle: CONNECTING, AWAITING_CONSENT, CONSENT_ACTIVE,
+    SYNCING, CONNECTED, PARTIALLY_AVAILABLE, NEEDS_ATTENTION, CONSENT_EXPIRED,
+    CONSENT_REVOKED, DISCONNECTED, ERROR.
+    """
+    __tablename__ = "bank_connections"
+
+    id = Column(String(64), primary_key=True, default=lambda: generate_uuid("bconn"))
+    user_id = Column(String(64), ForeignKey("users.id"), nullable=False, index=True)
+    provider = Column(String(32), default="SETU")  # SETU, MOCK_SETU
+    status = Column(String(32), default="CONNECTING")
+    customer_reference = Column(String(128), nullable=True)
+    phone_or_vua = Column(String(64), nullable=True)
+    error_code = Column(String(64), nullable=True)
+    error_message_safe = Column(String(512), nullable=True)
+    metadata_safe = Column(Text, nullable=True)  # Safe JSON string (no secrets)
+    last_sync_at = Column(DateTime, nullable=True)
+    last_successful_sync_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=get_utc_now)
+    updated_at = Column(DateTime, default=get_utc_now, onupdate=get_utc_now)
+
+    user = relationship("User", back_populates="bank_connections")
+    accounts = relationship("BankAccount", back_populates="connection", cascade="all, delete-orphan")
+    consents = relationship("BankConsent", back_populates="connection", cascade="all, delete-orphan")
+    sessions = relationship("BankDataSession", back_populates="connection", cascade="all, delete-orphan")
+    sync_runs = relationship("BankSyncRun", back_populates="connection", cascade="all, delete-orphan")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "provider": self.provider,
+            "status": self.status,
+            "customer_reference": self.customer_reference,
+            "phone_or_vua": self.phone_or_vua,
+            "error_code": self.error_code,
+            "error_message_safe": self.error_message_safe,
+            "last_sync_at": self.last_sync_at.isoformat() if self.last_sync_at else None,
+            "last_successful_sync_at": self.last_successful_sync_at.isoformat() if self.last_successful_sync_at else None,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+            "accounts_count": len(self.accounts) if self.accounts else 0
+        }
+
+
+class BankAccount(Base):
+    """
+    Represents an individual bank account linked via Account Aggregator.
+    Stores latest reported balance, balance timestamp, and account metadata.
+    """
+    __tablename__ = "bank_accounts"
+
+    id = Column(String(64), primary_key=True, default=lambda: generate_uuid("bacc"))
+    bank_connection_id = Column(String(64), ForeignKey("bank_connections.id"), nullable=False, index=True)
+    user_id = Column(String(64), ForeignKey("users.id"), nullable=False, index=True)
+    fip_id = Column(String(64), default="SETU_FIP")
+    institution_name = Column(String(128), default="Bank")
+    masked_account_number = Column(String(32), nullable=False)
+    account_type = Column(String(32), default="SAVINGS")  # SAVINGS, CURRENT
+    currency = Column(String(8), default="INR")
+    current_reported_balance = Column(Float, default=0.0)
+    available_reported_balance_if_supported = Column(Float, nullable=True)
+    balance_as_of = Column(DateTime, nullable=True)
+    status = Column(String(32), default="ACTIVE")  # ACTIVE, INACTIVE, UNLINKED
+    created_at = Column(DateTime, default=get_utc_now)
+    updated_at = Column(DateTime, default=get_utc_now, onupdate=get_utc_now)
+
+    connection = relationship("BankConnection", back_populates="accounts")
+    user = relationship("User", back_populates="bank_accounts")
+    transactions = relationship("BankTransaction", back_populates="bank_account", cascade="all, delete-orphan")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "bank_connection_id": self.bank_connection_id,
+            "user_id": self.user_id,
+            "fip_id": self.fip_id,
+            "institution_name": self.institution_name,
+            "masked_account_number": self.masked_account_number,
+            "account_type": self.account_type,
+            "currency": self.currency,
+            "current_reported_balance": float(self.current_reported_balance or 0.0),
+            "available_reported_balance": float(self.available_reported_balance_if_supported) if self.available_reported_balance_if_supported is not None else None,
+            "balance_as_of": self.balance_as_of.isoformat() if self.balance_as_of else None,
+            "status": self.status,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
+        }
+
+
+class BankConsent(Base):
+    """
+    Tracks Setu consent artefacts with validity ranges, status lifecycle,
+    and revocation state.
+    """
+    __tablename__ = "bank_consents"
+
+    id = Column(String(64), primary_key=True, default=lambda: generate_uuid("bcon"))
+    user_id = Column(String(64), ForeignKey("users.id"), nullable=False, index=True)
+    bank_connection_id = Column(String(64), ForeignKey("bank_connections.id"), nullable=False, index=True)
+    provider = Column(String(32), default="SETU")
+    consent_id = Column(String(128), unique=True, index=True, nullable=False)
+    status = Column(String(32), default="PENDING")  # PENDING, ACTIVE, REJECTED, REVOKED, PAUSED, EXPIRED
+    purpose_code = Column(String(32), default="101")
+    purpose_text = Column(String(256), default="Wealth management and cash flow resilience planning")
+    data_range_from = Column(String(32), nullable=True)
+    data_range_to = Column(String(32), nullable=True)
+    consent_url = Column(String(512), nullable=True)
+    consent_created_at = Column(DateTime, default=get_utc_now)
+    consent_updated_at = Column(DateTime, default=get_utc_now, onupdate=get_utc_now)
+    expires_at = Column(DateTime, nullable=True)
+    revoked_at = Column(DateTime, nullable=True)
+    last_fetch_at = Column(DateTime, nullable=True)
+
+    connection = relationship("BankConnection", back_populates="consents")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "bank_connection_id": self.bank_connection_id,
+            "consent_id": self.consent_id,
+            "status": self.status,
+            "purpose_code": self.purpose_code,
+            "purpose_text": self.purpose_text,
+            "data_range_from": self.data_range_from,
+            "data_range_to": self.data_range_to,
+            "consent_url": self.consent_url,
+            "consent_created_at": self.consent_created_at.isoformat() if self.consent_created_at else None,
+            "expires_at": self.expires_at.isoformat() if self.expires_at else None,
+            "revoked_at": self.revoked_at.isoformat() if self.revoked_at else None,
+            "last_fetch_at": self.last_fetch_at.isoformat() if self.last_fetch_at else None
+        }
+
+
+class BankDataSession(Base):
+    """
+    Tracks Setu data-fetch sessions created against active consents.
+    """
+    __tablename__ = "bank_data_sessions"
+
+    id = Column(String(64), primary_key=True, default=lambda: generate_uuid("bds"))
+    user_id = Column(String(64), ForeignKey("users.id"), nullable=False, index=True)
+    bank_connection_id = Column(String(64), ForeignKey("bank_connections.id"), nullable=False, index=True)
+    consent_id = Column(String(128), nullable=False, index=True)
+    data_session_id = Column(String(128), unique=True, index=True, nullable=False)
+    status = Column(String(32), default="PENDING")  # PENDING, PARTIAL, COMPLETED, EXPIRED, FAILED
+    requested_from = Column(String(32), nullable=True)
+    requested_to = Column(String(32), nullable=True)
+    format = Column(String(16), default="json")
+    ready_at = Column(DateTime, nullable=True)
+    completed_at = Column(DateTime, nullable=True)
+    failure_code = Column(String(64), nullable=True)
+    failure_message_safe = Column(String(512), nullable=True)
+    created_at = Column(DateTime, default=get_utc_now)
+
+    connection = relationship("BankConnection", back_populates="sessions")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "bank_connection_id": self.bank_connection_id,
+            "consent_id": self.consent_id,
+            "data_session_id": self.data_session_id,
+            "status": self.status,
+            "requested_from": self.requested_from,
+            "requested_to": self.requested_to,
+            "ready_at": self.ready_at.isoformat() if self.ready_at else None,
+            "completed_at": self.completed_at.isoformat() if self.completed_at else None,
+            "failure_code": self.failure_code,
+            "failure_message_safe": self.failure_message_safe,
+            "created_at": self.created_at.isoformat() if self.created_at else None
+        }
+
+
+class BankTransaction(Base):
+    """
+    Stores imported bank transactions with idempotency hashing,
+    confidence classification, candidate tagging, and self-transfer detection.
+    """
+    __tablename__ = "bank_transactions"
+
+    id = Column(String(64), primary_key=True, default=lambda: generate_uuid("btx"))
+    user_id = Column(String(64), ForeignKey("users.id"), nullable=False, index=True)
+    bank_account_id = Column(String(64), ForeignKey("bank_accounts.id"), nullable=False, index=True)
+    external_transaction_id_or_stable_hash = Column(String(128), nullable=False, index=True)
+    transaction_date = Column(String(32), nullable=False, index=True)  # YYYY-MM-DD
+    transaction_timestamp = Column(DateTime, nullable=True)
+    value_date_if_available = Column(String(32), nullable=True)
+    amount = Column(Float, nullable=False)
+    direction = Column(String(16), nullable=False)  # credit, debit
+    description = Column(Text, nullable=True)
+    merchant = Column(String(128), nullable=True)
+    category = Column(String(64), default="General")
+    subcategory = Column(String(64), nullable=True)
+    currency = Column(String(8), default="INR")
+    reference = Column(String(128), nullable=True)
+    balance_after_if_available = Column(Float, nullable=True)
+    source = Column(String(64), default="BANK_SETU")
+    raw_record_hash = Column(String(128), nullable=True)
+    imported_at = Column(DateTime, default=get_utc_now)
+    updated_at = Column(DateTime, default=get_utc_now, onupdate=get_utc_now)
+    classification_status = Column(String(32), default="UNCLASSIFIED")  # CONFIRMED, LIKELY, UNCERTAIN, UNCLASSIFIED, SELF_TRANSFER
+    is_income_candidate = Column(Boolean, default=False)
+    is_expense_candidate = Column(Boolean, default=False)
+    is_recurring_candidate = Column(Boolean, default=False)
+    is_self_transfer = Column(Boolean, default=False)
+    confidence_score = Column(Float, default=0.5)
+
+    bank_account = relationship("BankAccount", back_populates="transactions")
+
+    __table_args__ = (
+        Index("idx_btx_user_account", "user_id", "bank_account_id"),
+        Index("idx_btx_hash_account", "bank_account_id", "external_transaction_id_or_stable_hash", unique=True),
+    )
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "bank_account_id": self.bank_account_id,
+            "external_transaction_id_or_stable_hash": self.external_transaction_id_or_stable_hash,
+            "transaction_date": self.transaction_date,
+            "transaction_timestamp": self.transaction_timestamp.isoformat() if self.transaction_timestamp else None,
+            "amount": float(self.amount),
+            "direction": self.direction,
+            "description": self.description or "",
+            "merchant": self.merchant,
+            "category": self.category or "General",
+            "subcategory": self.subcategory,
+            "currency": self.currency,
+            "reference": self.reference,
+            "balance_after": float(self.balance_after_if_available) if self.balance_after_if_available is not None else None,
+            "source": self.source,
+            "classification_status": self.classification_status,
+            "is_income_candidate": self.is_income_candidate,
+            "is_expense_candidate": self.is_expense_candidate,
+            "is_recurring_candidate": self.is_recurring_candidate,
+            "is_self_transfer": self.is_self_transfer,
+            "confidence_score": float(self.confidence_score or 0.5),
+            "imported_at": self.imported_at.isoformat() if self.imported_at else None
+        }
+
+
+class BankSyncRun(Base):
+    """
+    Maintains full audit trails for bank sync operations including
+    counts, timestamps, and safe error diagnostics.
+    """
+    __tablename__ = "bank_sync_runs"
+
+    id = Column(String(64), primary_key=True, default=lambda: generate_uuid("bsync"))
+    user_id = Column(String(64), ForeignKey("users.id"), nullable=False, index=True)
+    connection_id = Column(String(64), ForeignKey("bank_connections.id"), nullable=False, index=True)
+    started_at = Column(DateTime, default=get_utc_now)
+    completed_at = Column(DateTime, nullable=True)
+    status = Column(String(32), default="RUNNING")  # RUNNING, SUCCESS, PARTIAL, FAILED
+    records_received = Column(Integer, default=0)
+    records_imported = Column(Integer, default=0)
+    records_updated = Column(Integer, default=0)
+    records_skipped_duplicate = Column(Integer, default=0)
+    records_failed = Column(Integer, default=0)
+    error_code = Column(String(64), nullable=True)
+    safe_error_message = Column(String(512), nullable=True)
+
+    connection = relationship("BankConnection", back_populates="sync_runs")
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "connection_id": self.connection_id,
+            "started_at": self.started_at.isoformat() if self.started_at else None,
+            "completed_at": self.completed_at.isoformat() if self.completed_at else None,
+            "status": self.status,
+            "records_received": self.records_received,
+            "records_imported": self.records_imported,
+            "records_updated": self.records_updated,
+            "records_skipped_duplicate": self.records_skipped_duplicate,
+            "records_failed": self.records_failed,
+            "error_code": self.error_code,
+            "safe_error_message": self.safe_error_message
         }

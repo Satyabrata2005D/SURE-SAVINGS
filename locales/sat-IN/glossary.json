@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "নিরাপদে সঞ্চয়যোগ্য পরিমাণ",
+  "smart_buffer": "স্মার্ট বাফার",
+  "protected_floor": "সুরক্ষিত নগদ ন্যূনতম সীমা",
+  "stabilized_income": "স্থিতিশীল আয়",
+  "expected_income": "প্রত্যাশিত আয়",
+  "financial_surplus": "আর্থিক উদ্বৃত্ত",
+  "liquidity": "তারল্য",
+  "buffer_coverage": "বাফার কভারেজ",
+  "income_volatility": "আয়ের অস্থিরতা",
+  "financial_risk": "আর্থিক ঝুঁকি",
+  "financial_resilience": "আর্থিক স্থিতিস্থাপকতা",
+  "cash_flow": "নগদ প্রবাহ",
+  "income_shortfall": "আয়ের ঘাটতি",
+  "capital_preservation": "মূলধন সুরক্ষা",
+  "data_readiness": "তথ্যের প্রস্তুতি",
+  "data_quality": "ডেটার গুণমান",
+  "goal": "লক্ষ্য",
+  "obligation": "দায়বদ্ধতা",
+  "forecast": "পূর্বাভাস"
+}

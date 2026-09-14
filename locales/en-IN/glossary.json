@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "Safe-to-Save",
+  "smart_buffer": "Smart Buffer",
+  "protected_floor": "Protected Cash Floor",
+  "stabilized_income": "Stabilized Income",
+  "expected_income": "Expected Income",
+  "financial_surplus": "Financial Surplus",
+  "liquidity": "Liquidity",
+  "buffer_coverage": "Buffer Coverage",
+  "income_volatility": "Income Volatility",
+  "financial_risk": "Financial Risk",
+  "financial_resilience": "Financial Resilience",
+  "cash_flow": "Cash Flow",
+  "income_shortfall": "Income Shortfall",
+  "capital_preservation": "Capital Preservation",
+  "data_readiness": "Data Readiness",
+  "data_quality": "Data Quality",
+  "goal": "Goal",
+  "obligation": "Obligation",
+  "forecast": "Forecast"
+}

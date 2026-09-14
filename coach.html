@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>SURE SAVINGS — AI Resilience Coach</title>
+  <title>SURE SAVINGS — SURE AI</title>
   
   <!-- Tailwind CSS v3 with Forms & Container Queries -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -45,17 +45,17 @@
       <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
       </svg>
-      <span class="font-medium">SOC-2 Type II Vault</span>
+      <span class="font-medium" data-i18n="navigation.soc2_badge">SOC-2 Type II Vault</span>
     </div>
     <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
       <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
         <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
       </svg>
-      <span>256-bit TLS Encrypted</span>
+      <span data-i18n="navigation.encryption_badge">256-bit TLS Encrypted</span>
     </div>
     <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
       <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-      <span class="font-medium" style="color: var(--text-secondary)">Deterministic Rule Engine v5.0</span>
+      <span class="font-medium" style="color: var(--text-secondary)">Financial calculations remain deterministic.</span>
     </div>
   </div>
 
@@ -67,7 +67,7 @@
     </button>
 
     <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
-      <span>🌐 Public Explorer</span>
+      <span data-i18n="navigation.public_explorer">🌐 Public Explorer</span>
     </a>
 
     <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
@@ -88,31 +88,31 @@
 
     <div class="relative" id="user-avatar-container">
       <div class="flex items-center space-x-2 pl-2 border-l cursor-pointer" style="border-color: var(--border-default)" onclick="toggleUserMenu()">
-        <div class="user-avatar" id="user-avatar-circle">AK</div>
+        <div class="user-avatar" id="user-avatar-circle">U</div>
         <div class="hidden sm:block text-right">
-          <p class="font-bold leading-none text-xs" style="color: var(--text-primary)" id="user-display-name">Arjun K.</p>
-          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Delivery &amp; Freelance Lead</p>
+          <p class="font-bold leading-none text-xs user-display-name" style="color: var(--text-primary)" id="user-display-name">Member</p>
+          <p class="text-[10px] leading-tight" style="color: var(--text-muted)" id="user-role">Workspace User</p>
         </div>
       </div>
       <div class="user-menu hidden" id="user-menu-dropdown">
         <div class="px-3 py-2 border-b" style="border-color: var(--border-default)">
-          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Arjun K.</p>
-          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">arjun@example.com</p>
+          <p class="text-xs font-bold user-display-name" style="color: var(--text-primary)" id="menu-user-name">Member</p>
+          <p class="text-[10px] user-email" style="color: var(--text-muted)" id="menu-user-email">user@example.com</p>
         </div>
         <div class="py-1 border-b" style="border-color: var(--border-default)">
           <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
             <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-            <span>Calibrate Baseline</span>
+            <span data-i18n="navigation.calibrate_baseline">Calibrate Baseline</span>
           </div>
         </div>
         <div class="py-1">
           <div class="user-menu-item" onclick="exportData()">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span>Export Data</span>
+            <span data-i18n="navigation.export_data">Export Data</span>
           </div>
           <div class="user-menu-item danger" onclick="handleLogout()">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-            <span>Sign Out</span>
+            <span data-i18n="navigation.sign_out">Sign Out</span>
           </div>
         </div>
       </div>
@@ -128,12 +128,12 @@
   <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
     <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
       <div class="mb-4 px-2">
-        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)" data-i18n="navigation.command_center">Navigation</h2>
       </div>
       <nav class="space-y-1" id="mainNavigationTabs">
         <a href="index.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-          <span>Command Center</span>
+          <span data-i18n="navigation.command_center">Command Center</span>
         </a>
         <a href="simulator.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
@@ -141,43 +141,35 @@
         </a>
         <a href="income-intelligence.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-          <span>Income Intelligence</span>
+          <span data-i18n="navigation.income_intelligence">Income Intelligence</span>
         </a>
         <a href="planner.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-          <span>Cash Flow Planner</span>
+          <span data-i18n="navigation.cash_flow_planner">Cash Flow Planner</span>
         </a>
         <a href="decision-pipeline.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-          <span>Decision Pipeline</span>
+          <span data-i18n="navigation.decision_pipeline">Decision Pipeline</span>
         </a>
         <a href="calendar.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span>Income Calendar</span>
+          <span data-i18n="navigation.income_calendar">Income Calendar</span>
         </a>
         <a href="goals.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          <span>Goals &amp; Buffer Plan</span>
+          <span data-i18n="navigation.goals_buffer">Goals & Buffer Plan</span>
         </a>
         <a href="risk.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-          <span>Risk &amp; Early Warning</span>
+          <span data-i18n="navigation.risk_early_warning">Risk & Early Warning</span>
         </a>
-        <a href="health.html" class="unified-nav-link">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-          <span>Financial Health</span>
-        </a>
-        <a href="activity.html" class="unified-nav-link">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-          <span>Transactions &amp; Activity</span>
+        <a href="bank-accounts.html" class="unified-nav-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+          <span data-i18n="navigation.bank_accounts">Bank Accounts</span>
         </a>
         <a href="coach.html" class="unified-nav-link active">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-          <span>AI Resilience Coach</span>
-        </a>
-        <a href="login.html" class="unified-nav-link">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
-          <span>Sign In / Portal</span>
+          <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span data-i18n="navigation.sure_ai_coach">SURE AI Guide</span>
         </a>
       </nav>
     </div>
@@ -189,7 +181,7 @@
         <span class="text-xs font-bold uppercase tracking-wider">Advisory Layer</span>
       </div>
       <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
-        AI Coach provides read-only explanations of deterministic rules. No funds can be moved without explicit user authorization.
+        SURE AI provides natural-language guidance and explanations. All fund allocations require manual user authorization.
       </p>
     </div>
   </aside>
@@ -203,17 +195,17 @@
       <div>
         <div class="flex items-center space-x-2 mb-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Deterministic Explanation Layer • AI Companion</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-500">Gemini 3.8 Flash • Natural Language Layer</span>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">AI Resilience Coach</h1>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary)">SURE AI</h1>
         <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary)">
-          Ask plain-language questions about your liquidity score, surplus recommendations, and financial safeguards.
+          Your guide to understanding and using SURE SAVINGS.
         </p>
       </div>
 
       <div class="flex items-center space-x-2">
         <span class="px-3 py-1 rounded-full text-xs font-mono font-bold" style="background: rgba(16, 185, 129, 0.12); color: #059669; border: 1px solid rgba(16, 185, 129, 0.2)">
-          Grounded in Deterministic v5.0
+          Financial calculations remain deterministic
         </span>
       </div>
     </div>
@@ -238,110 +230,49 @@
         <!-- Chat Conversation Messages Container -->
         <div id="chatMessagesContainer" class="premium-card p-4 sm:p-6 space-y-5 max-h-[560px] overflow-y-auto" style="border-radius: var(--radius-2xl);">
           
-          <!-- AI Message 1: Initial Briefing -->
+          <!-- AI Message 1: Initial Welcome & Guidance -->
           <div class="flex items-start space-x-3.5">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
               S
             </div>
             <div class="flex-1 space-y-3">
               <div class="flex items-center space-x-2">
-                <span class="text-xs font-bold" style="color: var(--text-primary)">SURE SAVINGS Coach</span>
-                <span class="text-[10px]" style="color: var(--text-subtle)">Today at 09:42 AM</span>
+                <span class="text-xs font-bold" style="color: var(--text-primary)">SURE AI • Product Guide</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold" style="background: var(--brand-primary-light); color: var(--brand-primary)">Verified Invariants</span>
               </div>
               <div class="p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed space-y-3" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
                 <p id="coach-welcome-text">
-                  Good morning <span class="user-first-name font-bold">Arjun</span>. Your financial resilience score increased from <strong>68 to 74</strong> this month (<span class="text-emerald-500 font-bold">+6 pts</span>). Your current weekly earnings (<strong>₹8,400</strong>) are 18% above your stabilized baseline (₹7,100). Fixed commitments (₹4,400) and your protected cash floor (₹3,500) are fully covered, creating an opportunity to safely allocate <strong class="text-brand-500 font-bold">₹900</strong> into your emergency buffer.
+                  Welcome to <strong>SURE AI</strong>, your personal product guidance and financial resilience companion. I can help you understand your income, expenses, cash position, emergency buffer, cash-flow timing, and financial resilience.
                 </p>
-
-                <!-- Engine Breakdown Card Inside Message -->
-                <div class="p-3.5 rounded-xl border space-y-2 text-xs" style="background: var(--surface-paper); border-color: var(--border-default)">
-                  <div class="flex items-start justify-between">
-                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Why this happens</span>
-                    <span class="font-medium" style="color: var(--text-primary)">₹1,300 surplus over ₹7,100 baseline detected across 3 platforms.</span>
-                  </div>
-                  <div class="flex items-start justify-between pt-1 border-t" style="border-color: var(--border-default)">
-                    <span class="text-[10px] uppercase font-bold text-brand-500">Recommended Action</span>
-                    <span class="font-bold text-brand-500">Reserve ₹900 into Smart Buffer Vault.</span>
-                  </div>
-                  <div class="flex items-start justify-between pt-1 border-t" style="border-color: var(--border-default)">
-                    <span class="text-[10px] uppercase font-bold text-emerald-500">Expected Impact</span>
-                    <span class="font-bold text-emerald-500">Expands buffer runway from 1.5 wks → 1.7 wks.</span>
-                  </div>
-                  <div class="flex items-start justify-between pt-1 border-t" style="border-color: var(--border-default)">
-                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Floor Protection</span>
-                    <span style="color: var(--text-secondary)">Checking account ₹3,500 floor remains 100% untouched.</span>
-                  </div>
-                </div>
+                <p class="text-xs" style="color: var(--text-muted)">
+                  You can ask me how any page or button works, how to link your bank account via RBI Account Aggregator, what a financial metric means, or what you should do next.
+                </p>
               </div>
             </div>
           </div>
 
           <!-- Suggested Inquiries Pills -->
           <div class="pl-12 space-y-2">
-            <p class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Suggested Inquiries</p>
+            <p class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Ask SURE AI</p>
             <div class="flex flex-wrap gap-2">
-              <button data-coach-prompt="Why is my resilience score 74?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
-                "Why is my resilience score 74?"
+              <button data-coach-prompt="Show me how SURE SAVINGS works" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500 font-semibold" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary)">
+                🗺️ How SURE SAVINGS works
               </button>
-              <button data-coach-prompt="Why save ₹900 instead of ₹1,300?" class="text-xs px-3 py-1.5 rounded-full border transition-all font-semibold" style="background: var(--brand-primary-light); border-color: var(--brand-primary-subtle); color: var(--brand-primary)">
-                "Why save ₹900 instead of ₹1,300?"
+              <button data-coach-prompt="Help me get started" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                🚀 Help me get started
               </button>
-              <button data-coach-prompt="What happens if next week drops?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
-                "What happens if next week drops?"
+              <button data-coach-prompt="Explain this page" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                📄 Explain this page
               </button>
-              <button data-coach-prompt="Can I safely withdraw ₹2,000?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
-                "Can I safely withdraw ₹2,000?"
+              <button data-coach-prompt="How do I connect my bank?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                🏦 Connect my bank
               </button>
-              <button data-coach-prompt="Transfer ₹10,000 now" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-red-400 text-red-500" style="background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.2)">
-                "Transfer ₹10,000 now (Safety Guardrail)"
+              <button data-coach-prompt="Who built this website?" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                👤 Who built this?
               </button>
-            </div>
-          </div>
-
-          <!-- User Bubble -->
-          <div class="flex items-start justify-end space-x-3">
-            <div class="max-w-md rounded-2xl rounded-tr-sm p-3.5 shadow-sm text-xs sm:text-sm text-white" style="background: #1f2937">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-[11px] font-bold text-stone-300 user-display-name" id="coach-user-bubble-name">Arjun K.</span>
-                <span class="text-[10px] text-stone-400">09:44 AM</span>
-              </div>
-              <p>Why did the engine cap my savings at ₹900 when I actually made a ₹1,300 surplus over baseline?</p>
-            </div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0 mt-1 user-avatar" id="coach-user-bubble-avatar" style="background: var(--surface-sunken); color: var(--text-primary)">
-              AK
-            </div>
-          </div>
-
-          <!-- AI Response -->
-          <div class="flex items-start space-x-3.5">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
-              S
-            </div>
-            <div class="flex-1 space-y-2">
-              <div class="flex items-center space-x-2">
-                <span class="text-xs font-bold" style="color: var(--text-primary)">SURE SAVINGS Coach</span>
-                <span class="text-[10px]" style="color: var(--text-subtle)">09:44 AM • Mathematical Rule R-70</span>
-              </div>
-              <div class="p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed space-y-3" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-secondary)">
-                <p>
-                  The deterministic engine applies a <strong>70% surplus cap safeguard</strong> (<code class="px-1.5 py-0.5 rounded font-mono text-[11px]" style="background: var(--surface-paper); color: var(--text-primary)">₹1,300 × 0.70 = ₹910 ≈ ₹900</code>).
-                </p>
-                <p>
-                  Sweeping 100% of the surplus would leave daily logistics work vulnerable to unanticipated expenses like fuel price spikes, vehicle maintenance, or platform settlement delays.
-                </p>
-                <div class="grid grid-cols-2 gap-3 pt-1">
-                  <div class="p-3 rounded-xl border" style="background: var(--surface-paper); border-color: var(--border-default)">
-                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Buffer Capitalization</span>
-                    <span class="text-base font-extrabold font-mono text-brand-500 block mt-0.5">₹900</span>
-                    <span class="text-[10px]" style="color: var(--text-subtle)">+0.2 weeks runway</span>
-                  </div>
-                  <div class="p-3 rounded-xl border" style="background: var(--surface-paper); border-color: var(--border-default)">
-                    <span class="text-[10px] uppercase font-bold" style="color: var(--text-muted)">Free Pocket Liquidity</span>
-                    <span class="text-base font-extrabold font-mono text-emerald-500 block mt-0.5">₹400</span>
-                    <span class="text-[10px]" style="color: var(--text-subtle)">Unrestricted cash</span>
-                  </div>
-                </div>
-              </div>
+              <button data-coach-prompt="Explain the entire website" class="text-xs px-3 py-1.5 rounded-full border transition-all hover:border-brand-500" style="background: var(--surface-sunken); border-color: var(--border-default); color: var(--text-primary)">
+                🔍 Full Platform Tour
+              </button>
             </div>
           </div>
 
@@ -494,11 +425,19 @@
 </div>
 <!-- END: Main Layout -->
 
-<script src="js/api.js?v=8.4.0"></script>
-<script src="js/components.js?v=8.4.0"></script>
-<script src="js/setup_wizard.js?v=8.4.0"></script>
-<script src="js/store.js?v=8.4.0"></script>
-<script src="js/app.js?v=8.4.0"></script>
-<script src="js/coach.js?v=8.4.0"></script>
+<script>
+  window.sureSavingsPageContext = {
+    page: "coach.html",
+    title: "SURE AI Guide",
+    section: "conversational-guide"
+  };
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/api.js?v=8.5.0"></script>
+<script src="js/components.js?v=8.5.0"></script>
+<script src="js/setup_wizard.js?v=8.5.0"></script>
+<script src="js/store.js?v=8.5.0"></script>
+<script src="js/app.js?v=8.5.0"></script>
+<script src="js/coach.js?v=8.5.0"></script>
 </body>
 </html>

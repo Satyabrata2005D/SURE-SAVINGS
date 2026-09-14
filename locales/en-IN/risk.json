@@ -1,0 +1,11 @@
+{
+  "title": "Risk & Early Warning Monitor",
+  "subtitle": "Continuous stress projections and cash shortfall prevention",
+  "risk_score": "Financial Risk Rating",
+  "low_risk": "Low Risk • Solid Safety",
+  "elevated_risk": "Elevated Risk • Monitoring Required",
+  "critical_risk": "Critical Risk • Immediate Safeguard Needed",
+  "drought_runway": "Zero-Income Runway",
+  "floor_breach_prob": "Cash Floor Breach Probability",
+  "early_warning_active": "Early Warning Sentinel Active"
+}

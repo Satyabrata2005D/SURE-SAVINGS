@@ -45,13 +45,13 @@
       <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
       </svg>
-      <span class="font-medium">SOC-2 Type II Vault</span>
+      <span class="font-medium" data-i18n="navigation.soc2_badge">SOC-2 Type II Vault</span>
     </div>
     <div class="hidden md:flex items-center space-x-1.5" style="color: var(--text-muted)">
       <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
         <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
       </svg>
-      <span>256-bit TLS Encrypted</span>
+      <span data-i18n="navigation.encryption_badge">256-bit TLS Encrypted</span>
     </div>
     <div class="hidden lg:flex items-center space-x-1.5" style="color: var(--text-muted)">
       <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -67,7 +67,7 @@
     </button>
 
     <a href="landing.html" class="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full border hover:bg-stone-50 font-medium text-xs transition-colors" style="border-color: var(--border-default); color: var(--text-secondary)">
-      <span>🌐 Public Explorer</span>
+      <span data-i18n="navigation.public_explorer">🌐 Public Explorer</span>
     </a>
 
     <button onclick="toggleDarkMode()" class="dark-mode-toggle" aria-label="Toggle dark mode">
@@ -102,17 +102,17 @@
         <div class="py-1 border-b" style="border-color: var(--border-default)">
           <div class="user-menu-item" onclick="if (window.setupWizard) window.setupWizard.openQuickStartModal()">
             <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-            <span>Calibrate Baseline</span>
+            <span data-i18n="navigation.calibrate_baseline">Calibrate Baseline</span>
           </div>
         </div>
         <div class="py-1">
           <div class="user-menu-item" onclick="exportData()">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span>Export Data</span>
+            <span data-i18n="navigation.export_data">Export Data</span>
           </div>
           <div class="user-menu-item danger" onclick="handleLogout()">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-            <span>Sign Out</span>
+            <span data-i18n="navigation.sign_out">Sign Out</span>
           </div>
         </div>
       </div>
@@ -128,12 +128,12 @@
   <aside class="w-full md:w-64 flex-shrink-0 flex flex-col space-y-4 sidebar-desktop" data-purpose="app-navigation">
     <div class="premium-card p-4" style="border-radius: var(--radius-2xl);">
       <div class="mb-4 px-2">
-        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)">Navigation</h2>
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-subtle)" data-i18n="navigation.command_center">Navigation</h2>
       </div>
       <nav class="space-y-1" id="mainNavigationTabs">
         <a href="index.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-          <span>Command Center</span>
+          <span data-i18n="navigation.command_center">Command Center</span>
         </a>
         <a href="simulator.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
@@ -141,31 +141,31 @@
         </a>
         <a href="income-intelligence.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-          <span>Income Intelligence</span>
+          <span data-i18n="navigation.income_intelligence">Income Intelligence</span>
         </a>
         <a href="planner.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-          <span>Cash Flow Planner</span>
+          <span data-i18n="navigation.cash_flow_planner">Cash Flow Planner</span>
         </a>
         <a href="decision-pipeline.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-          <span>Decision Pipeline</span>
+          <span data-i18n="navigation.decision_pipeline">Decision Pipeline</span>
         </a>
         <a href="calendar.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span>Income Calendar</span>
+          <span data-i18n="navigation.income_calendar">Income Calendar</span>
         </a>
         <a href="goals.html" class="unified-nav-link active">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          <span>Goals &amp; Buffer Plan</span>
+          <span data-i18n="navigation.goals_buffer">Goals & Buffer Plan</span>
         </a>
         <a href="risk.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-          <span>Risk &amp; Early Warning</span>
+          <span data-i18n="navigation.risk_early_warning">Risk & Early Warning</span>
         </a>
         <a href="health.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-          <span>Financial Health</span>
+          <span data-i18n="navigation.financial_health">Financial Health</span>
         </a>
         <a href="activity.html" class="unified-nav-link">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
@@ -362,6 +362,14 @@
 </div>
 
 <!-- SCRIPTS -->
+<script>
+  window.sureSavingsPageContext = {
+    page: "goals.html",
+    title: "Goals & Buffer Plan",
+    section: "goals"
+  };
+</script>
+<script src="js/i18n.js"></script>
 <script src="js/api.js?v=8.4.0"></script>
 <script src="js/components.js?v=8.4.0"></script>
 <script src="js/setup_wizard.js?v=8.4.0"></script>

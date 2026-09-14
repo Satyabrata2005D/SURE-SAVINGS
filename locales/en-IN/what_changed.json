@@ -1,0 +1,6 @@
+{
+  "title": "WHAT CHANGED THIS WEEK?",
+  "resilience_shift": "Resilience: {before} → {after} ({delta} pts)",
+  "summary_default": "Weekly operational delta summary.",
+  "essential_spending": "Essential Spending"
+}

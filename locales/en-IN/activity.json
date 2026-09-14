@@ -1,0 +1,8 @@
+{
+  "title": "Transactions & Audit Activity",
+  "subtitle": "Immutable audit trail of income cycles and reserve transfers",
+  "filter_all": "All Transactions",
+  "filter_inflows": "Inflows",
+  "filter_outflows": "Outflows",
+  "no_transactions": "No transactions recorded for this cycle."
+}

@@ -1,0 +1,21 @@
+{
+  "safe_to_save": "सुरक्षितम् बचत राशि",
+  "smart_buffer": "स्मार्ट सञ्चयः",
+  "protected_floor": "सुरक्षितम् नकद न्यूनतम स्तर",
+  "stabilized_income": "स्थिरम् आयः",
+  "expected_income": "अपेक्षित आयः",
+  "financial_surplus": "वित्तीय अधिशेष",
+  "liquidity": "द्रव्यता",
+  "buffer_coverage": "सञ्चयः कवरेज",
+  "income_volatility": "आयः में उतार-चढ़ाव",
+  "financial_risk": "वित्तीय जोखिम",
+  "financial_resilience": "वित्तीय लचीलापन (रेजिलिएंस)",
+  "cash_flow": "कैश फ्लो",
+  "income_shortfall": "आयः की न्यूनम्ी",
+  "capital_preservation": "पूंजी संरक्षण",
+  "data_readiness": "डेटा तत्परता",
+  "data_quality": "डेटा गुणवत्ता",
+  "goal": "लक्ष्य",
+  "obligation": "अनिवार्य देयता",
+  "forecast": "पूर्वानुमान"
+}

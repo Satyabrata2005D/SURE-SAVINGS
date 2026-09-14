@@ -1,0 +1,8 @@
+{
+  "email_label": "ईमेल पता",
+  "email_placeholder": "name@example.com",
+  "amount_label": "राशि (₹)",
+  "date_label": "तारीख",
+  "notes_label": "टिप्पणी (वैकल्पिक)",
+  "submit": "जमा गर्नुहोस्"
+}
