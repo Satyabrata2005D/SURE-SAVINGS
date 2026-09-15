@@ -162,8 +162,8 @@ async function sendCoachMessage(userText) {
   typingBubble.id = "coachTypingIndicator";
   typingBubble.className = "flex items-start space-x-3.5 mb-4";
   typingBubble.innerHTML = `
-    <div class="relative w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-sm flex-shrink-0">
-      S
+    <div class="relative w-9 h-9 rounded-xl flex items-center justify-center shadow-sm flex-shrink-0">
+      <img src="assets/images/sure-savings-logo.png" alt="SURE SAVINGS" class="w-9 h-9 object-contain" width="36" height="36">
       <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-teal-400 border-2 border-white"></span>
     </div>
     <div class="bg-gray-50 dark:bg-stone-800 border border-gray-100 dark:border-stone-700 text-gray-600 dark:text-stone-300 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm text-xs flex items-center space-x-2">
@@ -282,8 +282,8 @@ async function sendCoachMessage(userText) {
       : 'Just now • Deterministic Invariant Checked';
 
     botBubble.innerHTML = `
-      <div class="relative w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
-        S
+      <div class="relative w-9 h-9 rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+        <img src="assets/images/sure-savings-logo.png" alt="SURE SAVINGS" class="w-9 h-9 object-contain" width="36" height="36">
         <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full ${isLiveGemini ? 'bg-teal-400' : 'bg-emerald-400'} border-2 border-white"></span>
       </div>
       <div class="flex-1 space-y-2">
