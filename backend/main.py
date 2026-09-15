@@ -866,30 +866,42 @@ def select_google_account(
 
 @app.get("/api/v1/auth/google/callback")
 async def google_oauth_callback(
+    request: Request,
     code: Optional[str] = None,
     error: Optional[str] = None,
-    response: Response = None,
-    request: Request = None,
+    iss: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
     """
     Handles Google OAuth 2.0 Authorization Code callback from Google Account Chooser.
     Exchanges code for user profile tokens using client secret, authenticates user
     into their private workspace without OTP, and redirects to index.html.
+    Guarantees zero-500 unhandled crashes and provides seamless fallback to account selector.
     """
-    if error:
-        return RedirectResponse(url=f"/login.html?error={error}")
-    if not code:
-        return RedirectResponse(url="/login.html?error=missing_code")
-
-    cid = os.getenv("GOOGLE_CLIENT_ID", GOOGLE_CLIENT_ID)
-    csecret = os.getenv("GOOGLE_CLIENT_SECRET", GOOGLE_CLIENT_SECRET)
-
-    host = request.headers.get("host", "localhost:8000")
-    proto = request.headers.get("x-forwarded-proto", "http")
-    redirect_uri = f"{proto}://{host}/api/v1/auth/google/callback"
-
     try:
+        if error:
+            logger.warning(f"[GOOGLE CALLBACK] Received error param from Google: {error}")
+            return RedirectResponse(
+                url=f"/login.html?error={urllib.parse.quote(str(error))}&google_account_select=1",
+                status_code=303
+            )
+        if not code:
+            logger.warning("[GOOGLE CALLBACK] Called without authorization code")
+            return RedirectResponse(
+                url="/login.html?error=missing_code&google_account_select=1",
+                status_code=303
+            )
+
+        cid = os.getenv("GOOGLE_CLIENT_ID", GOOGLE_CLIENT_ID)
+        csecret = os.getenv("GOOGLE_CLIENT_SECRET", GOOGLE_CLIENT_SECRET)
+
+        redirect_uri = os.getenv("GOOGLE_REDIRECT_URI")
+        if not redirect_uri:
+            host = request.headers.get("host", "localhost:8000")
+            proto = request.headers.get("x-forwarded-proto", "http")
+            redirect_uri = f"{proto}://{host}/api/v1/auth/google/callback"
+
+        token_data = {}
         async with httpx.AsyncClient(timeout=10.0) as client:
             token_resp = await client.post(
                 "https://oauth2.googleapis.com/token",
@@ -901,14 +913,20 @@ async def google_oauth_callback(
                     "redirect_uri": redirect_uri
                 }
             )
-            token_data = token_resp.json()
+            try:
+                token_data = token_resp.json()
+            except Exception:
+                token_data = {}
 
-        print(f"[GOOGLE CALLBACK] token status={token_resp.status_code}, data={token_data}", flush=True)
+        logger.info(f"[GOOGLE CALLBACK] token status={token_resp.status_code}, data_keys={list(token_data.keys())}")
 
-        if "error" in token_data:
-            err_msg = token_data.get("error_description") or token_data.get("error")
-            print(f"[GOOGLE CALLBACK ERROR] Google returned error: {err_msg}", flush=True)
-            return RedirectResponse(url=f"/login.html?error={urllib.parse.quote(str(err_msg))}")
+        if "error" in token_data or token_resp.status_code != 200:
+            err_msg = token_data.get("error_description") or token_data.get("error") or "Authentication code expired or invalid"
+            logger.warning(f"[GOOGLE CALLBACK ERROR] Google returned: {err_msg}")
+            return RedirectResponse(
+                url=f"/login.html?error={urllib.parse.quote(str(err_msg))}&google_account_select=1",
+                status_code=303
+            )
 
         claims = None
         id_token_jwt = token_data.get("id_token")
@@ -916,14 +934,14 @@ async def google_oauth_callback(
             try:
                 claims = GoogleAuthService.verify_credential(id_token_jwt)
             except Exception as verify_err:
-                print(f"[GOOGLE CALLBACK] verify_credential fallback: {verify_err}", flush=True)
+                logger.warning(f"[GOOGLE CALLBACK] verify_credential fallback: {verify_err}")
                 try:
                     parts = id_token_jwt.split(".")
                     if len(parts) >= 2:
                         payload_b64 = parts[1] + "=" * ((4 - len(parts[1]) % 4) % 4)
                         idinfo = json.loads(base64.urlsafe_b64decode(payload_b64))
                         claims = {
-                            "google_subject_id": idinfo.get("sub"),
+                            "google_subject_id": idinfo.get("sub", f"g_{abs(hash(idinfo.get('email', 'user')))}"),
                             "email": idinfo.get("email"),
                             "email_verified": idinfo.get("email_verified", True),
                             "name": idinfo.get("name", "Google User"),
@@ -933,7 +951,7 @@ async def google_oauth_callback(
                             "locale": idinfo.get("locale", "en-IN")
                         }
                 except Exception as parse_err:
-                    print(f"[GOOGLE CALLBACK] payload parse failed: {parse_err}", flush=True)
+                    logger.error(f"[GOOGLE CALLBACK] payload parse failed: {parse_err}")
 
         if not claims:
             access_token = token_data.get("access_token")
@@ -956,7 +974,10 @@ async def google_oauth_callback(
                     }
 
         if not claims or not claims.get("email"):
-            return RedirectResponse(url="/login.html?error=failed_to_retrieve_google_profile")
+            return RedirectResponse(
+                url="/login.html?error=failed_to_retrieve_google_profile&google_account_select=1",
+                status_code=303
+            )
 
         user = FinancialRepository.create_or_update_google_user(db, claims)
         if user.is_demo_user:
@@ -977,9 +998,11 @@ async def google_oauth_callback(
         set_session_cookie(resp, session.session_token)
         return resp
     except Exception as e:
-        traceback.print_exc()
-        logger.error(f"Google OAuth callback error: {e}")
-        return RedirectResponse(url=f"/login.html?error={urllib.parse.quote(str(e))}")
+        logger.error(f"[GOOGLE CALLBACK UNEXPECTED ERROR] {e}")
+        return RedirectResponse(
+            url=f"/login.html?error={urllib.parse.quote(str(e))}&google_account_select=1",
+            status_code=303
+        )
 
 
 @app.post("/api/v1/auth/demo")

@@ -8,7 +8,9 @@
  */
 
 const API_VERSION = "7.0.2";
-const API_BASE = window.location.origin || "http://127.0.0.1:8000";
+const API_BASE = (window.location.port === "8000" || (window.location.port === "" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1"))
+  ? (window.location.origin || "http://127.0.0.1:8000")
+  : `${window.location.protocol}//${window.location.hostname}:8000`;
 
 const api = {
   async fetchJSON(endpoint, options = {}) {
